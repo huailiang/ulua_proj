@@ -10,8 +10,7 @@ find_path(XLUA_PROJECT_DIR NAMES SConstruct
 
 MARK_AS_ADVANCED(XLUA_PROJECT_DIR)
 
-set(LUA_SRC_PATH lua-5.3.5/src)
-set(LUAJIT_SRC_PATH luajit-2.1.0b2/src)
+set(LUAJIT_SRC_PATH luajit-2.1.0b3/src)
 	  
 include_directories(
   ${CMAKE_SOURCE_DIR}

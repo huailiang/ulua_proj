@@ -1,5 +1,7 @@
 export ANDROID_NDK=~/Documents/software/eclipse/android-ndk-r10e
 
+cp CMakeLists_android.txt CMakeLists.txt
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SRCDIR=$DIR/luajit-2.1.0b3
 

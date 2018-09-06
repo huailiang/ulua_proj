@@ -1,14 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-if ( WIN32 AND NOT CYGWIN AND NOT ( CMAKE_SYSTEM_NAME STREQUAL "WindowsStore" ) AND NOT ANDROID)
-	set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} /MT" CACHE STRING "")
-	set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /MTd" CACHE STRING "")
-	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT" CACHE STRING "")
-	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd" CACHE STRING "")
-endif ()
-
 project(XLua)
-
 
 find_path(XLUA_PROJECT_DIR NAMES SConstruct
     PATHS 
@@ -29,7 +21,6 @@ include_directories(
 
 set ( LUA_CORE )
 set_property( SOURCE xlua.c APPEND PROPERTY COMPILE_DEFINITIONS USING_LUAJIT )
-
 set ( LUA_LIB )
 
 set ( XLUA_CORE
@@ -60,6 +51,7 @@ source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_CORE)
 source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_LIB)
 source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} XLUA_CORE)
 
+
 add_library(ulua SHARED
     ${LUA_CORE}
     ${LUA_LIB}
@@ -67,12 +59,16 @@ add_library(ulua SHARED
     ${THIRDPART_SRC}
 )
 
-if ( WIN32 AND NOT CYGWIN )
-    target_compile_definitions (ulua PRIVATE LUA_BUILD_AS_DLL)
-endif ( )
+
+if(UINT_ESPECIALLY)
+    ADD_DEFINITIONS(-DUINT_ESPECIALLY)
+endif()
 	
+
 target_link_libraries(ulua
-    ${CMAKE_SOURCE_DIR}/${LUAJIT_SRC_PATH}/lua51.lib
-    ws2_32
-    ${THIRDPART_LIB} 
+${CMAKE_SOURCE_DIR}/${LUAJIT_SRC_PATH}/libluajit.a
+m
+${THIRDPART_LIB} 
 )
+
+

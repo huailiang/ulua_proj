@@ -1,3 +1,4 @@
+cp CMakeLists_ios.txt CMakeLists.txt
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 LIPO="xcrun -sdk iphoneos lipo"
 STRIP="xcrun -sdk iphoneos strip"
