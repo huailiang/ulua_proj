@@ -127,7 +127,7 @@ namespace LuaInterface
             if (err == null) err = "Unknown Lua Error";
             throw new LuaScriptException(err, "");
         }
-        
+
         /// <summary>
         /// Convert C# exceptions into Lua errors
         /// </summary>
@@ -222,7 +222,6 @@ namespace LuaInterface
                 if (env != null)
                 {
                     env.push(L);
-                    //LuaDLL.lua_setfenv(L, -1);
                     LuaDLL.lua_setfenv(L, -2);
                 }
 
@@ -263,9 +262,7 @@ namespace LuaInterface
                 LuaDLL.lua_pop(L, 1);
                 return null;
             }
-
             string luafile = Util.LuaPath(fileName);
-            //Encoding.UTF8.GetByteCount(text)
             if (LuaDLL.luaL_loadbuffer(L, text, text.Length, luafile) == 0)
             {
                 if (env != null)
@@ -274,7 +271,6 @@ namespace LuaInterface
                     //LuaDLL.lua_setfenv(L, -1);
                     LuaDLL.lua_setfenv(L, -2);
                 }
-
                 if (LuaDLL.lua_pcall(L, 0, -1, -2) == 0)
                 {
                     object[] results = translator.popValues(L, oldTop);

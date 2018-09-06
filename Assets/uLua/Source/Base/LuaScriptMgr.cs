@@ -188,15 +188,6 @@ public class LuaScriptMgr
         lua = new LuaState();
         _translator = lua.GetTranslator();
 
-        if (Application.platform == RuntimePlatform.IPhonePlayer ||
-            Application.platform == RuntimePlatform.OSXEditor)
-        {
-            LuaDLL.luaopen_bit(lua.L);
-        }
-#if UNITY_EDITOR
-        // LuaDLL.luaopen_socket_core(lua.L);
-#endif
-
         LuaDLL.tolua_openlibs(lua.L);
         //OpenXml();        
 
@@ -607,34 +598,9 @@ public class LuaScriptMgr
     {
         byte[] str = null;
         fileList.Add(name);
-
-#if !LUA_ZIP
-
         string luapath = Util.LuaResourcePath(name);
-        //  UnityEngine.Debug.Log("loader name:" + name+" path:"+luapath);
         TextAsset luaCode = Resources.Load<TextAsset>(luapath);
         if (luaCode != null) str = luaCode.bytes;
-
-#else
-        IAssetFile zipFile = null;
-        int pos = name.IndexOf('/');        
-
-        if (pos > 0)
-        {
-            string zip = name.Substring(0, pos);
-            zip = string.Format("Lua_{0}.unity3d", zip);
-            zipFile = dictBundle[zip];
-            name = name.Substring(pos + 1);
-        }
-        else
-        {
-            zipFile = dictBundle["Lua.unity3d"];
-        }
-
-        TextAsset luaCode = zipFile.Read<TextAsset>(name);
-        str = luaCode.bytes;
-        Resources.UnloadAsset(luaCode);
-#endif
         return str;
     }
 
@@ -653,7 +619,6 @@ public class LuaScriptMgr
         {
             LuaDLL.lua_settop(L, oldTop);
             LuaDLL.lua_pushnil(L);
-            Debugger.LogError("Push lua table {0} failed", path[0]);
             return false;
         }
 
