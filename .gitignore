@@ -19,6 +19,7 @@ build/build_lj_*/
 *.pidb
 *.booproj
 *.csproj
+*.sln
 *.DotSettings
 *.apk
 *.DS_Store
