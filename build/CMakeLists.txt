@@ -10,18 +10,21 @@ find_path(XLUA_PROJECT_DIR NAMES SConstruct
 
 MARK_AS_ADVANCED(XLUA_PROJECT_DIR)
 
-set(LUAJIT_SRC_PATH luajit-2.1.0b3/src)
-
 include_directories(
   ${CMAKE_SOURCE_DIR}
-  ${LUAJIT_SRC_PATH}
+  lua-5.1.5/src
+  lua-5.1.5/etc
   ${CMAKE_CURRENT_BINARY_DIR}
   ${THIRDPART_INC}
 )
+set ( LUA_CORE lua-5.1.5/src/lapi.c lua-5.1.5/src/lcode.c lua-5.1.5/src/ldebug.c lua-5.1.5/src/ldo.c lua-5.1.5/src/ldump.c lua-5.1.5/src/lfunc.c 
+  lua-5.1.5/src/lgc.c lua-5.1.5/src/llex.c lua-5.1.5/src/lmem.c lua-5.1.5/src/lobject.c lua-5.1.5/src/lopcodes.c lua-5.1.5/src/lparser.c lua-5.1.5/src/lstate.c 
+  lua-5.1.5/src/lstring.c lua-5.1.5/src/ltable.c lua-5.1.5/src/ltm.c lua-5.1.5/src/lundump.c lua-5.1.5/src/lvm.c lua-5.1.5/src/lzio.c lua-5.1.5/src/lauxlib.c 
+  lua-5.1.5/src/lbaselib.c lua-5.1.5/src/ldblib.c lua-5.1.5/src/liolib.c lua-5.1.5/src/lmathlib.c lua-5.1.5/src/loslib.c lua-5.1.5/src/ltablib.c 
+  lua-5.1.5/src/lstrlib.c lua-5.1.5/src/linit.c lua-5.1.5/src/loadlib.c)
 
-set ( LUA_CORE )
-set_property( SOURCE xlua.c APPEND PROPERTY COMPILE_DEFINITIONS USING_LUAJIT )
 set ( LUA_LIB )
+
 
 set ( XLUA_CORE
     i64lib.c
@@ -29,6 +32,7 @@ set ( XLUA_CORE
     xlua.c
     lua_wrap.c
 )
+
 
 macro(source_group_by_dir proj_dir source_files)
     if(MSVC OR APPLE)
@@ -52,23 +56,16 @@ source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} LUA_LIB)
 source_group_by_dir(${CMAKE_CURRENT_SOURCE_DIR} XLUA_CORE)
 
 
-add_library(ulua SHARED
+set(CMAKE_OSX_ARCHITECTURES "$(ARCHS_STANDARD)")
+add_library(ulua MODULE
     ${LUA_CORE}
     ${LUA_LIB}
     ${XLUA_CORE}
     ${THIRDPART_SRC}
 )
-
-
-if(UINT_ESPECIALLY)
-    ADD_DEFINITIONS(-DUINT_ESPECIALLY)
-endif()
-	
+set_target_properties ( ulua PROPERTIES BUNDLE TRUE )
 
 target_link_libraries(ulua
-${CMAKE_SOURCE_DIR}/${LUAJIT_SRC_PATH}/libluajit.a
-m
-${THIRDPART_LIB} 
+    m
+    ${THIRDPART_LIB} 
 )
-
-
