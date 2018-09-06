@@ -1,6 +1,6 @@
-**/Android/
-**/Win32/
-**/xcode_proj/
+Android/
+Win32/
+xcode_proj/
 
 **/[Ll]ibrary/
 **/[Tt]emp/
