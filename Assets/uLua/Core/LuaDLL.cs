@@ -94,8 +94,6 @@ namespace LuaInterface
         public static extern int luaopen_socket_core(IntPtr L);
 #endif
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int tolua_openlibs(IntPtr L);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_tothread(IntPtr L, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_xmove(IntPtr from, IntPtr to, int n);

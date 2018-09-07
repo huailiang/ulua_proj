@@ -1,1 +1,1 @@
-﻿print("This is a script from a file")
+print("This is a script from a file")

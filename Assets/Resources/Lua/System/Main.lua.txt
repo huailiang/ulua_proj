@@ -33,15 +33,12 @@ end
 
 
 function Main()
-	Time:Init()
+	-- Time:Init()
 	
-	--测试协同
-	--coroutine.start(TestCo)
-	--coroutine.start(TestCo2)
 end
 
 function Update(deltatime, unscaledDeltaTime)
-	Time:SetDeltaTime(deltatime, unscaledDeltaTime)
+	-- Time:SetDeltaTime(deltatime, unscaledDeltaTime)
 	UpdateBeat()
 end
 
@@ -51,10 +48,10 @@ function LateUpdate()
 end
 
 function FixedUpdate(fixedTime)
-	Time:SetFixedDelta(fixedTime)
+	-- Time:SetFixedDelta(fixedTime)
 	FixedUpdateBeat()
 end
 
 function OnLevelWasLoaded(level)
-	Time.timeSinceLevelLoad = 0
+	-- Time.timeSinceLevelLoad = 0
 end

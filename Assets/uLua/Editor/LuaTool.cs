@@ -27,7 +27,7 @@ public class LuaTool
     private static void Handle(Action action)
     {
         g_files.Clear();
-        SearchDirectoryFiles(lua_path, "*.lua");
+        SearchDirectoryFiles(lua_path, "*.txt");
         if (action != null) action();
         AssetDatabase.Refresh();
         g_files.Clear();
@@ -67,6 +67,7 @@ public class LuaTool
             string content = File.ReadAllText(file);
             using (var sw = new StreamWriter(file, false, new UTF8Encoding(false)))
             {
+                Debug.Log(file);
                 sw.Write(content);
             }
         }

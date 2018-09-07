@@ -1,13 +1,10 @@
-﻿//#define MULTI_STATE
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using LuaInterface;
 using UnityEngine;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Diagnostics;
-using System.Collections;
 
 public class LuaScriptMgr
 {
@@ -20,7 +17,6 @@ public class LuaScriptMgr
     public LuaState lua;
     public HashSet<string> fileList = null;
     Dictionary<string, LuaBase> dict = null;
-    //Dictionary<string, IAssetFile> dictBundle = null;    
     LuaFunction updateFunc = null;
     LuaFunction lateUpdateFunc = null;
     LuaFunction fixedUpdateFunc = null;
@@ -55,12 +51,7 @@ public class LuaScriptMgr
 
     static HashSet<Type> checkBaseType = new HashSet<Type>();
 
-#if MULTI_STATE
-    static List<LuaScriptMgr> mgrList = new List<LuaScriptMgr>();
-    static int mgrPos = 0;
-#else
     static LuaFunction traceback = null;
-#endif
 
     string luaIndex =
     @"        
@@ -188,12 +179,8 @@ public class LuaScriptMgr
         lua = new LuaState();
         _translator = lua.GetTranslator();
 
-        LuaDLL.tolua_openlibs(lua.L);
-        //OpenXml();        
-
         fileList = new HashSet<string>();
         dict = new Dictionary<string, LuaBase>();
-        //dictBundle = new Dictionary<string, IAssetFile>();
 
         LuaDLL.lua_pushstring(lua.L, "ToLua_Index");
         LuaDLL.luaL_dostring(lua.L, luaIndex);
@@ -213,16 +200,9 @@ public class LuaScriptMgr
 
         Bind();
 
-#if MULTI_STATE
-        mgrList.Add(this);
-        LuaDLL.lua_pushnumber(lua.L, mgrPos);
-        LuaDLL.lua_setglobal(lua.L, "_LuaScriptMgr");           
-
-        ++mgrPos;
-#else
         LuaDLL.lua_pushnumber(lua.L, 0);
         LuaDLL.lua_setglobal(lua.L, "_LuaScriptMgr");
-#endif
+
     }
 
     void SendGMmsg(params string[] param)
@@ -374,9 +354,8 @@ public class LuaScriptMgr
         packTouch = GetLuaFunction("Touch.New");
         packBounds = GetLuaReference("Bounds.New");
 
-#if !MULTI_STATE
         traceback = GetLuaFunction("traceback");
-#endif                       
+
 
         DoFile("System.Main");
 
@@ -1206,16 +1185,11 @@ public class LuaScriptMgr
 
     static ObjectTranslator GetTranslator(IntPtr L)
     {
-#if MULTI_STATE
-            return ObjectTranslator.FromState(L);
-#else
         if (_translator == null)
         {
             return ObjectTranslator.FromState(L);
         }
-
         return _translator;
-#endif        
     }
 
     //压入一个object变量
@@ -1734,7 +1708,6 @@ public class LuaScriptMgr
         {
             return true;
         }
-
         if (t == typeof(Type))
         {
             return type == monoType;
@@ -1747,7 +1720,6 @@ public class LuaScriptMgr
 
     public static object[] GetParamsObject(IntPtr L, int stackPos, int count)
     {
-        //ObjectTranslator translator = GetTranslator(L);
         List<object> list = new List<object>();
         object obj = null;
 
@@ -2206,7 +2178,6 @@ public class LuaScriptMgr
             case LuaTypes.LUA_TUSERDATA:
                 {
                     int udata = LuaDLL.luanet_rawnetobj(L, stackPos);
-
                     if (udata != -1)
                     {
                         object obj = null;
@@ -2235,16 +2206,13 @@ public class LuaScriptMgr
     public static int IndexArray(IntPtr L)
     {
         Array obj = GetLuaObject(L, 1) as Array;
-
         if (obj == null)
         {
             LuaDLL.luaL_error(L, "trying to index an invalid Array reference");
             LuaDLL.lua_pushnil(L);
             return 1;
         }
-
         LuaTypes luaType = LuaDLL.lua_type(L, 2);
-
         if (luaType == LuaTypes.LUA_TNUMBER)
         {
             int index = (int)LuaDLL.lua_tonumber(L, 2);
@@ -2254,15 +2222,12 @@ public class LuaScriptMgr
                 LuaDLL.luaL_error(L, "array index out of bounds: " + index + " " + obj.Length);
                 return 0;
             }
-
             object val = obj.GetValue(index);
-
             if (val == null)
             {
                 LuaDLL.luaL_error(L, string.Format("array index {0} is null", index));
                 return 0;
             }
-
             PushVarObject(L, val);
         }
         else if (luaType == LuaTypes.LUA_TSTRING)
@@ -2387,15 +2352,7 @@ public class LuaScriptMgr
 
     public static LuaScriptMgr GetMgrFromLuaState(IntPtr L)
     {
-#if MULTI_STATE      
-        
-        LuaDLL.lua_getglobal(L, "_LuaScriptMgr");
-        int pos = (int)GetNumber(L, -1);
-        LuaDLL.lua_pop(L, 1);        
-        return mgrList[pos];        
-#else
         return Instance;
-#endif        
     }
 
     public static void ThrowLuaException(IntPtr L)
@@ -2553,16 +2510,11 @@ public class LuaScriptMgr
 
     public static void PushTraceBack(IntPtr L)
     {
-#if !MULTI_STATE
         if (traceback == null)
         {
             LuaDLL.lua_getglobal(L, "traceback");
             return;
         }
-
         traceback.push();
-#else
-        LuaDLL.lua_getglobal(L, "traceback");
-#endif
     }
 }

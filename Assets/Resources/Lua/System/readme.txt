@@ -1,3 +1,3 @@
-Èç¹ûÏëÊ¹ÓÃluajit±àÒë½Å±¾ÐèÒªÔÚÏµÍ³»·¾³±äÁ¿pathÖÐÉèÖÃluajitµÄÂ·¾¶
-unityÃ¶¾ÙluaÄ¿Â¼ÏÂËùÓÐ.luaÎÄ¼þ(²»°üº¬×ÓÄ¿Â¼)¡£±àÒëÊä³öµ½outÄ¿Â¼
-Ö®ºó´ò°üoutÄ¿Â¼ÖÐËùÓÐ.luaÎÄ¼þµ½lua.unity3dÖÐ
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½luajitï¿½ï¿½ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½Òªï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pathï¿½ï¿½ï¿½ï¿½ï¿½ï¿½luajitï¿½ï¿½Â·ï¿½ï¿½
+unityÃ¶ï¿½ï¿½luaÄ¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.luaï¿½Ä¼ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½outÄ¿Â¼
+Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½outÄ¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.luaï¿½Ä¼ï¿½ï¿½ï¿½lua.unity3dï¿½
