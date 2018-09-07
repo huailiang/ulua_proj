@@ -10,15 +10,7 @@
 #include "lualib.h"
 #include "lauxlib.h"
 
-#ifdef _WIN32
-#include <windows.h>
-#else
-#include <time.h>
-#include <sys/time.h>
-#endif
-
 static int tag = 0;
-
 
 LUA_API int luaL_checkmetatable(lua_State *L,int index) 
 {
@@ -58,7 +50,6 @@ LUA_API void *checkudata(lua_State *L, int ud, const char *tname)
 			return p;
 	}
   }
-
   return NULL;
 }
 
@@ -244,10 +235,6 @@ int tolua_index(lua_State* L)
       lua_pushvalue(L, 1);
       lua_call(L, 1, -1);                
       return 1;
-      /*lua_rawgeti(L, -1, 1);  
-      lua_CFunction fn = lua_tocfunction (L, -1);
-      lua_settop(L, 1);                          
-      return fn(L);*/
     }
     else
     {
@@ -285,9 +272,6 @@ int tolua_newIndex(lua_State* L)
       lua_pushvalue(L, 3);
       lua_call(L, 3, 0);    
       return 0;
-      /*lua_CFunction fn = lua_tocfunction (L, -1);
-      lua_settop(L, 3);        
-      return fn(L);*/
     }
     else
     {
@@ -333,53 +317,4 @@ LUA_API bool tolua_pushnewudata(lua_State* L, int metaRef, int weakTableRef, int
   lua_rawseti(L, -3, index);
   lua_remove(L, -2);
   return true;  
-}
-
-#ifdef _WIN32
-double tolua_timegettime() 
-{
-    FILETIME ft;
-    double t;
-    GetSystemTimeAsFileTime(&ft);    
-    /* Windows file time (time since January 1, 1601 (UTC)) */
-    t  = ft.dwLowDateTime/1.0e7 + ft.dwHighDateTime*(4294967296.0/1.0e7);    
-    /* convert to Unix Epoch time (time since January 1, 1970 (UTC)) */
-    return (t - 11644473600.0);
-}
-#else
-double tolua_timegettime() 
-{
-    struct timeval v;
-    gettimeofday(&v, (struct timezone *) NULL);
-    /* Unix Epoch time (time since January 1, 1970 (UTC)) */
-    return v.tv_sec + v.tv_usec/1.0e6;
-}
-#endif
-
-static int tolua_gettime(lua_State *L)
-{
-    lua_pushnumber(L, tolua_timegettime());
-    return 1;
-}
-
-static int tolua_type(lua_State *L)
-{
-	int type = lua_type(L, 1);
-	lua_pushinteger(L, type);
-	return 1;
-}
-
-#define luaL_reg  luaL_Reg
-
-static const struct luaL_reg funcs[] = 
-{
-	{"gettime",	tolua_gettime},
-	{"type",	tolua_type},  
-	{NULL,	NULL}
-};
-
-LUA_API int tolua_openlibs(lua_State* L)
-{
-	luaL_register(L, "tolua", funcs);
-	return 1;
 }
