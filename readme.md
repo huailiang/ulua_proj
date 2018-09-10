@@ -44,6 +44,6 @@ git工程一共有个分支：
 lua_pushstring(L, T::className);
 lua_pushvalue(L, methods);
 lua_settable(L, LUA_GLOBALSINDEX);
-``
+```
 
 3. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。 读者可以根据自己项目的需要来定制自己的lua库。
