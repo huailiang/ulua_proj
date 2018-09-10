@@ -1,9 +1,6 @@
 <p align="center">
-	 <a href="https://huailiang.github.io/">
-	    <img src="https://huailiang.github.io/img/cpp.jpeg" width="100" height="100">
-    </a>
     <a href="https://www.lua.org/">
-	    <img src="https://www.lua.org/images/lua25.gif" width="200" height="100">
+	    <img src="https://www.lua.org/images/lua25.gif" width="120" height="100">
 	</a>
 	<a href="https://unity3d.com/cn/">
 	    <img src="https://huailiang.github.io/img/unity.jpeg" width="200" height="100">
