@@ -1,7 +1,6 @@
-# Tencent is pleased to support the open source community by making xLua available.
-# Copyright (C) 2016 THL A29 Limited, a Tencent company. All rights reserved.
+# ulua CMakeLists.txt
 # Licensed under the MIT License (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-# http://opensource.org/licenses/MIT
+# https://github.com/huailiang
 # Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 cmake_minimum_required(VERSION 2.8)
@@ -15,7 +14,6 @@ endif ()
 
 project(XLua)
 
-
 option ( UINT_ESPECIALLY "using custom ulong" OFF )
 option ( USING_LUAJIT "using luajit" OFF )
 
@@ -28,8 +26,6 @@ find_path(XLUA_PROJECT_DIR NAMES SConstruct
 MARK_AS_ADVANCED(XLUA_PROJECT_DIR)
 
 set(LUA_SRC_PATH lua-5.3.5/src)
-set(LUAJIT_SRC_PATH luajit-2.1.0b2/src)
-
 
 set ( LUA_IDSIZE 120 CACHE NUMBER "gives the maximum size for the description of the source." )
 
@@ -84,7 +80,6 @@ if (APPLE)
            ${LUA_CORE}
            ${LUA_LIB}
            ${XLUA_CORE}
-           ${THIRDPART_SRC}
         )
 		set_xcode_property (ulua IPHONEOS_DEPLOYMENT_TARGET "7.0")
     else ()
@@ -93,18 +88,14 @@ if (APPLE)
             ${LUA_CORE}
             ${LUA_LIB}
             ${XLUA_CORE}
-            ${THIRDPART_SRC}
         )
         set_target_properties ( ulua PROPERTIES BUNDLE TRUE )
-        # set_target_properties ( xlua PROPERTIES FRAMEWORK TRUE )
-        # set_target_properties ( xlua PROPERTIES MACOSX_RPATH TRUE )
     endif ()
 else ( )
     add_library(ulua SHARED
         ${LUA_CORE}
         ${LUA_LIB}
         ${XLUA_CORE}
-        ${THIRDPART_SRC}
     )
 endif ( )
 
@@ -116,14 +107,3 @@ if(UINT_ESPECIALLY)
     ADD_DEFINITIONS(-DUINT_ESPECIALLY)
 endif()
 	
-if ( WIN32 AND NOT CYGWIN )
-       target_link_libraries(ulua
-        ws2_32
-        ${THIRDPART_LIB} 
-    )
-else ( )
-    target_link_libraries(ulua
-        m
-        ${THIRDPART_LIB} 
-    )
-endif ( )
