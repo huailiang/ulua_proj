@@ -9,11 +9,12 @@ class xlua
 public:
 	xlua();
 	~xlua();
-	void main();
+	void exec();
 
 private :
 	const char* file;
 	lua_State* L;
+	const char* tag;
 };
 
 

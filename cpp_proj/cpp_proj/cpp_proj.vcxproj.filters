@@ -5,11 +5,13 @@
     <ClCompile Include="xprint.cpp" />
     <ClCompile Include="xstate.cpp" />
     <ClCompile Include="xlua.cpp" />
+    <ClCompile Include="ulua.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xprint.h" />
     <ClInclude Include="xstate.h" />
     <ClInclude Include="xlua.h" />
+    <ClInclude Include="ulua.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="main.lua" />

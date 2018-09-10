@@ -10,6 +10,7 @@ public class HelloWorld : MonoBehaviour
         LuaState l = new LuaState();
         string str = "print('hello world!')";
         l.DoString(str);
+        l.Close();
     }
 
 }

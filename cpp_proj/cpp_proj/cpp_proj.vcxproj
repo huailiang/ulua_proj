@@ -121,11 +121,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ulua.cpp" />
     <ClCompile Include="xlua.cpp" />
     <ClCompile Include="xprint.cpp" />
     <ClCompile Include="xstate.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ulua.h" />
     <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />
     <ClInclude Include="xstate.h" />

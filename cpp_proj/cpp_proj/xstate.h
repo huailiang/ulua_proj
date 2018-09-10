@@ -9,10 +9,11 @@ class xstate
 public:
 	xstate();
 	~xstate();
-	void main();
+	void exec();
 
 private:
 	lua_State * L;
+	const char* tag;
 };
 
 

@@ -1,32 +1,37 @@
 #include "xlua.h"
 #include "xstate.h"
+#include "ulua.h"
 
 using namespace std;
 
 xstate* pState;
-xlua* pLua;
+xlua* pXlua;
+ulua* pUlua;
 
 void init()
 {
 	pState = new xstate();
-	pLua = new xlua();
+	pXlua = new xlua();
+	pUlua = new ulua();
 }
 
 void tip()
 {
-	cout << "* 1.luaState, 2.luaFile, other any key break *" << endl;
+	cout << "* 1.luaState, 2.luaFile, 3.ulua, other any key break *" << endl;
 	cout << "please your input op: ";
 }
 
 void dispose()
 {
 	delete pState;
-	delete pLua;
+	delete pXlua;
+	delete pUlua;
 	pState = NULL;
-	pLua = NULL;
+	pXlua = NULL;
+	pUlua = NULL;
 }
 
-void main()
+int main()
 {
 	init();
 	int a = 0;
@@ -38,10 +43,13 @@ void main()
 		switch (a)
 		{
 		case 1:
-			pState->main();
+			pState->exec();
 			break;
 		case 2:
-			pLua->main();
+			pXlua->exec();
+			break;
+		case 3:
+			pUlua->exec();
 			break;
 		default:
 			loop = false;
@@ -49,4 +57,5 @@ void main()
 		}
 	}
 	//system("pause");
+	return 0;
 }

@@ -6,13 +6,13 @@
 
 using namespace std;
 
-#define LUAPRINT() xprint::print(L)
-
+#define LUAPRINT(tag) xprint::print(L,tag)
 
 class xprint
 {
 public:
 	static void print(lua_State* L);
+	static void print(lua_State* L, const char* tag);
 	static void stackDump(lua_State * L);
 };
 

@@ -1,15 +1,25 @@
 #include "xprint.h"
 
+
 void xprint::print(lua_State* L)
 {
+	print(L, NULL);
+}
+
+void  xprint::print(lua_State* L, const char* tag)
+{
 	int size = lua_gettop(L);
-	cout << "*******  size: " << size << " *******" << endl;
+	cout << "*******  " << tag << " size: " << size << " *******" << endl;
 	for (int i = 1;i <= size;i++)
 	{
 		//lua的栈索引是正负数对称的
-		if (lua_isstring(L, i) || lua_isnumber(L, i) || lua_isboolean(L, i))
+		if (lua_isstring(L, i) || lua_isnumber(L, i))
 		{
 			cout << i << ": " << lua_tostring(L, i) << " <-> " << lua_tostring(L, i - size - 1) << endl;
+		}
+		else if (lua_isboolean(L, i))
+		{
+			cout << i << ": is boolean with value: " << (lua_toboolean(L, i) == 1) << endl;
 		}
 		else if (lua_iscfunction(L, i))
 		{

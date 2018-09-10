@@ -3,6 +3,7 @@
 xlua::xlua()
 {
 	file = "main.lua";
+	tag = "xlua";
 	L = luaL_newstate();
 	luaL_openlibs(L);
 }
@@ -15,7 +16,7 @@ xlua::~xlua()
 }
 
 
-void xlua::main()
+void xlua::exec()
 {
 	luaL_dofile(L, file);
 	luaL_dostring(L, "print(\"called in cpp\")");
@@ -24,14 +25,14 @@ void xlua::main()
 	lua_getglobal(L, "str");
 	string str = lua_tostring(L, -1);
 	cout << "str = " << str.c_str() << endl;
-	LUAPRINT();
+	LUAPRINT(tag);
 
 	//读取table  
 	lua_getglobal(L, "tbl");
 	lua_getfield(L, -1, "id");
 	lua_getfield(L, -2, "name");
 	lua_getfield(L, -3, "tb2");
-	LUAPRINT();
+	LUAPRINT(tag);
 
 	//读取函数
 	lua_getglobal(L, "add");        // 获取函数，压入栈中  
@@ -48,5 +49,5 @@ void xlua::main()
 		double fValue = lua_tonumber(L, -1);
 		cout << "Result is " << fValue << endl;
 	}
-	LUAPRINT();
+	LUAPRINT(tag);
 }
