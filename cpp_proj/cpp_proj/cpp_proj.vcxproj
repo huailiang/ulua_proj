@@ -125,12 +125,14 @@
     <ClCompile Include="xlua.cpp" />
     <ClCompile Include="xprint.cpp" />
     <ClCompile Include="xstate.cpp" />
+    <ClCompile Include="xtable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ulua.h" />
     <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />
     <ClInclude Include="xstate.h" />
+    <ClInclude Include="xtable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="main.lua" />

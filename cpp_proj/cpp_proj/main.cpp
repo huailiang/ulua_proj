@@ -1,23 +1,26 @@
 #include "xlua.h"
 #include "xstate.h"
 #include "ulua.h"
+#include "xtable.h"
 
 using namespace std;
 
 xstate* pState;
 xlua* pXlua;
 ulua* pUlua;
+xtable* pTable;
 
 void init()
 {
 	pState = new xstate();
 	pXlua = new xlua();
 	pUlua = new ulua();
+	pTable = new xtable;
 }
 
 void tip()
 {
-	cout << "* 1.luaState, 2.luaFile, 3.ulua, other any key break *" << endl;
+	cout << "** 1.state, 2.xlua, 3.ulua, 4.table, any other number break **" << endl;
 	cout << "please your input op: ";
 }
 
@@ -26,9 +29,11 @@ void dispose()
 	delete pState;
 	delete pXlua;
 	delete pUlua;
+	delete pTable;
 	pState = NULL;
 	pXlua = NULL;
 	pUlua = NULL;
+	pTable = NULL;
 }
 
 int main()
@@ -50,6 +55,9 @@ int main()
 			break;
 		case 3:
 			pUlua->exec();
+			break;
+		case 4:
+			pTable->exec();
 			break;
 		default:
 			loop = false;

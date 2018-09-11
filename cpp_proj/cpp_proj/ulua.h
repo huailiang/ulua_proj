@@ -4,7 +4,6 @@
 #include "lua.hpp"
 #include "xprint.h"
 
-
 class ulua
 {
 public:
@@ -14,7 +13,7 @@ public:
 
 private:
 	lua_State* L;
-	int LUA_GLOBALSINDEX = -10002;
+	int LUA_GLOBALSINDEX;
 	const char* tag;
 };
 

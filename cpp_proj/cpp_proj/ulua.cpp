@@ -3,6 +3,7 @@
 ulua::ulua()
 {
 	tag = "ulua";
+	LUA_GLOBALSINDEX = -1027;
 	L = luaL_newstate();
 	luaL_openlibs(L);
 }
@@ -13,6 +14,9 @@ ulua::~ulua()
 	L = NULL;
 }
 
+/*
+ 测试ulua LuaState的构造函数里的api
+*/
 void ulua::exec()
 {
 	cout << "LUA_REGISTRYINDEX " << LUA_REGISTRYINDEX << endl;
