@@ -18,9 +18,10 @@ public static class DelegateFactory
 		dict.Add(typeof(System.Reflection.TypeFilter), new DelegateValue(System_Reflection_TypeFilter));
 		dict.Add(typeof(TestLuaDelegate.VoidDelegate), new DelegateValue(TestLuaDelegate_VoidDelegate));
 		dict.Add(typeof(Camera.CameraCallback), new DelegateValue(Camera_CameraCallback));
-		dict.Add(typeof(Application.LowMemoryCallback), new DelegateValue(Application_LowMemoryCallback));
 		dict.Add(typeof(Application.AdvertisingIdentifierCallback), new DelegateValue(Application_AdvertisingIdentifierCallback));
+		dict.Add(typeof(Application.LowMemoryCallback), new DelegateValue(Application_LowMemoryCallback));
 		dict.Add(typeof(Application.LogCallback), new DelegateValue(Application_LogCallback));
+		dict.Add(typeof(Func<bool>), new DelegateValue(Func_bool));
 	}
 
 	[NoToLuaAttribute]
@@ -125,15 +126,6 @@ public static class DelegateFactory
 		return d;
 	}
 
-	public static Delegate Application_LowMemoryCallback(LuaFunction func)
-	{
-		Application.LowMemoryCallback d = () =>
-		{
-			func.Call();
-		};
-		return d;
-	}
-
 	public static Delegate Application_AdvertisingIdentifierCallback(LuaFunction func)
 	{
 		Application.AdvertisingIdentifierCallback d = (param0, param1, param2) =>
@@ -149,6 +141,15 @@ public static class DelegateFactory
 		return d;
 	}
 
+	public static Delegate Application_LowMemoryCallback(LuaFunction func)
+	{
+		Application.LowMemoryCallback d = () =>
+		{
+			func.Call();
+		};
+		return d;
+	}
+
 	public static Delegate Application_LogCallback(LuaFunction func)
 	{
 		Application.LogCallback d = (param0, param1, param2) =>
@@ -160,6 +161,16 @@ public static class DelegateFactory
 			LuaScriptMgr.Push(L, param2);
 			func.PCall(top, 3);
 			func.EndPCall(top);
+		};
+		return d;
+	}
+
+	public static Delegate Func_bool(LuaFunction func)
+	{
+		Func<bool> d = () =>
+		{
+			object[] objs = func.Call();
+			return (bool)objs[0];
 		};
 		return d;
 	}

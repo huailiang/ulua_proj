@@ -45,19 +45,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateAssetBundle(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
-
-		if (count == 0)
-		{
-			AssetBundle obj = new AssetBundle();
-			LuaScriptMgr.Push(L, obj);
-			return 1;
-		}
-		else
-		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.New");
-		}
-
+		LuaDLL.luaL_error(L, "AssetBundle class does not have a constructor function");
 		return 0;
 	}
 

@@ -1,16 +1,18 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
 public class HelloWorld : MonoBehaviour
 {
 
-    void Start()
+    private void OnGUI()
     {
-        LuaState l = new LuaState();
-        string str = "print('hello world!')";
-        l.DoString(str);
-        l.Close();
+        if (GUI.Button(new Rect(20, 20, 100, 50), "Hello"))
+        {
+            LuaState l = new LuaState();
+            string str = "print('hello world!')";
+            l.DoString(str);
+            l.Close();
+        }
     }
 
 }

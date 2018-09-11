@@ -1045,18 +1045,18 @@ public class TransformWrap
 			obj.LookAt(arg0);
 			return 0;
 		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(LuaTable), typeof(LuaTable)))
-		{
-			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
-			Vector3 arg0 = LuaScriptMgr.GetVector3(L, 2);
-			Vector3 arg1 = LuaScriptMgr.GetVector3(L, 3);
-			obj.LookAt(arg0,arg1);
-			return 0;
-		}
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(Transform), typeof(LuaTable)))
 		{
 			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
 			Transform arg0 = (Transform)LuaScriptMgr.GetLuaObject(L, 2);
+			Vector3 arg1 = LuaScriptMgr.GetVector3(L, 3);
+			obj.LookAt(arg0,arg1);
+			return 0;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(LuaTable), typeof(LuaTable)))
+		{
+			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
+			Vector3 arg0 = LuaScriptMgr.GetVector3(L, 2);
 			Vector3 arg1 = LuaScriptMgr.GetVector3(L, 3);
 			obj.LookAt(arg0,arg1);
 			return 0;

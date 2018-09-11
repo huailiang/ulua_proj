@@ -9,9 +9,9 @@ public class ColliderWrap
 	{
 		LuaMethod[] regs = new LuaMethod[]
 		{
-			new LuaMethod("ClosestPointOnBounds", ClosestPointOnBounds),
 			new LuaMethod("ClosestPoint", ClosestPoint),
 			new LuaMethod("Raycast", Raycast),
+			new LuaMethod("ClosestPointOnBounds", ClosestPointOnBounds),
 			new LuaMethod("New", _CreateCollider),
 			new LuaMethod("GetClassType", GetClassType),
 			new LuaMethod("__eq", Lua_Eq),
@@ -23,9 +23,9 @@ public class ColliderWrap
 			new LuaField("attachedRigidbody", get_attachedRigidbody, null),
 			new LuaField("isTrigger", get_isTrigger, set_isTrigger),
 			new LuaField("contactOffset", get_contactOffset, set_contactOffset),
-			new LuaField("material", get_material, set_material),
-			new LuaField("sharedMaterial", get_sharedMaterial, set_sharedMaterial),
 			new LuaField("bounds", get_bounds, null),
+			new LuaField("sharedMaterial", get_sharedMaterial, set_sharedMaterial),
+			new LuaField("material", get_material, set_material),
 		};
 
 		LuaScriptMgr.RegisterLib(L, "UnityEngine.Collider", typeof(Collider), regs, fields, typeof(Component));
@@ -156,7 +156,7 @@ public class ColliderWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_material(IntPtr L)
+	static int get_bounds(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
 		Collider obj = (Collider)o;
@@ -167,15 +167,15 @@ public class ColliderWrap
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name material");
+				LuaDLL.luaL_error(L, "unknown member name bounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index material on a nil value");
+				LuaDLL.luaL_error(L, "attempt to index bounds on a nil value");
 			}
 		}
 
-		LuaScriptMgr.Push(L, obj.material);
+		LuaScriptMgr.Push(L, obj.bounds);
 		return 1;
 	}
 
@@ -204,7 +204,7 @@ public class ColliderWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_bounds(IntPtr L)
+	static int get_material(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
 		Collider obj = (Collider)o;
@@ -215,15 +215,15 @@ public class ColliderWrap
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name bounds");
+				LuaDLL.luaL_error(L, "unknown member name material");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index bounds on a nil value");
+				LuaDLL.luaL_error(L, "attempt to index material on a nil value");
 			}
 		}
 
-		LuaScriptMgr.Push(L, obj.bounds);
+		LuaScriptMgr.Push(L, obj.material);
 		return 1;
 	}
 
@@ -300,30 +300,6 @@ public class ColliderWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_material(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Collider obj = (Collider)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name material");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index material on a nil value");
-			}
-		}
-
-		obj.material = (PhysicMaterial)LuaScriptMgr.GetUnityObject(L, 3, typeof(PhysicMaterial));
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_sharedMaterial(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -348,14 +324,27 @@ public class ColliderWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ClosestPointOnBounds(IntPtr L)
+	static int set_material(IntPtr L)
 	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Collider obj = (Collider)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Collider");
-		Vector3 arg0 = LuaScriptMgr.GetVector3(L, 2);
-		Vector3 o = obj.ClosestPointOnBounds(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Collider obj = (Collider)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name material");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index material on a nil value");
+			}
+		}
+
+		obj.material = (PhysicMaterial)LuaScriptMgr.GetUnityObject(L, 3, typeof(PhysicMaterial));
+		return 0;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -381,6 +370,17 @@ public class ColliderWrap
 		LuaScriptMgr.Push(L, o);
 		LuaScriptMgr.Push(L, arg1);
 		return 2;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int ClosestPointOnBounds(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Collider obj = (Collider)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Collider");
+		Vector3 arg0 = LuaScriptMgr.GetVector3(L, 2);
+		Vector3 o = obj.ClosestPointOnBounds(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

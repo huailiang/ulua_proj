@@ -20,6 +20,7 @@ public class UtilWrap
 
 		LuaField[] fields = new LuaField[]
 		{
+			new LuaField("uLuaPath", get_uLuaPath, null),
 			new LuaField("isApplePlatform", get_isApplePlatform, null),
 		};
 
@@ -51,6 +52,13 @@ public class UtilWrap
 	static int GetClassType(IntPtr L)
 	{
 		LuaScriptMgr.Push(L, classType);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_uLuaPath(IntPtr L)
+	{
+		LuaScriptMgr.Push(L, Util.uLuaPath);
 		return 1;
 	}
 

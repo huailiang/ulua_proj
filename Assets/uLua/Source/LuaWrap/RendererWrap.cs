@@ -10,8 +10,11 @@ public class RendererWrap
 	{
 		LuaMethod[] regs = new LuaMethod[]
 		{
+			new LuaMethod("HasPropertyBlock", HasPropertyBlock),
 			new LuaMethod("SetPropertyBlock", SetPropertyBlock),
 			new LuaMethod("GetPropertyBlock", GetPropertyBlock),
+			new LuaMethod("GetMaterials", GetMaterials),
+			new LuaMethod("GetSharedMaterials", GetSharedMaterials),
 			new LuaMethod("GetClosestReflectionProbes", GetClosestReflectionProbes),
 			new LuaMethod("New", _CreateRenderer),
 			new LuaMethod("GetClassType", GetClassType),
@@ -28,6 +31,7 @@ public class RendererWrap
 			new LuaField("motionVectorGenerationMode", get_motionVectorGenerationMode, set_motionVectorGenerationMode),
 			new LuaField("lightProbeUsage", get_lightProbeUsage, set_lightProbeUsage),
 			new LuaField("reflectionProbeUsage", get_reflectionProbeUsage, set_reflectionProbeUsage),
+			new LuaField("renderingLayerMask", get_renderingLayerMask, set_renderingLayerMask),
 			new LuaField("sortingLayerName", get_sortingLayerName, set_sortingLayerName),
 			new LuaField("sortingLayerID", get_sortingLayerID, set_sortingLayerID),
 			new LuaField("sortingOrder", get_sortingOrder, set_sortingOrder),
@@ -41,9 +45,9 @@ public class RendererWrap
 			new LuaField("realtimeLightmapIndex", get_realtimeLightmapIndex, set_realtimeLightmapIndex),
 			new LuaField("lightmapScaleOffset", get_lightmapScaleOffset, set_lightmapScaleOffset),
 			new LuaField("realtimeLightmapScaleOffset", get_realtimeLightmapScaleOffset, set_realtimeLightmapScaleOffset),
+			new LuaField("materials", get_materials, set_materials),
 			new LuaField("material", get_material, set_material),
 			new LuaField("sharedMaterial", get_sharedMaterial, set_sharedMaterial),
-			new LuaField("materials", get_materials, set_materials),
 			new LuaField("sharedMaterials", get_sharedMaterials, set_sharedMaterials),
 		};
 
@@ -267,6 +271,30 @@ public class RendererWrap
 		}
 
 		LuaScriptMgr.Push(L, obj.reflectionProbeUsage);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_renderingLayerMask(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Renderer obj = (Renderer)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name renderingLayerMask");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index renderingLayerMask on a nil value");
+			}
+		}
+
+		LuaScriptMgr.Push(L, obj.renderingLayerMask);
 		return 1;
 	}
 
@@ -583,6 +611,30 @@ public class RendererWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_materials(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Renderer obj = (Renderer)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name materials");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index materials on a nil value");
+			}
+		}
+
+		LuaScriptMgr.PushArray(L, obj.materials);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_material(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -627,30 +679,6 @@ public class RendererWrap
 		}
 
 		LuaScriptMgr.Push(L, obj.sharedMaterial);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_materials(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Renderer obj = (Renderer)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name materials");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index materials on a nil value");
-			}
-		}
-
-		LuaScriptMgr.PushArray(L, obj.materials);
 		return 1;
 	}
 
@@ -819,6 +847,30 @@ public class RendererWrap
 		}
 
 		obj.reflectionProbeUsage = (UnityEngine.Rendering.ReflectionProbeUsage)LuaScriptMgr.GetNetObject(L, 3, typeof(UnityEngine.Rendering.ReflectionProbeUsage));
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_renderingLayerMask(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Renderer obj = (Renderer)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name renderingLayerMask");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index renderingLayerMask on a nil value");
+			}
+		}
+
+		obj.renderingLayerMask = (uint)LuaScriptMgr.GetNumber(L, 3);
 		return 0;
 	}
 
@@ -1063,6 +1115,30 @@ public class RendererWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_materials(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Renderer obj = (Renderer)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name materials");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index materials on a nil value");
+			}
+		}
+
+		obj.materials = LuaScriptMgr.GetArrayObject<Material>(L, 3);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_material(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -1111,30 +1187,6 @@ public class RendererWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_materials(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Renderer obj = (Renderer)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name materials");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index materials on a nil value");
-			}
-		}
-
-		obj.materials = LuaScriptMgr.GetArrayObject<Material>(L, 3);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_sharedMaterials(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -1159,22 +1211,88 @@ public class RendererWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int HasPropertyBlock(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
+		bool o = obj.HasPropertyBlock();
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetPropertyBlock(IntPtr L)
 	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
-		MaterialPropertyBlock arg0 = (MaterialPropertyBlock)LuaScriptMgr.GetNetObject(L, 2, typeof(MaterialPropertyBlock));
-		obj.SetPropertyBlock(arg0);
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 2)
+		{
+			Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
+			MaterialPropertyBlock arg0 = (MaterialPropertyBlock)LuaScriptMgr.GetNetObject(L, 2, typeof(MaterialPropertyBlock));
+			obj.SetPropertyBlock(arg0);
+			return 0;
+		}
+		else if (count == 3)
+		{
+			Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
+			MaterialPropertyBlock arg0 = (MaterialPropertyBlock)LuaScriptMgr.GetNetObject(L, 2, typeof(MaterialPropertyBlock));
+			int arg1 = (int)LuaScriptMgr.GetNumber(L, 3);
+			obj.SetPropertyBlock(arg0,arg1);
+			return 0;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Renderer.SetPropertyBlock");
+		}
+
 		return 0;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetPropertyBlock(IntPtr L)
 	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 2)
+		{
+			Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
+			MaterialPropertyBlock arg0 = (MaterialPropertyBlock)LuaScriptMgr.GetNetObject(L, 2, typeof(MaterialPropertyBlock));
+			obj.GetPropertyBlock(arg0);
+			return 0;
+		}
+		else if (count == 3)
+		{
+			Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
+			MaterialPropertyBlock arg0 = (MaterialPropertyBlock)LuaScriptMgr.GetNetObject(L, 2, typeof(MaterialPropertyBlock));
+			int arg1 = (int)LuaScriptMgr.GetNumber(L, 3);
+			obj.GetPropertyBlock(arg0,arg1);
+			return 0;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Renderer.GetPropertyBlock");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetMaterials(IntPtr L)
+	{
 		LuaScriptMgr.CheckArgsCount(L, 2);
 		Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
-		MaterialPropertyBlock arg0 = (MaterialPropertyBlock)LuaScriptMgr.GetNetObject(L, 2, typeof(MaterialPropertyBlock));
-		obj.GetPropertyBlock(arg0);
+		List<Material> arg0 = (List<Material>)LuaScriptMgr.GetNetObject(L, 2, typeof(List<Material>));
+		obj.GetMaterials(arg0);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetSharedMaterials(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Renderer obj = (Renderer)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Renderer");
+		List<Material> arg0 = (List<Material>)LuaScriptMgr.GetNetObject(L, 2, typeof(List<Material>));
+		obj.GetSharedMaterials(arg0);
 		return 0;
 	}
 

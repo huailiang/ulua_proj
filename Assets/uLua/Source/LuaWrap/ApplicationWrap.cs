@@ -9,9 +9,7 @@ public class ApplicationWrap
 		LuaMethod[] regs = new LuaMethod[]
 		{
 			new LuaMethod("Quit", Quit),
-			new LuaMethod("CancelQuit", CancelQuit),
 			new LuaMethod("Unload", Unload),
-			new LuaMethod("GetStreamProgressForLevel", GetStreamProgressForLevel),
 			new LuaMethod("CanStreamedLevelBeLoaded", CanStreamedLevelBeLoaded),
 			new LuaMethod("GetBuildTags", GetBuildTags),
 			new LuaMethod("SetBuildTags", SetBuildTags),
@@ -28,15 +26,14 @@ public class ApplicationWrap
 
 		LuaField[] fields = new LuaField[]
 		{
-			new LuaField("streamedBytes", get_streamedBytes, null),
 			new LuaField("isPlaying", get_isPlaying, null),
 			new LuaField("isFocused", get_isFocused, null),
-			new LuaField("isEditor", get_isEditor, null),
 			new LuaField("platform", get_platform, null),
 			new LuaField("buildGUID", get_buildGUID, null),
 			new LuaField("isMobilePlatform", get_isMobilePlatform, null),
 			new LuaField("isConsolePlatform", get_isConsolePlatform, null),
 			new LuaField("runInBackground", get_runInBackground, set_runInBackground),
+			new LuaField("isBatchMode", get_isBatchMode, null),
 			new LuaField("dataPath", get_dataPath, null),
 			new LuaField("streamingAssetsPath", get_streamingAssetsPath, null),
 			new LuaField("persistentDataPath", get_persistentDataPath, null),
@@ -57,6 +54,7 @@ public class ApplicationWrap
 			new LuaField("internetReachability", get_internetReachability, null),
 			new LuaField("genuine", get_genuine, null),
 			new LuaField("genuineCheckAvailable", get_genuineCheckAvailable, null),
+			new LuaField("isEditor", get_isEditor, null),
 		};
 
 		LuaScriptMgr.RegisterLib(L, "UnityEngine.Application", typeof(Application), regs, fields, typeof(object));
@@ -91,13 +89,6 @@ public class ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_streamedBytes(IntPtr L)
-	{
-		LuaScriptMgr.Push(L, Application.streamedBytes);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_isPlaying(IntPtr L)
 	{
 		LuaScriptMgr.Push(L, Application.isPlaying);
@@ -108,13 +99,6 @@ public class ApplicationWrap
 	static int get_isFocused(IntPtr L)
 	{
 		LuaScriptMgr.Push(L, Application.isFocused);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_isEditor(IntPtr L)
-	{
-		LuaScriptMgr.Push(L, Application.isEditor);
 		return 1;
 	}
 
@@ -150,6 +134,13 @@ public class ApplicationWrap
 	static int get_runInBackground(IntPtr L)
 	{
 		LuaScriptMgr.Push(L, Application.runInBackground);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isBatchMode(IntPtr L)
+	{
+		LuaScriptMgr.Push(L, Application.isBatchMode);
 		return 1;
 	}
 
@@ -294,6 +285,13 @@ public class ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isEditor(IntPtr L)
+	{
+		LuaScriptMgr.Push(L, Application.isEditor);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_runInBackground(IntPtr L)
 	{
 		Application.runInBackground = LuaScriptMgr.GetBoolean(L, 3);
@@ -323,45 +321,10 @@ public class ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CancelQuit(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 0);
-		Application.CancelQuit();
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Unload(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 0);
 		Application.Unload();
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetStreamProgressForLevel(IntPtr L)
-	{
-		int count = LuaDLL.lua_gettop(L);
-
-		if (count == 1 && LuaScriptMgr.CheckTypes(L, 1, typeof(string)))
-		{
-			string arg0 = LuaScriptMgr.GetString(L, 1);
-			float o = Application.GetStreamProgressForLevel(arg0);
-			LuaScriptMgr.Push(L, o);
-			return 1;
-		}
-		else if (count == 1 && LuaScriptMgr.CheckTypes(L, 1, typeof(int)))
-		{
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			float o = Application.GetStreamProgressForLevel(arg0);
-			LuaScriptMgr.Push(L, o);
-			return 1;
-		}
-		else
-		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Application.GetStreamProgressForLevel");
-		}
-
 		return 0;
 	}
 

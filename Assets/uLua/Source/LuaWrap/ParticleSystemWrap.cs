@@ -21,6 +21,7 @@ public class ParticleSystemWrap
 			new LuaMethod("Clear", Clear),
 			new LuaMethod("IsAlive", IsAlive),
 			new LuaMethod("Emit", Emit),
+			new LuaMethod("TriggerSubEmitter", TriggerSubEmitter),
 			new LuaMethod("New", _CreateParticleSystem),
 			new LuaMethod("GetClassType", GetClassType),
 			new LuaMethod("__eq", Lua_Eq),
@@ -36,6 +37,7 @@ public class ParticleSystemWrap
 			new LuaField("particleCount", get_particleCount, null),
 			new LuaField("randomSeed", get_randomSeed, set_randomSeed),
 			new LuaField("useAutoRandomSeed", get_useAutoRandomSeed, set_useAutoRandomSeed),
+			new LuaField("automaticCullingEnabled", get_automaticCullingEnabled, null),
 			new LuaField("main", get_main, null),
 			new LuaField("emission", get_emission, null),
 			new LuaField("shape", get_shape, null),
@@ -280,6 +282,30 @@ public class ParticleSystemWrap
 		}
 
 		LuaScriptMgr.Push(L, obj.useAutoRandomSeed);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_automaticCullingEnabled(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		ParticleSystem obj = (ParticleSystem)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name automaticCullingEnabled");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index automaticCullingEnabled on a nil value");
+			}
+		}
+
+		LuaScriptMgr.Push(L, obj.automaticCullingEnabled);
 		return 1;
 	}
 
@@ -1138,6 +1164,43 @@ public class ParticleSystemWrap
 		else
 		{
 			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Emit");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int TriggerSubEmitter(IntPtr L)
+	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 2)
+		{
+			ParticleSystem obj = (ParticleSystem)LuaScriptMgr.GetUnityObjectSelf(L, 1, "ParticleSystem");
+			int arg0 = (int)LuaScriptMgr.GetNumber(L, 2);
+			obj.TriggerSubEmitter(arg0);
+			return 0;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(ParticleSystem), typeof(int), typeof(List<ParticleSystem.Particle>)))
+		{
+			ParticleSystem obj = (ParticleSystem)LuaScriptMgr.GetUnityObjectSelf(L, 1, "ParticleSystem");
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			List<ParticleSystem.Particle> arg1 = (List<ParticleSystem.Particle>)LuaScriptMgr.GetLuaObject(L, 3);
+			obj.TriggerSubEmitter(arg0,arg1);
+			return 0;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(ParticleSystem), typeof(int), typeof(ParticleSystem.Particle)))
+		{
+			ParticleSystem obj = (ParticleSystem)LuaScriptMgr.GetUnityObjectSelf(L, 1, "ParticleSystem");
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			ParticleSystem.Particle arg1 = (ParticleSystem.Particle)LuaScriptMgr.GetLuaObject(L, 3);
+			obj.TriggerSubEmitter(arg0,ref arg1);
+			LuaScriptMgr.PushValue(L, arg1);
+			return 1;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.TriggerSubEmitter");
 		}
 
 		return 0;

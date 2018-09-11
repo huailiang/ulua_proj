@@ -10,19 +10,21 @@ public class MaterialWrap
 	{
 		LuaMethod[] regs = new LuaMethod[]
 		{
+			new LuaMethod("GetTexturePropertyNames", GetTexturePropertyNames),
+			new LuaMethod("GetTexturePropertyNameIDs", GetTexturePropertyNameIDs),
 			new LuaMethod("HasProperty", HasProperty),
-			new LuaMethod("GetTag", GetTag),
-			new LuaMethod("SetOverrideTag", SetOverrideTag),
-			new LuaMethod("SetShaderPassEnabled", SetShaderPassEnabled),
-			new LuaMethod("GetShaderPassEnabled", GetShaderPassEnabled),
-			new LuaMethod("Lerp", Lerp),
-			new LuaMethod("SetPass", SetPass),
-			new LuaMethod("GetPassName", GetPassName),
-			new LuaMethod("FindPass", FindPass),
-			new LuaMethod("CopyPropertiesFromMaterial", CopyPropertiesFromMaterial),
 			new LuaMethod("EnableKeyword", EnableKeyword),
 			new LuaMethod("DisableKeyword", DisableKeyword),
 			new LuaMethod("IsKeywordEnabled", IsKeywordEnabled),
+			new LuaMethod("SetShaderPassEnabled", SetShaderPassEnabled),
+			new LuaMethod("GetShaderPassEnabled", GetShaderPassEnabled),
+			new LuaMethod("GetPassName", GetPassName),
+			new LuaMethod("FindPass", FindPass),
+			new LuaMethod("SetOverrideTag", SetOverrideTag),
+			new LuaMethod("GetTag", GetTag),
+			new LuaMethod("Lerp", Lerp),
+			new LuaMethod("SetPass", SetPass),
+			new LuaMethod("CopyPropertiesFromMaterial", CopyPropertiesFromMaterial),
 			new LuaMethod("SetFloat", SetFloat),
 			new LuaMethod("SetInt", SetInt),
 			new LuaMethod("SetColor", SetColor),
@@ -30,8 +32,6 @@ public class MaterialWrap
 			new LuaMethod("SetMatrix", SetMatrix),
 			new LuaMethod("SetTexture", SetTexture),
 			new LuaMethod("SetBuffer", SetBuffer),
-			new LuaMethod("SetTextureOffset", SetTextureOffset),
-			new LuaMethod("SetTextureScale", SetTextureScale),
 			new LuaMethod("SetFloatArray", SetFloatArray),
 			new LuaMethod("SetColorArray", SetColorArray),
 			new LuaMethod("SetVectorArray", SetVectorArray),
@@ -41,11 +41,13 @@ public class MaterialWrap
 			new LuaMethod("GetColor", GetColor),
 			new LuaMethod("GetVector", GetVector),
 			new LuaMethod("GetMatrix", GetMatrix),
-			new LuaMethod("GetFloatArray", GetFloatArray),
-			new LuaMethod("GetVectorArray", GetVectorArray),
-			new LuaMethod("GetColorArray", GetColorArray),
-			new LuaMethod("GetMatrixArray", GetMatrixArray),
 			new LuaMethod("GetTexture", GetTexture),
+			new LuaMethod("GetFloatArray", GetFloatArray),
+			new LuaMethod("GetColorArray", GetColorArray),
+			new LuaMethod("GetVectorArray", GetVectorArray),
+			new LuaMethod("GetMatrixArray", GetMatrixArray),
+			new LuaMethod("SetTextureOffset", SetTextureOffset),
+			new LuaMethod("SetTextureScale", SetTextureScale),
 			new LuaMethod("GetTextureOffset", GetTextureOffset),
 			new LuaMethod("GetTextureScale", GetTextureScale),
 			new LuaMethod("New", _CreateMaterial),
@@ -60,12 +62,12 @@ public class MaterialWrap
 			new LuaField("mainTexture", get_mainTexture, set_mainTexture),
 			new LuaField("mainTextureOffset", get_mainTextureOffset, set_mainTextureOffset),
 			new LuaField("mainTextureScale", get_mainTextureScale, set_mainTextureScale),
-			new LuaField("passCount", get_passCount, null),
 			new LuaField("renderQueue", get_renderQueue, set_renderQueue),
-			new LuaField("shaderKeywords", get_shaderKeywords, set_shaderKeywords),
 			new LuaField("globalIlluminationFlags", get_globalIlluminationFlags, set_globalIlluminationFlags),
-			new LuaField("enableInstancing", get_enableInstancing, set_enableInstancing),
 			new LuaField("doubleSidedGI", get_doubleSidedGI, set_doubleSidedGI),
+			new LuaField("enableInstancing", get_enableInstancing, set_enableInstancing),
+			new LuaField("passCount", get_passCount, null),
+			new LuaField("shaderKeywords", get_shaderKeywords, set_shaderKeywords),
 		};
 
 		LuaScriptMgr.RegisterLib(L, "UnityEngine.Material", typeof(Material), regs, fields, typeof(Object));
@@ -228,30 +230,6 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_passCount(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Material obj = (Material)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name passCount");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index passCount on a nil value");
-			}
-		}
-
-		LuaScriptMgr.Push(L, obj.passCount);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_renderQueue(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -272,30 +250,6 @@ public class MaterialWrap
 		}
 
 		LuaScriptMgr.Push(L, obj.renderQueue);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_shaderKeywords(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Material obj = (Material)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name shaderKeywords");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index shaderKeywords on a nil value");
-			}
-		}
-
-		LuaScriptMgr.PushArray(L, obj.shaderKeywords);
 		return 1;
 	}
 
@@ -324,6 +278,30 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_doubleSidedGI(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Material obj = (Material)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name doubleSidedGI");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index doubleSidedGI on a nil value");
+			}
+		}
+
+		LuaScriptMgr.Push(L, obj.doubleSidedGI);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_enableInstancing(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -348,7 +326,7 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_doubleSidedGI(IntPtr L)
+	static int get_passCount(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
 		Material obj = (Material)o;
@@ -359,15 +337,39 @@ public class MaterialWrap
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name doubleSidedGI");
+				LuaDLL.luaL_error(L, "unknown member name passCount");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index doubleSidedGI on a nil value");
+				LuaDLL.luaL_error(L, "attempt to index passCount on a nil value");
 			}
 		}
 
-		LuaScriptMgr.Push(L, obj.doubleSidedGI);
+		LuaScriptMgr.Push(L, obj.passCount);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_shaderKeywords(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Material obj = (Material)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name shaderKeywords");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index shaderKeywords on a nil value");
+			}
+		}
+
+		LuaScriptMgr.PushArray(L, obj.shaderKeywords);
 		return 1;
 	}
 
@@ -516,30 +518,6 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_shaderKeywords(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Material obj = (Material)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name shaderKeywords");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index shaderKeywords on a nil value");
-			}
-		}
-
-		obj.shaderKeywords = LuaScriptMgr.GetArrayString(L, 3);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_globalIlluminationFlags(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -560,30 +538,6 @@ public class MaterialWrap
 		}
 
 		obj.globalIlluminationFlags = (MaterialGlobalIlluminationFlags)LuaScriptMgr.GetNetObject(L, 3, typeof(MaterialGlobalIlluminationFlags));
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_enableInstancing(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		Material obj = (Material)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name enableInstancing");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index enableInstancing on a nil value");
-			}
-		}
-
-		obj.enableInstancing = LuaScriptMgr.GetBoolean(L, 3);
 		return 0;
 	}
 
@@ -612,22 +566,124 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_enableInstancing(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Material obj = (Material)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name enableInstancing");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index enableInstancing on a nil value");
+			}
+		}
+
+		obj.enableInstancing = LuaScriptMgr.GetBoolean(L, 3);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shaderKeywords(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		Material obj = (Material)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name shaderKeywords");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index shaderKeywords on a nil value");
+			}
+		}
+
+		obj.shaderKeywords = LuaScriptMgr.GetArrayString(L, 3);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetTexturePropertyNames(IntPtr L)
+	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 1)
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string[] o = obj.GetTexturePropertyNames();
+			LuaScriptMgr.PushArray(L, o);
+			return 1;
+		}
+		else if (count == 2)
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			List<string> arg0 = (List<string>)LuaScriptMgr.GetNetObject(L, 2, typeof(List<string>));
+			obj.GetTexturePropertyNames(arg0);
+			return 0;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetTexturePropertyNames");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetTexturePropertyNameIDs(IntPtr L)
+	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 1)
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			int[] o = obj.GetTexturePropertyNameIDs();
+			LuaScriptMgr.PushArray(L, o);
+			return 1;
+		}
+		else if (count == 2)
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			List<int> arg0 = (List<int>)LuaScriptMgr.GetNetObject(L, 2, typeof(List<int>));
+			obj.GetTexturePropertyNameIDs(arg0);
+			return 0;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetTexturePropertyNameIDs");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int HasProperty(IntPtr L)
 	{
 		int count = LuaDLL.lua_gettop(L);
 
-		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
+		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			string arg0 = LuaScriptMgr.GetString(L, 2);
 			bool o = obj.HasProperty(arg0);
 			LuaScriptMgr.Push(L, o);
 			return 1;
 		}
-		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
+		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
 			bool o = obj.HasProperty(arg0);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -637,6 +693,92 @@ public class MaterialWrap
 			LuaDLL.luaL_error(L, "invalid arguments to method: Material.HasProperty");
 		}
 
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int EnableKeyword(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		obj.EnableKeyword(arg0);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DisableKeyword(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		obj.DisableKeyword(arg0);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int IsKeywordEnabled(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		bool o = obj.IsKeywordEnabled(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetShaderPassEnabled(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 3);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		bool arg1 = LuaScriptMgr.GetBoolean(L, 3);
+		obj.SetShaderPassEnabled(arg0,arg1);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetShaderPassEnabled(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		bool o = obj.GetShaderPassEnabled(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetPassName(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		int arg0 = (int)LuaScriptMgr.GetNumber(L, 2);
+		string o = obj.GetPassName(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FindPass(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		int o = obj.FindPass(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetOverrideTag(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 3);
+		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		string arg1 = LuaScriptMgr.GetLuaString(L, 3);
+		obj.SetOverrideTag(arg0,arg1);
 		return 0;
 	}
 
@@ -673,39 +815,6 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetOverrideTag(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 3);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		string arg1 = LuaScriptMgr.GetLuaString(L, 3);
-		obj.SetOverrideTag(arg0,arg1);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetShaderPassEnabled(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 3);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		bool arg1 = LuaScriptMgr.GetBoolean(L, 3);
-		obj.SetShaderPassEnabled(arg0,arg1);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetShaderPassEnabled(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		bool o = obj.GetShaderPassEnabled(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Lerp(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 4);
@@ -729,28 +838,6 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPassName(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		int arg0 = (int)LuaScriptMgr.GetNumber(L, 2);
-		string o = obj.GetPassName(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int FindPass(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		int o = obj.FindPass(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CopyPropertiesFromMaterial(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 2);
@@ -758,37 +845,6 @@ public class MaterialWrap
 		Material arg0 = (Material)LuaScriptMgr.GetUnityObject(L, 2, typeof(Material));
 		obj.CopyPropertiesFromMaterial(arg0);
 		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int EnableKeyword(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		obj.EnableKeyword(arg0);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int DisableKeyword(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		obj.DisableKeyword(arg0);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int IsKeywordEnabled(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		bool o = obj.IsKeywordEnabled(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -989,64 +1045,6 @@ public class MaterialWrap
 		else
 		{
 			LuaDLL.luaL_error(L, "invalid arguments to method: Material.SetBuffer");
-		}
-
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetTextureOffset(IntPtr L)
-	{
-		int count = LuaDLL.lua_gettop(L);
-
-		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(LuaTable)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
-			obj.SetTextureOffset(arg0,arg1);
-			return 0;
-		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(LuaTable)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
-			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
-			obj.SetTextureOffset(arg0,arg1);
-			return 0;
-		}
-		else
-		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Material.SetTextureOffset");
-		}
-
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetTextureScale(IntPtr L)
-	{
-		int count = LuaDLL.lua_gettop(L);
-
-		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(LuaTable)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
-			obj.SetTextureScale(arg0,arg1);
-			return 0;
-		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(LuaTable)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
-			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
-			obj.SetTextureScale(arg0,arg1);
-			return 0;
-		}
-		else
-		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Material.SetTextureScale");
 		}
 
 		return 0;
@@ -1378,19 +1376,40 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetTexture(IntPtr L)
+	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			Texture o = obj.GetTexture(arg0);
+			LuaScriptMgr.Push(L, o);
+			return 1;
+		}
+		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string arg0 = LuaScriptMgr.GetString(L, 2);
+			Texture o = obj.GetTexture(arg0);
+			LuaScriptMgr.Push(L, o);
+			return 1;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetTexture");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetFloatArray(IntPtr L)
 	{
 		int count = LuaDLL.lua_gettop(L);
 
-		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
-			float[] o = obj.GetFloatArray(arg0);
-			LuaScriptMgr.PushArray(L, o);
-			return 1;
-		}
-		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
+		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
@@ -1398,13 +1417,13 @@ public class MaterialWrap
 			LuaScriptMgr.PushArray(L, o);
 			return 1;
 		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(List<float>)))
+		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			string arg0 = LuaScriptMgr.GetString(L, 2);
-			List<float> arg1 = (List<float>)LuaScriptMgr.GetLuaObject(L, 3);
-			obj.GetFloatArray(arg0,arg1);
-			return 0;
+			float[] o = obj.GetFloatArray(arg0);
+			LuaScriptMgr.PushArray(L, o);
+			return 1;
 		}
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(List<float>)))
 		{
@@ -1414,54 +1433,17 @@ public class MaterialWrap
 			obj.GetFloatArray(arg0,arg1);
 			return 0;
 		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(List<float>)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string arg0 = LuaScriptMgr.GetString(L, 2);
+			List<float> arg1 = (List<float>)LuaScriptMgr.GetLuaObject(L, 3);
+			obj.GetFloatArray(arg0,arg1);
+			return 0;
+		}
 		else
 		{
 			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetFloatArray");
-		}
-
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetVectorArray(IntPtr L)
-	{
-		int count = LuaDLL.lua_gettop(L);
-
-		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
-			Vector4[] o = obj.GetVectorArray(arg0);
-			LuaScriptMgr.PushArray(L, o);
-			return 1;
-		}
-		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			Vector4[] o = obj.GetVectorArray(arg0);
-			LuaScriptMgr.PushArray(L, o);
-			return 1;
-		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(List<Vector4>)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
-			List<Vector4> arg1 = (List<Vector4>)LuaScriptMgr.GetLuaObject(L, 3);
-			obj.GetVectorArray(arg0,arg1);
-			return 0;
-		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(List<Vector4>)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			List<Vector4> arg1 = (List<Vector4>)LuaScriptMgr.GetLuaObject(L, 3);
-			obj.GetVectorArray(arg0,arg1);
-			return 0;
-		}
-		else
-		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetVectorArray");
 		}
 
 		return 0;
@@ -1513,19 +1495,56 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetVectorArray(IntPtr L)
+	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			Vector4[] o = obj.GetVectorArray(arg0);
+			LuaScriptMgr.PushArray(L, o);
+			return 1;
+		}
+		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string arg0 = LuaScriptMgr.GetString(L, 2);
+			Vector4[] o = obj.GetVectorArray(arg0);
+			LuaScriptMgr.PushArray(L, o);
+			return 1;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(List<Vector4>)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			List<Vector4> arg1 = (List<Vector4>)LuaScriptMgr.GetLuaObject(L, 3);
+			obj.GetVectorArray(arg0,arg1);
+			return 0;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(List<Vector4>)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string arg0 = LuaScriptMgr.GetString(L, 2);
+			List<Vector4> arg1 = (List<Vector4>)LuaScriptMgr.GetLuaObject(L, 3);
+			obj.GetVectorArray(arg0,arg1);
+			return 0;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetVectorArray");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetMatrixArray(IntPtr L)
 	{
 		int count = LuaDLL.lua_gettop(L);
 
-		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
-		{
-			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
-			string arg0 = LuaScriptMgr.GetString(L, 2);
-			Matrix4x4[] o = obj.GetMatrixArray(arg0);
-			LuaScriptMgr.PushArray(L, o);
-			return 1;
-		}
-		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
+		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
@@ -1533,18 +1552,26 @@ public class MaterialWrap
 			LuaScriptMgr.PushArray(L, o);
 			return 1;
 		}
-		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(List<Matrix4x4>)))
+		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			string arg0 = LuaScriptMgr.GetString(L, 2);
-			List<Matrix4x4> arg1 = (List<Matrix4x4>)LuaScriptMgr.GetLuaObject(L, 3);
-			obj.GetMatrixArray(arg0,arg1);
-			return 0;
+			Matrix4x4[] o = obj.GetMatrixArray(arg0);
+			LuaScriptMgr.PushArray(L, o);
+			return 1;
 		}
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(List<Matrix4x4>)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			List<Matrix4x4> arg1 = (List<Matrix4x4>)LuaScriptMgr.GetLuaObject(L, 3);
+			obj.GetMatrixArray(arg0,arg1);
+			return 0;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(List<Matrix4x4>)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string arg0 = LuaScriptMgr.GetString(L, 2);
 			List<Matrix4x4> arg1 = (List<Matrix4x4>)LuaScriptMgr.GetLuaObject(L, 3);
 			obj.GetMatrixArray(arg0,arg1);
 			return 0;
@@ -1558,29 +1585,58 @@ public class MaterialWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetTexture(IntPtr L)
+	static int SetTextureOffset(IntPtr L)
 	{
 		int count = LuaDLL.lua_gettop(L);
 
-		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int)))
+		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(LuaTable)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			Texture o = obj.GetTexture(arg0);
-			LuaScriptMgr.Push(L, o);
-			return 1;
+			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
+			obj.SetTextureOffset(arg0,arg1);
+			return 0;
 		}
-		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string)))
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(LuaTable)))
 		{
 			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
 			string arg0 = LuaScriptMgr.GetString(L, 2);
-			Texture o = obj.GetTexture(arg0);
-			LuaScriptMgr.Push(L, o);
-			return 1;
+			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
+			obj.SetTextureOffset(arg0,arg1);
+			return 0;
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Material.GetTexture");
+			LuaDLL.luaL_error(L, "invalid arguments to method: Material.SetTextureOffset");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetTextureScale(IntPtr L)
+	{
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(int), typeof(LuaTable)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
+			obj.SetTextureScale(arg0,arg1);
+			return 0;
+		}
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Material), typeof(string), typeof(LuaTable)))
+		{
+			Material obj = (Material)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Material");
+			string arg0 = LuaScriptMgr.GetString(L, 2);
+			Vector2 arg1 = LuaScriptMgr.GetVector2(L, 3);
+			obj.SetTextureScale(arg0,arg1);
+			return 0;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: Material.SetTextureScale");
 		}
 
 		return 0;

@@ -15,9 +15,6 @@ public class ScreenWrap
 
 		LuaField[] fields = new LuaField[]
 		{
-			new LuaField("resolutions", get_resolutions, null),
-			new LuaField("currentResolution", get_currentResolution, null),
-			new LuaField("fullScreen", get_fullScreen, set_fullScreen),
 			new LuaField("width", get_width, null),
 			new LuaField("height", get_height, null),
 			new LuaField("dpi", get_dpi, null),
@@ -27,7 +24,11 @@ public class ScreenWrap
 			new LuaField("autorotateToPortraitUpsideDown", get_autorotateToPortraitUpsideDown, set_autorotateToPortraitUpsideDown),
 			new LuaField("autorotateToLandscapeLeft", get_autorotateToLandscapeLeft, set_autorotateToLandscapeLeft),
 			new LuaField("autorotateToLandscapeRight", get_autorotateToLandscapeRight, set_autorotateToLandscapeRight),
+			new LuaField("currentResolution", get_currentResolution, null),
+			new LuaField("fullScreen", get_fullScreen, set_fullScreen),
+			new LuaField("fullScreenMode", get_fullScreenMode, set_fullScreenMode),
 			new LuaField("safeArea", get_safeArea, null),
+			new LuaField("resolutions", get_resolutions, null),
 		};
 
 		LuaScriptMgr.RegisterLib(L, "UnityEngine.Screen", typeof(Screen), regs, fields, typeof(object));
@@ -58,27 +59,6 @@ public class ScreenWrap
 	static int GetClassType(IntPtr L)
 	{
 		LuaScriptMgr.Push(L, classType);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_resolutions(IntPtr L)
-	{
-		LuaScriptMgr.PushArray(L, Screen.resolutions);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_currentResolution(IntPtr L)
-	{
-		LuaScriptMgr.PushValue(L, Screen.currentResolution);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_fullScreen(IntPtr L)
-	{
-		LuaScriptMgr.Push(L, Screen.fullScreen);
 		return 1;
 	}
 
@@ -146,6 +126,27 @@ public class ScreenWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_currentResolution(IntPtr L)
+	{
+		LuaScriptMgr.PushValue(L, Screen.currentResolution);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_fullScreen(IntPtr L)
+	{
+		LuaScriptMgr.Push(L, Screen.fullScreen);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_fullScreenMode(IntPtr L)
+	{
+		LuaScriptMgr.Push(L, Screen.fullScreenMode);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_safeArea(IntPtr L)
 	{
 		LuaScriptMgr.PushValue(L, Screen.safeArea);
@@ -153,10 +154,10 @@ public class ScreenWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fullScreen(IntPtr L)
+	static int get_resolutions(IntPtr L)
 	{
-		Screen.fullScreen = LuaScriptMgr.GetBoolean(L, 3);
-		return 0;
+		LuaScriptMgr.PushArray(L, Screen.resolutions);
+		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -202,24 +203,55 @@ public class ScreenWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_fullScreen(IntPtr L)
+	{
+		Screen.fullScreen = LuaScriptMgr.GetBoolean(L, 3);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_fullScreenMode(IntPtr L)
+	{
+		Screen.fullScreenMode = (FullScreenMode)LuaScriptMgr.GetNetObject(L, 3, typeof(FullScreenMode));
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetResolution(IntPtr L)
 	{
 		int count = LuaDLL.lua_gettop(L);
 
-		if (count == 3)
+		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(bool)))
 		{
-			int arg0 = (int)LuaScriptMgr.GetNumber(L, 1);
-			int arg1 = (int)LuaScriptMgr.GetNumber(L, 2);
-			bool arg2 = LuaScriptMgr.GetBoolean(L, 3);
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+			bool arg2 = LuaDLL.lua_toboolean(L, 3);
 			Screen.SetResolution(arg0,arg1,arg2);
 			return 0;
 		}
-		else if (count == 4)
+		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(FullScreenMode)))
 		{
-			int arg0 = (int)LuaScriptMgr.GetNumber(L, 1);
-			int arg1 = (int)LuaScriptMgr.GetNumber(L, 2);
-			bool arg2 = LuaScriptMgr.GetBoolean(L, 3);
-			int arg3 = (int)LuaScriptMgr.GetNumber(L, 4);
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+			FullScreenMode arg2 = (FullScreenMode)LuaScriptMgr.GetLuaObject(L, 3);
+			Screen.SetResolution(arg0,arg1,arg2);
+			return 0;
+		}
+		else if (count == 4 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(FullScreenMode), typeof(int)))
+		{
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+			FullScreenMode arg2 = (FullScreenMode)LuaScriptMgr.GetLuaObject(L, 3);
+			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
+			Screen.SetResolution(arg0,arg1,arg2,arg3);
+			return 0;
+		}
+		else if (count == 4 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(bool), typeof(int)))
+		{
+			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+			bool arg2 = LuaDLL.lua_toboolean(L, 3);
+			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
 			Screen.SetResolution(arg0,arg1,arg2,arg3);
 			return 0;
 		}

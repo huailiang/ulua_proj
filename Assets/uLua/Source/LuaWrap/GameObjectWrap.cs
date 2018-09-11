@@ -17,15 +17,15 @@ public class GameObjectWrap
 			new LuaMethod("GetComponents", GetComponents),
 			new LuaMethod("GetComponentsInChildren", GetComponentsInChildren),
 			new LuaMethod("GetComponentsInParent", GetComponentsInParent),
-			new LuaMethod("SetActive", SetActive),
-			new LuaMethod("CompareTag", CompareTag),
-			new LuaMethod("FindGameObjectWithTag", FindGameObjectWithTag),
 			new LuaMethod("FindWithTag", FindWithTag),
-			new LuaMethod("FindGameObjectsWithTag", FindGameObjectsWithTag),
 			new LuaMethod("SendMessageUpwards", SendMessageUpwards),
 			new LuaMethod("SendMessage", SendMessage),
 			new LuaMethod("BroadcastMessage", BroadcastMessage),
 			new LuaMethod("AddComponent", AddComponent),
+			new LuaMethod("SetActive", SetActive),
+			new LuaMethod("CompareTag", CompareTag),
+			new LuaMethod("FindGameObjectWithTag", FindGameObjectWithTag),
+			new LuaMethod("FindGameObjectsWithTag", FindGameObjectsWithTag),
 			new LuaMethod("Find", Find),
 			new LuaMethod("New", _CreateGameObject),
 			new LuaMethod("GetClassType", GetClassType),
@@ -524,53 +524,12 @@ public class GameObjectWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetActive(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		GameObject obj = (GameObject)LuaScriptMgr.GetUnityObjectSelf(L, 1, "GameObject");
-		bool arg0 = LuaScriptMgr.GetBoolean(L, 2);
-		obj.SetActive(arg0);
-		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CompareTag(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		GameObject obj = (GameObject)LuaScriptMgr.GetUnityObjectSelf(L, 1, "GameObject");
-		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
-		bool o = obj.CompareTag(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int FindGameObjectWithTag(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 1);
-		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		GameObject o = GameObject.FindGameObjectWithTag(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int FindWithTag(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
 		GameObject o = GameObject.FindWithTag(arg0);
 		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int FindGameObjectsWithTag(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 1);
-		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		GameObject[] o = GameObject.FindGameObjectsWithTag(arg0);
-		LuaScriptMgr.PushArray(L, o);
 		return 1;
 	}
 
@@ -717,6 +676,47 @@ public class GameObjectWrap
 		Type arg0 = LuaScriptMgr.GetTypeObject(L, 2);
 		Component o = obj.AddComponent(arg0);
 		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SetActive(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		GameObject obj = (GameObject)LuaScriptMgr.GetUnityObjectSelf(L, 1, "GameObject");
+		bool arg0 = LuaScriptMgr.GetBoolean(L, 2);
+		obj.SetActive(arg0);
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int CompareTag(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		GameObject obj = (GameObject)LuaScriptMgr.GetUnityObjectSelf(L, 1, "GameObject");
+		string arg0 = LuaScriptMgr.GetLuaString(L, 2);
+		bool o = obj.CompareTag(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FindGameObjectWithTag(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
+		GameObject o = GameObject.FindGameObjectWithTag(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FindGameObjectsWithTag(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
+		GameObject[] o = GameObject.FindGameObjectsWithTag(arg0);
+		LuaScriptMgr.PushArray(L, o);
 		return 1;
 	}
 

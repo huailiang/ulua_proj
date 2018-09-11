@@ -34,7 +34,6 @@ public static class WrapFile {
         _GT(typeof(Renderer)),       
         _GT(typeof(SkinnedMeshRenderer)),         
                 
-        _GT(typeof(Physics)),
         _GT(typeof(Collider)),
         _GT(typeof(BoxCollider)),
         

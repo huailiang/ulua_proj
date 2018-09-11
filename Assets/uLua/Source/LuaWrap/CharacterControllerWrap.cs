@@ -18,8 +18,8 @@ public class CharacterControllerWrap
 
 		LuaField[] fields = new LuaField[]
 		{
-			new LuaField("isGrounded", get_isGrounded, null),
 			new LuaField("velocity", get_velocity, null),
+			new LuaField("isGrounded", get_isGrounded, null),
 			new LuaField("collisionFlags", get_collisionFlags, null),
 			new LuaField("radius", get_radius, set_radius),
 			new LuaField("height", get_height, set_height),
@@ -64,30 +64,6 @@ public class CharacterControllerWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_isGrounded(IntPtr L)
-	{
-		object o = LuaScriptMgr.GetLuaObject(L, 1);
-		CharacterController obj = (CharacterController)o;
-
-		if (obj == null)
-		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
-
-			if (types == LuaTypes.LUA_TTABLE)
-			{
-				LuaDLL.luaL_error(L, "unknown member name isGrounded");
-			}
-			else
-			{
-				LuaDLL.luaL_error(L, "attempt to index isGrounded on a nil value");
-			}
-		}
-
-		LuaScriptMgr.Push(L, obj.isGrounded);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_velocity(IntPtr L)
 	{
 		object o = LuaScriptMgr.GetLuaObject(L, 1);
@@ -108,6 +84,30 @@ public class CharacterControllerWrap
 		}
 
 		LuaScriptMgr.Push(L, obj.velocity);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isGrounded(IntPtr L)
+	{
+		object o = LuaScriptMgr.GetLuaObject(L, 1);
+		CharacterController obj = (CharacterController)o;
+
+		if (obj == null)
+		{
+			LuaTypes types = LuaDLL.lua_type(L, 1);
+
+			if (types == LuaTypes.LUA_TTABLE)
+			{
+				LuaDLL.luaL_error(L, "unknown member name isGrounded");
+			}
+			else
+			{
+				LuaDLL.luaL_error(L, "attempt to index isGrounded on a nil value");
+			}
+		}
+
+		LuaScriptMgr.Push(L, obj.isGrounded);
 		return 1;
 	}
 
