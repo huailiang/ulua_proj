@@ -94,7 +94,7 @@ LUA_API int lua_pcall (lua_State *L, int nargs, int nresults, int errfunc) {
 5. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
 
 
-更多关于lua51升级后的更变 请参考[这里](/doc/lua changes.md)
+更多关于lua51升级后的更变 请参考[这里](/doc/luachanges.md)
 ### QA:
 
 1. 为什么自己编译lua库？
