@@ -127,17 +127,17 @@ LuaDLL.lua_rawseti(L, loaderTable, 1);
 更多关于lua51升级后的更变 请参考[这里](/doc/luachanges.md)
 ### QA:
 
-1. 为什么自己编译lua库？
+#### 1. 为什么自己编译lua库？
 
-```
+
 自己编译lua库，可以为相当于为游戏定制需求。
 1，可以移除不必要的库，减少代码量 
 2，有些公用的库，比如说cjson 可以同时在lua和GameCore中使用
 3，如int64等问题可以根据项目需要决定取舍
-```
 
-2. lua原码加密
 
-```
+#### 2. lua原码加密
+
+
 一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[这里](/doc/bytecode.md)
-```
+
