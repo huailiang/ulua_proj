@@ -12,13 +12,13 @@ public class LuaTool
 
     private static List<FileInfo> g_files = new List<FileInfo>();
 
-    [MenuItem("Lua/TransEncode")]
+    [MenuItem("Lua/Trans-utf8encode")]
     public static void TransNoBom()
     {
         Handle(TransNoBomUtf8);
     }
 
-    [MenuItem("Lua/TransSuffix")]
+    [MenuItem("Lua/Suffix-lua2txt")]
     public static void TransPostfixTxt()
     {
         Handle(TransFileSuffix);

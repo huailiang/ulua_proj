@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
 /// <summary>
 /// 反射调用方式是不推荐使用的，因为效率慢，推荐的是使用wrap的去反射模式，
@@ -9,8 +8,9 @@ using LuaInterface;
 /// 反射就可以通过临时的调用未wrap的类，进行使用，当大版本更新时，再将此类加入wrap，
 /// 这时候反射就是解决这种情况出现，所以概率小，1%的可能性，但并不代表不存在。
 /// </summary>
-public class CreateGameObject01 : MonoBehaviour {
-    
+public class CreateGameObject01 : MonoBehaviour
+{
+
     private string script = @"
             luanet.load_assembly('UnityEngine')
             GameObject = luanet.import_type('UnityEngine.GameObject')        
@@ -20,14 +20,11 @@ public class CreateGameObject01 : MonoBehaviour {
             newGameObj:AddComponent(luanet.ctype(ParticleSystem))
         ";
 
-	//反射调用
-	void Start () {
+    //反射调用
+    void Start()
+    {
         LuaState lua = new LuaState();
         lua.DoString(script);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
 }

@@ -111,11 +111,12 @@ public static class ToLuaExport
         "Text.OnRebuildRequested",
         "MonoBehaviour.runInEditMode",
         "Texture.imageContentsHash",
-        
+
         "Application.ExternalEval",
         "Resources.LoadAssetAtPath",
         "Input.IsJoystickPreconfigured",
         "String.Chars",
+        "Object.DestroyObject"
     };
 
     public static bool IsMemberFilter(MemberInfo mi)
@@ -211,7 +212,6 @@ public static class ToLuaExport
         {
             wrapClassName = className;
         }
-
         if (libClassName == "")
         {
             libClassName = className;
@@ -255,11 +255,8 @@ public static class ToLuaExport
                     {
                         list.RemoveAt(i);
                     }
-
                     continue;
                 }
-
-                //扔掉 unity3d 废弃的函数
                 if (IsObsolete(list[i]))
                 {
                     list.RemoveAt(i);
@@ -277,9 +274,7 @@ public static class ToLuaExport
             {
                 list.RemoveAt(index);
             }
-
             index = list.FindIndex((m) => { return m.Name == "set_" + ps[i].Name; });
-
             if (index >= 0 && list[index].Name != "set_Item")
             {
                 list.RemoveAt(index);
@@ -303,7 +298,6 @@ public static class ToLuaExport
         GenFunction();
 
         sb.AppendLine("}\r\n");
-        //Debugger.Log(sb.ToString());
         string path = Util.uLuaPath + "/Source/LuaWrap/";
         if (!Directory.Exists(path))
         {
@@ -535,13 +529,8 @@ public static class ToLuaExport
         for (int i = 0; i < methods.Length; i++)
         {
             MethodInfo m = methods[i];
-
-            if (m.IsGenericMethod)
-            {
-                Debugger.Log("Generic Method {0} cannot be export to lua", m.Name);
-                continue;
-            }
-
+            if (m.IsGenericMethod || IsObsolete(m)) continue;//泛型方法不导出
+            
             if (nameCounter[m.Name] > 1)
             {
                 if (!set.Contains(m.Name))
@@ -2622,24 +2611,11 @@ public static class ToLuaExport
 
     public static bool IsObsolete(MemberInfo mb)
     {
-        object[] attrs = mb.GetCustomAttributes(true);
-
-        for (int j = 0; j < attrs.Length; j++)
-        {
-            Type t = attrs[j].GetType();
-
-            if (t == typeof(System.ObsoleteAttribute) || t == typeof(NoToLuaAttribute)) // || t.ToString() == "UnityEngine.WrapperlessIcall")
-            {
-                return true;
-            }
-        }
-
         if (IsMemberFilter(mb))
         {
             return true;
         }
-
-        return false;
+        return Attribute.IsDefined(mb, typeof(ObsoleteAttribute)) || Attribute.IsDefined(mb, typeof(NoToLuaAttribute));
     }
 
     public static bool HasAttribute(MemberInfo mb, Type atrtype)
@@ -2722,32 +2698,11 @@ public static class ToLuaExport
         for (int i = 0; i < list.Length; i++)
         {
             Type t = list[i].type;
-
-            //if (t.Namespace != null && t.Namespace != string.Empty)
-            //{
-            //    usingList.Add(t.Namespace);
-            //}
-
             if (!typeof(System.Delegate).IsAssignableFrom(t))
             {
                 Debug.LogError(t.FullName + " not a delegate type");
                 return;
             }
-
-            //MethodInfo mi = t.GetMethod("Invoke");
-            //ParameterInfo[] pi = mi.GetParameters();
-            //int n = pi.Length;
-
-            //for (int j = 0; j < n; j++)
-            //{
-            //    ParameterInfo param = pi[j];
-            //    t = param.ParameterType;
-
-            //    if (!t.IsPrimitive && t.Namespace != null && t.Namespace != string.Empty)
-            //    {
-            //        usingList.Add(t.Namespace);
-            //    }
-            //}
         }
 
 

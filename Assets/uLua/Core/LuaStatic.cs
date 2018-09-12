@@ -48,8 +48,6 @@ namespace LuaInterface
             // For each argument we'll 'tostring' it
             int n = LuaDLL.lua_gettop(L);
             string s = String.Empty;
-
-
             LuaDLL.lua_getglobal(L, "tostring");
 
             for (int i = 1; i <= n; i++)
@@ -116,8 +114,7 @@ namespace LuaInterface
         {
             string fileName = String.Empty;
             fileName = LuaDLL.lua_tostring(L, 1);
-
-
+            
             string lowerName = fileName.ToLower();
             if (lowerName.EndsWith(".lua"))
             {

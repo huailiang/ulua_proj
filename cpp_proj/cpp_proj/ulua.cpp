@@ -26,26 +26,36 @@ void ulua::exec()
 	LUAPRINT("ulua1");
 	lua_settable(L, LUA_REGISTRYINDEX);
 	LUAPRINT("ulua2");
+
 	lua_newtable(L);
-	lua_setglobal(L, "luanet");
-	lua_pushvalue(L, LUA_GLOBALSINDEX);  //压入了_G表
-	lua_getglobal(L, "luanet");
 	LUAPRINT("ulua3");
-	lua_pushstring(L, "getmetatable");
-	lua_getglobal(L, "getmetatable");
-	lua_settable(L, -3);
+	lua_setglobal(L, "luanet");
+	
+
+	lua_getglobal(L, "luanet");
 	LUAPRINT("ulua4");
+	lua_pushstring(L, "getmetatable");
+	LUAPRINT("ulua5");
+	lua_getglobal(L, "getmetatable");
+	LUAPRINT("ulua6");
+	lua_settable(L, -3);
+	LUAPRINT("ulua7");
+
 	lua_pushstring(L, "rawget");
 	lua_getglobal(L, "rawget");
 	lua_settable(L, -3);
-	LUAPRINT("ulua5");
+
 	lua_pushstring(L, "rawset");
 	lua_getglobal(L, "rawset");
 	lua_settable(L, -3);
-	LUAPRINT("ulua6");
 
-	// Set luanet as global for object translator                          
-	lua_replace(L, LUA_GLOBALSINDEX); //用luanet替换_G表           
-	//translator = new ObjectTranslator(this, L);
-	lua_replace(L, LUA_GLOBALSINDEX); //恢复_G表     
+	//把luanet里的element压入栈
+	lua_getglobal(L, "luanet");
+	lua_getfield(L, -1,"getmetatable");
+	lua_getfield(L, -2, "rawget");
+	lua_getfield(L, -3, "rawset");
+	LUAPRINT("ulua7");
+	lua_pop(L,4);
+	LUAPRINT("ulua8");
+
 }

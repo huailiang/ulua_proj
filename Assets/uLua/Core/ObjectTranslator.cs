@@ -1,13 +1,8 @@
 namespace LuaInterface
 {
     using System;
-    using System.IO;
-    using System.Collections;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
-    using UnityEngine;
-    //using System.Diagnostics;
+    using System.Reflection;
 
     public static class ObjectExtends {
         public static object RefObject(this object obj) {
@@ -15,15 +10,9 @@ namespace LuaInterface
         }
     }
 
-    /*
-     * Passes objects from the CLR to Lua and vice-versa
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
-     */
+
     public class ObjectTranslator
     {
-        //fix ÄäÃûÎ¯ÍÐ equals ÅÐ¶Ï³ö´íbug, by topameng
         private class CompareObject : IEqualityComparer<object>
         {
             public new bool Equals(object x, object y)
@@ -258,9 +247,6 @@ namespace LuaInterface
                 string assemblyName = LuaDLL.lua_tostring(luaState, 1);
 
                 Assembly assembly = null;
-
-                //assembly = Assembly.GetExecutingAssembly();
-
                 try
                 {
                     assembly = Assembly.Load(assemblyName);

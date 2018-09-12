@@ -4,6 +4,7 @@ public static class Debugger
 {
     public static void Log(string str, params object[] args)
     {
+        str = string.Format(str, args);
         Debug.Log(str);
     }
 

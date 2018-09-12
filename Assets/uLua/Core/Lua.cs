@@ -37,20 +37,21 @@ namespace LuaInterface
             LuaDLL.lua_pushboolean(L, true);
             LuaDLL.lua_settable(L, (int)LuaIndexes.LUA_REGISTRYINDEX);
 
-            //LuaDLL.lua_newtable(L);
-            //LuaDLL.lua_setglobal(L, "luanet");
-            //LuaDLL.lua_pushvalue(L, (int)LuaIndexes.LUA_GLOBALSINDEX);  //压入了_G表
-            //LuaDLL.lua_getglobal(L, "luanet");
-            //LuaDLL.lua_pushstring(L, "getmetatable");
-            //LuaDLL.lua_getglobal(L, "getmetatable");
-            //LuaDLL.lua_settable(L, -3);
-            //LuaDLL.lua_pushstring(L, "rawget");
-            //LuaDLL.lua_getglobal(L, "rawget");
-            //LuaDLL.lua_settable(L, -3);
-            //LuaDLL.lua_pushstring(L, "rawset");
-            //LuaDLL.lua_getglobal(L, "rawset");
-            //LuaDLL.lua_settable(L, -3);
+            LuaDLL.lua_newtable(L);
+            LuaDLL.lua_setglobal(L, "luanet");
+            //LuaDLL.lua_pushvalue(L, LuaIndexes.LUA_GLOBALSINDEX);  //压入了_G表
+            LuaDLL.lua_getglobal(L, "luanet");
+            LuaDLL.lua_pushstring(L, "getmetatable");
+            LuaDLL.lua_getglobal(L, "getmetatable"); //把getmetatable
+            LuaDLL.lua_settable(L, -3);
+            LuaDLL.lua_pushstring(L, "rawget");
+            LuaDLL.lua_getglobal(L, "rawget");
+            LuaDLL.lua_settable(L, -3);
+            LuaDLL.lua_pushstring(L, "rawset");
+            LuaDLL.lua_getglobal(L, "rawset");
+            LuaDLL.lua_settable(L, -3);
 
+            
             //// Set luanet as global for object translator                          
             //LuaDLL.lua_replace(L, (int)LuaIndexes.LUA_GLOBALSINDEX); //用luanet替换_G表           
             //translator = new ObjectTranslator(this, L);
@@ -64,30 +65,25 @@ namespace LuaInterface
 
             printFunction = new LuaCSFunction(LuaStatic.print);
             LuaDLL.lua_pushstdcallcfunction(L, printFunction);
-            //LuaDLL.lua_setfield(L, LuaIndexes.LUA_GLOBALSINDEX, "print");
             LuaDLL.lua_setglobal(L, "print");
 
             loadfileFunction = new LuaCSFunction(LuaStatic.loadfile);
             LuaDLL.lua_pushstdcallcfunction(L, loadfileFunction);
-            //LuaDLL.lua_setfield(L, LuaIndexes.LUA_GLOBALSINDEX, "loadfile");
             LuaDLL.lua_setglobal(L, "loadfile");
 
             dofileFunction = new LuaCSFunction(LuaStatic.dofile);
             LuaDLL.lua_pushstdcallcfunction(L, dofileFunction);
-            //LuaDLL.lua_setfield(L, LuaIndexes.LUA_GLOBALSINDEX, "dofile");
             LuaDLL.lua_setglobal(L, "dofile");
 
             import_wrapFunction = new LuaCSFunction(LuaStatic.importWrap);
             LuaDLL.lua_pushstdcallcfunction(L, import_wrapFunction);
-            //LuaDLL.lua_setfield(L, LuaIndexes.LUA_GLOBALSINDEX, "import");
             LuaDLL.lua_setglobal(L, "import");
 
             // Insert our loader FIRST
             loaderFunction = new LuaCSFunction(LuaStatic.loader);
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
             int loaderFunc = LuaDLL.lua_gettop(L);
-
-            // LuaDLL.lua_getfield(L, LuaIndexes.LUA_GLOBALSINDEX, "package");
+            
             LuaDLL.lua_getglobal(L, "package");
             LuaDLL.lua_getfield(L, -1, "loaders");
             int loaderTable = LuaDLL.lua_gettop(L);

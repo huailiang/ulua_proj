@@ -205,17 +205,8 @@ namespace LuaInterface
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_getglobal(IntPtr luaState, string name);
-        //{
-        //    LuaDLL.lua_pushstring(luaState, name);
-        //    LuaDLL.lua_gettable(luaState, LuaIndexes.LUA_GLOBALSINDEX);
-        //}
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_setglobal(IntPtr luaState, string name);
-        //{
-        //    LuaDLL.lua_setfield(luaState, LuaIndexes.LUA_GLOBALSINDEX, name);
-        //}
-
-
         public static void lua_rawglobal(IntPtr luaState, string name)
         {
             LuaDLL.lua_pushstring(luaState, name);

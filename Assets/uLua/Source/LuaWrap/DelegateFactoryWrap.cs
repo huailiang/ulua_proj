@@ -14,9 +14,10 @@ public class DelegateFactoryWrap
 			new LuaMethod("System_Reflection_TypeFilter", System_Reflection_TypeFilter),
 			new LuaMethod("TestLuaDelegate_VoidDelegate", TestLuaDelegate_VoidDelegate),
 			new LuaMethod("Camera_CameraCallback", Camera_CameraCallback),
-			new LuaMethod("Application_LowMemoryCallback", Application_LowMemoryCallback),
 			new LuaMethod("Application_AdvertisingIdentifierCallback", Application_AdvertisingIdentifierCallback),
+			new LuaMethod("Application_LowMemoryCallback", Application_LowMemoryCallback),
 			new LuaMethod("Application_LogCallback", Application_LogCallback),
+			new LuaMethod("Func_bool", Func_bool),
 			new LuaMethod("Clear", Clear),
 			new LuaMethod("New", _CreateDelegateFactory),
 			new LuaMethod("GetClassType", GetClassType),
@@ -112,16 +113,6 @@ public class DelegateFactoryWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Application_LowMemoryCallback(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 1);
-		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
-		Delegate o = DelegateFactory.Application_LowMemoryCallback(arg0);
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Application_AdvertisingIdentifierCallback(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
@@ -132,11 +123,31 @@ public class DelegateFactoryWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Application_LowMemoryCallback(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
+		Delegate o = DelegateFactory.Application_LowMemoryCallback(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Application_LogCallback(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
 		Delegate o = DelegateFactory.Application_LogCallback(arg0);
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Func_bool(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		LuaFunction arg0 = LuaScriptMgr.GetLuaFunction(L, 1);
+		Delegate o = DelegateFactory.Func_bool(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
