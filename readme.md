@@ -139,5 +139,5 @@ LuaDLL.lua_rawseti(L, loaderTable, 1);
 2. lua原码加密
 
 ```
-一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[这里](doc/bytecode.md)
+一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[这里](/doc/bytecode.md)
 ```
