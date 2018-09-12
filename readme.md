@@ -99,7 +99,7 @@ LUA_API int lua_pcall (lua_State *L, int nargs, int nresults, int errfunc) {
  	a. 查找package.loaded 确认目标模块是否加载过
 	b. 没加载过，则通过package.loaders 获取loader
 	c. 通过loader去加载目标模块
-  lua53中package中剔除了loaders的模块，相对应替代的是searchers模块
+  lua53中package中剔除了loaders表，相对应替代的是searchers表
 
   所以我们在LuaState.cs中, 做如下修改：
 ```csharp
@@ -136,3 +136,8 @@ LuaDLL.lua_rawseti(L, loaderTable, 1);
 3，如int64等问题可以根据项目需要决定取舍
 ```
 
+2. lua原码加密
+
+```
+一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[这里](doc/bytecode.md)
+```
