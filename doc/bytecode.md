@@ -13,8 +13,8 @@ lua使用bytecode 的好处主要有两点：
   b. uajit -b  需要编译的lua文件路径 编译输出文件保存路径
 
   ```shell
-  	# luajit -b d:\src.lua d:\des.lua
-	luajit -b d:\src.lua d:\des.lua
+# luajit -b d:\src.lua d:\des.lua
+luajit -b d:\src.lua d:\des.lua
   ```
 
 2. luac (mac下)
