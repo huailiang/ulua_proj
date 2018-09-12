@@ -4,8 +4,10 @@ namespace LuaInterface
     using System.Collections.Generic;
     using System.Reflection;
 
-    public static class ObjectExtends {
-        public static object RefObject(this object obj) {
+    public static class ObjectExtends
+    {
+        public static object RefObject(this object obj)
+        {
             return new WeakReference(obj).Target;
         }
     }
@@ -97,8 +99,8 @@ namespace LuaInterface
             createIndexingMetaFunction(luaState);
             createBaseClassMetatable(luaState);
             createClassMetatable(luaState);
-            createFunctionMetatable(luaState);
-            setGlobalFunctions(luaState);
+            //createFunctionMetatable(luaState);
+            //setGlobalFunctions(luaState);
         }
 
         public void Destroy()
@@ -129,8 +131,7 @@ namespace LuaInterface
             LuaDLL.lua_pushstring(luaState, "__mode");
             LuaDLL.lua_pushstring(luaState, "v");
             LuaDLL.lua_settable(luaState, -3);
-            //LuaDLL.lua_setmetatable(luaState,-2);
-            LuaDLL.lua_settable(luaState, (int)LuaIndexes.LUA_REGISTRYINDEX);
+            LuaDLL.lua_settable(luaState, LuaIndexes.LUA_REGISTRYINDEX);
         }
         /*
          * Registers the indexing function of CLR objects
@@ -516,26 +517,26 @@ namespace LuaInterface
             }
             else
                 if (lt == LuaTypes.LUA_TSTRING)
+            {
+                string sflags = LuaDLL.lua_tostring(luaState, 2);
+                string err = null;
+                try
                 {
-                    string sflags = LuaDLL.lua_tostring(luaState, 2);
-                    string err = null;
-                    try
-                    {
-                        res = Enum.Parse(t, sflags);
-                    }
-                    catch (ArgumentException e)
-                    {
-                        err = e.Message;
-                    }
-                    if (err != null)
-                    {
-                        return translator.pushError(luaState, err);
-                    }
+                    res = Enum.Parse(t, sflags);
                 }
-                else
+                catch (ArgumentException e)
                 {
-                    return translator.pushError(luaState, "second argument must be a integer or a string");
+                    err = e.Message;
                 }
+                if (err != null)
+                {
+                    return translator.pushError(luaState, err);
+                }
+            }
+            else
+            {
+                return translator.pushError(luaState, "second argument must be a integer or a string");
+            }
             translator.pushObject(luaState, res, "luaNet_metatable");
             return 1;
         }
@@ -680,7 +681,7 @@ namespace LuaInterface
         public void PushNewValueObject(IntPtr luaState, object o, int index)
         {
             LuaDLL.luanet_newudata(luaState, index);
-            
+
             Type t = o.GetType();
             PushMetaTable(luaState, o.GetType());
 
@@ -947,7 +948,7 @@ namespace LuaInterface
          * Pushes the object into the Lua stack according to its type.
          */
         internal void push(IntPtr luaState, object o)
-        {                        
+        {
             LuaScriptMgr.PushVarObject(luaState, o);
         }
 

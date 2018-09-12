@@ -3,16 +3,21 @@ using UnityEngine;
 
 public class HelloWorld : MonoBehaviour
 {
-
+    LuaState l;
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 20, 100, 50), "Hello"))
+        if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
         {
-            LuaState l = new LuaState();
+            l = new LuaState();
             string str = "print('hello world!')";
             l.DoString(str);
-            l.Close();
+        }
+        if (GUI.Button(new Rect(20, 120, 200, 80), "Hello"))
+        {
+            if (l != null)
+            {
+                l.Close();
+            }
         }
     }
-
 }

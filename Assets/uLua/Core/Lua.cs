@@ -39,7 +39,7 @@ namespace LuaInterface
 
             LuaDLL.lua_newtable(L);
             LuaDLL.lua_setglobal(L, "luanet");
-            //LuaDLL.lua_pushvalue(L, LuaIndexes.LUA_GLOBALSINDEX);  //压入了_G表
+            // LuaDLL.lua_pushvalue(L, LuaIndexes.LUA_GLOBALSINDEX);  //压入了_G表
             LuaDLL.lua_getglobal(L, "luanet");
             LuaDLL.lua_pushstring(L, "getmetatable");
             LuaDLL.lua_getglobal(L, "getmetatable"); //把getmetatable
@@ -51,10 +51,11 @@ namespace LuaInterface
             LuaDLL.lua_getglobal(L, "rawset");
             LuaDLL.lua_settable(L, -3);
 
-            
+
             //// Set luanet as global for object translator                          
-            //LuaDLL.lua_replace(L, (int)LuaIndexes.LUA_GLOBALSINDEX); //用luanet替换_G表           
-            //translator = new ObjectTranslator(this, L);
+            //LuaDLL.lua_replace(L, (int)LuaIndexes.LUA_GLOBALSINDEX); //用luanet替换_G表    
+            LuaDLL.lua_getglobal(L, "luanet");
+            translator = new ObjectTranslator(this, L);
             //LuaDLL.lua_replace(L, (int)LuaIndexes.LUA_GLOBALSINDEX); //恢复_G表                    
 
             //translator.PushTranslator(L);
@@ -83,7 +84,7 @@ namespace LuaInterface
             loaderFunction = new LuaCSFunction(LuaStatic.loader);
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
             int loaderFunc = LuaDLL.lua_gettop(L);
-            
+
             LuaDLL.lua_getglobal(L, "package");
             LuaDLL.lua_getfield(L, -1, "loaders");
             int loaderTable = LuaDLL.lua_gettop(L);
@@ -98,7 +99,7 @@ namespace LuaInterface
             LuaDLL.lua_rawseti(L, loaderTable, 1);
             LuaDLL.lua_settop(L, 0);
 
-        //    DoString(LuaStatic.init_luanet);
+            //    DoString(LuaStatic.init_luanet);
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
 

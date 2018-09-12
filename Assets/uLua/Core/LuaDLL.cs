@@ -240,7 +240,7 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_pushvalue(IntPtr luaState, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_copy(IntPtr luaState, int fromidx,int toidx);
+        public static extern void lua_copy(IntPtr luaState, int fromidx, int toidx);
         public static void lua_replace(IntPtr luaState, int index)
         {
             lua_copy(luaState, -1, index);
@@ -262,14 +262,6 @@ namespace LuaInterface
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_ref(IntPtr luaState, int registryIndex);
-        public static int lua_ref(IntPtr luaState, int lockRef)
-        {
-            if (lockRef != 0)
-            {
-                return LuaDLL.luaL_ref(luaState, LuaIndexes.LUA_REGISTRYINDEX);
-            }
-            else return 0;
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_rawgeti(IntPtr luaState, int tableIndex, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -368,7 +360,7 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_load(IntPtr luaState, LuaChunkReader chunkReader, ref ReaderInfo data, string chunkName);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int luaL_loadbufferx(IntPtr luaState, byte[] buff, int size, string name,string mode);
+        public static extern int luaL_loadbufferx(IntPtr luaState, byte[] buff, int size, string name, string mode);
         public static int luaL_loadbuffer(IntPtr luaState, byte[] buff, int size, string name)
         {
             return luaL_loadbufferx(luaState, buff, size, name, null);
