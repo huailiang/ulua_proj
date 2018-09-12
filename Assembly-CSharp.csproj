@@ -170,7 +170,7 @@
     <None Include="Assets\Resources\Lua\events.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Vector4.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Wrap.lua.txt" />
-    <None Include="Assets\Resources\Lua\hotfix\hotfix_hello2.lua.txt" />
+    <None Include="Assets\Resources\Lua\hotfix\hotfix_hello.lua.txt" />
     <None Include="Assets\Resources\Lua\System\strict.lua.txt" />
     <None Include="Assets\Resources\Lua\3rd\cjson\json2lua.lua.txt" />
     <None Include="Assets\Resources\Lua\protobuf.lua.txt" />
@@ -178,7 +178,7 @@
     <None Include="Assets\Resources\Lua\containers.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Touch.lua.txt" />
     <None Include="Assets\Resources\Lua\decoder.lua.txt" />
-    <None Include="Assets\Resources\Lua\hotfix\Scripts.lua.txt" />
+    <None Include="Assets\Resources\Lua\hotfix\hotfix_Scripts.lua.txt" />
     <None Include="Assets\Resources\Lua\Logic\GameManager.lua.txt" />
     <None Include="Assets\uLua\Examples\A4_ButtonClick\ReadMe.txt" />
     <None Include="Assets\Resources\Lua\System\Layer.lua.txt" />

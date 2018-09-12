@@ -46,17 +46,19 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 ```
 所以lua53中对应的值是-1001000  这个值需要在LuaDLL.cs中定义修改过来
 
-2. LUA_ENVIRONINDEX
+2. LUA_GLOBALSINDEX
 
-从 Lua 5.2开始, LUA_GLOBALSINDEX 就不存在了. 代替的是, 使用lua_setglobal() and lua_getglobal(). 正确使用方式如下：
+从 Lua 5.2开始, LUA_GLOBALSINDEX 就不存在了. 代替的是, 使用lua_setglobal() and lua_getglobal(). 正确使用方式应该用注册表的方式：
 
-
+```c++
+lua_pushstring(L, "getmetatable");
+lua_getglobal(L, "getmetatable"); 
 ```
-lua_pushstring(L, T::className);
-lua_pushvalue(L, methods);
+
+类似下面lua_settable中通过LUA_GLOBALSINDEX 伪索引的方式设置table是错误的
+```c++
 lua_settable(L, LUA_GLOBALSINDEX);
 ```
-
 
 3. lua_replace这个导出给外部使用的接口也取消了，在Lua53中实现如下：
 
@@ -91,7 +93,35 @@ LUA_API int lua_pcall (lua_State *L, int nargs, int nresults, int errfunc) {
 }
 ```
 
-5. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
+5. 关于require的实现
+
+  lua51的用法：
+ 	a. 查找package.loaded 确认目标模块是否加载过
+	b. 没加载过，则通过package.loaders 获取loader
+	c. 通过loader去加载目标模块
+  lua53中package中剔除了loaders的模块，相对应替代的是searchers模块
+
+  所以我们在LuaState.cs中, 做如下修改：
+```csharp
+loaderFunction = new LuaCSFunction(LuaStatic.loader);
+LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
+int loaderFunc = LuaDLL.lua_gettop(L);
+
+LuaDLL.lua_getglobal(L, "package");
+LuaDLL.lua_getfield(L, -1, "searchers");
+int loaderTable = LuaDLL.lua_gettop(L);
+
+for (int e = LuaDLL.lua_rawlen(L, loaderTable) + 1; e > 1; e--)
+{
+    LuaDLL.lua_rawgeti(L, loaderTable, e - 1);
+    LuaDLL.lua_rawseti(L, loaderTable, e);
+}
+LuaDLL.lua_pushvalue(L, loaderFunc);
+LuaDLL.lua_rawseti(L, loaderTable, 1);
+```
+
+
+6. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
 
 
 更多关于lua51升级后的更变 请参考[这里](/doc/luachanges.md)

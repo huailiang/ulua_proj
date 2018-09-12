@@ -7,7 +7,6 @@ public class UtilWrap
 	{
 		LuaMethod[] regs = new LuaMethod[]
 		{
-			new LuaMethod("LuaPath", LuaPath),
 			new LuaMethod("LuaResourcePath", LuaResourcePath),
 			new LuaMethod("Log", Log),
 			new LuaMethod("LogWarning", LogWarning),
@@ -66,16 +65,6 @@ public class UtilWrap
 	static int get_isApplePlatform(IntPtr L)
 	{
 		LuaScriptMgr.Push(L, Util.isApplePlatform);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LuaPath(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 1);
-		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		string o = Util.LuaPath(arg0);
-		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
 

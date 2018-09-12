@@ -10,6 +10,7 @@ public:
 	ulua();
 	~ulua();
 	void exec();
+	void global();
 
 private:
 	lua_State* L;

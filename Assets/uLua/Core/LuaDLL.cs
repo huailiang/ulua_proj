@@ -103,10 +103,6 @@ namespace LuaInterface
         public static extern int lua_status(IntPtr L);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_pushthread(IntPtr L);
-        public static int luaL_getn(IntPtr luaState, int i)
-        {
-            return (int)LuaDLL.lua_rawlen(luaState, i);
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_gc(IntPtr luaState, LuaGCOptions what, int data);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

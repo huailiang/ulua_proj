@@ -57,5 +57,16 @@ void ulua::exec()
 	LUAPRINT("ulua7");
 	lua_pop(L,4);
 	LUAPRINT("ulua8");
+	global();
+}
 
+
+void ulua::global()
+{
+	lua_getglobal(L, "package");
+	lua_getfield(L, -1, "loaded");
+	lua_getfield(L, -2, "config");
+	lua_getfield(L, -3, "preload");
+	lua_getfield(L, -4, "searchers");
+	LUAPRINT("ulua9");
 }

@@ -1,22 +1,21 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
 public class ScriptsFromFile_01 : MonoBehaviour
 {
 
     public TextAsset scriptFile;
+    LuaState l;
 
-    // Use this for initialization
-    void Start()
-    {
-        LuaState l = new LuaState();
-        l.DoString(scriptFile.text);
-    }
 
     // Update is called once per frame
-    void Update()
+    private void OnGUI()
     {
+        if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
+        {
+            if (l == null) l = new LuaState();
+            l.DoString(scriptFile.text);
+        }
 
     }
 }

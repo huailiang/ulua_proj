@@ -80,11 +80,11 @@ namespace LuaInterface
             int loaderFunc = LuaDLL.lua_gettop(L);
 
             LuaDLL.lua_getglobal(L, "package");
-            LuaDLL.lua_getfield(L, -1, "loaders");
+            LuaDLL.lua_getfield(L, -1, "searchers");
             int loaderTable = LuaDLL.lua_gettop(L);
 
             // Shift table elements right
-            for (int e = LuaDLL.luaL_getn(L, loaderTable) + 1; e > 1; e--)
+            for (int e = LuaDLL.lua_rawlen(L, loaderTable) + 1; e > 1; e--)
             {
                 LuaDLL.lua_rawgeti(L, loaderTable, e - 1);
                 LuaDLL.lua_rawseti(L, loaderTable, e);
@@ -93,7 +93,7 @@ namespace LuaInterface
             LuaDLL.lua_rawseti(L, loaderTable, 1);
             LuaDLL.lua_settop(L, 0);
 
-            //    DoString(LuaStatic.init_luanet);
+            //DoString(LuaStatic.init_luanet);
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
 
@@ -162,42 +162,7 @@ namespace LuaInterface
 
             return result;
         }
-
-        public LuaFunction LoadString(string chunk, string name)
-        {
-            return LoadString(chunk, name, null);
-        }
-
-        public LuaFunction LoadFile(string fileName)
-        {
-            int oldTop = LuaDLL.lua_gettop(L);
-
-            byte[] bt = null;
-            string path = Util.LuaPath(fileName);
-
-            using (FileStream fs = new FileStream(path, FileMode.Open))
-            {
-                BinaryReader br = new BinaryReader(fs);
-                bt = br.ReadBytes((int)fs.Length);
-                fs.Close();
-            }
-
-            if (LuaDLL.luaL_loadbuffer(L, bt, bt.Length, fileName) != 0)
-            {
-                ThrowExceptionFromError(oldTop);
-            }
-
-            LuaFunction result = translator.getFunction(L, -1);
-            translator.popValues(L, oldTop);
-
-            return result;
-        }
-
-
-        /*
-         * Excutes a Lua chunk and returns all the chunk's return
-         * values in an array
-         */
+        
         public object[] DoString(string chunk)
         {
             return DoString(chunk, "chunk", null);
@@ -259,8 +224,7 @@ namespace LuaInterface
                 LuaDLL.lua_pop(L, 1);
                 return null;
             }
-            string luafile = Util.LuaPath(fileName);
-            if (LuaDLL.luaL_loadbuffer(L, text, text.Length, luafile) == 0)
+            if (LuaDLL.luaL_loadbuffer(L, text, text.Length, fileName) == 0)
             {
                 if (env != null)
                 {

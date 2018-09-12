@@ -1,1 +1,2 @@
+require "hotfix_Scripts"
 print("hello world, huailiang")
