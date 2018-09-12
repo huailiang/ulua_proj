@@ -11,8 +11,7 @@ namespace LuaInterface
             return new WeakReference(obj).Target;
         }
     }
-
-
+    
     public class ObjectTranslator
     {
         private class CompareObject : IEqualityComparer<object>
@@ -30,20 +29,15 @@ namespace LuaInterface
         }
 
         internal CheckType typeChecker;
-
-        // object # to object (FIXME - it should be possible to get object address as an object #)
-        public readonly Dictionary<int, object> objects = new Dictionary<int, object>();
-        //public readonly LuaObjectMap objects = new LuaObjectMap();        
-        // object to object #
-        public readonly Dictionary<object, int> objectsBackMap = new Dictionary<object, int>(new CompareObject());
-
-        static Dictionary<Type, int> typeMetaMap = new Dictionary<Type, int>();
-
         internal LuaState interpreter;
+
+        public readonly Dictionary<int, object> objects = new Dictionary<int, object>();
+        public readonly Dictionary<object, int> objectsBackMap = new Dictionary<object, int>(new CompareObject());
+        static Dictionary<Type, int> typeMetaMap = new Dictionary<Type, int>();
+        
         public MetaFunctions metaFunctions;
         public List<Assembly> assemblies;
-        private LuaCSFunction registerTableFunction, unregisterTableFunction, getMethodSigFunction,
-        getConstructorSigFunction, importTypeFunction, loadAssemblyFunction, ctypeFunction, enumFromIntFunction;
+        private LuaCSFunction registerTableFunction, unregisterTableFunction, importTypeFunction, loadAssemblyFunction, ctypeFunction, enumFromIntFunction;
 
         internal EventHandlerContainer pendingEvents = new EventHandlerContainer();
 
@@ -81,9 +75,6 @@ namespace LuaInterface
             loadAssemblyFunction = new LuaCSFunction(loadAssembly);
             registerTableFunction = new LuaCSFunction(registerTable);
             unregisterTableFunction = new LuaCSFunction(unregisterTable);
-            getMethodSigFunction = new LuaCSFunction(getMethodSignature);
-            getConstructorSigFunction = new LuaCSFunction(getConstructorSignature);
-
             ctypeFunction = new LuaCSFunction(ctype);
             enumFromIntFunction = new LuaCSFunction(enumFromInt);
 
@@ -92,7 +83,7 @@ namespace LuaInterface
             createBaseClassMetatable(luaState);
             createClassMetatable(luaState);
             //createFunctionMetatable(luaState);
-            //setGlobalFunctions(luaState);
+            setGlobalFunctions(luaState);
         }
 
         public void Destroy()
@@ -180,9 +171,7 @@ namespace LuaInterface
             LuaDLL.lua_settable(luaState, -3);
             LuaDLL.lua_settop(luaState, -2);
         }
-        /*
-         * Registers the global functions used by LuaInterface
-         */
+
         private void setGlobalFunctions(IntPtr luaState)
         {
             LuaDLL.lua_pushstdcallcfunction(luaState, metaFunctions.indexFunction);
@@ -195,15 +184,10 @@ namespace LuaInterface
             LuaDLL.lua_setglobal(luaState, "make_object");
             LuaDLL.lua_pushstdcallcfunction(luaState, unregisterTableFunction);
             LuaDLL.lua_setglobal(luaState, "free_object");
-            LuaDLL.lua_pushstdcallcfunction(luaState, getMethodSigFunction);
-            LuaDLL.lua_setglobal(luaState, "get_method_bysig");
-            LuaDLL.lua_pushstdcallcfunction(luaState, getConstructorSigFunction);
-            LuaDLL.lua_setglobal(luaState, "get_constructor_bysig");
             LuaDLL.lua_pushstdcallcfunction(luaState, ctypeFunction);
             LuaDLL.lua_setglobal(luaState, "ctype");
             LuaDLL.lua_pushstdcallcfunction(luaState, enumFromIntFunction);
             LuaDLL.lua_setglobal(luaState, "enum");
-
         }
 
         /*
@@ -227,10 +211,7 @@ namespace LuaInterface
         {
             LuaDLL.luaL_error(luaState, message);
         }
-        /*
-         * Implementation of load_assembly. Throws an error
-         * if the assembly is not found.
-         */
+  
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int loadAssembly(IntPtr luaState)
         {
@@ -253,7 +234,6 @@ namespace LuaInterface
                 {
                     assembly = Assembly.Load(AssemblyName.GetAssemblyName(assemblyName));
                 }
-
                 if (assembly != null && !translator.assemblies.Contains(assembly))
                 {
                     translator.assemblies.Add(assembly);
@@ -280,10 +260,6 @@ namespace LuaInterface
             return null;
         }
 
-        /*
-         * Implementation of import_type. Returns nil if the
-         * type is not found.
-         */
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int importType(IntPtr luaState)
         {
@@ -296,11 +272,7 @@ namespace LuaInterface
                 LuaDLL.lua_pushnil(luaState);
             return 1;
         }
-        /*
-         * Implementation of make_object. Registers a table (first
-         * argument in the stack) as an object subclassing the
-         * type passed as second argument in the stack.
-         */
+
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int registerTable(IntPtr luaState)
         {
@@ -346,10 +318,7 @@ namespace LuaInterface
 #endif
             return 0;
         }
-        /*
-         * Implementation of free_object. Clears the metatable and the
-         * base field, freeing the created object for garbage-collection
-         */
+
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int unregisterTable(IntPtr luaState)
         {
@@ -378,83 +347,6 @@ namespace LuaInterface
                 translator.throwError(luaState, e.Message);
             }
             return 0;
-        }
-        /*
-         * Implementation of get_method_bysig. Returns nil
-         * if no matching method is not found.
-         */
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        public static int getMethodSignature(IntPtr luaState)
-        {
-            ObjectTranslator translator = ObjectTranslator.FromState(luaState);
-            IReflect klass; object target;
-            int udata = LuaDLL.luanet_checkudata(luaState, 1, "luaNet_class");
-            if (udata != -1)
-            {
-                klass = (IReflect)translator.objects[udata];
-                target = null;
-            }
-            else
-            {
-                target = translator.getRawNetObject(luaState, 1);
-                if (target == null)
-                {
-                    translator.throwError(luaState, "get_method_bysig: first arg is not type or object reference");
-                    LuaDLL.lua_pushnil(luaState);
-                    return 1;
-                }
-                klass = target.GetType();
-            }
-            string methodName = LuaDLL.lua_tostring(luaState, 2);
-            Type[] signature = new Type[LuaDLL.lua_gettop(luaState) - 2];
-            for (int i = 0; i < signature.Length; i++)
-                signature[i] = translator.FindType(LuaDLL.lua_tostring(luaState, i + 3));
-            try
-            {
-                //CP: Added ignore case
-                MethodInfo method = klass.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static |
-                                                  BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.IgnoreCase, null, signature, null);
-                translator.pushFunction(luaState, new LuaCSFunction((new LuaMethodWrapper(translator, target, klass, method)).call));
-            }
-            catch (Exception e)
-            {
-                translator.throwError(luaState, e.Message);
-                LuaDLL.lua_pushnil(luaState);
-            }
-            return 1;
-        }
-        /*
-         * Implementation of get_constructor_bysig. Returns nil
-         * if no matching constructor is found.
-         */
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        public static int getConstructorSignature(IntPtr luaState)
-        {
-            ObjectTranslator translator = ObjectTranslator.FromState(luaState);
-            IReflect klass = null;
-            int udata = LuaDLL.luanet_checkudata(luaState, 1, "luaNet_class");
-            if (udata != -1)
-            {
-                klass = (IReflect)translator.objects[udata];
-            }
-            if (klass == null)
-            {
-                translator.throwError(luaState, "get_constructor_bysig: first arg is invalid type reference");
-            }
-            Type[] signature = new Type[LuaDLL.lua_gettop(luaState) - 1];
-            for (int i = 0; i < signature.Length; i++)
-                signature[i] = translator.FindType(LuaDLL.lua_tostring(luaState, i + 2));
-            try
-            {
-                ConstructorInfo constructor = klass.UnderlyingSystemType.GetConstructor(signature);
-                translator.pushFunction(luaState, new LuaCSFunction((new LuaMethodWrapper(translator, null, klass, constructor)).call));
-            }
-            catch (Exception e)
-            {
-                translator.throwError(luaState, e.Message);
-                LuaDLL.lua_pushnil(luaState);
-            }
-            return 1;
         }
 
         private Type typeOf(IntPtr luaState, int idx)
@@ -533,16 +425,11 @@ namespace LuaInterface
             return 1;
         }
 
-        /*
-         * Pushes a type reference into the stack
-         */
         internal void pushType(IntPtr luaState, Type t)
         {
             pushObject(luaState, new ProxyType(t), "luaNet_class");
         }
-        /*
-         * Pushes a delegate into the stack
-         */
+  
         internal void pushFunction(IntPtr luaState, LuaCSFunction func)
         {
             pushObject(luaState, func, "luaNet_function");
@@ -563,10 +450,6 @@ namespace LuaInterface
             return isValue;
         }
 
-        /*
-         * Pushes a CLR object into the Lua stack as an userdata
-         * with the provided metatable
-         */
         public void pushObject(IntPtr luaState, object o, string metatable)
         {
             if (o == null)
@@ -619,8 +502,7 @@ namespace LuaInterface
         }
 
         /*
-         * Pushes a new object into the Lua stack with the provided
-         * metatable
+         * Pushes a new object into the Lua stack with the provided metatable
          */
         private void pushNewObject(IntPtr luaState, object o, int index, string metatable)
         {
@@ -707,10 +589,6 @@ namespace LuaInterface
             LuaDLL.lua_setmetatable(luaState, -2);
         }
 
-        /*
-         * Gets an object from the Lua stack with the desired type, if it matches, otherwise
-         * returns null.
-         */
         internal object getAsType(IntPtr luaState, int stackPos, Type paramType)
         {
             ExtractValue extractor = typeChecker.checkType(luaState, stackPos, paramType);
@@ -721,8 +599,7 @@ namespace LuaInterface
 
         /// <summary>
         /// Given the Lua int ID for an object remove it from our maps
-        /// </summary>
-        /// <param name="udata"></param>        
+        /// </summary>    
 
         internal void collectObject(int udata)
         {
@@ -745,7 +622,6 @@ namespace LuaInterface
         /// <summary>
         /// Given an object reference, remove it from our maps
         /// </summary>
-        /// <param name="udata"></param>
         void collectObject(object o, int udata)
         {
             objectsBackMap.Remove(o);
@@ -760,28 +636,19 @@ namespace LuaInterface
 
         public int addObject(object obj)
         {
-            // New object: inserts it in the list
             int index = nextObj++;
             objects[index] = obj;
-
-            //int index = objects.Add(obj);            
-
             if (!obj.GetType().IsValueType)
             {
                 objectsBackMap[obj] = index;
             }
-
             return index;
         }
 
         public int addObject(object obj, bool isValueType)
         {
-            // New object: inserts it in the list
             int index = nextObj++;
             objects[index] = obj;
-
-            //int index = objects.Add(obj);            
-
             if (!isValueType)
             {
                 objectsBackMap[obj] = index;
@@ -920,25 +787,16 @@ namespace LuaInterface
             }
         }
 
-        // kevinh - the following line doesn't work for remoting proxies - they always return a match for 'is'
-        // else if(o is ILuaGeneratedType)
         static bool IsILua(object o)
         {
-#if ! __NOGEN__
             if (o is ILuaGeneratedType)
             {
-                // Make sure we are _really_ ILuaGenerated
                 Type typ = o.GetType();
                 return (typ.GetInterface("ILuaGeneratedType") != null);
             }
-            else
-#endif
-                return false;
+            return false;
         }
 
-        /*
-         * Pushes the object into the Lua stack according to its type.
-         */
         internal void push(IntPtr luaState, object o)
         {
             LuaScriptMgr.PushVarObject(luaState, o);
@@ -950,10 +808,6 @@ namespace LuaInterface
             PushNewValueObject(lua, o, index);
         }
 
-        /*
-         * Checks if the method matches the arguments in the Lua stack, getting
-         * the arguments if it does.
-         */
         internal bool matchParameters(IntPtr luaState, MethodBase method, ref MethodCache methodCache)
         {
             return metaFunctions.matchParameters(luaState, method, ref methodCache);

@@ -63,7 +63,6 @@
   <ItemGroup>
     <Compile Include="Assets\uLua\Core\CheckType.cs" />
     <Compile Include="Assets\uLua\Core\GenerateEventAssembly.cs" />
-    <Compile Include="Assets\uLua\Core\Lua.cs" />
     <Compile Include="Assets\uLua\Core\LuaAttributes.cs" />
     <Compile Include="Assets\uLua\Core\LuaBase.cs" />
     <Compile Include="Assets\uLua\Core\LuaDLL.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\uLua\Core\LuaObjectMap.cs" />
     <Compile Include="Assets\uLua\Core\LuaRegistrationHelper.cs" />
     <Compile Include="Assets\uLua\Core\LuaScriptException.cs" />
+    <Compile Include="Assets\uLua\Core\LuaState.cs" />
     <Compile Include="Assets\uLua\Core\LuaStatic.cs" />
     <Compile Include="Assets\uLua\Core\LuaTable.cs" />
     <Compile Include="Assets\uLua\Core\Metatables.cs" />

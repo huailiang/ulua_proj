@@ -1,21 +1,17 @@
 namespace LuaInterface
 {
-	using System;
-	using System.IO;
-	using System.Collections;
-	using System.Reflection;
-	using System.Diagnostics;
-	using System.Collections.Generic;
-	using System.Runtime.InteropServices;
-	
-	/*
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+
+    /*
      * Functions used in the metatables of userdata representing
      * CLR objects
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
      */
-	public class MetaFunctions
+    public class MetaFunctions
 	{
 		/*
          * __index metafunction for CLR objects. Implemented in Lua.
@@ -81,10 +77,6 @@ namespace LuaInterface
 			{
 				ObjectTranslator translator = ObjectTranslator.FromState(luaState);
 				translator.collectObject(udata);
-			}
-			else
-			{
-				 //Debug.WriteLine("not found: " + udata);
 			}
 			return 0;
 		}
@@ -534,10 +526,6 @@ namespace LuaInterface
 		/// <summary>
 		/// Tries to set a named property or field
 		/// </summary>
-		/// <param name="luaState"></param>
-		/// <param name="targetType"></param>
-		/// <param name="target"></param>
-		/// <param name="bindingType"></param>
 		/// <returns>false if unable to find the named member, true for success</returns>
 		private bool trySetMember(IntPtr luaState, IReflect targetType, object target, BindingFlags bindingType, out string detailMessage)
 		{
@@ -633,7 +621,6 @@ namespace LuaInterface
 		/// <summary>
 		/// Convert a C# exception into a Lua error
 		/// </summary>
-		/// <param name="e"></param>
 		/// We try to look into the exception to give the most meaningful description
 		void ThrowError(IntPtr luaState, Exception e)
 		{
@@ -871,11 +858,6 @@ namespace LuaInterface
 		/// CP: Fix for operator overloading failure
 		/// Returns true if the type is set and assigns the extract value
 		/// </summary>
-		/// <param name="luaState"></param>
-		/// <param name="currentLuaParam"></param>
-		/// <param name="currentNetParam"></param>
-		/// <param name="extractValue"></param>
-		/// <returns></returns>
 		private bool _IsTypeCorrect(IntPtr luaState, int currentLuaParam, ParameterInfo currentNetParam, out ExtractValue extractValue)
 		{
 			try
@@ -945,9 +927,7 @@ namespace LuaInterface
 					}
 				}
 			}
-			
 			Debug.WriteLine("Type wasn't Params object.");
-			
 			return false;
 		}
 	}

@@ -332,7 +332,6 @@ public class LuaScriptMgr
 
     void OnBundleLoaded()
     {
-
         DoFile("System/Global.lua");
         InitLayers(lua.L);
 
@@ -343,7 +342,6 @@ public class LuaScriptMgr
         unpackColor = GetLuaReference("Color.Get");
         unpackRay = GetLuaReference("Ray.Get");
         unpackBounds = GetLuaReference("Bounds.Get");
-
         packVec3 = GetLuaReference("Vector3.New");
         packVec2 = GetLuaReference("Vector2.New");
         packVec4 = GetLuaReference("Vector4.New");
@@ -353,9 +351,7 @@ public class LuaScriptMgr
         packRay = GetLuaReference("Ray.New");
         packTouch = GetLuaFunction("Touch.New");
         packBounds = GetLuaReference("Bounds.New");
-
         traceback = GetLuaFunction("traceback");
-
 
         DoFile("System.Main");
 
@@ -407,7 +403,6 @@ public class LuaScriptMgr
         }
     }
 
-
     void SafeRelease(ref LuaFunction func)
     {
         if (func != null)
@@ -434,7 +429,6 @@ public class LuaScriptMgr
         SafeUnRef(ref delegateMetaRef);
         SafeUnRef(ref iterMetaRef);
         SafeUnRef(ref arrayMetaRef);
-
 
         SafeRelease(ref packRaycastHit);
         SafeRelease(ref packTouch);
@@ -473,7 +467,6 @@ public class LuaScriptMgr
         {
             return lua.DoFile(fileName, null);
         }
-
         return null;
     }
 
@@ -503,7 +496,6 @@ public class LuaScriptMgr
                 func.Dispose();
                 return objs;
             }
-
             return null;
         }
     }
@@ -512,7 +504,6 @@ public class LuaScriptMgr
     public LuaFunction GetLuaFunction(string name)
     {
         LuaBase func = null;
-
         if (!dict.TryGetValue(name, out func))
         {
             IntPtr L = lua.L;
@@ -529,14 +520,12 @@ public class LuaScriptMgr
             {
                 Debugger.LogError("Lua function {0} not exists", name);
             }
-
             LuaDLL.lua_settop(L, oldTop);
         }
         else
         {
             func.AddRef();
         }
-
         return func as LuaFunction;
     }
 
@@ -563,13 +552,11 @@ public class LuaScriptMgr
     {
         IntPtr L = lua.L;
         int oldTop = LuaDLL.lua_gettop(L);
-
         if (PushLuaFunction(L, name))
         {
             LuaDLL.lua_settop(L, oldTop);
             return true;
         }
-
         return false;
     }
 
@@ -689,7 +676,6 @@ public class LuaScriptMgr
         {
             lt.AddRef();
         }
-
         return lt as LuaTable;
     }
 
@@ -822,13 +808,11 @@ public class LuaScriptMgr
     public static int __gc(IntPtr luaState)
     {
         int udata = LuaDLL.luanet_rawnetobj(luaState, 1);
-
         if (udata != -1)
         {
             ObjectTranslator translator = ObjectTranslator.FromState(luaState);
             translator.collectObject(udata);
         }
-
         return 0;
     }
 
@@ -836,9 +820,7 @@ public class LuaScriptMgr
     public static void RegisterLib(IntPtr L, string libName, Type t, LuaMethod[] regs, LuaField[] fields, Type baseType)
     {
         CreateTable(L, libName);
-
         LuaDLL.luaL_getmetatable(L, t.AssemblyQualifiedName);
-
         if (LuaDLL.lua_isnil(L, -1))
         {
             LuaDLL.lua_pop(L, 1);
@@ -864,9 +846,7 @@ public class LuaScriptMgr
         }
 
         LuaDLL.tolua_setindex(L);
-
         LuaDLL.tolua_setnewindex(L);
-
         LuaDLL.lua_pushstring(L, "__call");
         LuaDLL.lua_pushstring(L, "ToLua_TableCall");
         LuaDLL.lua_rawget(L, (int)LuaIndexes.LUA_REGISTRYINDEX);
@@ -905,7 +885,6 @@ public class LuaScriptMgr
 
         LuaDLL.lua_setmetatable(L, -2);
         LuaDLL.lua_settop(L, 0);
-
         checkBaseType.Remove(t);
     }
 
@@ -915,7 +894,6 @@ public class LuaScriptMgr
         {
             return LuaDLL.lua_tonumber(L, stackPos);
         }
-
         LuaDLL.luaL_typerror(L, stackPos, "number");
         return 0;
     }
@@ -926,7 +904,6 @@ public class LuaScriptMgr
         {
             return LuaDLL.lua_toboolean(L, stackPos);
         }
-
         LuaDLL.luaL_typerror(L, stackPos, "boolean");
         return false;
     }
@@ -934,24 +911,20 @@ public class LuaScriptMgr
     public static string GetString(IntPtr L, int stackPos)
     {
         string str = GetLuaString(L, stackPos);
-
         if (str == null)
         {
             LuaDLL.luaL_typerror(L, stackPos, "string");
         }
-
         return str;
     }
 
     public static LuaFunction GetFunction(IntPtr L, int stackPos)
     {
         LuaTypes luatype = LuaDLL.lua_type(L, stackPos);
-
         if (luatype != LuaTypes.LUA_TFUNCTION)
         {
             return null;
         }
-
         LuaDLL.lua_pushvalue(L, stackPos);
         return new LuaFunction(LuaDLL.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX), GetTranslator(L).interpreter);
     }
@@ -965,13 +938,11 @@ public class LuaScriptMgr
     public static LuaFunction GetLuaFunction(IntPtr L, int stackPos)
     {
         LuaFunction func = GetFunction(L, stackPos);
-
         if (func == null)
         {
             LuaDLL.luaL_typerror(L, stackPos, "function");
             return null;
         }
-
         return func;
     }
 
@@ -984,12 +955,10 @@ public class LuaScriptMgr
     static LuaTable GetTable(IntPtr L, int stackPos)
     {
         LuaTypes luatype = LuaDLL.lua_type(L, stackPos);
-
         if (luatype != LuaTypes.LUA_TTABLE)
         {
             return null;
         }
-
         LuaDLL.lua_pushvalue(L, stackPos);
         return new LuaTable(LuaDLL.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX), GetTranslator(L).interpreter);
     }
@@ -997,13 +966,11 @@ public class LuaScriptMgr
     public static LuaTable GetLuaTable(IntPtr L, int stackPos)
     {
         LuaTable table = GetTable(L, stackPos);
-
         if (table == null)
         {
             LuaDLL.luaL_typerror(L, stackPos, "table");
             return null;
         }
-
         return table;
     }
 
@@ -1038,7 +1005,6 @@ public class LuaScriptMgr
             LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got nil", type));
             return null;
         }
-
         return obj;
     }
 
@@ -1046,13 +1012,11 @@ public class LuaScriptMgr
     {
         object obj = GetTranslator(L).getRawNetObject(L, stackPos);
         UnityEngine.TrackedReference uObj = (UnityEngine.TrackedReference)obj;
-
         if (uObj == null)
         {
             LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got nil", type));
             return null;
         }
-
         return obj;
     }
 
@@ -1067,10 +1031,7 @@ public class LuaScriptMgr
         {
             return null;
         }
-
         object obj = GetLuaObject(L, stackPos);
-
-
         if (obj == null)
         {
             LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got nil", type.Name));
@@ -1078,12 +1039,10 @@ public class LuaScriptMgr
         }
 
         Type objType = obj.GetType();
-
         if (type == objType || type.IsAssignableFrom(objType))
         {
             return obj;
         }
-
         LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got {1}", type.Name, objType.Name));
         return null;
     }
@@ -1095,13 +1054,9 @@ public class LuaScriptMgr
 
     public static UnityEngine.Object GetUnityObject(IntPtr L, int stackPos, Type type)
     {
-        if (LuaDLL.lua_isnil(L, stackPos))
-        {
-            return null;
-        }
+        if (LuaDLL.lua_isnil(L, stackPos)) return null;
 
         object obj = GetLuaObject(L, stackPos);
-
         if (obj == null)
         {
             LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got nil", type.Name));
@@ -1109,7 +1064,6 @@ public class LuaScriptMgr
         }
 
         UnityEngine.Object uObj = (UnityEngine.Object)obj; // as UnityEngine.Object;        
-
         if (uObj == null)
         {
             LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got nil", type.Name));
@@ -1117,12 +1071,10 @@ public class LuaScriptMgr
         }
 
         Type objType = uObj.GetType();
-
         if (type == objType || objType.IsSubclassOf(type))
         {
             return uObj;
         }
-
         LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got {1}", type.Name, objType.Name));
         return null;
     }
@@ -1134,13 +1086,9 @@ public class LuaScriptMgr
 
     public static UnityEngine.TrackedReference GetTrackedObject(IntPtr L, int stackPos, Type type)
     {
-        if (LuaDLL.lua_isnil(L, stackPos))
-        {
-            return null;
-        }
+        if (LuaDLL.lua_isnil(L, stackPos)) return null;
 
         object obj = GetLuaObject(L, stackPos);
-
         if (obj == null)
         {
             LuaDLL.luaL_argerror(L, stackPos, string.Format("{0} expected, got nil", type.Name));
@@ -1156,7 +1104,6 @@ public class LuaScriptMgr
         }
 
         Type objType = obj.GetType();
-
         if (type == objType || objType.IsSubclassOf(type))
         {
             return uObj;
@@ -1169,12 +1116,10 @@ public class LuaScriptMgr
     public static Type GetTypeObject(IntPtr L, int stackPos)
     {
         object obj = GetLuaObject(L, stackPos);
-
         if (obj == null || obj.GetType() != monoType)
         {
             LuaDLL.luaL_argerror(L, stackPos, string.Format("Type expected, got {0}", obj == null ? "nil" : obj.GetType().Name));
         }
-
         return (Type)obj;
     }
 
@@ -1611,7 +1556,6 @@ public class LuaScriptMgr
                 return false;
             }
         }
-
         return true;
     }
 
@@ -1740,7 +1684,6 @@ public class LuaScriptMgr
                 break;
             }
         }
-
         return list.ToArray();
     }
 
@@ -1894,7 +1837,6 @@ public class LuaScriptMgr
             retVal = LuaDLL.lua_tostring(L, -1);
             LuaDLL.lua_pop(L, 1);
         }
-
         return retVal;
     }
 
@@ -1914,7 +1856,6 @@ public class LuaScriptMgr
                 LuaDLL.luaL_argerror(L, stackPos, "string expected, got nil");
                 break;
             }
-
             list.Add(obj);
         }
 
@@ -2005,7 +1946,6 @@ public class LuaScriptMgr
         else if (luatype == LuaTypes.LUA_TUSERDATA)
         {
             T[] ret = GetNetObject<T[]>(L, stackPos);
-
             if (ret != null)
             {
                 return (T[])ret;
@@ -2239,7 +2179,6 @@ public class LuaScriptMgr
                 Push(L, obj.Length);
             }
         }
-
         return 1;
     }
 
@@ -2248,7 +2187,6 @@ public class LuaScriptMgr
     public static int NewIndexArray(IntPtr L)
     {
         Array obj = GetLuaObject(L, 1) as Array;
-
         if (obj == null)
         {
             LuaDLL.luaL_error(L, "trying to index and invalid object reference");
@@ -2258,16 +2196,13 @@ public class LuaScriptMgr
         int index = (int)GetNumber(L, 2);
         object val = GetVarObject(L, 3);
         Type type = obj.GetType().GetElementType();
-
         if (!CheckType(L, type, 3))
         {
             LuaDLL.luaL_error(L, "trying to set object type is not correct");
             return 0;
         }
-
         val = Convert.ChangeType(val, type);
         obj.SetValue(val, index);
-
         return 0;
     }
 
@@ -2275,7 +2210,6 @@ public class LuaScriptMgr
     public static void DumpStack(IntPtr L)
     {
         int top = LuaDLL.lua_gettop(L);
-
         for (int i = 1; i <= top; i++)
         {
             LuaTypes t = LuaDLL.lua_type(L, i);
@@ -2303,13 +2237,11 @@ public class LuaScriptMgr
     static object GetEnumObj(Enum e)
     {
         object o = null;
-
         if (!enumMap.TryGetValue(e, out o))
         {
             o = e;
             enumMap.Add(e, o);
         }
-
         return o;
     }
 
@@ -2320,7 +2252,6 @@ public class LuaScriptMgr
         ObjectTranslator translator = mgr.lua.translator;
         int weakTableRef = translator.weakTableRef;
         object obj = GetEnumObj(e);
-
         int index = -1;
         bool found = translator.objectsBackMap.TryGetValue(obj, out index);
 
@@ -2330,10 +2261,8 @@ public class LuaScriptMgr
             {
                 return;
             }
-
             translator.collectObject(index);
         }
-
         index = translator.addObject(obj, false);
         LuaDLL.tolua_pushnewudata(L, mgr.enumMetaRef, weakTableRef, index);
     }

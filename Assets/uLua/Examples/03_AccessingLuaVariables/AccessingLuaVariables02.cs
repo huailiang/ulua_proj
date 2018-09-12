@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
-public class AccessingLuaVariables02 : MonoBehaviour 
+public class AccessingLuaVariables02 : MonoBehaviour
 {
     //cstolua要求必须要先定义变量才能使用
     private string var = @"Objs2Spawn = 0";
@@ -21,8 +20,9 @@ public class AccessingLuaVariables02 : MonoBehaviour
             var2read = 42
         ";
 
-	// Use this for initialization
-	void Start () {        
+    // Use this for initialization
+    void Start()
+    {
         LuaScriptMgr mgr = new LuaScriptMgr();
         mgr.Start();
         // Assign to global scope variables as if they're keys in a dictionary (they are really)
@@ -38,14 +38,10 @@ public class AccessingLuaVariables02 : MonoBehaviour
         LuaTable particles = (LuaTable)l["particles"];
 
         // Typical foreach over values in table
-        foreach( ParticleSystem ps in particles.Values )
+        foreach (ParticleSystem ps in particles.Values)
         {
             ps.Play();
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
 }
