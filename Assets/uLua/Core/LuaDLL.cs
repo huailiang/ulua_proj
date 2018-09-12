@@ -89,10 +89,6 @@ namespace LuaInterface
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaopen_bit(IntPtr L);
-#if UNITY_EDITOR
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int luaopen_socket_core(IntPtr L);
-#endif
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_tothread(IntPtr L, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -105,7 +101,6 @@ namespace LuaInterface
         public static extern int lua_resume(IntPtr L, int narg);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_status(IntPtr L);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_pushthread(IntPtr L);
         public static int luaL_getn(IntPtr luaState, int i)
@@ -142,8 +137,6 @@ namespace LuaInterface
         public static extern string luaL_gsub(IntPtr luaState, string str, string pattern, string replacement);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_getfenv(IntPtr luaState, int stackPos);
-
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_isuserdata(IntPtr luaState, int stackPos);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -179,9 +172,7 @@ namespace LuaInterface
         public static int luaL_dostring(IntPtr luaState, string chunk)
         {
             int result = LuaDLL.luaL_loadstring(luaState, chunk);
-            if (result != 0)
-                return result;
-
+            if (result != 0) return result;
             return LuaDLL.lua_pcall(luaState, 0, -1, 0);
         }
         /// <summary>DEPRECATED - use luaL_dostring(IntPtr luaState, string chunk) instead!</summary>
@@ -198,9 +189,7 @@ namespace LuaInterface
         public static int luaL_dofile(IntPtr luaState, string fileName)
         {
             int result = LuaDLL.luaL_loadfile(luaState, fileName);
-            if (result != 0)
-                return result;
-
+            if (result != 0) return result;
             return LuaDLL.lua_pcall(luaState, 0, -1, 0);
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -212,7 +201,6 @@ namespace LuaInterface
             LuaDLL.lua_pushstring(luaState, name);
             LuaDLL.lua_rawget(luaState, LuaIndexes.LUA_GLOBALSINDEX);
         }
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_settop(IntPtr luaState, int newTop);
         public static void lua_pop(IntPtr luaState, int amount)
@@ -301,10 +289,8 @@ namespace LuaInterface
         public static extern double lua_tonumber(IntPtr luaState, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool lua_toboolean(IntPtr luaState, int index);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_tolstring(IntPtr luaState, int index, out int strLen);
-
         static string AnsiToUnicode(IntPtr source, int strlen)
         {
             byte[] buffer = new byte[strlen];
@@ -312,7 +298,6 @@ namespace LuaInterface
             string str = Encoding.UTF8.GetString(buffer);
             return str;
         }
-
         public static string lua_tostring(IntPtr luaState, int index)
         {
             int strlen;
@@ -332,7 +317,6 @@ namespace LuaInterface
                 return null;
             }
         }
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_atpanic(IntPtr luaState, LuaCSFunction panicf);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

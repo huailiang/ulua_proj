@@ -24,11 +24,7 @@ namespace LuaInterface
 
             public int GetHashCode(object obj)
             {
-                if (obj != null)
-                {
-                    return obj.GetHashCode();
-                }
-
+                if (obj != null) return obj.GetHashCode();
                 return 0;
             }
         }
@@ -54,11 +50,7 @@ namespace LuaInterface
         static List<ObjectTranslator> list = new List<ObjectTranslator>();
         static int indexTranslator = 0;
 
-        public int weakTableRef
-        {
-            get;
-            private set;
-        }
+        public int weakTableRef { get; private set; }
 
         public static ObjectTranslator FromState(IntPtr luaState)
         {

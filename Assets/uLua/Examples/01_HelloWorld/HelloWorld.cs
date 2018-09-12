@@ -8,11 +8,11 @@ public class HelloWorld : MonoBehaviour
     {
         if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
         {
-            l = new LuaState();
+            if (l == null) l = new LuaState();
             string str = "print('hello world!')";
             l.DoString(str);
         }
-        if (GUI.Button(new Rect(20, 120, 200, 80), "Hello"))
+        if (GUI.Button(new Rect(20, 120, 200, 80), "Close"))
         {
             if (l != null)
             {

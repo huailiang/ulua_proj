@@ -1,15 +1,10 @@
 ﻿namespace LuaInterface
 {
     using System;
-    using System.IO;
-    using System.Collections;
-    using System.Reflection;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Reflection;
 
-    /*
-     * Cached method
-     */
     struct MethodCache
     {
         private MethodBase _cachedMethod;
@@ -24,12 +19,7 @@
             {
                 _cachedMethod = value;
                 MethodInfo mi = value as MethodInfo;
-
-                if (mi != null)
-                {                    
-                    //SJD this is guaranteed to be correct irrespective of actual name used for type..
-                    IsReturnVoid = mi.ReturnType == typeof(void);
-                }
+                if (mi != null) IsReturnVoid = mi.ReturnType == typeof(void);
             }
         }
 
@@ -65,12 +55,6 @@
      */
     delegate object ExtractValue(IntPtr luaState, int stackPos);
 
-    /*
-     * Wrapper class for methods/constructors accessed from Lua.
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
-     */
     class LuaMethodWrapper
     {
         private ObjectTranslator _Translator;
@@ -95,11 +79,7 @@
                 _ExtractTarget = translator.typeChecker.getExtractor(targetType);
             _Method = method;
             _MethodName = method.Name;
-
-            if (method.IsStatic)
-            { _BindingType = BindingFlags.Static; }
-            else
-            { _BindingType = BindingFlags.Instance; }
+            _BindingType = method.IsStatic ? BindingFlags.Static : _BindingType = BindingFlags.Instance;
         }
         /*
          * Constructs the wrapper for a known method name
@@ -168,8 +148,7 @@
                     targetObject = null;
                 else
                     targetObject = _ExtractTarget(luaState, 1);
-
-                //LuaDLL.lua_remove(luaState,1); // Pops the receiver
+                
                 if (_LastCalledMethod.cachedMethod != null) // Cached?
                 {
                     int numStackToSkip = isStatic ? 0 : 1; // If this is an instance invoe we will have an extra arg on the stack for the targetObject
@@ -236,7 +215,6 @@
                 if (failedCall)
                 {
                     // System.Diagnostics.Debug.WriteLine("cache miss on " + methodName);
-
                     // If we are running an instance variable, we can now pop the targetObject from the stack
                     if (!isStatic)
                     {
@@ -275,8 +253,7 @@
 
                         LuaDLL.luaL_error(luaState, msg);
                         LuaDLL.lua_pushnil(luaState);
-
-						// fjs: 这里释放掉缓存的参数对象
+                        
 						ClearCachedArgs();
 
                         return 1;
@@ -308,8 +285,7 @@
                     {
                         LuaDLL.luaL_error(luaState, "unable to invoke method on generic class as the current method is an open generic method");
                         LuaDLL.lua_pushnil(luaState);
-
-						// fjs: 这里释放掉缓存的参数对象
+                        
 						ClearCachedArgs();
                         return 1;
                     }
@@ -327,8 +303,7 @@
                     {
                         LuaDLL.luaL_error(luaState, "invalid arguments to method call");
                         LuaDLL.lua_pushnil(luaState);
-
-						// fjs: 这里释放掉缓存的参数对象
+                        
 						ClearCachedArgs();
                         return 1;
                     }
@@ -339,7 +314,6 @@
             {
                 if (!LuaDLL.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
 				{
-					// fjs: 这里释放掉缓存的参数对象
 					ClearCachedArgs();
                     throw new LuaException("Lua stack overflow");
 				}
@@ -359,13 +333,11 @@
                 }
                 catch (TargetInvocationException e)
                 {
-					// fjs: 这里释放掉缓存的参数对象
 					ClearCachedArgs();
                     return SetPendingException(e.GetBaseException());
                 }
                 catch (Exception e)
                 {
-					// fjs: 这里释放掉缓存的参数对象
 					ClearCachedArgs();
                     return SetPendingException(e);
                 }
@@ -377,8 +349,7 @@
                 nReturnValues++;
                 _Translator.push(luaState, _LastCalledMethod.args[_LastCalledMethod.outList[index]]);
             }
-
-            //by isSingle 2010-09-10 11:26:31
+            
             //Desc:
             //  if not return void,we need add 1,
             //  or we will lost the function's return value
@@ -387,16 +358,10 @@
             {
                 nReturnValues++;
             }
-
-			// fjs: 这里释放掉缓存的参数对象
 			ClearCachedArgs();
-
             return nReturnValues < 1 ? 1 : nReturnValues;
         }
     }
-
-
-
 
     /// <summary>
     /// We keep track of what delegates we have auto attached to an event - to allow us to cleanly exit a LuaInterface session
@@ -432,11 +397,7 @@
 
 
     /*
-     * Wrapper class for events that does registration/deregistration
-     * of event handlers.
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
+     * Wrapper class for events that does registration/deregistration of event handlers.
      */
     class RegisterEventHandler
     {
@@ -469,17 +430,6 @@
 
             return handlerDelegate;
 #endif
-
-
-            //MethodInfo mi = eventInfo.EventHandlerType.GetMethod("Invoke");
-            //ParameterInfo[] pi = mi.GetParameters();
-            //LuaEventHandler handler=CodeGeneration.Instance.GetEvent(pi[1].ParameterType,function);
-
-            //Delegate handlerDelegate=Delegate.CreateDelegate(eventInfo.EventHandlerType,handler,"HandleEvent");
-            //eventInfo.AddEventHandler(target,handlerDelegate);
-            //pendingEvents.Add(handlerDelegate, this);
-
-            //return handlerDelegate;
         }
 
         /*
@@ -500,14 +450,6 @@
         }
     }
 
-    /*
-     * Base wrapper class for Lua function event handlers.
-     * Subclasses that do actual event handling are created
-     * at runtime.
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
-     */
     public class LuaEventHandler
     {
         public LuaFunction handler = null;
@@ -518,19 +460,12 @@
         {
             handler.Call(args);
         }
-        //public void handleEvent(object sender,object data)
-        //{
-        //    handler.call(new object[] { sender,data },new Type[0]);
-        //}
     }
 
     /*
      * Wrapper class for Lua functions as delegates
      * Subclasses with correct signatures are created
      * at runtime.
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
      */
     public class LuaDelegate
     {
@@ -573,8 +508,6 @@
     /*
      * Static helper methods for Lua tables acting as CLR objects.
      *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
      */
     public class LuaClassHelper
     {

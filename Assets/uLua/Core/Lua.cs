@@ -39,10 +39,9 @@ namespace LuaInterface
 
             LuaDLL.lua_newtable(L);
             LuaDLL.lua_setglobal(L, "luanet");
-            // LuaDLL.lua_pushvalue(L, LuaIndexes.LUA_GLOBALSINDEX);  //压入了_G表
             LuaDLL.lua_getglobal(L, "luanet");
             LuaDLL.lua_pushstring(L, "getmetatable");
-            LuaDLL.lua_getglobal(L, "getmetatable"); //把getmetatable
+            LuaDLL.lua_getglobal(L, "getmetatable"); 
             LuaDLL.lua_settable(L, -3);
             LuaDLL.lua_pushstring(L, "rawget");
             LuaDLL.lua_getglobal(L, "rawget");
@@ -50,15 +49,10 @@ namespace LuaInterface
             LuaDLL.lua_pushstring(L, "rawset");
             LuaDLL.lua_getglobal(L, "rawset");
             LuaDLL.lua_settable(L, -3);
-
-
-            //// Set luanet as global for object translator                          
-            //LuaDLL.lua_replace(L, (int)LuaIndexes.LUA_GLOBALSINDEX); //用luanet替换_G表    
+            
             LuaDLL.lua_getglobal(L, "luanet");
             translator = new ObjectTranslator(this, L);
-            //LuaDLL.lua_replace(L, (int)LuaIndexes.LUA_GLOBALSINDEX); //恢复_G表                    
-
-            //translator.PushTranslator(L);
+            translator.PushTranslator(L);
 
             // We need to keep this in a managed reference so the delegate doesn't get garbage collected
             panicCallback = new LuaCSFunction(LuaStatic.panic);
