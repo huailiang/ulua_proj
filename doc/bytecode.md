@@ -1,15 +1,16 @@
-### Lua 导出bytecode
+## Lua 导出bytecode
 
-lua使用bytecode 的好处主要有两点：
+### lua使用bytecode 的好处主要有两点：
  a. 二进制文件，为了加密
  b. 编译后的中间件，提升效率
 
 
  那么如何导出bytecode呢？
 
-1. luajit 
+### 1. luajit 
 
   a. 进入luajit\LuaJIT-2.0.1\src 目录
+  
   b. uajit -b  需要编译的lua文件路径 编译输出文件保存路径
 
   ```shell
@@ -17,7 +18,7 @@ lua使用bytecode 的好处主要有两点：
 luajit -b d:\src.lua d:\des.lua
   ```
 
-2. luac (mac下)
+### 2. luac (mac下)
 	
 	a.  下载源文件
 	
@@ -36,6 +37,7 @@ luajit -b d:\src.lua d:\des.lua
 
 	c.配置编译器  sublime下执行Tools->Build System->New Build System 
 	输入： 
+
 	```
 	{ 
 	"cmd": ["/usr/local/bin/lua", "$file"], 
@@ -43,10 +45,17 @@ luajit -b d:\src.lua d:\des.lua
 	"selector": "source.lua"
 	} 
 	```
+
 	保存为Lua.sublime-build，然后Tools-Build System上就能选择lua来编译脚本了
 
-	d. 生成bytecode
+	d. luac生成bytecode, 使用如下命令：
+
 	
 	```shell
 	luac -o test.luac test.lua
 	```
+
+
+### 注意：
+
+如果项目在PC下正常运行，但是安装到Android手机就报错：ulua.lua: cannot load incompatible bytecode，那么说明你的运行时luajit和编译时luajit版本不一致，你需要删除LuaEncoder文件夹下的luajit，然后，把LuaFramework下的luajit拷贝过来，然后在运行就可以了。

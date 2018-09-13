@@ -54,8 +54,16 @@ public class LuaTool
         for (int i = 0; i < g_files.Count; i++)
         {
             FileInfo fi = g_files[i];
-            string mofile = fi.FullName.Replace(".lua", ".lua.txt");
-            if (!File.Exists(mofile)) fi.MoveTo(mofile);
+            if (fi.FullName.EndsWith(".lua.txt.txt"))
+            {
+                string mofile = fi.FullName.Replace(".lua.txt.txt", ".lua.txt");
+                if (!File.Exists(mofile)) fi.MoveTo(mofile);
+            }
+            else if (fi.FullName.EndsWith(".lua"))
+            {
+                string mofile = fi.FullName.Replace(".lua", ".lua.txt");
+                if (!File.Exists(mofile)) fi.MoveTo(mofile);
+            }
         }
     }
 
