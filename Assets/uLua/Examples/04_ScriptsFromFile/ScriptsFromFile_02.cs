@@ -1,20 +1,12 @@
-﻿using LuaInterface;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScriptsFromFile_02 : MonoBehaviour
 {
-    LuaState l;
     LuaScriptMgr mgr;
-
 
     private void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
-        {
-            if (l == null) l = new LuaState();
-            l.DoFile("hotfix_hello");
-        }
-        if (GUI.Button(new Rect(20, 120, 200, 80), "File"))
+        if (GUI.Button(new Rect(20, 20, 200, 80), "ReadFile"))
         {
             if (mgr == null)
             {
@@ -23,18 +15,13 @@ public class ScriptsFromFile_02 : MonoBehaviour
             }
             mgr.lua.DoFile("hotfix_hello");
         }
-        if (GUI.Button(new Rect(20, 220, 200, 80), "File"))
+        if (GUI.Button(new Rect(20, 120, 200, 80), "Dispose"))
         {
             if (mgr != null)
             {
                 mgr.Destroy();
                 Debug.Log("destroy mgr");
             }
-            if (l != null)
-            {
-                l.Close();
-            }
         }
     }
-
 }

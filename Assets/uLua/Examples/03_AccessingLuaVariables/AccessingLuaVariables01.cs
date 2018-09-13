@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
-public class AccessingLuaVariables01 : MonoBehaviour {
+public class AccessingLuaVariables01 : MonoBehaviour
+{
 
     private string script = @"
             luanet.load_assembly('UnityEngine')
@@ -23,8 +23,8 @@ public class AccessingLuaVariables01 : MonoBehaviour {
             var2read = 42
         ";
 
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         LuaState l = new LuaState();
         // Assign to global scope variables as if they're keys in a dictionary (they are really)
         l["Objs2Spawn"] = 5;
@@ -37,14 +37,9 @@ public class AccessingLuaVariables01 : MonoBehaviour {
         LuaTable particles = (LuaTable)l["particles"];
 
         // Typical foreach over values in table
-        foreach( ParticleSystem ps in particles.Values )
+        foreach (ParticleSystem ps in particles.Values)
         {
             ps.Play();
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
 }

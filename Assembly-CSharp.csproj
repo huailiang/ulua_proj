@@ -89,9 +89,7 @@
     <Compile Include="Assets\uLua\Examples\04_ScriptsFromFile\ScriptsFromFile_02.cs" />
     <Compile Include="Assets\uLua\Examples\05_CallLuaFunction\CallLuaFunction_01.cs" />
     <Compile Include="Assets\uLua\Examples\05_CallLuaFunction\CallLuaFunction_02.cs" />
-    <Compile Include="Assets\uLua\Examples\06_LuaCoroutines\LuaCoroutines.cs" />
-    <Compile Include="Assets\uLua\Examples\06_LuaCoroutines\LuaWWW.cs" />
-    <Compile Include="Assets\uLua\Examples\07_AccessingArray\TestLuaArray.cs" />
+    <Compile Include="Assets\uLua\Examples\06_AccessingArray\TestLuaArray.cs" />
     <Compile Include="Assets\uLua\Examples\08_ProtoBuffer\LuaProtoBuffer01.cs" />
     <Compile Include="Assets\uLua\Examples\08_ProtoBuffer\TestProtol.cs" />
     <Compile Include="Assets\uLua\Examples\08_ProtoBuffer\TestProtolWrap.cs" />
@@ -201,7 +199,6 @@
     <None Include="Assets\Resources\Lua\System\Quaternion.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Test.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Vector2.lua.txt" />
-    <None Include="Assets\Resources\Lua\System\Coroutine.lua.txt" />
     <None Include="Assets\Resources\Lua\3rd\pbc\parser.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Color.lua.txt" />
     <None Include="Assets\Resources\Lua\System\Bounds.lua.txt" />

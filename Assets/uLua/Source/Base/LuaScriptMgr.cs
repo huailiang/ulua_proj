@@ -13,10 +13,6 @@ public class LuaScriptMgr
     public LuaState lua;
     public HashSet<string> fileList = null;
     Dictionary<string, LuaBase> dict = null;
-    LuaFunction updateFunc = null;
-    LuaFunction lateUpdateFunc = null;
-    LuaFunction fixedUpdateFunc = null;
-    LuaFunction levelLoaded = null;
 
     int unpackVec3 = 0;
     int unpackVec2 = 0;
@@ -286,51 +282,7 @@ public class LuaScriptMgr
         traceback = GetLuaFunction("traceback");
 
         DoFile("System.Main");
-
-        updateFunc = GetLuaFunction("Update");
-        lateUpdateFunc = GetLuaFunction("LateUpdate");
-        fixedUpdateFunc = GetLuaFunction("FixedUpdate");
-        levelLoaded = GetLuaFunction("OnLevelWasLoaded");
         CallLuaFunction("Main");
-    }
-
-    public void OnLevelLoaded(int level)
-    {
-        levelLoaded.Call(level);
-    }
-
-    public void Update()
-    {
-        if (updateFunc != null)
-        {
-            int top = updateFunc.BeginPCall();
-            IntPtr L = updateFunc.GetLuaState();
-            LuaScriptMgr.Push(L, Time.deltaTime);
-            LuaScriptMgr.Push(L, Time.unscaledDeltaTime);
-            updateFunc.PCall(top, 2);
-            updateFunc.EndPCall(top);
-        }
-        while (!refGCList.IsEmpty())
-        {
-            LuaRef lf = refGCList.Dequeue();
-            LuaDLL.lua_unref(lf.L, lf.reference);
-        }
-    }
-
-    public void LateUpate()
-    {
-        if (lateUpdateFunc != null)
-        {
-            lateUpdateFunc.Call();
-        }
-    }
-
-    public void FixedUpdate()
-    {
-        if (fixedUpdateFunc != null)
-        {
-            fixedUpdateFunc.Call(Time.fixedDeltaTime);
-        }
     }
 
     void SafeRelease(ref LuaFunction func)
@@ -362,9 +314,6 @@ public class LuaScriptMgr
 
         SafeRelease(ref packRaycastHit);
         SafeRelease(ref packTouch);
-        SafeRelease(ref updateFunc);
-        SafeRelease(ref lateUpdateFunc);
-        SafeRelease(ref fixedUpdateFunc);
 
         LuaDLL.lua_gc(lua.L, LuaGCOptions.LUA_GCCOLLECT, 0);
         foreach (KeyValuePair<string, LuaBase> kv in dict)
@@ -629,7 +578,7 @@ public class LuaScriptMgr
                 LuaDLL.lua_pushstring(L, path[0]);
                 LuaDLL.lua_pushvalue(L, -2);
                 LuaDLL.lua_settable(L, -3);
-                LuaDLL.lua_setglobal(L,path[0]);
+                LuaDLL.lua_setglobal(L, path[0]);
             }
         }
         LuaDLL.lua_insert(L, oldTop + 1);

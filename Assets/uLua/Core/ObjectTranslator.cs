@@ -82,7 +82,7 @@ namespace LuaInterface
             createIndexingMetaFunction(luaState);
             createBaseClassMetatable(luaState);
             createClassMetatable(luaState);
-            //createFunctionMetatable(luaState);
+            createFunctionMetatable(luaState);
             setGlobalFunctions(luaState);
         }
 
@@ -99,10 +99,7 @@ namespace LuaInterface
             LuaDLL.lua_unref(L, weakTableRef);
             typeMetaMap.Clear();
         }
-
-        /*
-         * Sets up the list of objects in the Lua side
-         */
+        
         private void createLuaObjectList(IntPtr luaState)
         {
             LuaDLL.lua_pushstring(luaState, "luaNet_objects");
@@ -116,10 +113,7 @@ namespace LuaInterface
             LuaDLL.lua_settable(luaState, -3);
             LuaDLL.lua_settable(luaState, LuaIndexes.LUA_REGISTRYINDEX);
         }
-        /*
-         * Registers the indexing function of CLR objects
-         * passed to Lua
-         */
+    
         private void createIndexingMetaFunction(IntPtr luaState)
         {
             LuaDLL.lua_pushstring(luaState, "luaNet_indexfunction");
@@ -127,10 +121,7 @@ namespace LuaInterface
             //LuaDLL.lua_pushstdcallcfunction(luaState,indexFunction);
             LuaDLL.lua_rawset(luaState, (int)LuaIndexes.LUA_REGISTRYINDEX);
         }
-        /*
-         * Creates the metatable for superclasses (the base
-         * field of registered tables)
-         */
+
         private void createBaseClassMetatable(IntPtr luaState)
         {
             LuaDLL.luaL_newmetatable(luaState, "luaNet_searchbase");
@@ -148,9 +139,7 @@ namespace LuaInterface
             LuaDLL.lua_settable(luaState, -3);
             LuaDLL.lua_settop(luaState, -2);
         }
-        /*
-         * Creates the metatable for type references
-         */
+
         private void createClassMetatable(IntPtr luaState)
         {
             LuaDLL.luaL_newmetatable(luaState, "luaNet_class");
@@ -174,10 +163,9 @@ namespace LuaInterface
 
         private void setGlobalFunctions(IntPtr luaState)
         {
-            LuaDLL.lua_getglobal(luaState, "luanet");
-            LuaDLL.lua_pushstring(luaState, "get_object_member");
             LuaDLL.lua_pushstdcallcfunction(luaState, metaFunctions.indexFunction);
-            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_setglobal(luaState, "get_object_member");
+            LuaDLL.lua_getglobal(luaState, "luanet");
             LuaDLL.lua_pushstring(luaState, "import_type");
             LuaDLL.lua_pushstdcallcfunction(luaState, importTypeFunction);
             LuaDLL.lua_settable(luaState, -3);
@@ -197,10 +185,7 @@ namespace LuaInterface
             LuaDLL.lua_pushstdcallcfunction(luaState, enumFromIntFunction);
             LuaDLL.lua_settable(luaState, -3);
         }
-
-        /*
-         * Creates the metatable for delegates
-         */
+        
         private void createFunctionMetatable(IntPtr luaState)
         {
             LuaDLL.luaL_newmetatable(luaState, "luaNet_function");
@@ -212,9 +197,7 @@ namespace LuaInterface
             LuaDLL.lua_settable(luaState, -3);
             LuaDLL.lua_settop(luaState, -2);
         }
-        /*
-         * Passes errors (argument e) to the Lua interpreter
-         */
+
         internal void throwError(IntPtr luaState, string message)
         {
             LuaDLL.luaL_error(luaState, message);

@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using LuaInterface;
-using System;
+using UnityEngine;
 
-public class CallLuaFunction_02 : MonoBehaviour {
+public class CallLuaFunction_02 : MonoBehaviour
+{
 
     private string script = @"
             function luaFunc(num)                
@@ -13,23 +13,23 @@ public class CallLuaFunction_02 : MonoBehaviour {
 
     LuaFunction func = null;
 
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         LuaScriptMgr mgr = new LuaScriptMgr();
-        
+
         mgr.DoString(script);
 
         // Get the function object
         func = mgr.GetLuaFunction("luaFunc");
 
         //有gc alloc
-        object[] r = func.Call(123456);        
+        object[] r = func.Call(123456);
         print(r[0]);
 
         // no gc alloc
         int num = CallFunc();
         print(num);
-	}
+    }
 
     void OnDestroy()
     {
@@ -49,11 +49,4 @@ public class CallLuaFunction_02 : MonoBehaviour {
         func.EndPCall(top);
         return num;
     }
-	
-	// Update is called once per frame
-	void Update () 
-    {
-        //func.Call(123456);
-        //CallFunc();
-	}
 }
