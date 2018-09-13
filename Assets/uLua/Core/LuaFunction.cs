@@ -77,10 +77,6 @@ namespace LuaInterface
             return ret;
         }
 
-        /*
-         * Calls the function and returns its return values inside
-         * an array
-         */
         public object[] Call(params object[] args)
         {
             return call(args, null);
@@ -136,14 +132,12 @@ namespace LuaInterface
                 if (err == null) err = "Unknown Lua Error";
                 throw new LuaScriptException(err, "");
             }
-
             return true;
         }
 
         public object[] PopValues(int oldTop)
         {
-            object[] ret = translator.popValues(L, oldTop);
-            return ret;
+            return translator.popValues(L, oldTop);
         }
 
         public void EndPCall(int oldTop)

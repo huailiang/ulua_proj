@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using LuaInterface;
+
 
 public class ToLua_System_Delegate
-{    
+{
     [NoToLuaAttribute]
     public static string op_AdditionDefined =
 @"        LuaScriptMgr.CheckArgsCount(L, 2);

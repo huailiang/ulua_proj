@@ -4,9 +4,7 @@ using System.Reflection;
 
 namespace LuaInterface
 {
-    /// <summary>
-    /// Summary description for ProxyType.
-    /// </summary>
+
     public class ProxyType : IReflect
     {
 
@@ -20,7 +18,6 @@ namespace LuaInterface
         /// <summary>
         /// Provide human readable short hand for this proxy object
         /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             return "ProxyType(" + UnderlyingSystemType + ")";

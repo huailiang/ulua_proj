@@ -2,9 +2,6 @@
 
 namespace LuaInterface
 {
-    /// <summary>
-    /// Base class to provide consistent disposal flow across lua objects. Uses code provided by Yves Duhoux and suggestions by Hans Schmeidenbacher and Qingrui Li
-    /// </summary>
     public abstract class LuaBase : IDisposable
     {        
         private bool _Disposed;
@@ -77,7 +74,6 @@ namespace LuaInterface
                     }
                     else if (_Interpreter.L != IntPtr.Zero)
                     {                                                
-                        LuaScriptMgr.refGCList.Enqueue(new LuaRef(_Interpreter.L, _Reference));
                         _Reference = 0;
                     }
                 }

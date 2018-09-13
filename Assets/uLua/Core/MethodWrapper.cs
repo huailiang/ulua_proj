@@ -25,9 +25,9 @@
 
         public bool IsReturnVoid;
 
-		// List or arguments, 
-		// fjs: 狗日的这个会缓存每一次调用某个函数的参数，导致内存释放不了。
-		// 修改方案: 调用完成后，或中间出错退出时一定要清空这个数组的所有元素, 完事以后一定得提起裤子就走人，别留恋!
+        // List or arguments, 
+        // 这个会缓存每一次调用某个函数的参数，导致内存释放不了。
+        // 修改方案: 调用完成后，或中间出错退出时一定要清空这个数组的所有元素, 完事以后一定得提起裤子就走人，别留恋!
         public object[] args;
         // Positions of out parameters
         public int[] outList;
@@ -110,19 +110,20 @@
             return _Translator.interpreter.SetPendingException(e);
         }
 
-        private static bool IsInteger(double x) {
+        private static bool IsInteger(double x)
+        {
             return Math.Ceiling(x) == x;
         }
 
-		// fjs: 清空缓存的 args 数组，否则这里会造成内存泄露，无法被GC掉, 纹理内存最严重
-		private void ClearCachedArgs()
-		{
-			if(_LastCalledMethod.args == null) { return ; }
-			for(int i = 0; i < _LastCalledMethod.args.Length; i++)
-			{
-				_LastCalledMethod.args[i] = null;
-			}
-		}
+        // fjs: 清空缓存的 args 数组，否则这里会造成内存泄露，无法被GC掉, 纹理内存最严重
+        private void ClearCachedArgs()
+        {
+            if (_LastCalledMethod.args == null) { return; }
+            for (int i = 0; i < _LastCalledMethod.args.Length; i++)
+            {
+                _LastCalledMethod.args[i] = null;
+            }
+        }
 
         /*
          * Calls the method. Receives the arguments from the Lua stack
@@ -148,7 +149,7 @@
                     targetObject = null;
                 else
                     targetObject = _ExtractTarget(luaState, 1);
-                
+
                 if (_LastCalledMethod.cachedMethod != null) // Cached?
                 {
                     int numStackToSkip = isStatic ? 0 : 1; // If this is an instance invoe we will have an extra arg on the stack for the targetObject
@@ -160,7 +161,7 @@
                         if (!LuaDLL.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
                             throw new LuaException("Lua stack overflow");
 
-						// fjs: 这里 args 只是将 _LastCalledMethod.args 拿来做缓冲区用，避免内存再分配, 里面的值是可以干掉的
+                        // fjs: 这里 args 只是将 _LastCalledMethod.args 拿来做缓冲区用，避免内存再分配, 里面的值是可以干掉的
                         object[] args = _LastCalledMethod.args;
 
                         try
@@ -171,7 +172,7 @@
                                 object luaParamValue = type.extractValue(luaState, i + 1 + numStackToSkip);
                                 if (_LastCalledMethod.argTypes[i].isParamsArray)
                                 {
-                                    args[type.index] = _Translator.tableToArray(luaParamValue,type.paramsArrayType);
+                                    args[type.index] = _Translator.tableToArray(luaParamValue, type.paramsArrayType);
                                 }
                                 else
                                 {
@@ -193,7 +194,7 @@
                                 if (_LastCalledMethod.cachedMethod.IsConstructor)
                                     _Translator.push(luaState, ((ConstructorInfo)method).Invoke(args));
                                 else
-                                    _Translator.push(luaState, method.Invoke(targetObject,args));
+                                    _Translator.push(luaState, method.Invoke(targetObject, args));
                             }
                             failedCall = false;
                         }
@@ -214,8 +215,6 @@
                 // Cache miss
                 if (failedCall)
                 {
-                    // System.Diagnostics.Debug.WriteLine("cache miss on " + methodName);
-                    // If we are running an instance variable, we can now pop the targetObject from the stack
                     if (!isStatic)
                     {
                         if (targetObject == null)
@@ -237,7 +236,7 @@
 
                         MethodBase m = (MethodInfo)member;
 
-						// fjs: 这里在缓存调用参数，退出前一定要释放掉
+                        // fjs: 这里在缓存调用参数，退出前一定要释放掉
                         bool isMethod = _Translator.matchParameters(luaState, m, ref _LastCalledMethod);
                         if (isMethod)
                         {
@@ -253,8 +252,8 @@
 
                         LuaDLL.luaL_error(luaState, msg);
                         LuaDLL.lua_pushnil(luaState);
-                        
-						ClearCachedArgs();
+
+                        ClearCachedArgs();
 
                         return 1;
                     }
@@ -265,7 +264,7 @@
                 if (methodToCall.ContainsGenericParameters)
                 {
                     // bool isMethod = //* not used
-					// fjs: 这里在缓存调用参数，退出前一定要释放掉
+                    // fjs: 这里在缓存调用参数，退出前一定要释放掉
                     _Translator.matchParameters(luaState, methodToCall, ref _LastCalledMethod);
 
                     if (methodToCall.IsGenericMethodDefinition)
@@ -285,8 +284,8 @@
                     {
                         LuaDLL.luaL_error(luaState, "unable to invoke method on generic class as the current method is an open generic method");
                         LuaDLL.lua_pushnil(luaState);
-                        
-						ClearCachedArgs();
+
+                        ClearCachedArgs();
                         return 1;
                     }
                 }
@@ -298,13 +297,13 @@
                         LuaDLL.lua_remove(luaState, 1); // Pops the receiver
                     }
 
-					// fjs: 这里在缓存调用参数，退出前一定要释放掉
+                    // fjs: 这里在缓存调用参数，退出前一定要释放掉
                     if (!_Translator.matchParameters(luaState, methodToCall, ref _LastCalledMethod))
                     {
                         LuaDLL.luaL_error(luaState, "invalid arguments to method call");
                         LuaDLL.lua_pushnil(luaState);
-                        
-						ClearCachedArgs();
+
+                        ClearCachedArgs();
                         return 1;
                     }
                 }
@@ -313,10 +312,10 @@
             if (failedCall)
             {
                 if (!LuaDLL.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
-				{
-					ClearCachedArgs();
+                {
+                    ClearCachedArgs();
                     throw new LuaException("Lua stack overflow");
-				}
+                }
                 try
                 {
                     if (isStatic)
@@ -333,12 +332,12 @@
                 }
                 catch (TargetInvocationException e)
                 {
-					ClearCachedArgs();
+                    ClearCachedArgs();
                     return SetPendingException(e.GetBaseException());
                 }
                 catch (Exception e)
                 {
-					ClearCachedArgs();
+                    ClearCachedArgs();
                     return SetPendingException(e);
                 }
             }
@@ -349,7 +348,7 @@
                 nReturnValues++;
                 _Translator.push(luaState, _LastCalledMethod.args[_LastCalledMethod.outList[index]]);
             }
-            
+
             //Desc:
             //  if not return void,we need add 1,
             //  or we will lost the function's return value
@@ -358,7 +357,7 @@
             {
                 nReturnValues++;
             }
-			ClearCachedArgs();
+            ClearCachedArgs();
             return nReturnValues < 1 ? 1 : nReturnValues;
         }
     }
@@ -499,16 +498,9 @@
         }
     }
 
-    /*
-     * Static helper methods for Lua tables acting as CLR objects.
-     *
-     */
+
     public class LuaClassHelper
     {
-        /*
-         *  Gets the function called name from the provided table,
-         * returning null if it does not exist
-         */
         public static LuaFunction getTableFunction(LuaTable luaTable, string name)
         {
             object funcObj = luaTable.rawget(name);
@@ -522,9 +514,6 @@
          */
         public static object callFunction(LuaFunction function, object[] args, Type[] returnTypes, object[] inArgs, int[] outArgs)
         {
-            // args is the return array of arguments, inArgs is the actual array
-            // of arguments passed to the function (with in parameters only), outArgs
-            // has the positions of out parameters
             object returnValue;
             int iRefArgs;
             object[] returnValues = function.call(inArgs, returnTypes);

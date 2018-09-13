@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
+using LuaInterface;
 
-public class LuaClass : MonoBehaviour {
+public class LuaClass : MonoBehaviour
+{
     const string source = @"
         Account = { balance = 0 };
         
@@ -42,15 +43,11 @@ public class LuaClass : MonoBehaviour {
         print (s.balance)  
     ";
 
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         LuaScriptMgr mgr = new LuaScriptMgr();
         mgr.Start();
         mgr.lua.DoString(source);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
 }

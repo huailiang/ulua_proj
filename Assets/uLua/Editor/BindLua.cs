@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using LuaInterface;
 
 public class BindType
 {
@@ -43,7 +44,7 @@ public class BindType
             }
             else
             {
-                results[i] = ToLuaExport.GetTypeStr(types[i]);
+                results[i] = LuaExport.GetTypeStr(types[i]);
             }
 
         }
@@ -69,12 +70,12 @@ public class BindType
     {
         type = t;
 
-        name = ToLuaExport.GetTypeStr(t);
+        name = LuaExport.GetTypeStr(t);
 
         if (t.IsGenericType)
         {
-            libName = ToLuaExport.GetGenericLibName(t);
-            wrapName = ToLuaExport.GetGenericLibName(t);
+            libName = LuaExport.GetGenericLibName(t);
+            wrapName = LuaExport.GetGenericLibName(t);
         }
         else
         {
@@ -89,7 +90,7 @@ public class BindType
 
         if (t.BaseType != null)
         {
-            baseName = ToLuaExport.GetTypeStr(t.BaseType);
+            baseName = LuaExport.GetTypeStr(t.BaseType);
 
             if (baseName == "ValueType")
             {
@@ -140,25 +141,22 @@ public static class LuaBinding
 
         for (int i = 0; i < list.Length; i++)
         {
-            ToLuaExport.Clear();
-            ToLuaExport.className = list[i].name;
-            ToLuaExport.type = list[i].type;
-            ToLuaExport.isStaticClass = list[i].IsStatic;
-            ToLuaExport.baseClassName = list[i].baseName;
-            ToLuaExport.wrapClassName = list[i].wrapName;
-            ToLuaExport.libClassName = list[i].libName;
-            ToLuaExport.Generate(null);
+            LuaExport.Clear();
+            LuaExport.className = list[i].name;
+            LuaExport.type = list[i].type;
+            LuaExport.isStaticClass = list[i].IsStatic;
+            LuaExport.baseClassName = list[i].baseName;
+            LuaExport.wrapClassName = list[i].wrapName;
+            LuaExport.libClassName = list[i].libName;
+            LuaExport.Generate(null);
         }
 
         StringBuilder sb = new StringBuilder();
-
         for (int i = 0; i < list.Length; i++)
         {
             sb.AppendFormat("\t\t{0}Wrap.Register();\r\n", list[i].wrapName);
         }
-
         EditorApplication.isPlaying = false;
-
 
         GenLuaBinder();
         GenLuaDelegates();
@@ -180,7 +178,7 @@ public static class LuaBinding
         sb.AppendLine("\t\tif (type == null || wrapList.Contains(type)) return;");
         sb.AppendLine("\t\twrapList.Add(type); type += \"Wrap\";");
         sb.AppendLine("\t\tswitch (type) {");
-        string[] files = Directory.GetFiles("Assets/uLua/Source/LuaWrap/", "*.cs", SearchOption.TopDirectoryOnly);
+        string[] files = Directory.GetFiles("Assets/uLua/LuaWrap/", "*.cs", SearchOption.TopDirectoryOnly);
 
         List<string> wrapfiles = new List<string>();
         for (int i = 0; i < files.Length; i++)
@@ -201,8 +199,7 @@ public static class LuaBinding
         sb.AppendLine("\t}");
         sb.AppendLine("}");
 
-        string file = Util.uLuaPath + "/Source/Base/LuaBinder.cs";
-
+        string file = Util.uLuaPath + "/Core/LuaBinder.cs";
         using (StreamWriter textWriter = new StreamWriter(file, false, Encoding.UTF8))
         {
             textWriter.Write(sb.ToString());
@@ -226,19 +223,17 @@ public static class LuaBinding
         sb.AppendLine("\t}");
         sb.AppendLine("}");
 
-        string file = Util.uLuaPath + "/Source/Base/LuaBinder.cs";
-
+        string file = Util.uLuaPath + "/Core/LuaBinder.cs";
         using (StreamWriter textWriter = new StreamWriter(file, false, Encoding.UTF8))
         {
             textWriter.Write(sb.ToString());
             textWriter.Flush();
             textWriter.Close();
         }
-
         string wrapfile = Application.dataPath + "/Resources/Lua/System/Wrap.lua.txt";
         File.WriteAllText(wrapfile, string.Empty);
 
-        ClearFiles(Util.uLuaPath + "/Source/LuaWrap/");
+        ClearFiles(Util.uLuaPath + "/LuaWrap/");
         AssetDatabase.Refresh();
     }
 
@@ -259,20 +254,10 @@ public static class LuaBinding
             FieldInfo[] fields = type.GetFields(BindingFlags.GetField | BindingFlags.SetField | binding);
             PropertyInfo[] props = type.GetProperties(BindingFlags.GetProperty | BindingFlags.SetProperty | binding);
             MethodInfo[] methods = null;
-
-            if (type.IsInterface)
-            {
-                methods = type.GetMethods();
-            }
-            else
-            {
-                methods = type.GetMethods(BindingFlags.Instance | binding);
-            }
-
+            methods = type.IsInterface ? type.GetMethods() : type.GetMethods(BindingFlags.Instance | binding);
             for (int j = 0; j < fields.Length; j++)
             {
                 Type t = fields[j].FieldType;
-
                 if (typeof(System.Delegate).IsAssignableFrom(t))
                 {
                     set.Add(t);
@@ -282,7 +267,6 @@ public static class LuaBinding
             for (int j = 0; j < props.Length; j++)
             {
                 Type t = props[j].PropertyType;
-
                 if (typeof(System.Delegate).IsAssignableFrom(t))
                 {
                     set.Add(t);
@@ -292,57 +276,41 @@ public static class LuaBinding
             for (int j = 0; j < methods.Length; j++)
             {
                 MethodInfo m = methods[j];
-
-                if (m.IsGenericMethod)
-                {
-                    continue;
-                }
-
+                if (m.IsGenericMethod) continue;
                 ParameterInfo[] pifs = m.GetParameters();
-
                 for (int k = 0; k < pifs.Length; k++)
                 {
                     Type t = pifs[k].ParameterType;
-
                     if (typeof(System.MulticastDelegate).IsAssignableFrom(t))
                     {
                         set.Add(t);
                     }
                 }
             }
-
         }
-
         return set;
     }
 
-    /// <summary>
-    /// 清除缓存文件
-    /// </summary>
-    /// <param name="path"></param>
     static void ClearFiles(string path)
     {
         string[] names = Directory.GetFiles(path);
         foreach (var filename in names)
         {
-            File.Delete(filename); //删除缓存
+            File.Delete(filename);
         }
     }
 
     [MenuItem("Lua/Gen Lua Delegates", false, 2)]
     static void GenLuaDelegates()
     {
-        ToLuaExport.Clear();
+        LuaExport.Clear();
         List<DelegateType> list = new List<DelegateType>();
-
         list.AddRange(new DelegateType[] {
             _DT(typeof(Action<GameObject>)),
             _DT(typeof(Action)),
             _DT(typeof(UnityEngine.Events.UnityAction)),
         });
-
-        HashSet<Type> set = beAutoGen ? ToLuaExport.eventSet : GetCustomDelegateTypes();
-
+        HashSet<Type> set = beAutoGen ? LuaExport.eventSet : GetCustomDelegateTypes();
         foreach (Type t in set)
         {
             if (null == list.Find((p) => { return p.type == t; }))
@@ -350,10 +318,9 @@ public static class LuaBinding
                 list.Add(_DT(t));
             }
         }
-
-        ToLuaExport.GenDelegates(list.ToArray());
+        LuaExport.GenDelegates(list.ToArray());
         set.Clear();
-        ToLuaExport.Clear();
+        LuaExport.Clear();
         AssetDatabase.Refresh();
         Debug.Log("Create lua delegate over");
     }

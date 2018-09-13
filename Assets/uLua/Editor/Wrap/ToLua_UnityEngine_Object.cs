@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LuaInterface;
 
 public class ToLua_UnityEngine_Object     
 {

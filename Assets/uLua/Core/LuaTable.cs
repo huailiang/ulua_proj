@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 
 namespace LuaInterface
 {
-    /*
-     * Wrapper class for Lua tables
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
-     */
+
     public class LuaTable : LuaBase
     {                
         public LuaTable(int reference, LuaState interpreter)

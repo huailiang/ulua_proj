@@ -40,15 +40,15 @@ public class DelegateType
     public DelegateType(Type t)
     {
         type = t;
-        strType = ToLuaExport.GetTypeStr(t);
+        strType = LuaExport.GetTypeStr(t);
 
         if (t.IsGenericType)
         {
-            name = ToLuaExport.GetGenericLibName(t);
+            name = LuaExport.GetGenericLibName(t);
         }
         else
         {
-            name = ToLuaExport.GetTypeStr(t);
+            name = LuaExport.GetTypeStr(t);
             name = name.Replace(".", "_");
         }
     }
@@ -60,7 +60,7 @@ public class DelegateType
     }
 }
 
-public static class ToLuaExport
+public static class LuaExport
 {
     public static string className = string.Empty;
     public static Type type = null;
@@ -124,7 +124,7 @@ public static class ToLuaExport
         return memberFilter.Contains(type.Name + "." + mi.Name);
     }
 
-    static ToLuaExport()
+    static LuaExport()
     {
 
     }
@@ -222,7 +222,7 @@ public static class ToLuaExport
             GenEnum();
             GenEnumTranslator();
             sb.AppendLine("}\r\n");
-            SaveFile(Util.uLuaPath + "/Source/LuaWrap/" + wrapClassName + "Wrap.cs");
+            SaveFile(Util.uLuaPath + "/LuaWrap/" + wrapClassName + "Wrap.cs");
             return;
         }
 
@@ -298,7 +298,7 @@ public static class ToLuaExport
         GenFunction();
 
         sb.AppendLine("}\r\n");
-        string path = Util.uLuaPath + "/Source/LuaWrap/";
+        string path = Util.uLuaPath + "/LuaWrap/";
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -2759,7 +2759,7 @@ public static class ToLuaExport
         sb.AppendLine("\t}\r\n");
 
         sb.AppendLine("}");
-        SaveFile(Util.uLuaPath + "/Source/Base/DelegateFactory.cs");
+        SaveFile(Util.uLuaPath + "/Core/DelegateFactory.cs");
 
         Clear();
     }
