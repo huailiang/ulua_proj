@@ -64,6 +64,7 @@ int main()
 			break;
 		}
 	}
+	dispose();
 	//system("pause");
 	return 0;
 }

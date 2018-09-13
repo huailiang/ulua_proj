@@ -16,6 +16,7 @@ public class HelloWorld : MonoBehaviour
         {
             if (l != null)
             {
+                Debug.Log("close state");
                 l.Close();
             }
         }

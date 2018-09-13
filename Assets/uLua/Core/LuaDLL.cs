@@ -13,20 +13,23 @@ namespace LuaInterface
     }
 #pragma warning restore 414
 
+    // basic types & defined in lua.h
     public enum LuaTypes
     {
         LUA_TNONE = -1,
         LUA_TNIL = 0,
+        LUA_TBOOLEAN = 1,
+        LUA_TLIGHTUSERDATA = 2,
         LUA_TNUMBER = 3,
         LUA_TSTRING = 4,
-        LUA_TBOOLEAN = 1,
         LUA_TTABLE = 5,
         LUA_TFUNCTION = 6,
         LUA_TUSERDATA = 7,
         LUA_TTHREAD = 8,
-        LUA_TLIGHTUSERDATA = 2
+        LUA_NUMTAGS = 9
     }
 
+    // garbage-collection function and options & defined in lua.h
     public enum LuaGCOptions
     {
         LUA_GCSTOP = 0,
@@ -37,22 +40,13 @@ namespace LuaInterface
         LUA_GCSTEP = 5,
         LUA_GCSETPAUSE = 6,
         LUA_GCSETSTEPMUL = 7,
-    }
-
-    public enum LuaThreadStatus
-    {
-        LUA_YIELD = 1,
-        LUA_ERRRUN = 2,
-        LUA_ERRSYNTAX = 3,
-        LUA_ERRMEM = 4,
-        LUA_ERRERR = 5,
+        LUA_GCISRUNNING = 9
     }
 
     sealed class LuaIndexes
     {
         public static int LUA_REGISTRYINDEX = -1001000;
         public static int LUA_ENVIRONINDEX = -10001;
-        public static int LUA_GLOBALSINDEX = -1027;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -192,11 +186,6 @@ namespace LuaInterface
         public static extern void lua_getglobal(IntPtr luaState, string name);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_setglobal(IntPtr luaState, string name);
-        public static void lua_rawglobal(IntPtr luaState, string name)
-        {
-            LuaDLL.lua_pushstring(luaState, name);
-            LuaDLL.lua_rawget(luaState, LuaIndexes.LUA_GLOBALSINDEX);
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_settop(IntPtr luaState, int newTop);
         public static void lua_pop(IntPtr luaState, int amount)
