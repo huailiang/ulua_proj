@@ -1,8 +1,3 @@
---[[
-Auth:Chiuan
-like Unity Brocast Event System in lua.
-]]
-
 local EventLib = require "eventlib"
 
 local Event = {}

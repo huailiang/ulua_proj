@@ -174,20 +174,28 @@ namespace LuaInterface
 
         private void setGlobalFunctions(IntPtr luaState)
         {
+            LuaDLL.lua_getglobal(luaState, "luanet");
+            LuaDLL.lua_pushstring(luaState, "get_object_member");
             LuaDLL.lua_pushstdcallcfunction(luaState, metaFunctions.indexFunction);
-            LuaDLL.lua_setglobal(luaState, "get_object_member");
+            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_pushstring(luaState, "import_type");
             LuaDLL.lua_pushstdcallcfunction(luaState, importTypeFunction);
-            LuaDLL.lua_setglobal(luaState, "import_type");
+            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_pushstring(luaState, "load_assembly");
             LuaDLL.lua_pushstdcallcfunction(luaState, loadAssemblyFunction);
-            LuaDLL.lua_setglobal(luaState, "load_assembly");
+            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_pushstring(luaState, "make_object");
             LuaDLL.lua_pushstdcallcfunction(luaState, registerTableFunction);
-            LuaDLL.lua_setglobal(luaState, "make_object");
+            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_pushstring(luaState, "free_object");
             LuaDLL.lua_pushstdcallcfunction(luaState, unregisterTableFunction);
-            LuaDLL.lua_setglobal(luaState, "free_object");
+            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_pushstring(luaState, "ctype");
             LuaDLL.lua_pushstdcallcfunction(luaState, ctypeFunction);
-            LuaDLL.lua_setglobal(luaState, "ctype");
+            LuaDLL.lua_settable(luaState, -3);
+            LuaDLL.lua_pushstring(luaState, "enum");
             LuaDLL.lua_pushstdcallcfunction(luaState, enumFromIntFunction);
-            LuaDLL.lua_setglobal(luaState, "enum");
+            LuaDLL.lua_settable(luaState, -3);
         }
 
         /*
@@ -276,9 +284,6 @@ namespace LuaInterface
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int registerTable(IntPtr luaState)
         {
-#if __NOGEN__
-			throwError(luaState,"Tables as Objects not implemnented");
-#else
             ObjectTranslator translator = ObjectTranslator.FromState(luaState);
             if (LuaDLL.lua_type(luaState, 1) == LuaTypes.LUA_TTABLE)
             {
@@ -315,7 +320,6 @@ namespace LuaInterface
                     translator.throwError(luaState, "register_table: superclass name can not be null");
             }
             else translator.throwError(luaState, "register_table: first arg is not a table");
-#endif
             return 0;
         }
 

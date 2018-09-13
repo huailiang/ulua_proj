@@ -8,11 +8,7 @@ using UnityEngine;
 
 public class LuaScriptMgr
 {
-    public static LuaScriptMgr Instance
-    {
-        get;
-        private set;
-    }
+    public static LuaScriptMgr Instance { get; private set; }
 
     public LuaState lua;
     public HashSet<string> fileList = null;
@@ -202,26 +198,6 @@ public class LuaScriptMgr
 
         LuaDLL.lua_pushnumber(lua.L, 0);
         LuaDLL.lua_setglobal(lua.L, "_LuaScriptMgr");
-
-    }
-
-    void SendGMmsg(params string[] param)
-    {
-        Debugger.Log("SendGMmsg");
-        string str = "";
-        int i = 0;
-
-        foreach (string p in param)
-        {
-            if (i > 0)
-            {
-                str = str + " " + p;
-                Debugger.Log(p);
-            }
-            i++;
-        }
-
-        CallLuaFunction("GMMsg", str);
     }
 
     void InitLayers(IntPtr L)
@@ -232,7 +208,6 @@ public class LuaScriptMgr
         for (int i = 0; i < 32; i++)
         {
             string str = LayerMask.LayerToName(i);
-
             if (str != string.Empty)
             {
                 LuaDLL.lua_pushstring(L, str);
@@ -240,7 +215,6 @@ public class LuaScriptMgr
                 LuaDLL.lua_rawset(L, -3);
             }
         }
-
         LuaDLL.lua_settop(L, 0);
     }
 
@@ -280,7 +254,6 @@ public class LuaScriptMgr
             Debugger.Log("PrintLua [ModuleName]");
             return;
         }
-
         CallLuaFunction("PrintLua", param[1]);
     }
 
@@ -307,19 +280,13 @@ public class LuaScriptMgr
         {
             Debugger.LogWarning("BaseType {0} not register to lua", t.FullName);
         }
-
         checkBaseType.Clear();
     }
 
     int GetLuaReference(string str)
     {
         LuaFunction func = GetLuaFunction(str);
-
-        if (func != null)
-        {
-            return func.GetReference();
-        }
-
+        if (func != null) return func.GetReference();
         return -1;
     }
 
@@ -475,7 +442,6 @@ public class LuaScriptMgr
     public object[] CallLuaFunction(string name, params object[] args)
     {
         LuaBase lb = null;
-
         if (dict.TryGetValue(name, out lb))
         {
             LuaFunction func = lb as LuaFunction;
@@ -793,14 +759,12 @@ public class LuaScriptMgr
     public static void RegisterLib(IntPtr L, string libName, LuaMethod[] regs)
     {
         CreateTable(L, libName);
-
         for (int i = 0; i < regs.Length; i++)
         {
             LuaDLL.lua_pushstring(L, regs[i].name);
             LuaDLL.lua_pushstdcallcfunction(L, regs[i].func);
             LuaDLL.lua_rawset(L, -3);
         }
-
         LuaDLL.lua_settop(L, 0);
     }
 
@@ -841,7 +805,6 @@ public class LuaScriptMgr
             {
                 checkBaseType.Remove(baseType);
             }
-
             LuaDLL.lua_setmetatable(L, -2);
         }
 
@@ -851,7 +814,6 @@ public class LuaScriptMgr
         LuaDLL.lua_pushstring(L, "ToLua_TableCall");
         LuaDLL.lua_rawget(L, (int)LuaIndexes.LUA_REGISTRYINDEX);
         LuaDLL.lua_rawset(L, -3);
-
         LuaDLL.lua_pushstring(L, "__gc");
         LuaDLL.lua_pushstdcallcfunction(L, __gc);
         LuaDLL.lua_rawset(L, -3);
@@ -873,13 +835,11 @@ public class LuaScriptMgr
                 LuaDLL.lua_pushstdcallcfunction(L, fields[i].getter);
                 LuaDLL.lua_rawseti(L, -2, 1);
             }
-
             if (fields[i].setter != null)
             {
                 LuaDLL.lua_pushstdcallcfunction(L, fields[i].setter);
                 LuaDLL.lua_rawseti(L, -2, 2);
             }
-
             LuaDLL.lua_rawset(L, -3);
         }
 
@@ -974,13 +934,11 @@ public class LuaScriptMgr
         return table;
     }
 
-    //注册到lua中的object类型对象, 存放在ObjectTranslator objects 池中
     public static object GetLuaObject(IntPtr L, int stackPos)
     {
         return GetTranslator(L).getRawNetObject(L, stackPos);
     }
 
-    //System object类型匹配正确, 只需判断会否为null. 获取对象本身时使用
     public static object GetNetObjectSelf(IntPtr L, int stackPos, string type)
     {
         object obj = GetTranslator(L).getRawNetObject(L, stackPos);
@@ -994,7 +952,6 @@ public class LuaScriptMgr
         return obj;
     }
 
-    //Unity object类型匹配正确, 只需判断会否为null. 获取对象本身时使用
     public static object GetUnityObjectSelf(IntPtr L, int stackPos, string type)
     {
         object obj = GetTranslator(L).getRawNetObject(L, stackPos);
@@ -1716,9 +1673,7 @@ public class LuaScriptMgr
 
     public static T[] GetArrayObject<T>(IntPtr L, int stackPos)
     {
-        //ObjectTranslator translator = GetTranslator(L);
         LuaTypes luatype = LuaDLL.lua_type(L, stackPos);
-
         if (luatype == LuaTypes.LUA_TTABLE)
         {
             int index = 1;
@@ -1850,7 +1805,6 @@ public class LuaScriptMgr
             obj = GetLuaString(L, stackPos);
             ++stackPos;
             --count;
-
             if (obj == null)
             {
                 LuaDLL.luaL_argerror(L, stackPos, "string expected, got nil");
@@ -1858,7 +1812,6 @@ public class LuaScriptMgr
             }
             list.Add(obj);
         }
-
         return list.ToArray();
     }
 
@@ -1887,7 +1840,6 @@ public class LuaScriptMgr
                 {
                     retVal = GetLuaString(L, -1);
                 }
-
                 list.Add(retVal);
                 LuaDLL.lua_pop(L, 1);
                 ++index;
@@ -2099,8 +2051,6 @@ public class LuaScriptMgr
                 o = new LuaTable(LuaDLL.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX), GetTranslator(L).interpreter);
             }
         }
-
-        //LuaDLL.lua_settop(L, oldTop);
         return o;
     }
 

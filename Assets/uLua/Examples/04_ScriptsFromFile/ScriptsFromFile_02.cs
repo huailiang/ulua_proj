@@ -4,6 +4,10 @@ using UnityEngine;
 public class ScriptsFromFile_02 : MonoBehaviour
 {
     LuaState l;
+
+    LuaScriptMgr mgr;
+
+
     private void OnGUI()
     {
         if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
@@ -11,12 +15,12 @@ public class ScriptsFromFile_02 : MonoBehaviour
             if (l == null) l = new LuaState();
             l.DoFile("hotfix_hello");
         }
-        if (GUI.Button(new Rect(20, 120, 200, 80), "Close"))
+        if (GUI.Button(new Rect(20, 120, 200, 80), "File"))
         {
-            if (l != null)
-            {
-                l.Close();
-            }
+             mgr = new LuaScriptMgr();
+            mgr.Start();
+            mgr.lua.DoFile("hotfix_hello");
+          //  mgr.Destroy();
         }
     }
 }

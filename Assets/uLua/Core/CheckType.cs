@@ -1,5 +1,3 @@
-#define __NOGEN__
-
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -7,12 +5,6 @@ using UnityEngine;
 
 namespace LuaInterface
 {
-    /*
-     * Type checking and conversion functions.
-     *
-     * Author: Fabio Mascarenhas
-     * Version: 1.0
-     */
     class CheckType
     {
         private ObjectTranslator translator;
@@ -107,8 +99,6 @@ namespace LuaInterface
                     return extractValues[typeof(LuaFunction).TypeHandle.Value.ToInt64()];
                 else if (luatype == LuaTypes.LUA_TNUMBER)
                     return extractValues[typeof(double).TypeHandle.Value.ToInt64()];
-                //else // suppress CS0642
-                    ;//an unsupported type was encountered
             }
 
             if (paramType.IsValueType && luatype == LuaTypes.LUA_TTABLE)
@@ -185,19 +175,11 @@ namespace LuaInterface
             }
             else if (typeof(Delegate).IsAssignableFrom(paramType) && luatype == LuaTypes.LUA_TFUNCTION)
             {
-#if __NOGEN__
 				translator.throwError(luaState,"Delegates not implemnented");
-#else
-                return new ExtractValue(new DelegateGenerator(translator, paramType).extractGenerated);
-#endif
             }
             else if (paramType.IsInterface && luatype == LuaTypes.LUA_TTABLE)
             {
-#if __NOGEN__
 				translator.throwError(luaState,"Interfaces not implemnented");
-#else
-                return new ExtractValue(new ClassGenerator(translator, paramType).extractGenerated);
-#endif
             }
             else if ((paramType.IsInterface || paramType.IsClass) && luatype == LuaTypes.LUA_TNIL)
             {

@@ -38,7 +38,7 @@ namespace LuaInterface
             LuaDLL.lua_getfield(L, -1, "traceback");
             LuaDLL.lua_pushvalue(L, 1);
             LuaDLL.lua_pushnumber(L, 2);
-            LuaDLL.lua_pcall(L, 2, 1,0);
+            LuaDLL.lua_pcall(L, 2, 1, 0);
             return 1;
         }
 
@@ -54,7 +54,7 @@ namespace LuaInterface
             {
                 LuaDLL.lua_pushvalue(L, -1);  /* function to be called */
                 LuaDLL.lua_pushvalue(L, i);   /* value to print */
-                LuaDLL.lua_pcall(L, 1, 1,0);
+                LuaDLL.lua_pcall(L, 1, 1, 0);
 
                 if (i > 1)
                 {
@@ -103,7 +103,7 @@ namespace LuaInterface
             }
             if (LuaDLL.luaL_loadbuffer(L, text, text.Length, fileName) != 0)
             {
-               // mgr.lua.ThrowExceptionFromError(oldTop);
+                // mgr.lua.ThrowExceptionFromError(oldTop);
                 LuaDLL.lua_pop(L, 1);
             }
             return 1;
@@ -114,7 +114,7 @@ namespace LuaInterface
         {
             string fileName = String.Empty;
             fileName = LuaDLL.lua_tostring(L, 1);
-            
+
             string lowerName = fileName.ToLower();
             if (lowerName.EndsWith(".lua"))
             {
@@ -158,51 +158,6 @@ namespace LuaInterface
             }
             return 0;
         }
-
-        public static string init_luanet =
-            @"local metatable = {}
-            local rawget = rawget
-            local debug = debug
-            local import_type = luanet.import_type
-            local load_assembly = luanet.load_assembly
-            luanet.error, luanet.type = error, type
-            -- Lookup a .NET identifier component.
-            function metatable:__index(key) -- key is e.g. 'Form'
-            -- Get the fully-qualified name, e.g. 'System.Windows.Forms.Form'
-            local fqn = rawget(self,'.fqn')
-            fqn = ((fqn and fqn .. '.') or '') .. key
-
-            -- Try to find either a luanet function or a CLR type
-            local obj = rawget(luanet,key) or import_type(fqn)
-
-            -- If key is neither a luanet function or a CLR type, then it is simply
-            -- an identifier component.
-            if obj == nil then
-                -- It might be an assembly, so we load it too.
-                    pcall(load_assembly,fqn)
-                    obj = { ['.fqn'] = fqn }
-            setmetatable(obj, metatable)
-            end
-
-            -- Cache this lookup
-            rawset(self, key, obj)
-            return obj
-            end
-
-            -- A non-type has been called; e.g. foo = System.Foo()
-            function metatable:__call(...)
-            error('No such type: ' .. rawget(self,'.fqn'), 2)
-            end
-
-            -- This is the root of the .NET namespace
-            luanet['.fqn'] = false
-            setmetatable(luanet, metatable)
-
-            -- Preload the mscorlib assembly
-            luanet.load_assembly('mscorlib')
-
-            function traceback(msg)                
-                return debug.traceback(msg, 1)                
-            end";
     }
+        
 }

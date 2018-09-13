@@ -1,22 +1,15 @@
-//#if UNITY_IPHONE
-#define __NOGEN__
-//#endif
-
 namespace LuaInterface
 {
     using System;
     using System.Collections.Specialized;
-    using System.IO;
     using System.Reflection;
     using System.Text;
 
     public class LuaState : IDisposable
     {
         public IntPtr L;
-
-        internal LuaCSFunction tracebackFunction;
         internal ObjectTranslator translator;
-
+        internal LuaCSFunction tracebackFunction;
         internal LuaCSFunction panicCallback;
 
         // Overrides
@@ -28,10 +21,7 @@ namespace LuaInterface
 
         public LuaState()
         {
-            // Create State
             L = LuaDLL.luaL_newstate();
-
-            // Create LuaInterface library
             LuaDLL.luaL_openlibs(L);
             LuaDLL.lua_pushstring(L, "LUAINTERFACE LOADED");
             LuaDLL.lua_pushboolean(L, true);
@@ -41,7 +31,7 @@ namespace LuaInterface
             LuaDLL.lua_setglobal(L, "luanet");
             LuaDLL.lua_getglobal(L, "luanet");
             LuaDLL.lua_pushstring(L, "getmetatable");
-            LuaDLL.lua_getglobal(L, "getmetatable"); 
+            LuaDLL.lua_getglobal(L, "getmetatable");
             LuaDLL.lua_settable(L, -3);
             LuaDLL.lua_pushstring(L, "rawget");
             LuaDLL.lua_getglobal(L, "rawget");
@@ -49,7 +39,7 @@ namespace LuaInterface
             LuaDLL.lua_pushstring(L, "rawset");
             LuaDLL.lua_getglobal(L, "rawset");
             LuaDLL.lua_settable(L, -3);
-            
+
             LuaDLL.lua_getglobal(L, "luanet");
             translator = new ObjectTranslator(this, L);
             translator.PushTranslator(L);
@@ -83,7 +73,6 @@ namespace LuaInterface
             LuaDLL.lua_getfield(L, -1, "searchers");
             int loaderTable = LuaDLL.lua_gettop(L);
 
-            // Shift table elements right
             for (int e = LuaDLL.lua_rawlen(L, loaderTable) + 1; e > 1; e--)
             {
                 LuaDLL.lua_rawgeti(L, loaderTable, e - 1);
@@ -93,7 +82,6 @@ namespace LuaInterface
             LuaDLL.lua_rawseti(L, loaderTable, 1);
             LuaDLL.lua_settop(L, 0);
 
-            //DoString(LuaStatic.init_luanet);
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
 
@@ -111,32 +99,21 @@ namespace LuaInterface
             return translator;
         }
 
-        /// <summary>
-        /// Assuming we have a Lua error string sitting on the stack, throw a C# exception out to the user's app
-        /// </summary>
-        /// <exception cref="LuaScriptException">Thrown if the script caused an exception</exception>
         internal void ThrowExceptionFromError(int oldTop)
         {
             string err = LuaDLL.lua_tostring(L, -1);
             LuaDLL.lua_settop(L, oldTop);
 
-            // A non-wrapped Lua error (best interpreted as a string) - wrap it and throw it
             if (err == null) err = "Unknown Lua Error";
             throw new LuaScriptException(err, "");
         }
 
-        /// <summary>
-        /// Convert C# exceptions into Lua errors
-        /// </summary>
-        /// <returns>num of things on stack</returns>
-        /// <param name="e">null for no pending exception</param>
         internal int SetPendingException(Exception e)
         {
             if (e != null)
             {
                 translator.throwError(L, e.ToString());
                 LuaDLL.lua_pushnil(L);
-
                 return 1;
             }
             else
@@ -162,18 +139,12 @@ namespace LuaInterface
 
             return result;
         }
-        
+
         public object[] DoString(string chunk)
         {
             return DoString(chunk, "chunk", null);
         }
 
-        /// <summary>
-        /// Executes a Lua chnk and returns all the chunk's return values in an array.
-        /// </summary>
-        /// <param name="chunk">Chunk to execute</param>
-        /// <param name="chunkName">Name to associate with the chunk</param>
-        /// <returns></returns>
         public object[] DoString(string chunk, string chunkName, LuaTable env)
         {
             int oldTop = LuaDLL.lua_gettop(L);
@@ -203,10 +174,6 @@ namespace LuaInterface
             return DoFile(fileName, null);
         }
 
-        /*
-         * Excutes a Lua file and returns all the chunk's return
-         * values in an array
-         */
         public object[] DoFile(string fileName, LuaTable env)
         {
             LuaDLL.lua_pushstdcallcfunction(L, tracebackFunction);
@@ -250,14 +217,9 @@ namespace LuaInterface
                 LuaDLL.lua_pop(L, 1);
             }
 
-            return null;            // Never reached - keeps compiler happy
+            return null;  // Never reached - keeps compiler happy
         }
 
-
-        /*
-         * Indexer for global variables from the LuaInterpreter
-         * Supports navigation of tables by using . operator
-         */
         public object this[string fullPath]
         {
             get
@@ -303,9 +265,7 @@ namespace LuaInterface
                     Array.Copy(path, 1, remainingPath, 0, path.Length - 1);
                     setObject(remainingPath, value);
                 }
-
                 LuaDLL.lua_settop(L, oldTop);
-
             }
         }
 
@@ -362,16 +322,9 @@ namespace LuaInterface
          */
         public Delegate GetFunction(Type delegateType, string fullPath)
         {
-#if __NOGEN__
             translator.throwError(L, "function delegates not implemnented");
             return null;
-#else
-            return CodeGeneration.Instance.GetDelegate(delegateType,GetFunction(fullPath));
-#endif
         }
-
-
-
         /*
          * Navigates a table to set the value of one of its fields
          */
@@ -623,5 +576,4 @@ namespace LuaInterface
         #endregion
 
     }
-
 }

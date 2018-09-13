@@ -1,5 +1,3 @@
---按namespace区分类型定义
-
 --测试极端条件性能
 local go = GameObject.New()
 local node = go.transform
