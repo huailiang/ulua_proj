@@ -1,7 +1,7 @@
 ﻿using System;
 using LuaInterface;
 
-public class UtilWrap
+public class LuaInterface_UtilWrap
 {
 	public static void Register(IntPtr L)
 	{
@@ -13,7 +13,7 @@ public class UtilWrap
 			new LuaMethod("LogError", LogError),
 			new LuaMethod("ClearMemory", ClearMemory),
 			new LuaMethod("CheckEnvironment", CheckEnvironment),
-			new LuaMethod("New", _CreateUtil),
+			new LuaMethod("New", _CreateLuaInterface_Util),
 			new LuaMethod("GetClassType", GetClassType),
 		};
 
@@ -23,29 +23,29 @@ public class UtilWrap
 			new LuaField("isApplePlatform", get_isApplePlatform, null),
 		};
 
-		LuaScriptMgr.RegisterLib(L, "Util", typeof(Util), regs, fields, typeof(object));
+		LuaScriptMgr.RegisterLib(L, "LuaInterface.Util", typeof(LuaInterface.Util), regs, fields, typeof(object));
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int _CreateUtil(IntPtr L)
+	static int _CreateLuaInterface_Util(IntPtr L)
 	{
 		int count = LuaDLL.lua_gettop(L);
 
 		if (count == 0)
 		{
-			Util obj = new Util();
+			LuaInterface.Util obj = new LuaInterface.Util();
 			LuaScriptMgr.PushObject(L, obj);
 			return 1;
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Util.New");
+			LuaDLL.luaL_error(L, "invalid arguments to method: LuaInterface.Util.New");
 		}
 
 		return 0;
 	}
 
-	static Type classType = typeof(Util);
+	static Type classType = typeof(LuaInterface.Util);
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetClassType(IntPtr L)
@@ -57,14 +57,14 @@ public class UtilWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_uLuaPath(IntPtr L)
 	{
-		LuaScriptMgr.Push(L, Util.uLuaPath);
+		LuaScriptMgr.Push(L, LuaInterface.Util.uLuaPath);
 		return 1;
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_isApplePlatform(IntPtr L)
 	{
-		LuaScriptMgr.Push(L, Util.isApplePlatform);
+		LuaScriptMgr.Push(L, LuaInterface.Util.isApplePlatform);
 		return 1;
 	}
 
@@ -73,7 +73,7 @@ public class UtilWrap
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		string o = Util.LuaResourcePath(arg0);
+		string o = LuaInterface.Util.LuaResourcePath(arg0);
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}
@@ -83,7 +83,7 @@ public class UtilWrap
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		Util.Log(arg0);
+		LuaInterface.Util.Log(arg0);
 		return 0;
 	}
 
@@ -92,7 +92,7 @@ public class UtilWrap
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		Util.LogWarning(arg0);
+		LuaInterface.Util.LogWarning(arg0);
 		return 0;
 	}
 
@@ -101,7 +101,7 @@ public class UtilWrap
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		string arg0 = LuaScriptMgr.GetLuaString(L, 1);
-		Util.LogError(arg0);
+		LuaInterface.Util.LogError(arg0);
 		return 0;
 	}
 
@@ -109,7 +109,7 @@ public class UtilWrap
 	static int ClearMemory(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 0);
-		Util.ClearMemory();
+		LuaInterface.Util.ClearMemory();
 		return 0;
 	}
 
@@ -117,7 +117,7 @@ public class UtilWrap
 	static int CheckEnvironment(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 0);
-		bool o = Util.CheckEnvironment();
+		bool o = LuaInterface.Util.CheckEnvironment();
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}

@@ -19,13 +19,14 @@ public static class LuaBinder
 			case "CharacterControllerWrap": CharacterControllerWrap.Register(L); break;
 			case "ColliderWrap": ColliderWrap.Register(L); break;
 			case "ComponentWrap": ComponentWrap.Register(L); break;
-			case "DebuggerWrap": DebuggerWrap.Register(L); break;
 			case "DelegateFactoryWrap": DelegateFactoryWrap.Register(L); break;
 			case "DelegateWrap": DelegateWrap.Register(L); break;
 			case "EnumWrap": EnumWrap.Register(L); break;
 			case "GameObjectWrap": GameObjectWrap.Register(L); break;
 			case "IEnumeratorWrap": IEnumeratorWrap.Register(L); break;
 			case "LuaEnumTypeWrap": LuaEnumTypeWrap.Register(L); break;
+			case "LuaInterface_DebuggerWrap": LuaInterface_DebuggerWrap.Register(L); break;
+			case "LuaInterface_UtilWrap": LuaInterface_UtilWrap.Register(L); break;
 			case "MaterialWrap": MaterialWrap.Register(L); break;
 			case "MonoBehaviourWrap": MonoBehaviourWrap.Register(L); break;
 			case "ObjectWrap": ObjectWrap.Register(L); break;
@@ -43,7 +44,6 @@ public static class LuaBinder
 			case "TimeWrap": TimeWrap.Register(L); break;
 			case "TransformWrap": TransformWrap.Register(L); break;
 			case "TypeWrap": TypeWrap.Register(L); break;
-			case "UtilWrap": UtilWrap.Register(L); break;
 		}
 	}
 }

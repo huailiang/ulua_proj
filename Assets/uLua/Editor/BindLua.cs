@@ -192,7 +192,7 @@ public static class LuaBinding
             wrapfiles.Add("import '" + wrapfile + "'");
         }
 
-        string wrap = Application.dataPath + "/Resources/Lua/System/Wrap.lua.txt";
+        string wrap = LuaTool.lua_path + "System/Wrap.lua.txt";
         File.WriteAllLines(wrap, wrapfiles.ToArray());
 
         sb.AppendLine("\t\t}");
@@ -230,7 +230,7 @@ public static class LuaBinding
             textWriter.Flush();
             textWriter.Close();
         }
-        string wrapfile = Application.dataPath + "/Resources/Lua/System/Wrap.lua.txt";
+        string wrapfile = LuaTool.lua_path + "System/Wrap.lua.txt";
         File.WriteAllText(wrapfile, string.Empty);
 
         ClearFiles(Util.uLuaPath + "/LuaWrap/");

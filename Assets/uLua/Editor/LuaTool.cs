@@ -8,7 +8,7 @@ using System;
 
 public class LuaTool
 {
-    private static string lua_path = Application.dataPath + "/Resources/Lua/";
+    public static string lua_path = Application.dataPath + "/uLua/Resources/Lua/";
 
     private static List<FileInfo> g_files = new List<FileInfo>();
 
