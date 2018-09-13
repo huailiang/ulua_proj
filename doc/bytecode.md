@@ -19,41 +19,41 @@ luajit -b d:\src.lua d:\des.lua
   ```
 
 ### 2. luac (mac下)
-	
-	a.  下载源文件
-	
-	``` shell
-	curl -R -O http://www.lua.org/ftp/lua-5.3.1.tar.gz 
-	tar zxf lua-5.3.1.tar.gz 
-	cd lua-5.3.1 
-	make macosx test
-	```
 
-	b. 安装, 输入以下命令，会要求输入Password: 输入相应密码（你的密码），然后回车就自动安装了 
+a.  下载源文件
 
-	```shell
-	sudo make install
-	```
+```sh
+curl -R -O http://www.lua.org/ftp/lua-5.3.1.tar.gz 
+tar zxf lua-5.3.1.tar.gz 
+cd lua-5.3.1 
+make macosx test
+```
 
-	c.配置编译器  sublime下执行Tools->Build System->New Build System 
-	输入： 
+b. 安装, 输入以下命令，会要求输入Password: 输入相应密码（你的密码），然后回车就自动安装了 
 
-	```
-	{ 
-	"cmd": ["/usr/local/bin/lua", "$file"], 
-	"file_regex": "^(…?):([0-9]):?([0-9]*)", 
-	"selector": "source.lua"
-	} 
-	```
+```shell
+sudo make install
+```
 
-	保存为Lua.sublime-build，然后Tools-Build System上就能选择lua来编译脚本了
+c.配置编译器  sublime下执行Tools->Build System->New Build System 
+输入： 
 
-	d. luac生成bytecode, 使用如下命令：
+```
+{ 
+"cmd": ["/usr/local/bin/lua", "$file"], 
+"file_regex": "^(…?):([0-9]):?([0-9]*)", 
+"selector": "source.lua"
+} 
+```
 
-	
-	```shell
-	luac -o test.luac test.lua
-	```
+保存为Lua.sublime-build，然后Tools-Build System上就能选择lua来编译脚本了
+
+d. luac生成bytecode, 使用如下命令：
+
+
+```shell
+luac -o test.luac test.lua
+```
 
 
 ### 注意：
