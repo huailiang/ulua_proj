@@ -80,3 +80,12 @@ LUALIB_API int luaL_typerror (lua_State *L, int narg, const char *tname) {
 
 13.	luaL_openlib(L, NULL, func, 0);   => luaL_setfuncs(L, func, 0);
 
+14. unpack
+unpack 这个函数而需要修改为 table.unpack 。这个函数从 lua 5.2 开始就从全局函数移到了 table 下，只是因为部分同学的习惯问题而一直没有改过来。这次 lua 5.3 把它从全局变量里删掉了
+在例子07_LuaArray中 我们使用了table.unpack， 而不是unpack
+
+15. __ipairs
+__ipairs 在 Lua 5.3 里去掉了，现在 ipairs 的行为改为从 1 开始迭代，直到第一个为 nil 的项停止
+
+16. unsigned
+Lua 5.3 去掉了关于 unsigned 等的 api ，现在全部用 lua_Integer 类型了。这些只需要换掉 api ，加上强制转换即可

@@ -93,6 +93,7 @@
     <Compile Include="Assets\uLua\Examples\05_CallLuaFunction\CallLuaFunction_01.cs" />
     <Compile Include="Assets\uLua\Examples\05_CallLuaFunction\CallLuaFunction_02.cs" />
     <Compile Include="Assets\uLua\Examples\06_AccessingArray\TestLuaArray.cs" />
+    <Compile Include="Assets\uLua\Examples\07_LuaArray\LuaArray.cs" />
     <Compile Include="Assets\uLua\Examples\08_ProtoBuffer\LuaProtoBuffer01.cs" />
     <Compile Include="Assets\uLua\Examples\08_ProtoBuffer\TestProtol.cs" />
     <Compile Include="Assets\uLua\Examples\08_ProtoBuffer\TestProtolWrap.cs" />
@@ -104,12 +105,11 @@
     <Compile Include="Assets\uLua\Examples\10_TestOverride\TestOverride_SpaceWrap.cs" />
     <Compile Include="Assets\uLua\Examples\10_TestOverride\TestOverride01.cs" />
     <Compile Include="Assets\uLua\Examples\10_TestOverride\TestOverrideWrap.cs" />
-    <Compile Include="Assets\uLua\Examples\A1_LuaArray\LuaArray.cs" />
+    <Compile Include="Assets\uLua\Examples\A1_LuaCall\A1_LuaCall.cs" />
     <Compile Include="Assets\uLua\Examples\A2_LuaEnum\LuaEnum.cs" />
     <Compile Include="Assets\uLua\Examples\A2_LuaEnum\LuaEnumType.cs" />
     <Compile Include="Assets\uLua\Examples\A3_LuaClass\LuaClass.cs" />
     <Compile Include="Assets\uLua\Examples\A5_Debugger\A5_Debugger.cs" />
-    <Compile Include="Assets\uLua\Examples\A6_LuaCall\A6_LuaCall.cs" />
     <Compile Include="Assets\uLua\LuaWrap\AnimationClipWrap.cs" />
     <Compile Include="Assets\uLua\LuaWrap\AnimationWrap.cs" />
     <Compile Include="Assets\uLua\LuaWrap\ApplicationWrap.cs" />

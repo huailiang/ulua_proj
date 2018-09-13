@@ -1,7 +1,5 @@
 ﻿using System;
-using UnityEngine;
 using LuaInterface;
-using Object = UnityEngine.Object;
 
 public class TestLuaDelegateWrap
 {
@@ -11,7 +9,6 @@ public class TestLuaDelegateWrap
 		{
 			new LuaMethod("New", _CreateTestLuaDelegate),
 			new LuaMethod("GetClassType", GetClassType),
-			new LuaMethod("__eq", Lua_Eq),
 		};
 
 		LuaField[] fields = new LuaField[]
@@ -19,13 +16,25 @@ public class TestLuaDelegateWrap
 			new LuaField("onClick", get_onClick, set_onClick),
 		};
 
-		LuaScriptMgr.RegisterLib(L, "TestLuaDelegate", typeof(TestLuaDelegate), regs, fields, typeof(MonoBehaviour));
+		LuaScriptMgr.RegisterLib(L, "TestLuaDelegate", typeof(TestLuaDelegate), regs, fields, typeof(object));
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTestLuaDelegate(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "TestLuaDelegate class does not have a constructor function");
+		int count = LuaDLL.lua_gettop(L);
+
+		if (count == 0)
+		{
+			TestLuaDelegate obj = new TestLuaDelegate();
+			LuaScriptMgr.PushObject(L, obj);
+			return 1;
+		}
+		else
+		{
+			LuaDLL.luaL_error(L, "invalid arguments to method: TestLuaDelegate.New");
+		}
+
 		return 0;
 	}
 
@@ -100,17 +109,6 @@ public class TestLuaDelegateWrap
 			};
 		}
 		return 0;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Lua_Eq(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Object arg0 = LuaScriptMgr.GetLuaObject(L, 1) as Object;
-		Object arg1 = LuaScriptMgr.GetLuaObject(L, 2) as Object;
-		bool o = arg0 == arg1;
-		LuaScriptMgr.Push(L, o);
-		return 1;
 	}
 }
 

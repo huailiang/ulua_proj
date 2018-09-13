@@ -50,11 +50,11 @@ function print(...)
 	end
 	
 	local str = table.concat(t)	
-	Debugger.Log(str)
+	LuaInterface.Debugger.Log(str)
 end
 
 function printf(format, ...)
-	Debugger.Log(string.format(format, ...))
+	LuaInterface.Debugger.Log(string.format(format, ...))
 end
 
 
@@ -83,10 +83,10 @@ end
 
 function LuaGC()
   local c = collectgarbage("count")
-  Debugger.Log("Begin gc count = {0} kb", c)
+  LuaInterface.Debugger.Log("Begin gc count = {0} kb", c)
   collectgarbage("collect")
   c = collectgarbage("count")
-  Debugger.Log("End gc count = {0} kb", c)
+  LuaInterface.Debugger.Log("End gc count = {0} kb", c)
 end
 
 
@@ -160,9 +160,9 @@ end
 function DumpTable(t)
 	for k,v in pairs(t) do
 		if v ~= nil then
-			Debugger.Log("Key: {0}, Value: {1}", tostring(k), tostring(v))
+			LuaInterface.Debugger.Log("Key: {0}, Value: {1}", tostring(k), tostring(v))
 		else
-			Debugger.Log("Key: {0}, Value nil", tostring(k))
+			LuaInterface.Debugger.Log("Key: {0}, Value nil", tostring(k))
 		end
 	end
 end
@@ -196,24 +196,24 @@ function PrintLua(name, lib)
 	 m = lib
 
 	if (m == nil) then
-		Debugger.Log("Lua Module {0} not exists", name)
+		LuaInterface.Debugger.Log("Lua Module {0} not exists", name)
 		return
 	end
 
-	Debugger.Log("-----------------Dump Table {0}-----------------",name)
+	LuaInterface.Debugger.Log("-----------------Dump Table {0}-----------------",name)
 	if (type(m) == "table") then
 		for k,v in pairs(m) do
-			Debugger.Log("Key: {0}, Value: {1}", k, tostring(v))
+			LuaInterface.Debugger.Log("Key: {0}, Value: {1}", k, tostring(v))
 		end
 	end
 
 	local meta = getmetatable(m)
-	Debugger.Log("-----------------Dump meta {0}-----------------",name)
+	LuaInterface.Debugger.Log("-----------------Dump meta {0}-----------------",name)
 
 	while meta ~= nil and meta ~= m do
 		for k,v in pairs(meta) do
 			if k ~= nil then
-			Debugger.Log("Key: {0}, Value: {1}", tostring(k), tostring(v))
+			LuaInterface.Debugger.Log("Key: {0}, Value: {1}", tostring(k), tostring(v))
 			end
 
 		end
@@ -221,6 +221,6 @@ function PrintLua(name, lib)
 		meta = getmetatable(meta)
 	end
 
-	Debugger.Log("-----------------Dump meta Over-----------------")
-	Debugger.Log("-----------------Dump Table Over-----------------")
+	LuaInterface.Debugger.Log("-----------------Dump meta Over-----------------")
+	LuaInterface.Debugger.Log("-----------------Dump Table Over-----------------")
 end

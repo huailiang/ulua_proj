@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
-public class LuaArray : MonoBehaviour {
+public class LuaArray : MonoBehaviour
+{
 
     string source = @"
         function luaFunc(objs, len)
@@ -11,14 +10,15 @@ public class LuaArray : MonoBehaviour {
                 print(objs[i])
             end
             local table1 = {'111', '222', '333'}
-            return unpack(table1)
+            return table.unpack(table1)
         end
     ";
 
     string[] objs = { "aaa", "bbb", "ccc" };
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         LuaScriptMgr luaMgr = new LuaScriptMgr();
         luaMgr.Start();
         LuaState l = luaMgr.lua;
@@ -30,7 +30,8 @@ public class LuaArray : MonoBehaviour {
         f.Release();
 
         //lua table to c# array
-        foreach (object de in rs) {
+        foreach (object de in rs)
+        {
             Debug.Log(de.ToString());
         }
     }

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
-public class A6_LuaCall : MonoBehaviour {
+public class A1_LuaCall : MonoBehaviour
+{
 
     const string script = @"
         A6_LuaCall = luanet.import_type('A6_LuaCall')  
@@ -27,13 +27,15 @@ public class A6_LuaCall : MonoBehaviour {
         LuaClass:New():test();
     ";
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         LuaState lua = new LuaState();
         lua.DoString(script);
-	}
+    }
 
-    public static void OnSharpCall(LuaTable self, LuaFunction func) {
+    public static void OnSharpCall(LuaTable self, LuaFunction func)
+    {
         func.Call(self);
-    } 
+    }
 }

@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
-public class CreateGameObject02 : MonoBehaviour {
+public class CreateGameObject02 : MonoBehaviour
+{
 
     private string script = @"
             luanet.load_assembly('UnityEngine')
@@ -12,15 +12,12 @@ public class CreateGameObject02 : MonoBehaviour {
             newGameObj:AddComponent(ParticleSystem.GetClassType())
         ";
 
-	//非反射调用
-	void Start () {
+
+    void Start()
+    {
         LuaScriptMgr lua = new LuaScriptMgr();
         lua.Start();
         lua.DoString(script);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    }
+
 }
