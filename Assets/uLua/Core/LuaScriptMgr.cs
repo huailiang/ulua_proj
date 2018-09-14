@@ -1644,7 +1644,7 @@ namespace LuaInterface
             {
                 LuaDLL.lua_getglobal(L, "tostring");
                 LuaDLL.lua_pushvalue(L, stackPos);
-                LuaDLL.lua_call(L, 1, 1);
+                LuaDLL.lua_pcall(L, 1, 1,0);
                 retVal = LuaDLL.lua_tostring(L, -1);
                 LuaDLL.lua_pop(L, 1);
             }
@@ -2166,7 +2166,7 @@ namespace LuaInterface
             Push(L, hit.rigidbody);
             Push(L, hit.transform);
 
-            LuaDLL.lua_call(L, 6, -1);
+            LuaDLL.lua_pcall(L, 6, -1, 0);
         }
 
         public static void Push(IntPtr L, Ray ray)
@@ -2175,7 +2175,7 @@ namespace LuaInterface
             LuaDLL.lua_getref(L, luaMgr.packRay);
             LuaDLL.tolua_pushfloat3(L, luaMgr.packVec3, ray.direction.x, ray.direction.y, ray.direction.z);
             LuaDLL.tolua_pushfloat3(L, luaMgr.packVec3, ray.origin.x, ray.origin.y, ray.origin.z);
-            LuaDLL.lua_call(L, 2, -1);
+            LuaDLL.lua_pcall(L, 2, -1, 0);
         }
 
         public static Ray GetRay(IntPtr L, int stackPos)
@@ -2227,7 +2227,7 @@ namespace LuaInterface
             LuaDLL.lua_pushinteger(L, touch.tapCount);
             LuaDLL.lua_pushinteger(L, (int)touch.phase);
 
-            LuaDLL.lua_call(L, 7, -1);
+            LuaDLL.lua_pcall(L, 7, -1,0);
         }
 
         public static void Push(IntPtr L, Bounds bound)
@@ -2238,7 +2238,7 @@ namespace LuaInterface
             Push(L, bound.center);
             Push(L, bound.size);
 
-            LuaDLL.lua_call(L, 2, -1);
+            LuaDLL.lua_pcall(L, 2, -1, 0);
         }
 
         public static void PushTraceBack(IntPtr L)

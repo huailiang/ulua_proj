@@ -82,13 +82,9 @@ namespace LuaInterface
 #endif
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int luaopen_bit(IntPtr L);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_tothread(IntPtr L, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_xmove(IntPtr from, IntPtr to, int n);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lua_yield(IntPtr L, int nresults);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_newthread(IntPtr L);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -126,11 +122,7 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern string luaL_gsub(IntPtr luaState, string str, string pattern, string replacement);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_getfenv(IntPtr luaState, int stackPos);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_isuserdata(IntPtr luaState, int stackPos);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lua_lessthan(IntPtr luaState, int stackPos1, int stackPos2);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_rawequal(IntPtr luaState, int stackPos1, int stackPos2);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -175,12 +167,6 @@ namespace LuaInterface
         public static void lua_newtable(IntPtr luaState)
         {
             LuaDLL.lua_createtable(luaState, 0, 0);
-        }
-        public static int luaL_dofile(IntPtr luaState, string fileName)
-        {
-            int result = LuaDLL.luaL_loadfile(luaState, fileName);
-            if (result != 0) return result;
-            return LuaDLL.lua_pcall(luaState, 0, -1, 0);
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_getglobal(IntPtr luaState, string name);
@@ -265,8 +251,6 @@ namespace LuaInterface
             lua_pushcclosure(luaState, fn, n);
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_call(IntPtr luaState, int nArgs, int nResults);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_pcall(IntPtr luaState, int nArgs, int nResults, int errfunc);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_tocfunction(IntPtr luaState, int index);
@@ -334,8 +318,6 @@ namespace LuaInterface
         {
             return luaL_loadbufferx(luaState, buff, size, name, null);
         }
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int luaL_loadfile(IntPtr luaState, string filename);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool luaL_checkmetatable(IntPtr luaState, int obj);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

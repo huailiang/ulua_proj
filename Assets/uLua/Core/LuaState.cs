@@ -66,7 +66,6 @@ namespace LuaInterface
             // insert overide loader first
             loaderFunction = new LuaCSFunction(LuaStatic.loader);
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
-            int oldTop = LuaDLL.lua_gettop(L);
 
             LuaDLL.lua_getglobal(L, "package");
             LuaDLL.lua_getfield(L, -1, "searchers");

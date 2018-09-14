@@ -135,7 +135,7 @@ namespace LuaInterface
 
             if (LuaDLL.luaL_loadbuffer(L, text, text.Length, fileName) == 0)
             {
-                LuaDLL.lua_call(L, 0, LuaDLL.LUA_MULTRET);
+                LuaDLL.lua_pcall(L, 0, LuaDLL.LUA_MULTRET, 0);
             }
 
             return LuaDLL.lua_gettop(L) - n;
