@@ -6,5 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/uLua/Examples/04_ScriptsFromFile/ScriptsFromFile_02.unity
-    guid: 90f9048761dbcc242b3f3aad440ac41e
+    path: Assets/uLua/Examples/01_HelloWorld/HelloWorld.unity
+    guid: e25d9e98a842cc1439dcf1eecfc657e0
+  m_configObjects: {}

@@ -31,9 +31,8 @@ public static class LuaBinder
 			case "MonoBehaviourWrap": MonoBehaviourWrap.Register(L); break;
 			case "ObjectWrap": ObjectWrap.Register(L); break;
 			case "ParticleSystemWrap": ParticleSystemWrap.Register(L); break;
-			case "QualitySettingsWrap": QualitySettingsWrap.Register(L); break;
-			case "RendererWrap": RendererWrap.Register(L); break;
 			case "RenderTextureWrap": RenderTextureWrap.Register(L); break;
+			case "RendererWrap": RendererWrap.Register(L); break;
 			case "ScreenWrap": ScreenWrap.Register(L); break;
 			case "SkinnedMeshRendererWrap": SkinnedMeshRendererWrap.Register(L); break;
 			case "System_ObjectWrap": System_ObjectWrap.Register(L); break;
