@@ -72,23 +72,12 @@ namespace LuaInterface
             LuaDLL.lua_remove(L, -2); //remv table package
             int len = LuaDLL.lua_rawlen(L, -1);
             int indx = len + 1;
-            UnityEngine.Debug.Log("search length: " + len);
-            //for (int e = len + 1; e > indx; e--)
-            //{
-            //    LuaDLL.lua_rawgeti(L, -1, e - 1); 
-            //    LuaDLL.lua_rawseti(L, -2, e);
-            //}
+            UnityEngine.Debug.Log("search length: " + len + " type:" + ((LuaTypes)LuaDLL.lua_type(L, -1)).ToString());
             IntPtr fn = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(loaderFunction);
-            UnityEngine.Debug.Log("fn: " + fn.ToInt64());
+            IntPtr fn2 = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(printFunction);
+            UnityEngine.Debug.Log("fn: " + fn.ToString()+" fn2: "+fn2.ToString());
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
-            LuaDLL.lua_rawseti(L, -2, indx);
-
-            LuaDLL.lua_getglobal(L, "package");
-            LuaDLL.lua_getfield(L, -1, "searchers");
-            LuaDLL.lua_remove(L, -2); //remv table package
-            len = LuaDLL.lua_rawlen(L, -1);
-            UnityEngine.Debug.Log("new search length: " + len);
-
+            LuaDLL.lua_rawseti(L, -2, len + 1);
             LuaDLL.lua_settop(L, 0); //clear stack
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
