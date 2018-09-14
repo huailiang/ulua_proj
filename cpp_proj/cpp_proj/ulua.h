@@ -12,6 +12,8 @@ public:
 	void exec();
 	void global();
 
+
+
 private:
 	lua_State* L;
 	int LUA_GLOBALSINDEX;

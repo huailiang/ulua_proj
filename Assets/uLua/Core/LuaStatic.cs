@@ -85,11 +85,12 @@ namespace LuaInterface
             }
             fileName = fileName.Replace('.', '/');
 
-            //LuaScriptMgr mgr = LuaScriptMgr.GetMgrFromLuaState(L);
-            //if (mgr == null) return 0;
-
-            //LuaDLL.lua_pushstdcallcfunction(L, mgr.lua.tracebackFunction);
-            //int oldTop = LuaDLL.lua_gettop(L);
+            LuaScriptMgr mgr = LuaScriptMgr.GetMgrFromLuaState(L);
+            int oldTop = LuaDLL.lua_gettop(L);
+            if (mgr != null)
+            {
+                LuaDLL.lua_pushstdcallcfunction(L, mgr.lua.tracebackFunction);
+            }
 
             byte[] text = LuaStatic.Load(fileName);
             if (text == null)
@@ -103,7 +104,7 @@ namespace LuaInterface
             }
             if (LuaDLL.luaL_loadbuffer(L, text, text.Length, fileName) != 0)
             {
-                // mgr.lua.ThrowExceptionFromError(oldTop);
+                mgr.lua.ThrowExceptionFromError(oldTop + 1);
                 LuaDLL.lua_pop(L, 1);
             }
             return 1;
