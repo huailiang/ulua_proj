@@ -71,13 +71,13 @@ c#端实现如下：
 我们加入了lua_copy的外部接口, 封装lua_replace 实现类似c++的效果
 
 ```csharp
-    [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-    public static extern void lua_copy(IntPtr luaState, int fromidx,int toidx);
-    public static void lua_replace(IntPtr luaState, int index)
-    {
-        lua_copy(luaState, -1, index);
-        lua_pop(luaState, 1);
-    }
+[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+public static extern void lua_copy(IntPtr luaState, int fromidx,int toidx);
+public static void lua_replace(IntPtr luaState, int index)
+{
+    lua_copy(luaState, -1, index);
+    lua_pop(luaState, 1);
+}
 ```
 
 4. lua_pcall 给外部使用的接口取消 替代的是lua_pcallk
@@ -101,27 +101,45 @@ LUA_API int lua_pcall (lua_State *L, int nargs, int nresults, int errfunc) {
 	c. 通过loader去加载目标模块
   lua53中package中剔除了loaders表，相对应替代的是searchers表
 
-  所以我们在LuaState.cs中, 做如下修改：
+  所以我们在LuaState.cs中, 做如下修改(算法参考了xlua的实现方式)：
+  
 ```csharp
-loaderFunction = new LuaCSFunction(LuaStatic.loader);
-LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
-int loaderFunc = LuaDLL.lua_gettop(L);
-
 LuaDLL.lua_getglobal(L, "package");
 LuaDLL.lua_getfield(L, -1, "searchers");
-int loaderTable = LuaDLL.lua_gettop(L);
-
-for (int e = LuaDLL.lua_rawlen(L, loaderTable) + 1; e > 1; e--)
+LuaDLL.lua_remove(L, -2); //remv table package
+int len = LuaDLL.lua_rawlen(L, -1);
+for (int e = len + 1; e > 1; e--)
 {
-    LuaDLL.lua_rawgeti(L, loaderTable, e - 1);
-    LuaDLL.lua_rawseti(L, loaderTable, e);
+    LuaDLL.lua_rawgeti(L, -1, e - 1);
+    LuaDLL.lua_rawseti(L, -2, e);
 }
-LuaDLL.lua_pushvalue(L, loaderFunc);
-LuaDLL.lua_rawseti(L, loaderTable, 1);
+LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
+LuaDLL.lua_rawseti(L, -2, 1);
 ```
 
+6. luaL_typerror取消了， 在lua51中luaL_typerror实现如下：
 
-6. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
+```c++
+LUALIB_API int luaL_typerror (lua_State *L, int narg, const char *tname) {
+  const char *msg = lua_pushfstring(L, "%s expected, got %s",
+                                    tname, luaL_typename(L, narg));
+  return luaL_argerror(L, narg, msg);
+}
+
+```
+
+因此在c#中实现如下：
+
+```csharp
+public static int luaL_typerror(IntPtr luaState, int narg, string tname)
+{
+    lua_pushstring(luaState, tname + " expected, got " + luaL_typename(luaState, narg));
+    string msg = lua_tostring(luaState, -1);
+    return luaL_argerror(luaState, narg, msg);
+}
+```
+
+7. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
 
 
 更多关于lua51升级后的更变 请参考[这里](/doc/luachanges.md)

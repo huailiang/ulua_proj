@@ -274,7 +274,6 @@ namespace LuaInterface
             if (str != IntPtr.Zero)
             {
                 string ss = Marshal.PtrToStringAnsi(str, strlen);
-                //当从c传出中文时会转换失败
                 if (ss == null)
                 {
                     return AnsiToUnicode(str, strlen);
@@ -346,10 +345,12 @@ namespace LuaInterface
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern string lua_getupvalue(IntPtr L, int funcindex, int n);
-
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int luaL_typerror(IntPtr luaState, int narg, string tname);
-
+        public static int luaL_typerror(IntPtr luaState, int narg, string tname)
+        {
+            lua_pushstring(luaState, tname + " expected, got " + luaL_typename(luaState, narg));
+            string msg = lua_tostring(luaState, -1);
+            return luaL_argerror(luaState, narg, msg);
+        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_argerror(IntPtr luaState, int narg, string extramsg);
 

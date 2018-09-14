@@ -20,9 +20,6 @@ namespace LuaInterface
             _Interpreter = translator.interpreter;            
         }
 
-        /*
-         * Indexer for string fields of the table
-         */
         public object this[string field]
         {
             get
@@ -34,9 +31,7 @@ namespace LuaInterface
                 _Interpreter.setObject(_Reference, field, value);
             }
         }
-        /*
-         * Indexer for numeric fields of the table
-         */
+
         public object this[object field]
         {
             get
@@ -48,8 +43,7 @@ namespace LuaInterface
                 _Interpreter.setObject(_Reference, field, value);
             }
         }
-
-
+        
         public System.Collections.IDictionaryEnumerator GetEnumerator()
         {
             return _Interpreter.GetTableDict(this).GetEnumerator();
@@ -57,12 +51,7 @@ namespace LuaInterface
 
         public int Count
         {
-            get
-            {
-                //push(_Interpreter.L);
-                //LuaDLL.lua_objlen(_Interpreter.L, -1);
-                return _Interpreter.GetTableDict(this).Count;
-            }
+            get { return _Interpreter.GetTableDict(this).Count; }
         }
 
         public ICollection Keys
@@ -129,9 +118,7 @@ namespace LuaInterface
             LuaDLL.lua_getref(L, _Reference);
             LuaDLL.lua_pushstring(L, field);
             LuaDLL.lua_gettable(L, -2);
-
             type = LuaDLL.lua_type(L, -1);
-
             if (type == LuaTypes.LUA_TFUNCTION)
             {
                 func = new LuaFunction(LuaDLL.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX), L);                
@@ -140,10 +127,7 @@ namespace LuaInterface
             LuaDLL.lua_settop(L, oldTop);
             return func;
         }
-
-        /*
-         * Pushes this table into the Lua stack
-        // */
+        
         internal void push(IntPtr luaState)
         {
             LuaDLL.lua_getref(luaState, _Reference);

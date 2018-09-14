@@ -501,13 +501,7 @@ namespace LuaInterface
          */
         internal bool compareRef(int ref1, int ref2)
         {
-            if (ref1 == ref2) return true;
-            int top = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, ref1);
-            LuaDLL.lua_getref(L, ref2);
-            int equal = LuaDLL.lua_equal(L, -1, -2);
-            LuaDLL.lua_settop(L, top);
-            return (equal != 0);
+            return ref1 == ref2;
         }
 
         internal void pushCSFunction(LuaCSFunction function)
