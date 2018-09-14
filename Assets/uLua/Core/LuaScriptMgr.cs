@@ -569,6 +569,7 @@ namespace LuaInterface
             }
             else
             {
+                
                 LuaDLL.lua_getglobal(L, path[0]);
                 LuaTypes type = LuaDLL.lua_type(L, -1);
                 if (type == LuaTypes.LUA_TNIL)
@@ -579,6 +580,7 @@ namespace LuaInterface
                     LuaDLL.lua_pushvalue(L, -2);
                     LuaDLL.lua_settable(L, -3);
                     LuaDLL.lua_setglobal(L, path[0]);
+                    LuaDLL.lua_getglobal(L, path[0]);
                 }
             }
             LuaDLL.lua_insert(L, oldTop + 1);

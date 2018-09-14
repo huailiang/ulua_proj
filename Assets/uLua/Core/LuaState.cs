@@ -70,17 +70,16 @@ namespace LuaInterface
 
             LuaDLL.lua_getglobal(L, "package");
             LuaDLL.lua_getfield(L, -1, "searchers");
-            int loaderTable = LuaDLL.lua_gettop(L);
-            int len = LuaDLL.lua_rawlen(L,loaderTable);
+            LuaDLL.lua_remove(L, -2); //remv table package
+            int len = LuaDLL.lua_rawlen(L, -1);
             for (int e = len + 1; e > 1; e--)
             {
-                LuaDLL.lua_rawgeti(L, loaderTable, e - 1);
-                LuaDLL.lua_rawseti(L, loaderTable, e);
+                LuaDLL.lua_rawgeti(L, -1, e - 1);
+                LuaDLL.lua_rawseti(L, -2, e);
             }
-            LuaDLL.lua_pushvalue(L, oldTop);
-            LuaDLL.lua_rawseti(L, loaderTable, 1);
-            LuaDLL.lua_settop(L, 0);
-
+            LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
+            LuaDLL.lua_rawseti(L, -2, 1);
+            LuaDLL.lua_settop(L, 0); //clear stack
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
 
