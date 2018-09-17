@@ -107,7 +107,3 @@ if(UINT_ESPECIALLY)
     ADD_DEFINITIONS(-DUINT_ESPECIALLY)
 endif()
 	
-target_link_libraries(ulua
-    m
-    ${THIRDPART_LIB} 
-)

@@ -71,7 +71,7 @@
     <Compile Include="Assets\uLua\Editor\Wrap\ToLua_UnityEngine_Object.cs" />
     <Compile Include="Assets\uLua\Editor\WrapFile.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/projects/ulua_proj/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/plugin/ulua_proj/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/install/Unity2018/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

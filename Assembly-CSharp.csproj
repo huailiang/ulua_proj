@@ -197,7 +197,7 @@
     <None Include="Assets\uLua\Resources\Lua\System\Color.lua.txt" />
     <None Include="Assets\uLua\Resources\Lua\System\Bounds.lua.txt" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/projects/ulua_proj/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>D:/plugin/ulua_proj/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/install/Unity2018/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

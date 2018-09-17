@@ -67,12 +67,11 @@ namespace LuaInterface
             loaderFunction = new LuaCSFunction(LuaStatic.loader);
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
 
+            PrintSearchers("lua_pushstdcallcfunction");
             LuaDLL.lua_getglobal(L, "package");
             LuaDLL.lua_getfield(L, -1, "searchers");
             LuaDLL.lua_remove(L, -2); //remv table package
             int len = LuaDLL.lua_rawlen(L, -1);
-            int indx = len + 1;
-            UnityEngine.Debug.Log("search length: " + len + " type:" + ((LuaTypes)LuaDLL.lua_type(L, -1)).ToString());
             IntPtr fn = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(loaderFunction);
             IntPtr fn2 = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(printFunction);
             UnityEngine.Debug.Log("fn: " + fn.ToString()+" fn2: "+fn2.ToString());
@@ -94,6 +93,24 @@ namespace LuaInterface
         public ObjectTranslator GetTranslator()
         {
             return translator;
+        }
+
+        internal void PrintSearchers(string tag)
+        {
+            LuaDLL.lua_getglobal(L, "package");
+            LuaDLL.lua_getfield(L, -1, "searchers");
+            LuaDLL.lua_remove(L, -2); //remv table package
+            int len = LuaDLL.lua_rawlen(L, -1);
+            UnityEngine.Debug.Log("===> searchers " + tag + " length: " + len + " type:" + (LuaTypes)LuaDLL.lua_type(L, -1));
+            string stype = string.Empty;
+            for (int i = 1; i <= len; i++)
+            {
+                LuaDLL.lua_rawgeti(L, -1, i);
+                stype += LuaDLL.lua_type(L, -1) + " ";
+                LuaDLL.lua_rawseti(L, -2, i);
+            }
+            UnityEngine.Debug.Log(stype);
+            LuaDLL.lua_pop(L, 1);
         }
 
         internal void ThrowExceptionFromError(int oldTop)
