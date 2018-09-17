@@ -113,7 +113,7 @@ if ( WIN32 AND NOT CYGWIN )
 	        ${THIRDPART_LIB} 
 	    )
 else ( )
-	target_link_libraries(xlua
+	target_link_libraries(ulua
 	    m
 	    ${THIRDPART_LIB} 
 	)
