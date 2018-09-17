@@ -9,7 +9,7 @@ xcode_proj/
 
 build/plugin_luajit/
 build/plugin_lua53/
-build/build_lj*/
+build/build_*/
 build/build64/
 
 
