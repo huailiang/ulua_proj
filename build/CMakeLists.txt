@@ -106,4 +106,15 @@ endif ( )
 if(UINT_ESPECIALLY)
     ADD_DEFINITIONS(-DUINT_ESPECIALLY)
 endif()
-	
+
+if ( WIN32 AND NOT CYGWIN )
+	target_link_libraries(ulua
+	        ws2_32
+	        ${THIRDPART_LIB} 
+	    )
+else ( )
+	target_link_libraries(xlua
+	    m
+	    ${THIRDPART_LIB} 
+	)
+endif()
