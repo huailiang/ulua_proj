@@ -22,6 +22,8 @@ cpp_proj/**/x64
 *.pidb
 *.booproj
 ulua_proj*
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
 *.DotSettings
 *.apk
 *.DS_Store

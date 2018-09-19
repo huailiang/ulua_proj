@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using LuaInterface;
 using UnityEngine;
 namespace LuaInterface
 {
@@ -45,122 +44,6 @@ namespace LuaInterface
 
         static LuaFunction traceback = null;
 
-        string luaIndex =
-        @"        
-        local rawget = rawget
-        local rawset = rawset
-        local getmetatable = getmetatable      
-        local type = type  
-        local function index(obj,name)  
-            local o = obj            
-            local meta = getmetatable(o)            
-            local parent = meta
-            local v = nil
-            
-            while meta~= nil do
-                v = rawget(meta, name)
-                
-                if v~= nil then
-                    if parent ~= meta then rawset(parent, name, v) end
-
-                    local t = type(v)
-
-                    if t == 'function' then                    
-                        return v
-                    else
-                        local func = v[1]
-                
-                        if func ~= nil then
-                            return func(obj)                         
-                        end
-                    end
-                    break
-                end
-                
-                meta = getmetatable(meta)
-            end
-
-           error('unknown member name '..name, 2)
-           return nil	        
-        end
-        return index";
-
-        string luaNewIndex =
-        @"
-        local rawget = rawget
-        local getmetatable = getmetatable   
-        local rawset = rawset     
-        local function newindex(obj, name, val)            
-            local meta = getmetatable(obj)            
-            local parent = meta
-            local v = nil
-            
-            while meta~= nil do
-                v = rawget(meta, name)
-                
-                if v~= nil then
-                    if parent ~= meta then rawset(parent, name, v) end
-                    local func = v[2]
-                    if func ~= nil then                        
-                        return func(obj, nil, val)                        
-                    end
-                    break
-                end
-                
-                meta = getmetatable(meta)
-            end  
-       
-            error('field or property '..name..' does not exist', 2)
-            return nil		
-        end
-        return newindex";
-
-        string luaTableCall =
-        @"
-        local rawget = rawget
-        local getmetatable = getmetatable     
-
-        local function call(obj, ...)
-            local meta = getmetatable(obj)
-            local fun = rawget(meta, 'New')
-            
-            if fun ~= nil then
-                return fun(...)
-            else
-                error('unknow function __call',2)
-            end
-        end
-
-        return call
-    ";
-
-        string luaEnumIndex =
-        @"
-        local rawget = rawget                
-        local getmetatable = getmetatable         
-
-        local function indexEnum(obj,name)
-            local v = rawget(obj, name)
-            
-            if v ~= nil then
-                return v
-            end
-
-            local meta = getmetatable(obj)  
-            local func = rawget(meta, name)            
-            
-            if func ~= nil then
-                v = func()
-                rawset(obj, name, v)
-                return v
-            else
-                error('field '..name..' does not exist', 2)
-            end
-        end
-
-        return indexEnum
-    ";
-
 
         public LuaScriptMgr()
         {
@@ -170,30 +53,9 @@ namespace LuaInterface
             LuaStatic.Load = Loader;
             lua = new LuaState();
             _translator = lua.GetTranslator();
-
             fileList = new HashSet<string>();
             dict = new Dictionary<string, LuaBase>();
-
-            LuaDLL.lua_pushstring(lua.L, "ToLua_Index");
-            LuaDLL.luaL_dostring(lua.L, luaIndex);
-            LuaDLL.lua_rawset(lua.L, (int)LuaIndexes.LUA_REGISTRYINDEX);
-
-            LuaDLL.lua_pushstring(lua.L, "ToLua_NewIndex");
-            LuaDLL.luaL_dostring(lua.L, luaNewIndex);
-            LuaDLL.lua_rawset(lua.L, (int)LuaIndexes.LUA_REGISTRYINDEX);
-
-            LuaDLL.lua_pushstring(lua.L, "ToLua_TableCall");
-            LuaDLL.luaL_dostring(lua.L, luaTableCall);
-            LuaDLL.lua_rawset(lua.L, (int)LuaIndexes.LUA_REGISTRYINDEX);
-
-            LuaDLL.lua_pushstring(lua.L, "ToLua_EnumIndex");
-            LuaDLL.luaL_dostring(lua.L, luaEnumIndex);
-            LuaDLL.lua_rawset(lua.L, (int)LuaIndexes.LUA_REGISTRYINDEX);
-
             Bind();
-
-            LuaDLL.lua_pushnumber(lua.L, 0);
-            LuaDLL.lua_setglobal(lua.L, "_LuaScriptMgr");
         }
 
 

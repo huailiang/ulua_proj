@@ -23,9 +23,6 @@ namespace LuaInterface
         {
             L = LuaDLL.luaL_newstate();
             LuaDLL.luaL_openlibs(L);
-            LuaDLL.lua_pushstring(L, "LUAINTERFACE LOADED");
-            LuaDLL.lua_pushboolean(L, true);
-            LuaDLL.lua_settable(L, LuaIndexes.LUA_REGISTRYINDEX);
 
             LuaDLL.lua_newtable(L);
             LuaDLL.lua_pushstring(L, "getmetatable");
@@ -129,10 +126,7 @@ namespace LuaInterface
                 LuaDLL.lua_pushnil(L);
                 return 1;
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
 
         public LuaFunction LoadString(string chunk, string name, LuaTable env)
