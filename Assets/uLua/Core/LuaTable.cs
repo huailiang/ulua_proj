@@ -115,7 +115,7 @@ namespace LuaInterface
             LuaFunction func = null;
 
             int oldTop = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, _Reference);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
             LuaDLL.lua_pushstring(L, field);
             LuaDLL.lua_gettable(L, -2);
             type = LuaDLL.lua_type(L, -1);
@@ -130,7 +130,7 @@ namespace LuaInterface
         
         internal void push(IntPtr luaState)
         {
-            LuaDLL.lua_getref(luaState, _Reference);
+            LuaDLL.lua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
         }     
 
         public override string ToString()

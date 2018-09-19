@@ -157,7 +157,7 @@ namespace LuaInterface
         {
             if (_Reference != 0)
             {
-                LuaDLL.lua_getref(luaState, _Reference);
+                LuaDLL.lua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
             }
             else
             {
@@ -169,7 +169,7 @@ namespace LuaInterface
         {
             if (_Reference != 0)
             {
-                LuaDLL.lua_getref(L, _Reference);
+                LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
             }
             else
             {

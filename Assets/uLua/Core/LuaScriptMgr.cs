@@ -2034,7 +2034,7 @@ namespace LuaInterface
         public static void Push(IntPtr L, Ray ray)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaDLL.lua_getref(L, luaMgr.packRay);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, luaMgr.packRay);
             LuaDLL.tolua_pushfloat3(L, luaMgr.packVec3, ray.direction.x, ray.direction.y, ray.direction.z);
             LuaDLL.tolua_pushfloat3(L, luaMgr.packVec3, ray.origin.x, ray.origin.y, ray.origin.z);
             LuaDLL.lua_pcall(L, 2, -1, 0);
@@ -2095,7 +2095,7 @@ namespace LuaInterface
         public static void Push(IntPtr L, Bounds bound)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaDLL.lua_getref(L, luaMgr.packBounds);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, luaMgr.packBounds);
 
             Push(L, bound.center);
             Push(L, bound.size);

@@ -484,7 +484,7 @@ namespace LuaInterface
             }
             else
             {
-                LuaDLL.lua_getref(L, reference);
+                LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             }
         }
 
@@ -493,7 +493,7 @@ namespace LuaInterface
          */
         private void pushNewObject(IntPtr luaState, object o, int index, string metatable)
         {
-            LuaDLL.lua_getref(luaState, weakTableRef);
+            LuaDLL.lua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, weakTableRef);
             LuaDLL.luanet_newudata(luaState, index);
 
             if (metatable == "luaNet_metatable")

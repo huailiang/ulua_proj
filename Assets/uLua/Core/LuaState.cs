@@ -59,7 +59,7 @@ namespace LuaInterface
             import_wrapFunction = new LuaCSFunction(LuaStatic.importWrap);
             LuaDLL.lua_pushstdcallcfunction(L, import_wrapFunction);
             LuaDLL.lua_setglobal(L, "import");
-
+            
             // insert overide loader first
             loaderFunction = new LuaCSFunction(LuaStatic.loader);
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
@@ -98,15 +98,13 @@ namespace LuaInterface
             LuaDLL.lua_getfield(L, -1, "searchers");
             LuaDLL.lua_remove(L, -2); //remv table package
             int len = LuaDLL.lua_rawlen(L, -1);
-            UnityEngine.Debug.Log("===> searchers " + tag + " length: " + len + " type:" + (LuaTypes)LuaDLL.lua_type(L, -1));
             string stype = string.Empty;
             for (int i = 1; i <= len; i++)
             {
-                LuaDLL.lua_rawgeti(L, -1, i);
-                stype += LuaDLL.lua_type(L, -1) + " ";
+                stype += LuaDLL.lua_rawgeti(L, -1, i) + " ";
                 LuaDLL.lua_rawseti(L, -2, i);
             }
-            UnityEngine.Debug.Log(stype);
+            UnityEngine.Debug.Log("===> searchers " + tag + " length: " + len + " type:" + stype);
             LuaDLL.lua_pop(L, 1);
         }
 
@@ -422,7 +420,7 @@ namespace LuaInterface
         internal object rawGetObject(int reference, string field)
         {
             int oldTop = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, reference);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             LuaDLL.lua_pushstring(L, field);
             LuaDLL.lua_rawget(L, -2);
             object obj = translator.getObject(L, -1);
@@ -435,7 +433,7 @@ namespace LuaInterface
         internal object getObject(int reference, string field)
         {
             int oldTop = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, reference);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             object returnValue = getObject(field.Split(new char[] { '.' }));
             LuaDLL.lua_settop(L, oldTop);
             return returnValue;
@@ -446,7 +444,7 @@ namespace LuaInterface
         internal object getObject(int reference, object field)
         {
             int oldTop = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, reference);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             translator.push(L, field);
             LuaDLL.lua_gettable(L, -2);
             object returnValue = translator.getObject(L, -1);
@@ -460,7 +458,7 @@ namespace LuaInterface
         internal void setObject(int reference, string field, object val)
         {
             int oldTop = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, reference);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             setObject(field.Split(new char[] { '.' }), val);
             LuaDLL.lua_settop(L, oldTop);
         }
@@ -471,7 +469,7 @@ namespace LuaInterface
         internal void setObject(int reference, object field, object val)
         {
             int oldTop = LuaDLL.lua_gettop(L);
-            LuaDLL.lua_getref(L, reference);
+            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             translator.push(L, field);
             translator.push(L, val);
             LuaDLL.lua_settable(L, -3);

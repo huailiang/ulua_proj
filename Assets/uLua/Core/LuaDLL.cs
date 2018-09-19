@@ -157,11 +157,6 @@ namespace LuaInterface
             if (result != 0) return result;
             return LuaDLL.lua_pcall(luaState, 0, -1, 0);
         }
-        /// <summary>DEPRECATED - use luaL_dostring(IntPtr luaState, string chunk) instead!</summary>
-        public static int lua_dostring(IntPtr luaState, string chunk)
-        {
-            return LuaDLL.luaL_dostring(luaState, chunk);
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_createtable(IntPtr luaState, int narr, int nrec);
         public static void lua_newtable(IntPtr luaState)
@@ -198,11 +193,6 @@ namespace LuaInterface
         public static extern void lua_pushvalue(IntPtr luaState, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_copy(IntPtr luaState, int fromidx, int toidx);
-        public static void lua_replace(IntPtr luaState, int index)
-        {
-            lua_copy(luaState, -1, index);
-            lua_pop(luaState, 1);
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_gettop(IntPtr luaState);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -220,17 +210,13 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_ref(IntPtr luaState, int registryIndex);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_rawgeti(IntPtr luaState, int tableIndex, int index);
+        public static extern int lua_rawgeti(IntPtr luaState, int tableIndex, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_rawseti(IntPtr luaState, int tableIndex, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_newuserdata(IntPtr luaState, int size);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_touserdata(IntPtr luaState, int index);
-        public static void lua_getref(IntPtr luaState, int reference)
-        {
-            LuaDLL.lua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, reference);
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void luaL_unref(IntPtr luaState, int registryIndex, int reference);
         public static void lua_unref(IntPtr luaState, int reference)
@@ -262,8 +248,7 @@ namespace LuaInterface
         {
             byte[] buffer = new byte[strlen];
             Marshal.Copy(source, buffer, 0, strlen);
-            string str = Encoding.UTF8.GetString(buffer);
-            return str;
+            return Encoding.UTF8.GetString(buffer);
         }
         public static string lua_tostring(IntPtr luaState, int index)
         {
@@ -272,16 +257,10 @@ namespace LuaInterface
             if (str != IntPtr.Zero)
             {
                 string ss = Marshal.PtrToStringAnsi(str, strlen);
-                if (ss == null)
-                {
-                    return AnsiToUnicode(str, strlen);
-                }
+                if (ss == null) return AnsiToUnicode(str, strlen);
                 return ss;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_atpanic(IntPtr luaState, LuaCSFunction panicf);
@@ -337,10 +316,8 @@ namespace LuaInterface
         public static extern IntPtr luanet_gettag();
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void luaL_where(IntPtr luaState, int level);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_pushcclosure(IntPtr luaState, IntPtr fn, int n);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern string lua_getupvalue(IntPtr L, int funcindex, int n);
         public static int luaL_typerror(IntPtr luaState, int narg, string tname)
@@ -351,37 +328,26 @@ namespace LuaInterface
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_argerror(IntPtr luaState, int narg, string extramsg);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_getfloat2(IntPtr luaState, int reference, int stack, ref float x, ref float y);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_getfloat3(IntPtr luaState, int reference, int stack, ref float x, ref float y, ref float z);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_getfloat4(IntPtr luaState, int reference, int stack, ref float x, ref float y, ref float z, ref float w);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_getfloat6(IntPtr luaState, int reference, int stack, ref float x, ref float y, ref float z, ref float x1, ref float y1, ref float z1);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_pushfloat2(IntPtr luaState, int reference, float x, float y);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_pushfloat3(IntPtr luaState, int reference, float x, float y, float z);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_pushfloat4(IntPtr luaState, int reference, float x, float y, float z, float w);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool tolua_pushudata(IntPtr L, int reference, int index);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool tolua_pushnewudata(IntPtr L, int metaRef, int weakTableRef, int index);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_setindex(IntPtr L);
-
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_setnewindex(IntPtr L);
     }
