@@ -561,12 +561,12 @@ namespace LuaInterface
                 if (fields[i].getter != null)
                 {
                     LuaDLL.lua_pushstdcallcfunction(L, fields[i].getter);
-                    LuaDLL.lua_rawseti(L, -2, 1);
+                    LuaDLL.xlua_rawseti(L, -2, 1);
                 }
                 if (fields[i].setter != null)
                 {
                     LuaDLL.lua_pushstdcallcfunction(L, fields[i].setter);
-                    LuaDLL.lua_rawseti(L, -2, 2);
+                    LuaDLL.xlua_rawseti(L, -2, 2);
                 }
                 LuaDLL.lua_rawset(L, -3);
             }
@@ -1402,7 +1402,7 @@ namespace LuaInterface
 
                 do
                 {
-                    LuaDLL.lua_rawgeti(L, -1, index);
+                    LuaDLL.xlua_rawgeti(L, -1, index);
                     luatype = LuaDLL.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1546,7 +1546,7 @@ namespace LuaInterface
 
                 while (true)
                 {
-                    LuaDLL.lua_rawgeti(L, -1, index);
+                    LuaDLL.xlua_rawgeti(L, -1, index);
                     luatype = LuaDLL.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1594,7 +1594,7 @@ namespace LuaInterface
 
                 while (true)
                 {
-                    LuaDLL.lua_rawgeti(L, -1, index);
+                    LuaDLL.xlua_rawgeti(L, -1, index);
                     luatype = LuaDLL.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1642,7 +1642,7 @@ namespace LuaInterface
 
                 while (true)
                 {
-                    LuaDLL.lua_rawgeti(L, -1, index);
+                    LuaDLL.xlua_rawgeti(L, -1, index);
                     luatype = LuaDLL.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -2034,7 +2034,7 @@ namespace LuaInterface
         public static void Push(IntPtr L, Ray ray)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, luaMgr.packRay);
+            LuaDLL.xlua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, luaMgr.packRay);
             LuaDLL.tolua_pushfloat3(L, luaMgr.packVec3, ray.direction.x, ray.direction.y, ray.direction.z);
             LuaDLL.tolua_pushfloat3(L, luaMgr.packVec3, ray.origin.x, ray.origin.y, ray.origin.z);
             LuaDLL.lua_pcall(L, 2, -1, 0);
@@ -2095,7 +2095,7 @@ namespace LuaInterface
         public static void Push(IntPtr L, Bounds bound)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, luaMgr.packBounds);
+            LuaDLL.xlua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, luaMgr.packBounds);
 
             Push(L, bound.center);
             Push(L, bound.size);

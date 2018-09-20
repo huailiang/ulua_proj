@@ -484,7 +484,7 @@ namespace LuaInterface
             }
             else
             {
-                LuaDLL.lua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
+                LuaDLL.xlua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, reference);
             }
         }
 
@@ -493,7 +493,7 @@ namespace LuaInterface
          */
         private void pushNewObject(IntPtr luaState, object o, int index, string metatable)
         {
-            LuaDLL.lua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, weakTableRef);
+            LuaDLL.xlua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, weakTableRef);
             LuaDLL.luanet_newudata(luaState, index);
 
             if (metatable == "luaNet_metatable")
@@ -535,7 +535,7 @@ namespace LuaInterface
 
             LuaDLL.lua_setmetatable(luaState, -2);
             LuaDLL.lua_pushvalue(luaState, -1);
-            LuaDLL.lua_rawseti(luaState, -3, index);
+            LuaDLL.xlua_rawseti(luaState, -3, index);
             LuaDLL.lua_remove(luaState, -2);
         }
 

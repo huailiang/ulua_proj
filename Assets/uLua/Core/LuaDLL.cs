@@ -210,9 +210,9 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_ref(IntPtr luaState, int registryIndex);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lua_rawgeti(IntPtr luaState, int tableIndex, int index);
+        public static extern void xlua_rawgeti(IntPtr luaState, int tableIndex, long index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_rawseti(IntPtr luaState, int tableIndex, int index);
+        public static extern void xlua_rawseti(IntPtr luaState, int tableIndex, long index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr lua_newuserdata(IntPtr luaState, int size);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

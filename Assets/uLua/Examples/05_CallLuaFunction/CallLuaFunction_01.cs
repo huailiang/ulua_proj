@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
 public class CallLuaFunction_01 : MonoBehaviour
 {
@@ -11,19 +10,13 @@ public class CallLuaFunction_01 : MonoBehaviour
                 return 42
             end
         ";
-    
+
     void Start()
     {
         LuaState l = new LuaState();
-        
         l.DoString(script);
-        
         LuaFunction f = l.GetFunction("luaFunc");
-        
         object[] r = f.Call("I called a lua function!");
-
-        // Lua functions can have variable returns, so we again store those as a C# object array, and in this case print the first one
         print(r[0]);
     }
-
 }
