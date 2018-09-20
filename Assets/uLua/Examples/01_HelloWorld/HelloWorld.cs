@@ -36,9 +36,9 @@ public class HelloWorld : MonoBehaviour
         string stype = string.Empty;
         for (int i = 1; i <= len; i++)
         {
-            LuaAPI.xlua_rawgeti(l.L, -1, i);
+            LuaAPI.ulua_rawgeti(l.L, -1, i);
             stype += LuaAPI.lua_type(l.L, -1) + " ";
-            LuaAPI.xlua_rawseti(l.L, -2, i);
+            LuaAPI.ulua_rawseti(l.L, -2, i);
         }
         UnityEngine.Debug.Log("===> searchers " + tag + " length: " + len + " type:" + stype);
         LuaAPI.lua_pop(l.L, 1);

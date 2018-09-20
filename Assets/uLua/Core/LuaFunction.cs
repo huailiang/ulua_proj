@@ -154,7 +154,7 @@ namespace LuaInterface
         {
             if (_Reference != 0)
             {
-                LuaAPI.xlua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, _Reference);
+                LuaAPI.ulua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, _Reference);
             }
             else
             {
@@ -166,7 +166,7 @@ namespace LuaInterface
         {
             if (_Reference != 0)
             {
-                LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, _Reference);
+                LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, _Reference);
             }
             else
             {

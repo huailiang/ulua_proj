@@ -536,8 +536,8 @@ namespace LuaInterface
                 LuaAPI.lua_setmetatable(L, -2);
             }
 
-            LuaAPI.tolua_setindex(L);
-            LuaAPI.tolua_setnewindex(L);
+            LuaAPI.ulua_setindex(L);
+            LuaAPI.ulua_setnewindex(L);
             LuaAPI.lua_pushstring(L, "__call");
             LuaAPI.lua_pushstring(L, "ToLua_TableCall");
             LuaAPI.lua_rawget(L, LuaAPI.LUA_REGISTRYINDEX);
@@ -561,12 +561,12 @@ namespace LuaInterface
                 if (fields[i].getter != null)
                 {
                     LuaAPI.lua_pushstdcallcfunction(L, fields[i].getter);
-                    LuaAPI.xlua_rawseti(L, -2, 1);
+                    LuaAPI.ulua_rawseti(L, -2, 1);
                 }
                 if (fields[i].setter != null)
                 {
                     LuaAPI.lua_pushstdcallcfunction(L, fields[i].setter);
-                    LuaAPI.xlua_rawseti(L, -2, 2);
+                    LuaAPI.ulua_rawseti(L, -2, 2);
                 }
                 LuaAPI.lua_rawset(L, -3);
             }
@@ -985,11 +985,11 @@ namespace LuaInterface
             bool found = translator.objectsBackMap.TryGetValue(o, out index);
             if (found)
             {
-                if (LuaAPI.tolua_pushudata(L, weakTableRef, index)) return;
+                if (LuaAPI.ulua_pushudata(L, weakTableRef, index)) return;
                 translator.collectObject(index);
             }
             index = translator.addObject(o, false);
-            LuaAPI.tolua_pushnewudata(L, metaRef, weakTableRef, index);
+            LuaAPI.ulua_pushnewudata(L, metaRef, weakTableRef, index);
         }
 
         public static void Push(IntPtr L, Type o)
@@ -1402,7 +1402,7 @@ namespace LuaInterface
 
                 do
                 {
-                    LuaAPI.xlua_rawgeti(L, -1, index);
+                    LuaAPI.ulua_rawgeti(L, -1, index);
                     luatype = LuaAPI.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1546,7 +1546,7 @@ namespace LuaInterface
 
                 while (true)
                 {
-                    LuaAPI.xlua_rawgeti(L, -1, index);
+                    LuaAPI.ulua_rawgeti(L, -1, index);
                     luatype = LuaAPI.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1594,7 +1594,7 @@ namespace LuaInterface
 
                 while (true)
                 {
-                    LuaAPI.xlua_rawgeti(L, -1, index);
+                    LuaAPI.ulua_rawgeti(L, -1, index);
                     luatype = LuaAPI.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1642,7 +1642,7 @@ namespace LuaInterface
 
                 while (true)
                 {
-                    LuaAPI.xlua_rawgeti(L, -1, index);
+                    LuaAPI.ulua_rawgeti(L, -1, index);
                     luatype = LuaAPI.lua_type(L, -1);
 
                     if (luatype == LuaTypes.LUA_TNIL)
@@ -1925,14 +1925,14 @@ namespace LuaInterface
 
             if (found)
             {
-                if (LuaAPI.tolua_pushudata(L, weakTableRef, index))
+                if (LuaAPI.ulua_pushudata(L, weakTableRef, index))
                 {
                     return;
                 }
                 translator.collectObject(index);
             }
             index = translator.addObject(obj, false);
-            LuaAPI.tolua_pushnewudata(L, mgr.enumMetaRef, weakTableRef, index);
+            LuaAPI.ulua_pushnewudata(L, mgr.enumMetaRef, weakTableRef, index);
         }
 
         public static void Push(IntPtr L, LuaStringBuffer lsb)
@@ -1964,27 +1964,27 @@ namespace LuaInterface
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float x = 0, y = 0, z = 0;
-            LuaAPI.tolua_getfloat3(L, luaMgr.unpackVec3, stackPos, ref x, ref y, ref z);
+            LuaAPI.ulua_getfloat3(L, luaMgr.unpackVec3, stackPos, ref x, ref y, ref z);
             return new Vector3(x, y, z);
         }
 
         public static void Push(IntPtr L, Vector3 v3)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.tolua_pushfloat3(L, luaMgr.packVec3, v3.x, v3.y, v3.z);
+            LuaAPI.ulua_pushfloat3(L, luaMgr.packVec3, v3.x, v3.y, v3.z);
         }
 
         public static void Push(IntPtr L, Quaternion q)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.tolua_pushfloat4(L, luaMgr.packQuat, q.x, q.y, q.z, q.w);
+            LuaAPI.ulua_pushfloat4(L, luaMgr.packQuat, q.x, q.y, q.z, q.w);
         }
 
         public static Quaternion GetQuaternion(IntPtr L, int stackPos)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float x = 0, y = 0, z = 0, w = 1;
-            LuaAPI.tolua_getfloat4(L, luaMgr.unpackQuat, stackPos, ref x, ref y, ref z, ref w);
+            LuaAPI.ulua_getfloat4(L, luaMgr.unpackQuat, stackPos, ref x, ref y, ref z, ref w);
             return new Quaternion(x, y, z, w);
         }
 
@@ -1992,28 +1992,28 @@ namespace LuaInterface
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float x = 0, y = 0;
-            LuaAPI.tolua_getfloat2(L, luaMgr.unpackVec2, stackPos, ref x, ref y);
+            LuaAPI.ulua_getfloat2(L, luaMgr.unpackVec2, stackPos, ref x, ref y);
             return new Vector2(x, y);
         }
 
         public static void Push(IntPtr L, Vector2 v2)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.tolua_pushfloat2(L, luaMgr.packVec2, v2.x, v2.y);
+            LuaAPI.ulua_pushfloat2(L, luaMgr.packVec2, v2.x, v2.y);
         }
 
         public static Vector4 GetVector4(IntPtr L, int stackPos)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float x = 0, y = 0, z = 0, w = 0;
-            LuaAPI.tolua_getfloat4(L, luaMgr.unpackVec4, stackPos, ref x, ref y, ref z, ref w);
+            LuaAPI.ulua_getfloat4(L, luaMgr.unpackVec4, stackPos, ref x, ref y, ref z, ref w);
             return new Vector4(x, y, z, w);
         }
 
         public static void Push(IntPtr L, Vector4 v4)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.tolua_pushfloat4(L, luaMgr.packVec4, v4.x, v4.y, v4.z, v4.w);
+            LuaAPI.ulua_pushfloat4(L, luaMgr.packVec4, v4.x, v4.y, v4.z, v4.w);
         }
 
         public static void Push(IntPtr L, RaycastHit hit)
@@ -2034,9 +2034,9 @@ namespace LuaInterface
         public static void Push(IntPtr L, Ray ray)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, luaMgr.packRay);
-            LuaAPI.tolua_pushfloat3(L, luaMgr.packVec3, ray.direction.x, ray.direction.y, ray.direction.z);
-            LuaAPI.tolua_pushfloat3(L, luaMgr.packVec3, ray.origin.x, ray.origin.y, ray.origin.z);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, luaMgr.packRay);
+            LuaAPI.ulua_pushfloat3(L, luaMgr.packVec3, ray.direction.x, ray.direction.y, ray.direction.z);
+            LuaAPI.ulua_pushfloat3(L, luaMgr.packVec3, ray.origin.x, ray.origin.y, ray.origin.z);
             LuaAPI.lua_pcall(L, 2, -1, 0);
         }
 
@@ -2045,7 +2045,7 @@ namespace LuaInterface
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float x = 0, y = 0, z = 0;
             float x1 = 0, y1 = 0, z1 = 0;
-            LuaAPI.tolua_getfloat6(L, luaMgr.unpackRay, stackPos, ref x, ref y, ref z, ref x1, ref y1, ref z1);
+            LuaAPI.ulua_getfloat6(L, luaMgr.unpackRay, stackPos, ref x, ref y, ref z, ref x1, ref y1, ref z1);
             Vector3 origin = new Vector3(x, y, z);
             Vector3 dir = new Vector3(x1, y1, z1);
             return new Ray(origin, dir);
@@ -2056,7 +2056,7 @@ namespace LuaInterface
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float x = 0, y = 0, z = 0;
             float x1 = 0, y1 = 0, z1 = 0;
-            LuaAPI.tolua_getfloat6(L, luaMgr.unpackBounds, stackPos, ref x, ref y, ref z, ref x1, ref y1, ref z1);
+            LuaAPI.ulua_getfloat6(L, luaMgr.unpackBounds, stackPos, ref x, ref y, ref z, ref x1, ref y1, ref z1);
             Vector3 center = new Vector3(x, y, z);
             Vector3 size = new Vector3(x1, y1, z1);
             return new Bounds(center, size);
@@ -2066,14 +2066,14 @@ namespace LuaInterface
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             float r = 0, g = 0, b = 0, a = 0;
-            LuaAPI.tolua_getfloat4(L, luaMgr.unpackColor, stackPos, ref r, ref g, ref b, ref a);
+            LuaAPI.ulua_getfloat4(L, luaMgr.unpackColor, stackPos, ref r, ref g, ref b, ref a);
             return new Color(r, g, b, a);
         }
 
         public static void Push(IntPtr L, Color clr)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.tolua_pushfloat4(L, luaMgr.packColor, clr.r, clr.g, clr.b, clr.a);
+            LuaAPI.ulua_pushfloat4(L, luaMgr.packColor, clr.r, clr.g, clr.b, clr.a);
         }
 
         public static void Push(IntPtr L, Touch touch)
@@ -2082,9 +2082,9 @@ namespace LuaInterface
             luaMgr.packTouch.push(L);
 
             LuaAPI.lua_pushinteger(L, touch.fingerId);
-            LuaAPI.tolua_pushfloat2(L, luaMgr.packVec2, touch.position.x, touch.position.y);
-            LuaAPI.tolua_pushfloat2(L, luaMgr.packVec2, touch.rawPosition.x, touch.rawPosition.y);
-            LuaAPI.tolua_pushfloat2(L, luaMgr.packVec2, touch.deltaPosition.x, touch.deltaPosition.y);
+            LuaAPI.ulua_pushfloat2(L, luaMgr.packVec2, touch.position.x, touch.position.y);
+            LuaAPI.ulua_pushfloat2(L, luaMgr.packVec2, touch.rawPosition.x, touch.rawPosition.y);
+            LuaAPI.ulua_pushfloat2(L, luaMgr.packVec2, touch.deltaPosition.x, touch.deltaPosition.y);
             LuaAPI.lua_pushnumber(L, touch.deltaTime);
             LuaAPI.lua_pushinteger(L, touch.tapCount);
             LuaAPI.lua_pushinteger(L, (int)touch.phase);
@@ -2095,7 +2095,7 @@ namespace LuaInterface
         public static void Push(IntPtr L, Bounds bound)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, luaMgr.packBounds);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, luaMgr.packBounds);
 
             Push(L, bound.center);
             Push(L, bound.size);

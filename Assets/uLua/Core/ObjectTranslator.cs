@@ -450,7 +450,7 @@ namespace LuaInterface
             bool beValueType = o.GetType().IsValueType;
             if (!beValueType && objectsBackMap.TryGetValue(o, out index))
             {
-                if (LuaAPI.tolua_pushudata(luaState, weakTableRef, index))
+                if (LuaAPI.ulua_pushudata(luaState, weakTableRef, index))
                 {
                     return;
                 }
@@ -484,7 +484,7 @@ namespace LuaInterface
             }
             else
             {
-                LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
+                LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
             }
         }
 
@@ -493,7 +493,7 @@ namespace LuaInterface
          */
         private void pushNewObject(IntPtr luaState, object o, int index, string metatable)
         {
-            LuaAPI.xlua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, weakTableRef);
+            LuaAPI.ulua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, weakTableRef);
             LuaAPI.luanet_newudata(luaState, index);
 
             if (metatable == "luaNet_metatable")
@@ -535,7 +535,7 @@ namespace LuaInterface
 
             LuaAPI.lua_setmetatable(luaState, -2);
             LuaAPI.lua_pushvalue(luaState, -1);
-            LuaAPI.xlua_rawseti(luaState, -3, index);
+            LuaAPI.ulua_rawseti(luaState, -3, index);
             LuaAPI.lua_remove(luaState, -2);
         }
 

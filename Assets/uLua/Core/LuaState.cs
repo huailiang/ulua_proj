@@ -68,11 +68,11 @@ namespace LuaInterface
             int index = 2;
             for (int i = len + 1; i > index; i--)
             {
-                LuaAPI.xlua_rawgeti(L, -1, i - 1);
-                LuaAPI.xlua_rawseti(L, -2, i);
+                LuaAPI.ulua_rawgeti(L, -1, i - 1);
+                LuaAPI.ulua_rawseti(L, -2, i);
             }
             LuaAPI.lua_pushstdcallcfunction(L, loaderFunction);
-            LuaAPI.xlua_rawseti(L, -2, index);
+            LuaAPI.ulua_rawseti(L, -2, index);
             LuaAPI.lua_settop(L, 0); //clear stack
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
@@ -333,7 +333,7 @@ namespace LuaInterface
         internal object rawGetObject(int reference, string field)
         {
             int oldTop = LuaAPI.lua_gettop(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
             LuaAPI.lua_pushstring(L, field);
             LuaAPI.lua_rawget(L, -2);
             object obj = translator.getObject(L, -1);
@@ -346,7 +346,7 @@ namespace LuaInterface
         internal object getObject(int reference, string field)
         {
             int oldTop = LuaAPI.lua_gettop(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
             object returnValue = getObject(field.Split(new char[] { '.' }));
             LuaAPI.lua_settop(L, oldTop);
             return returnValue;
@@ -357,7 +357,7 @@ namespace LuaInterface
         internal object getObject(int reference, object field)
         {
             int oldTop = LuaAPI.lua_gettop(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
             translator.push(L, field);
             LuaAPI.lua_gettable(L, -2);
             object returnValue = translator.getObject(L, -1);
@@ -371,7 +371,7 @@ namespace LuaInterface
         internal void setObject(int reference, string field, object val)
         {
             int oldTop = LuaAPI.lua_gettop(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
             setObject(field.Split(new char[] { '.' }), val);
             LuaAPI.lua_settop(L, oldTop);
         }
@@ -382,7 +382,7 @@ namespace LuaInterface
         internal void setObject(int reference, object field, object val)
         {
             int oldTop = LuaAPI.lua_gettop(L);
-            LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
+            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
             translator.push(L, field);
             translator.push(L, val);
             LuaAPI.lua_settable(L, -3);

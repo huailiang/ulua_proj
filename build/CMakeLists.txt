@@ -46,10 +46,8 @@ set ( LUA_LIB ${LUA_SRC_PATH}/lauxlib.c ${LUA_SRC_PATH}/lbaselib.c ${LUA_SRC_PAT
   ${LUA_SRC_PATH}/lutf8lib.c ${LUA_SRC_PATH}/loadlib.c )
 
 set ( XLUA_CORE
-    i64lib.c
     perflib.c
-    xlua.c
-    lua_wrap.c
+    ulua.c
 )
 
 macro(source_group_by_dir proj_dir source_files)
