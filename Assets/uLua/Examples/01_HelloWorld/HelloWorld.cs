@@ -8,10 +8,11 @@ public class HelloWorld : MonoBehaviour
     {
         if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
         {
+            Debug.Log("Helooclick");
             if (l == null) l = new LuaState();
             string str =
                 @"
-                  require('hotfix_Scripts')
+                 -- require('hotfix_Scripts')
                   print('hello world!')";
             l.DoString(str);
         }

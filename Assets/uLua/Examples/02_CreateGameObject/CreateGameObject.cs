@@ -20,7 +20,7 @@ public class CreateGameObject : MonoBehaviour
             ParticleSystem = UnityEngine.ParticleSystem
             local newGameObj = GameObject('NewObj2')
             newGameObj:AddComponent(ParticleSystem.GetClassType())
-            newGameObj.transform.position = Vector3(4,0,1);
+            newGameObj.transform.position = Vector3(14,0,1);
         ";
 
     private void OnGUI()
