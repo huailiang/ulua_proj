@@ -65,11 +65,14 @@ namespace LuaInterface
             LuaDLL.lua_getfield(L, -1, "searchers");
             LuaDLL.lua_remove(L, -2); //remv table package
             int len = LuaDLL.lua_rawlen(L, -1);
-            IntPtr fn = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(loaderFunction);
-            IntPtr fn2 = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(printFunction);
-            UnityEngine.Debug.Log("fn: " + fn.ToString() + " fn2: " + fn2.ToString());
+            int index = 2;
+            for (int i = len + 1; i > index; i--)
+            {
+                LuaDLL.xlua_rawgeti(L, -1, i - 1);
+                LuaDLL.xlua_rawseti(L, -2, i);
+            }
             LuaDLL.lua_pushstdcallcfunction(L, loaderFunction);
-            LuaDLL.xlua_rawseti(L, -2, len + 1);
+            LuaDLL.xlua_rawseti(L, -2, index);
             LuaDLL.lua_settop(L, 0); //clear stack
             tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
