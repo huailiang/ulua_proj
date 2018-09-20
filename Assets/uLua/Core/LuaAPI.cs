@@ -128,20 +128,12 @@ namespace LuaInterface
         public static extern int luaL_callmeta(IntPtr luaState, int stackPos, string name);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr luaL_newstate();
-        public static IntPtr lua_open()
-        {
-            return luaL_newstate();
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_close(IntPtr luaState);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void luaL_openlibs(IntPtr luaState);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_rawlen(IntPtr luaState, int stackPos);
-        public static int lua_strlen(IntPtr luaState, int stackPos)
-        {
-            return lua_rawlen(luaState, stackPos);
-        }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_loadstring(IntPtr luaState, string chunk);
         public static int luaL_dostring(IntPtr luaState, string chunk)

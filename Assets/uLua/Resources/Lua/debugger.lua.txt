@@ -10,7 +10,7 @@ ZBS = "D:/ZeroBraneStudio/";
 LuaPath = "E:/workspace/ulua_package/Assets/uLua/Lua"
 package.path = package.path..";./?.lua;"..ZBS.."lualibs/?/?.lua;"..ZBS.."lualibs/?.lua;"..LuaPath.."?.lua;"
 
-require("mobdebug").start()
+--require("mobdebug").start()
 
 debugger = {};
 local this = debugger;

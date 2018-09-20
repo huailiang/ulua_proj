@@ -1676,9 +1676,7 @@ namespace LuaInterface
             {
                 string cls = LuaAPI.lua_tostring(L, -1);
                 LuaAPI.lua_settop(L, oldTop);
-
                 stackPos = stackPos > 0 ? stackPos : stackPos + oldTop + 1;
-
                 if (cls == "Vector3")
                 {
                     o = GetVector3(L, stackPos);
@@ -1716,11 +1714,9 @@ namespace LuaInterface
             return o;
         }
 
-        //读取object类型，object为万用类型, 能读取所有从lua传递的参数
         public static object GetVarObject(IntPtr L, int stackPos)
         {
             LuaTypes type = LuaAPI.lua_type(L, stackPos);
-
             switch (type)
             {
                 case LuaTypes.LUA_TNUMBER:
@@ -1736,10 +1732,7 @@ namespace LuaInterface
                             GetTranslator(L).objects.TryGetValue(udata, out obj);
                             return obj;
                         }
-                        else
-                        {
-                            return null;
-                        }
+                        return null;
                     }
                 case LuaTypes.LUA_TBOOLEAN:
                     return LuaAPI.lua_toboolean(L, stackPos);
@@ -1752,7 +1745,6 @@ namespace LuaInterface
                     return null;
             }
         }
-
 
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int IndexArray(IntPtr L)
@@ -1768,7 +1760,6 @@ namespace LuaInterface
             if (luaType == LuaTypes.LUA_TNUMBER)
             {
                 int index = (int)LuaAPI.lua_tonumber(L, 2);
-
                 if (index >= obj.Length)
                 {
                     LuaAPI.luaL_error(L, "array index out of bounds: " + index + " " + obj.Length);
@@ -1785,7 +1776,6 @@ namespace LuaInterface
             else if (luaType == LuaTypes.LUA_TSTRING)
             {
                 string field = GetLuaString(L, 2);
-
                 if (field == "Length")
                 {
                     Push(L, obj.Length);
