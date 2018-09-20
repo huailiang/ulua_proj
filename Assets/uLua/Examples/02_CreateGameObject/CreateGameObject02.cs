@@ -6,10 +6,13 @@ public class CreateGameObject02 : MonoBehaviour
 
     private string script = @"
             luanet.load_assembly('UnityEngine')
-            GameObject = UnityEngine.GameObject
+            --GameObject = UnityEngine.GameObject
             ParticleSystem = UnityEngine.ParticleSystem
+            print(ParticleSystem)
+            print(GameObject)
             local newGameObj = GameObject('NewObj')
-            newGameObj:AddComponent(ParticleSystem.GetClassType())
+           -- print(newGameObj)
+           newGameObj:AddComponent(ParticleSystem.GetClassType())
         ";
 
 
@@ -18,6 +21,7 @@ public class CreateGameObject02 : MonoBehaviour
         LuaScriptMgr lua = new LuaScriptMgr();
         lua.Start();
         lua.DoString(script);
+        lua.Destroy();
     }
 
 }

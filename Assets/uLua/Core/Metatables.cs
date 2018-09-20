@@ -1,12 +1,12 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
+
 namespace LuaInterface
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
-
     public class MetaFunctions
     {
 
@@ -337,12 +337,6 @@ namespace LuaInterface
                         ThrowError(luaState, e);
                         LuaAPI.lua_pushnil(luaState);
                     }
-                }
-                else if (member.MemberType == MemberTypes.Event)
-                {
-                    EventInfo eventInfo = (EventInfo)member;
-                    if (cachedMember == null) setMemberCache(memberCache, objType, methodName, member);
-                    translator.push(luaState, new RegisterEventHandler(translator.pendingEvents, obj, eventInfo));
                 }
                 else if (!implicitStatic)
                 {

@@ -7,6 +7,7 @@ public class CreateGameObject01 : MonoBehaviour
 
     private string script = @"
             luanet.load_assembly('UnityEngine')
+           
             GameObject = luanet.import_type('UnityEngine.GameObject')      
 	        ParticleSystem = luanet.import_type('UnityEngine.ParticleSystem')         
             local newGameObj = GameObject('NewObj')

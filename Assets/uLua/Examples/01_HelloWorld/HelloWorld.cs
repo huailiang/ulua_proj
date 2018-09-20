@@ -13,7 +13,6 @@ public class HelloWorld : MonoBehaviour
                 @"
                   require('hotfix_Scripts')
                   print('hello world!')";
-            PrintSearchers("lua_pushstdcallcfunction");
             l.DoString(str);
         }
         if (GUI.Button(new Rect(20, 120, 200, 80), "Close"))
@@ -26,21 +25,4 @@ public class HelloWorld : MonoBehaviour
         }
     }
 
-
-    internal void PrintSearchers(string tag)
-    {
-        LuaAPI.lua_getglobal(l.L, "package");
-        LuaAPI.lua_getfield(l.L, -1, "searchers");
-        LuaAPI.lua_remove(l.L, -2); //remv table package
-        int len = LuaAPI.lua_rawlen(l.L, -1);
-        string stype = string.Empty;
-        for (int i = 1; i <= len; i++)
-        {
-            LuaAPI.ulua_rawgeti(l.L, -1, i);
-            stype += LuaAPI.lua_type(l.L, -1) + " ";
-            LuaAPI.ulua_rawseti(l.L, -2, i);
-        }
-        UnityEngine.Debug.Log("===> searchers " + tag + " length: " + len + " type:" + stype);
-        LuaAPI.lua_pop(l.L, 1);
-    }
 }

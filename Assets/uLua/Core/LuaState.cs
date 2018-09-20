@@ -1,9 +1,9 @@
+using System;
+using System.Collections.Specialized;
+using System.Text;
+
 namespace LuaInterface
 {
-    using System;
-    using System.Collections.Specialized;
-    using System.Text;
-
     public class LuaState : IDisposable
     {
         public IntPtr L;
@@ -17,6 +17,8 @@ namespace LuaInterface
         internal LuaCSFunction loaderFunction;
         internal LuaCSFunction dofileFunction;
         internal LuaCSFunction import_wrapFunction;
+
+        public ObjectTranslator Translator { get { return translator; } }
 
         public LuaState()
         {
@@ -86,11 +88,6 @@ namespace LuaInterface
             }
         }
 
-        public ObjectTranslator GetTranslator()
-        {
-            return translator;
-        }
-
         internal void ThrowExceptionFromError(int oldTop)
         {
             string err = LuaAPI.lua_tostring(L, -1);
@@ -144,7 +141,6 @@ namespace LuaInterface
                     env.push(L);
                     LuaAPI.lua_setfenv(L, -2);
                 }
-
                 if (LuaAPI.lua_pcall(L, 0, -1, 0) == 0)
                     return translator.popValues(L, oldTop);
                 else
@@ -152,8 +148,7 @@ namespace LuaInterface
             }
             else
                 ThrowExceptionFromError(oldTop);
-
-            return null;      // Never reached - keeps compiler happy
+            return null;
         }
 
         public object[] DoFile(string fileName)
@@ -246,10 +241,6 @@ namespace LuaInterface
         }
 
 
-        /*
-         * Navigates a table in the top of the stack, returning
-         * the value of the specified field
-         */
         internal object getObject(string[] remainingPath)
         {
             object returnValue = null;
@@ -264,9 +255,6 @@ namespace LuaInterface
         }
 
 
-        /*
-         * Gets a function global variable
-         */
         public LuaFunction GetFunction(string fullPath)
         {
             object obj = this[fullPath];
@@ -287,11 +275,9 @@ namespace LuaInterface
             //{
             //    LuaAPI.lua_gettable(L, -2);               
             //    LuaTypes type = LuaAPI.lua_type(L, -1);
-
             //    if (type == LuaTypes.LUA_TUSERDATA)
             //    {
             //        int udata = LuaAPI.luanet_tonetobject(L, -1);
-
             //        if (udata != -1)
             //        {
             //            translator.collectObject(udata);
@@ -326,10 +312,7 @@ namespace LuaInterface
                 LuaAPI.lua_unref(L, reference);
             }
         }
-        /*
-         * Gets a field of the table corresponding to the provided reference
-         * using rawget (do not use metatables)
-         */
+
         internal object rawGetObject(int reference, string field)
         {
             int oldTop = LuaAPI.lua_gettop(L);
@@ -340,9 +323,7 @@ namespace LuaInterface
             LuaAPI.lua_settop(L, oldTop);
             return obj;
         }
-        /*
-         * Gets a field of the table or userdata corresponding to the provided reference
-         */
+
         internal object getObject(int reference, string field)
         {
             int oldTop = LuaAPI.lua_gettop(L);
@@ -351,9 +332,7 @@ namespace LuaInterface
             LuaAPI.lua_settop(L, oldTop);
             return returnValue;
         }
-        /*
-         * Gets a numeric field of the table or userdata corresponding the the provided reference
-         */
+
         internal object getObject(int reference, object field)
         {
             int oldTop = LuaAPI.lua_gettop(L);
@@ -364,10 +343,7 @@ namespace LuaInterface
             LuaAPI.lua_settop(L, oldTop);
             return returnValue;
         }
-        /*
-         * Sets a field of the table or userdata corresponding the the provided reference
-         * to the provided value
-         */
+
         internal void setObject(int reference, string field, object val)
         {
             int oldTop = LuaAPI.lua_gettop(L);
@@ -375,23 +351,8 @@ namespace LuaInterface
             setObject(field.Split(new char[] { '.' }), val);
             LuaAPI.lua_settop(L, oldTop);
         }
-        /*
-         * Sets a numeric field of the table or userdata corresponding the the provided reference
-         * to the provided value
-         */
-        internal void setObject(int reference, object field, object val)
-        {
-            int oldTop = LuaAPI.lua_gettop(L);
-            LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, reference);
-            translator.push(L, field);
-            translator.push(L, val);
-            LuaAPI.lua_settable(L, -3);
-            LuaAPI.lua_settop(L, oldTop);
-        }
 
-        /*
-         * Compares the two values referenced by ref1 and ref2 for equality
-         */
+
         internal bool compareRef(int ref1, int ref2)
         {
             return ref1 == ref2;
@@ -402,30 +363,14 @@ namespace LuaInterface
             translator.pushFunction(L, function);
         }
 
-        #region IDisposable Members
-
         public void Dispose()
         {
-            Dispose(true);
+            translator = null;
             L = IntPtr.Zero;
             GC.SuppressFinalize(this);
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }
-
-        public virtual void Dispose(bool dispose)
-        {
-            if (dispose)
-            {
-                if (translator != null)
-                {
-                    translator.pendingEvents.Dispose();
-                    translator = null;
-                }
-            }
-        }
-
-        #endregion
     }
 }

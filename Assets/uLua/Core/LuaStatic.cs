@@ -1,8 +1,8 @@
+using System;
+using UnityEngine;
+
 namespace LuaInterface
 {
-    using System;
-    using UnityEngine;
-
     public delegate byte[] ReadLuaFile(string name);
 
     public static class LuaStatic
@@ -41,12 +41,10 @@ namespace LuaInterface
             LuaAPI.lua_pcall(L, 2, 1, 0);
             return 1;
         }
-
-
+        
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int print(IntPtr L)
         {
-            // For each argument we'll 'tostring' it
             int n = LuaAPI.lua_gettop(L);
             string s = String.Empty;
             LuaAPI.lua_getglobal(L, "tostring");
@@ -57,24 +55,17 @@ namespace LuaInterface
                 LuaAPI.lua_pushvalue(L, i);   /* value to print */
                 LuaAPI.lua_pcall(L, 1, 1, 0);
 
-                if (i > 1)
-                {
-                    s += "\t";
-                }
+                if (i > 1) s += "\t";
                 s += LuaAPI.lua_tostring(L, -1);
-
                 LuaAPI.lua_pop(L, 1);  /* pop result */
-
             }
             Debug.Log("LUA: " + s);
-
             return 0;
         }
 
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int loader(IntPtr L)
         {
-            // Get script to load
             string fileName = string.Empty;
             fileName = LuaAPI.lua_tostring(L, 1);
 
@@ -122,19 +113,15 @@ namespace LuaInterface
             fileName = fileName.Replace('.', '/') + ".lua";
 
             int n = LuaAPI.lua_gettop(L);
-
             byte[] text = Load(fileName);
-
             if (text == null)
             {
                 return LuaAPI.lua_gettop(L) - n;
             }
-
             if (LuaAPI.luaL_loadbuffer(L, text, text.Length, fileName) == 0)
             {
                 LuaAPI.lua_pcall(L, 0, -1, 0);
             }
-
             return LuaAPI.lua_gettop(L) - n;
         }
 
@@ -157,5 +144,4 @@ namespace LuaInterface
             return 0;
         }
     }
-        
 }

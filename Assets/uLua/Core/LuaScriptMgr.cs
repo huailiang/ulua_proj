@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
+
 namespace LuaInterface
 {
     public class LuaScriptMgr
@@ -37,7 +38,53 @@ namespace LuaInterface
         int delegateMetaRef = 0;
         int iterMetaRef = 0;
         int arrayMetaRef = 0;
-        
+
+        string luaTableCall =
+        @"
+        local rawget = rawget
+        local getmetatable = getmetatable     
+
+        local function call(obj, ...)
+            local meta = getmetatable(obj)
+            local fun = rawget(meta, 'New')
+            
+            if fun ~= nil then
+                return fun(...)
+            else
+                error('unknow function __call',2)
+            end
+        end
+
+        return call
+    ";
+
+        string luaEnumIndex =
+        @"
+        local rawget = rawget                
+        local getmetatable = getmetatable         
+
+        local function indexEnum(obj,name)
+            local v = rawget(obj, name)
+            
+            if v ~= nil then
+                return v
+            end
+
+            local meta = getmetatable(obj)  
+            local func = rawget(meta, name)            
+            
+            if func ~= nil then
+                v = func()
+                rawset(obj, name, v)
+                return v
+            else
+                error('field '..name..' does not exist', 2)
+            end
+        end
+
+        return indexEnum
+    ";
+
         static ObjectTranslator _translator = null;
 
         static HashSet<Type> checkBaseType = new HashSet<Type>();
@@ -52,9 +99,18 @@ namespace LuaInterface
             Instance = this;
             LuaStatic.Load = Loader;
             lua = new LuaState();
-            _translator = lua.GetTranslator();
+            _translator = lua.Translator;
             fileList = new HashSet<string>();
             dict = new Dictionary<string, LuaBase>();
+
+            LuaAPI.lua_pushstring(lua.L, "Lua_TableCall");
+            LuaAPI.luaL_dostring(lua.L, luaTableCall);
+            LuaAPI.lua_rawset(lua.L, LuaAPI.LUA_REGISTRYINDEX);
+
+            LuaAPI.lua_pushstring(lua.L, "Lua_EnumIndex");
+            LuaAPI.luaL_dostring(lua.L, luaEnumIndex);
+            LuaAPI.lua_rawset(lua.L, LuaAPI.LUA_REGISTRYINDEX);
+
             Bind();
         }
 
@@ -186,7 +242,7 @@ namespace LuaInterface
             lua.Close();
             lua.Dispose();
             lua = null;
-            
+
             LuaBinder.wrapList.Clear();
             Debugger.Log("Lua module destroy");
         }
@@ -429,7 +485,7 @@ namespace LuaInterface
             }
             else
             {
-                
+
                 LuaAPI.lua_getglobal(L, path[0]);
                 LuaTypes type = LuaAPI.lua_type(L, -1);
                 if (type == LuaTypes.LUA_TNIL)
@@ -460,7 +516,7 @@ namespace LuaInterface
                 LuaAPI.luaL_newmetatable(L, t.AssemblyQualifiedName);
             }
 
-            LuaAPI.lua_pushstring(L, "ToLua_EnumIndex");
+            LuaAPI.lua_pushstring(L, "Lua_EnumIndex");
             LuaAPI.lua_rawget(L, LuaAPI.LUA_REGISTRYINDEX);
             LuaAPI.lua_setfield(L, -2, "__index");
 
@@ -508,7 +564,6 @@ namespace LuaInterface
             return 0;
         }
 
-
         public static void RegisterLib(IntPtr L, string libName, Type t, LuaMethod[] regs, LuaField[] fields, Type baseType)
         {
             CreateTable(L, libName);
@@ -537,7 +592,7 @@ namespace LuaInterface
             LuaAPI.ulua_setindex(L);
             LuaAPI.ulua_setnewindex(L);
             LuaAPI.lua_pushstring(L, "__call");
-            LuaAPI.lua_pushstring(L, "ToLua_TableCall");
+            LuaAPI.lua_pushstring(L, "Lua_TableCall");
             LuaAPI.lua_rawget(L, LuaAPI.LUA_REGISTRYINDEX);
             LuaAPI.lua_rawset(L, -3);
             LuaAPI.lua_pushstring(L, "__gc");
@@ -1098,54 +1153,6 @@ namespace LuaInterface
             LuaAPI.lua_pushlightuserdata(L, p);
         }
 
-        public static void Push(IntPtr L, ILuaGeneratedType o)
-        {
-            if (o == null)
-            {
-                LuaAPI.lua_pushnil(L);
-            }
-            else
-            {
-                LuaTable table = o.__luaInterface_getLuaTable();
-                table.push(L);
-            }
-        }
-
-        public static void Push(IntPtr L, LuaTable table)
-        {
-            if (table == null)
-            {
-                LuaAPI.lua_pushnil(L);
-            }
-            else
-            {
-                table.push(L);
-            }
-        }
-
-        public static void Push(IntPtr L, LuaFunction func)
-        {
-            if (func == null)
-            {
-                LuaAPI.lua_pushnil(L);
-            }
-            else
-            {
-                func.push();
-            }
-        }
-
-        public static void Push(IntPtr L, LuaCSFunction func)
-        {
-            if (func == null)
-            {
-                LuaAPI.lua_pushnil(L);
-                return;
-            }
-
-            GetTranslator(L).pushFunction(L, func);
-        }
-
         public static bool CheckTypes(IntPtr L, int begin, Type type0)
         {
             return CheckType(L, type0, begin);
@@ -1171,58 +1178,9 @@ namespace LuaInterface
             return CheckType(L, type0, begin) && CheckType(L, type1, begin + 1) && CheckType(L, type2, begin + 2) && CheckType(L, type3, begin + 3) && CheckType(L, type4, begin + 4);
         }
 
-        public static bool CheckTypes(IntPtr L, int begin, Type type0, Type type1, Type type2, Type type3, Type type4, Type type5)
-        {
-            return CheckType(L, type0, begin) && CheckType(L, type1, begin + 1) && CheckType(L, type2, begin + 2) && CheckType(L, type3, begin + 3) && CheckType(L, type4, begin + 4) &&
-                   CheckType(L, type5, begin + 5);
-        }
-
-        public static bool CheckTypes(IntPtr L, int begin, Type type0, Type type1, Type type2, Type type3, Type type4, Type type5, Type type6)
-        {
-            return CheckType(L, type0, begin) && CheckType(L, type1, begin + 1) && CheckType(L, type2, begin + 2) && CheckType(L, type3, begin + 3) && CheckType(L, type4, begin + 4) &&
-                   CheckType(L, type5, begin + 5) && CheckType(L, type6, begin + 6);
-        }
-
-        public static bool CheckTypes(IntPtr L, int begin, Type type0, Type type1, Type type2, Type type3, Type type4, Type type5, Type type6, Type type7)
-        {
-            return CheckType(L, type0, begin) && CheckType(L, type1, begin + 1) && CheckType(L, type2, begin + 2) && CheckType(L, type3, begin + 3) && CheckType(L, type4, begin + 4) &&
-                   CheckType(L, type5, begin + 5) && CheckType(L, type6, begin + 6) && CheckType(L, type7, begin + 7);
-        }
-
-        public static bool CheckTypes(IntPtr L, int begin, Type type0, Type type1, Type type2, Type type3, Type type4, Type type5, Type type6, Type type7, Type type8)
-        {
-            return CheckType(L, type0, begin) && CheckType(L, type1, begin + 1) && CheckType(L, type2, begin + 2) && CheckType(L, type3, begin + 3) && CheckType(L, type4, begin + 4) &&
-                   CheckType(L, type5, begin + 5) && CheckType(L, type6, begin + 6) && CheckType(L, type7, begin + 7) && CheckType(L, type8, begin + 8);
-        }
-
-        public static bool CheckTypes(IntPtr L, int begin, Type type0, Type type1, Type type2, Type type3, Type type4, Type type5, Type type6, Type type7, Type type8, Type type9)
-        {
-            return CheckType(L, type0, begin) && CheckType(L, type1, begin + 1) && CheckType(L, type2, begin + 2) && CheckType(L, type3, begin + 3) && CheckType(L, type4, begin + 4) &&
-                   CheckType(L, type5, begin + 5) && CheckType(L, type6, begin + 6) && CheckType(L, type7, begin + 7) && CheckType(L, type8, begin + 8) && CheckType(L, type9, begin + 9);
-        }
-
-        //当进入这里时势必会有一定的gc alloc, 因为params Type[]会分配内存, 可以像上面扩展来避免gc alloc
-        public static bool CheckTypes(IntPtr L, int begin, params Type[] types)
-        {
-            for (int i = 0; i < types.Length; i++)
-            {
-                if (!CheckType(L, types[i], i + begin))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public static bool CheckParamsType(IntPtr L, Type t, int begin, int count)
         {
-            //默认都可以转 object
-            if (t == typeof(object))
-            {
-                return true;
-            }
-
+            if (t == typeof(object)) return true;
             for (int i = 0; i < count; i++)
             {
                 if (!CheckType(L, t, i + begin))
@@ -1283,14 +1241,9 @@ namespace LuaInterface
 
         public static bool CheckType(IntPtr L, Type t, int pos)
         {
-            //默认都可以转 object
-            if (t == typeof(object))
-            {
-                return true;
-            }
+            if (t == typeof(object)) return true;
 
             LuaTypes luaType = LuaAPI.lua_type(L, pos);
-
             switch (luaType)
             {
                 case LuaTypes.LUA_TNUMBER:
@@ -1310,7 +1263,6 @@ namespace LuaInterface
                 default:
                     break;
             }
-
             return false;
         }
 
@@ -1364,14 +1316,11 @@ namespace LuaInterface
         {
             List<T> list = new List<T>();
             T obj = default(T);
-
             while (count > 0)
             {
                 object tmp = GetLuaObject(L, stackPos);
-
                 ++stackPos;
                 --count;
-
                 if (tmp != null && tmp.GetType() == typeof(T))
                 {
                     obj = (T)tmp;
@@ -1383,7 +1332,6 @@ namespace LuaInterface
                     break;
                 }
             }
-
             return list.ToArray();
         }
 
@@ -1402,7 +1350,6 @@ namespace LuaInterface
                 {
                     LuaAPI.ulua_rawgeti(L, -1, index);
                     luatype = LuaAPI.lua_type(L, -1);
-
                     if (luatype == LuaTypes.LUA_TNIL)
                     {
                         LuaAPI.lua_pop(L, 1);
@@ -1413,7 +1360,6 @@ namespace LuaInterface
                         LuaAPI.lua_pop(L, 1);
                         break;
                     }
-
                     val = (T)GetVarObject(L, -1);
                     list.Add(val);
                     LuaAPI.lua_pop(L, 1);
@@ -1504,7 +1450,7 @@ namespace LuaInterface
             {
                 LuaAPI.lua_getglobal(L, "tostring");
                 LuaAPI.lua_pushvalue(L, stackPos);
-                LuaAPI.lua_pcall(L, 1, 1,0);
+                LuaAPI.lua_pcall(L, 1, 1, 0);
                 retVal = LuaAPI.lua_tostring(L, -1);
                 LuaAPI.lua_pop(L, 1);
             }
@@ -1873,31 +1819,6 @@ namespace LuaInterface
         }
 
 
-        public static void DumpStack(IntPtr L)
-        {
-            int top = LuaAPI.lua_gettop(L);
-            for (int i = 1; i <= top; i++)
-            {
-                LuaTypes t = LuaAPI.lua_type(L, i);
-
-                switch (t)
-                {
-                    case LuaTypes.LUA_TSTRING:
-                        Debugger.Log(LuaAPI.lua_tostring(L, i));
-                        break;
-                    case LuaTypes.LUA_TBOOLEAN:
-                        Debugger.Log(LuaAPI.lua_toboolean(L, i).ToString());
-                        break;
-                    case LuaTypes.LUA_TNUMBER:
-                        Debugger.Log(LuaAPI.lua_tonumber(L, i).ToString());
-                        break;
-                    default:
-                        Debugger.Log(t.ToString());
-                        break;
-                }
-            }
-        }
-
         static Dictionary<Enum, object> enumMap = new Dictionary<Enum, object>();
 
         static object GetEnumObj(Enum e)
@@ -1948,13 +1869,6 @@ namespace LuaInterface
         public static LuaScriptMgr GetMgrFromLuaState(IntPtr L)
         {
             return Instance;
-        }
-
-        public static void ThrowLuaException(IntPtr L)
-        {
-            string err = LuaAPI.lua_tostring(L, -1);
-            if (err == null) err = "Unknown Lua Error";
-            throw new LuaScriptException(err.ToString(), "");
         }
 
         //无缝兼容原生写法 transform.position = v3          
@@ -2087,17 +2001,15 @@ namespace LuaInterface
             LuaAPI.lua_pushinteger(L, touch.tapCount);
             LuaAPI.lua_pushinteger(L, (int)touch.phase);
 
-            LuaAPI.lua_pcall(L, 7, -1,0);
+            LuaAPI.lua_pcall(L, 7, -1, 0);
         }
 
         public static void Push(IntPtr L, Bounds bound)
         {
             LuaScriptMgr luaMgr = GetMgrFromLuaState(L);
             LuaAPI.ulua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, luaMgr.packBounds);
-
             Push(L, bound.center);
             Push(L, bound.size);
-
             LuaAPI.lua_pcall(L, 2, -1, 0);
         }
 

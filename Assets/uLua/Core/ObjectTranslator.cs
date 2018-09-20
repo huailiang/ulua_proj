@@ -1,17 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+
 namespace LuaInterface
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-
-    public static class ObjectExtends
-    {
-        public static object RefObject(this object obj)
-        {
-            return new WeakReference(obj).Target;
-        }
-    }
-    
     public class ObjectTranslator
     {
         private class CompareObject : IEqualityComparer<object>
@@ -34,12 +26,10 @@ namespace LuaInterface
         public readonly Dictionary<int, object> objects = new Dictionary<int, object>();
         public readonly Dictionary<object, int> objectsBackMap = new Dictionary<object, int>(new CompareObject());
         static Dictionary<Type, int> typeMetaMap = new Dictionary<Type, int>();
-        
+
         public MetaFunctions metaFunctions;
         public List<Assembly> assemblies;
         private LuaCSFunction registerTableFunction, unregisterTableFunction, importTypeFunction, loadAssemblyFunction, ctypeFunction, enumFromIntFunction;
-
-        internal EventHandlerContainer pendingEvents = new EventHandlerContainer();
 
         static List<ObjectTranslator> list = new List<ObjectTranslator>();
         static int indexTranslator = 0;
@@ -73,7 +63,6 @@ namespace LuaInterface
 
             importTypeFunction = new LuaCSFunction(importType);
             loadAssemblyFunction = new LuaCSFunction(loadAssembly);
-            registerTableFunction = new LuaCSFunction(registerTable);
             unregisterTableFunction = new LuaCSFunction(unregisterTable);
             ctypeFunction = new LuaCSFunction(ctype);
             enumFromIntFunction = new LuaCSFunction(enumFromInt);
@@ -89,17 +78,15 @@ namespace LuaInterface
         public void Destroy()
         {
             IntPtr L = interpreter.L;
-
             foreach (KeyValuePair<Type, int> kv in typeMetaMap)
             {
                 int reference = kv.Value;
                 LuaAPI.lua_unref(L, reference);
             }
-
             LuaAPI.lua_unref(L, weakTableRef);
             typeMetaMap.Clear();
         }
-        
+
         private void createLuaObjectList(IntPtr luaState)
         {
             LuaAPI.lua_pushstring(luaState, "luaNet_objects");
@@ -113,7 +100,7 @@ namespace LuaInterface
             LuaAPI.lua_settable(luaState, -3);
             LuaAPI.lua_settable(luaState, LuaAPI.LUA_REGISTRYINDEX);
         }
-    
+
         private void createIndexingMetaFunction(IntPtr luaState)
         {
             LuaAPI.lua_pushstring(luaState, "luaNet_indexfunction");
@@ -173,9 +160,6 @@ namespace LuaInterface
             LuaAPI.lua_pushstdcallcfunction(luaState, loadAssemblyFunction);
             LuaAPI.lua_settable(luaState, -3);
             LuaAPI.lua_pushstring(luaState, "make_object");
-            LuaAPI.lua_pushstdcallcfunction(luaState, registerTableFunction);
-            LuaAPI.lua_settable(luaState, -3);
-            LuaAPI.lua_pushstring(luaState, "free_object");
             LuaAPI.lua_pushstdcallcfunction(luaState, unregisterTableFunction);
             LuaAPI.lua_settable(luaState, -3);
             LuaAPI.lua_pushstring(luaState, "ctype");
@@ -185,7 +169,7 @@ namespace LuaInterface
             LuaAPI.lua_pushstdcallcfunction(luaState, enumFromIntFunction);
             LuaAPI.lua_settable(luaState, -3);
         }
-        
+
         private void createFunctionMetatable(IntPtr luaState)
         {
             LuaAPI.luaL_newmetatable(luaState, "luaNet_function");
@@ -202,7 +186,7 @@ namespace LuaInterface
         {
             LuaAPI.luaL_error(luaState, message);
         }
-  
+
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int loadAssembly(IntPtr luaState)
         {
@@ -234,7 +218,6 @@ namespace LuaInterface
             {
                 translator.throwError(luaState, e.Message);
             }
-
             return 0;
         }
 
@@ -264,47 +247,6 @@ namespace LuaInterface
             return 1;
         }
 
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        public static int registerTable(IntPtr luaState)
-        {
-            ObjectTranslator translator = ObjectTranslator.FromState(luaState);
-            if (LuaAPI.lua_type(luaState, 1) == LuaTypes.LUA_TTABLE)
-            {
-                LuaTable luaTable = translator.getTable(luaState, 1);
-                string superclassName = LuaAPI.lua_tostring(luaState, 2);
-                if (superclassName != null)
-                {
-                    Type klass = translator.FindType(superclassName);
-                    if (klass != null)
-                    {
-                        // Creates and pushes the object in the stack, setting
-                        // it as the  metatable of the first argument
-                        object obj = CodeGeneration.Instance.GetClassInstance(klass, luaTable);
-                        translator.pushObject(luaState, obj, "luaNet_metatable");
-                        LuaAPI.lua_newtable(luaState);
-                        LuaAPI.lua_pushstring(luaState, "__index");
-                        LuaAPI.lua_pushvalue(luaState, -3);
-                        LuaAPI.lua_settable(luaState, -3);
-                        LuaAPI.lua_pushstring(luaState, "__newindex");
-                        LuaAPI.lua_pushvalue(luaState, -3);
-                        LuaAPI.lua_settable(luaState, -3);
-                        LuaAPI.lua_setmetatable(luaState, 1);
-                        // Pushes the object again, this time as the base field
-                        // of the table and with the luaNet_searchbase metatable
-                        LuaAPI.lua_pushstring(luaState, "base");
-                        int index = translator.addObject(obj);
-                        translator.pushNewObject(luaState, obj, index, "luaNet_searchbase");
-                        LuaAPI.lua_rawset(luaState, 1);
-                    }
-                    else
-                        translator.throwError(luaState, "register_table: can not find superclass '" + superclassName + "'");
-                }
-                else
-                    translator.throwError(luaState, "register_table: superclass name can not be null");
-            }
-            else translator.throwError(luaState, "register_table: first arg is not a table");
-            return 0;
-        }
 
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int unregisterTable(IntPtr luaState)
@@ -345,8 +287,7 @@ namespace LuaInterface
             }
             else
             {
-                ProxyType pt = (ProxyType)objects[udata];
-                return pt.UnderlyingSystemType;
+                return (Type)objects[udata];
             }
         }
 
@@ -414,27 +355,12 @@ namespace LuaInterface
 
         internal void pushType(IntPtr luaState, Type t)
         {
-            pushObject(luaState, new ProxyType(t), "luaNet_class");
+            pushObject(luaState, t, "luaNet_class");
         }
-  
+
         internal void pushFunction(IntPtr luaState, LuaCSFunction func)
         {
             pushObject(luaState, func, "luaNet_function");
-        }
-
-        static Dictionary<Type, bool> valueTypeMap = new Dictionary<Type, bool>();
-
-        bool IsValueType(Type t)
-        {
-            bool isValue = false;
-
-            if (!valueTypeMap.TryGetValue(t, out isValue))
-            {
-                isValue = t.IsValueType;
-                valueTypeMap.Add(t, isValue);
-            }
-
-            return isValue;
         }
 
         public void pushObject(IntPtr luaState, object o, string metatable)
@@ -488,9 +414,6 @@ namespace LuaInterface
             }
         }
 
-        /*
-         * Pushes a new object into the Lua stack with the provided metatable
-         */
         private void pushNewObject(IntPtr luaState, object o, int index, string metatable)
         {
             LuaAPI.ulua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, weakTableRef);
@@ -532,7 +455,6 @@ namespace LuaInterface
             {
                 LuaAPI.luaL_getmetatable(luaState, metatable);
             }
-
             LuaAPI.lua_setmetatable(luaState, -2);
             LuaAPI.lua_pushvalue(luaState, -1);
             LuaAPI.ulua_rawseti(luaState, -3, index);
@@ -580,21 +502,13 @@ namespace LuaInterface
             return null;
         }
 
-
-        /// <summary>
-        /// Given the Lua int ID for an object remove it from our maps
-        /// </summary>    
-
         internal void collectObject(int udata)
         {
             object o;
             bool found = objects.TryGetValue(udata, out o);
-
-            // The other variant of collectObject might have gotten here first, in that case we will silently ignore the missing entry
             if (found)
             {
                 objects.Remove(udata);
-
                 if (o != null && !o.GetType().IsValueType)
                 {
                     objectsBackMap.Remove(o);
@@ -602,10 +516,6 @@ namespace LuaInterface
             }
         }
 
-
-        /// <summary>
-        /// Given an object reference, remove it from our maps
-        /// </summary>
         void collectObject(object o, int udata)
         {
             objectsBackMap.Remove(o);
@@ -613,21 +523,8 @@ namespace LuaInterface
         }
 
 
-        /// <summary>
-        /// We want to ensure that objects always have a unique ID
-        /// </summary>
-        int nextObj = 0;
 
-        public int addObject(object obj)
-        {
-            int index = nextObj++;
-            objects[index] = obj;
-            if (!obj.GetType().IsValueType)
-            {
-                objectsBackMap[obj] = index;
-            }
-            return index;
-        }
+        int nextObj = 0;
 
         public int addObject(object obj, bool isValueType)
         {
@@ -637,7 +534,6 @@ namespace LuaInterface
             {
                 objectsBackMap[obj] = index;
             }
-
             return index;
         }
 
@@ -699,27 +595,6 @@ namespace LuaInterface
             }
         }
 
-        /*
-         * Pushes the entire array into the Lua stack and returns the number
-         * of elements pushed.
-         */
-        internal int returnValues(IntPtr luaState, object[] returnValues)
-        {
-            if (LuaAPI.lua_checkstack(luaState, returnValues.Length + 5))
-            {
-                for (int i = 0; i < returnValues.Length; i++)
-                {
-                    push(luaState, returnValues[i]);
-                }
-                return returnValues.Length;
-            }
-            else
-                return 0;
-        }
-        /*
-         * Gets the values from the provided index to
-         * the top of the stack and returns them in an array.
-         */
         internal object[] popValues(IntPtr luaState, int oldTop)
         {
             int newTop = LuaAPI.lua_gettop(luaState);
@@ -771,16 +646,6 @@ namespace LuaInterface
             }
         }
 
-        static bool IsILua(object o)
-        {
-            if (o is ILuaGeneratedType)
-            {
-                Type typ = o.GetType();
-                return (typ.GetInterface("ILuaGeneratedType") != null);
-            }
-            return false;
-        }
-
         internal void push(IntPtr luaState, object o)
         {
             LuaScriptMgr.PushVarObject(luaState, o);
@@ -791,7 +656,6 @@ namespace LuaInterface
             int index = addObject(o, true);
             PushNewValueObject(lua, o, index);
         }
-
         internal bool matchParameters(IntPtr luaState, MethodBase method, ref MethodCache methodCache)
         {
             return metaFunctions.matchParameters(luaState, method, ref methodCache);
