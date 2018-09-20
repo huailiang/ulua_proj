@@ -38,7 +38,7 @@ public class CharacterControllerWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateCharacterController(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -48,7 +48,7 @@ public class CharacterControllerWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: CharacterController.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: CharacterController.New");
 		}
 
 		return 0;
@@ -71,15 +71,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name velocity");
+				LuaAPI.luaL_error(L, "unknown member name velocity");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index velocity on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index velocity on a nil value");
 			}
 		}
 
@@ -95,15 +95,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isGrounded");
+				LuaAPI.luaL_error(L, "unknown member name isGrounded");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isGrounded on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isGrounded on a nil value");
 			}
 		}
 
@@ -119,15 +119,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name collisionFlags");
+				LuaAPI.luaL_error(L, "unknown member name collisionFlags");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index collisionFlags on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index collisionFlags on a nil value");
 			}
 		}
 
@@ -143,15 +143,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name radius");
+				LuaAPI.luaL_error(L, "unknown member name radius");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index radius on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index radius on a nil value");
 			}
 		}
 
@@ -167,15 +167,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name height");
+				LuaAPI.luaL_error(L, "unknown member name height");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index height on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index height on a nil value");
 			}
 		}
 
@@ -191,15 +191,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name center");
+				LuaAPI.luaL_error(L, "unknown member name center");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index center on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index center on a nil value");
 			}
 		}
 
@@ -215,15 +215,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name slopeLimit");
+				LuaAPI.luaL_error(L, "unknown member name slopeLimit");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index slopeLimit on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index slopeLimit on a nil value");
 			}
 		}
 
@@ -239,15 +239,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stepOffset");
+				LuaAPI.luaL_error(L, "unknown member name stepOffset");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stepOffset on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stepOffset on a nil value");
 			}
 		}
 
@@ -263,15 +263,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name skinWidth");
+				LuaAPI.luaL_error(L, "unknown member name skinWidth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index skinWidth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index skinWidth on a nil value");
 			}
 		}
 
@@ -287,15 +287,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name minMoveDistance");
+				LuaAPI.luaL_error(L, "unknown member name minMoveDistance");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index minMoveDistance on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index minMoveDistance on a nil value");
 			}
 		}
 
@@ -311,15 +311,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name detectCollisions");
+				LuaAPI.luaL_error(L, "unknown member name detectCollisions");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index detectCollisions on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index detectCollisions on a nil value");
 			}
 		}
 
@@ -335,15 +335,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enableOverlapRecovery");
+				LuaAPI.luaL_error(L, "unknown member name enableOverlapRecovery");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enableOverlapRecovery on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enableOverlapRecovery on a nil value");
 			}
 		}
 
@@ -359,15 +359,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name radius");
+				LuaAPI.luaL_error(L, "unknown member name radius");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index radius on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index radius on a nil value");
 			}
 		}
 
@@ -383,15 +383,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name height");
+				LuaAPI.luaL_error(L, "unknown member name height");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index height on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index height on a nil value");
 			}
 		}
 
@@ -407,15 +407,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name center");
+				LuaAPI.luaL_error(L, "unknown member name center");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index center on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index center on a nil value");
 			}
 		}
 
@@ -431,15 +431,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name slopeLimit");
+				LuaAPI.luaL_error(L, "unknown member name slopeLimit");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index slopeLimit on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index slopeLimit on a nil value");
 			}
 		}
 
@@ -455,15 +455,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stepOffset");
+				LuaAPI.luaL_error(L, "unknown member name stepOffset");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stepOffset on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stepOffset on a nil value");
 			}
 		}
 
@@ -479,15 +479,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name skinWidth");
+				LuaAPI.luaL_error(L, "unknown member name skinWidth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index skinWidth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index skinWidth on a nil value");
 			}
 		}
 
@@ -503,15 +503,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name minMoveDistance");
+				LuaAPI.luaL_error(L, "unknown member name minMoveDistance");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index minMoveDistance on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index minMoveDistance on a nil value");
 			}
 		}
 
@@ -527,15 +527,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name detectCollisions");
+				LuaAPI.luaL_error(L, "unknown member name detectCollisions");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index detectCollisions on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index detectCollisions on a nil value");
 			}
 		}
 
@@ -551,15 +551,15 @@ public class CharacterControllerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enableOverlapRecovery");
+				LuaAPI.luaL_error(L, "unknown member name enableOverlapRecovery");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enableOverlapRecovery on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enableOverlapRecovery on a nil value");
 			}
 		}
 

@@ -48,7 +48,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateAnimation(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -58,7 +58,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.New");
 		}
 
 		return 0;
@@ -81,15 +81,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name clip");
+				LuaAPI.luaL_error(L, "unknown member name clip");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index clip on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index clip on a nil value");
 			}
 		}
 
@@ -105,15 +105,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name playAutomatically");
+				LuaAPI.luaL_error(L, "unknown member name playAutomatically");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index playAutomatically on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index playAutomatically on a nil value");
 			}
 		}
 
@@ -129,15 +129,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapMode");
+				LuaAPI.luaL_error(L, "unknown member name wrapMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapMode on a nil value");
 			}
 		}
 
@@ -153,15 +153,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isPlaying");
+				LuaAPI.luaL_error(L, "unknown member name isPlaying");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isPlaying on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isPlaying on a nil value");
 			}
 		}
 
@@ -177,15 +177,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name animatePhysics");
+				LuaAPI.luaL_error(L, "unknown member name animatePhysics");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index animatePhysics on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index animatePhysics on a nil value");
 			}
 		}
 
@@ -201,15 +201,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cullingType");
+				LuaAPI.luaL_error(L, "unknown member name cullingType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cullingType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cullingType on a nil value");
 			}
 		}
 
@@ -225,15 +225,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localBounds");
+				LuaAPI.luaL_error(L, "unknown member name localBounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localBounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localBounds on a nil value");
 			}
 		}
 
@@ -249,15 +249,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name clip");
+				LuaAPI.luaL_error(L, "unknown member name clip");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index clip on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index clip on a nil value");
 			}
 		}
 
@@ -273,15 +273,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name playAutomatically");
+				LuaAPI.luaL_error(L, "unknown member name playAutomatically");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index playAutomatically on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index playAutomatically on a nil value");
 			}
 		}
 
@@ -297,15 +297,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapMode");
+				LuaAPI.luaL_error(L, "unknown member name wrapMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapMode on a nil value");
 			}
 		}
 
@@ -321,15 +321,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name animatePhysics");
+				LuaAPI.luaL_error(L, "unknown member name animatePhysics");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index animatePhysics on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index animatePhysics on a nil value");
 			}
 		}
 
@@ -345,15 +345,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cullingType");
+				LuaAPI.luaL_error(L, "unknown member name cullingType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cullingType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cullingType on a nil value");
 			}
 		}
 
@@ -369,15 +369,15 @@ public class AnimationWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localBounds");
+				LuaAPI.luaL_error(L, "unknown member name localBounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localBounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localBounds on a nil value");
 			}
 		}
 
@@ -388,7 +388,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Stop(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -405,7 +405,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.Stop");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.Stop");
 		}
 
 		return 0;
@@ -414,7 +414,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Rewind(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -431,7 +431,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.Rewind");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.Rewind");
 		}
 
 		return 0;
@@ -471,7 +471,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Play(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -507,7 +507,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.Play");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.Play");
 		}
 
 		return 0;
@@ -516,7 +516,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CrossFade(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -544,7 +544,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.CrossFade");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.CrossFade");
 		}
 
 		return 0;
@@ -553,7 +553,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Blend(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -581,7 +581,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.Blend");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.Blend");
 		}
 
 		return 0;
@@ -590,7 +590,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CrossFadeQueued(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -632,7 +632,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.CrossFadeQueued");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.CrossFadeQueued");
 		}
 
 		return 0;
@@ -641,7 +641,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int PlayQueued(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -672,7 +672,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.PlayQueued");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.PlayQueued");
 		}
 
 		return 0;
@@ -681,7 +681,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int AddClip(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 3)
 		{
@@ -714,7 +714,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.AddClip");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.AddClip");
 		}
 
 		return 0;
@@ -723,7 +723,7 @@ public class AnimationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int RemoveClip(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Animation), typeof(string)))
 		{
@@ -741,7 +741,7 @@ public class AnimationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Animation.RemoveClip");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Animation.RemoveClip");
 		}
 
 		return 0;

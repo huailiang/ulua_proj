@@ -26,19 +26,19 @@ namespace LuaInterface
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int panic(IntPtr L)
         {
-            string reason = String.Format("unprotected error in call to Lua API ({0})", LuaDLL.lua_tostring(L, -1));
-            LuaDLL.lua_pop(L, 1);
+            string reason = String.Format("unprotected error in call to Lua API ({0})", LuaAPI.lua_tostring(L, -1));
+            LuaAPI.lua_pop(L, 1);
             throw new LuaException(reason);
         }
 
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int traceback(IntPtr L)
         {
-            LuaDLL.lua_getglobal(L, "debug");
-            LuaDLL.lua_getfield(L, -1, "traceback");
-            LuaDLL.lua_pushvalue(L, 1);
-            LuaDLL.lua_pushnumber(L, 2);
-            LuaDLL.lua_pcall(L, 2, 1, 0);
+            LuaAPI.lua_getglobal(L, "debug");
+            LuaAPI.lua_getfield(L, -1, "traceback");
+            LuaAPI.lua_pushvalue(L, 1);
+            LuaAPI.lua_pushnumber(L, 2);
+            LuaAPI.lua_pcall(L, 2, 1, 0);
             return 1;
         }
 
@@ -47,23 +47,23 @@ namespace LuaInterface
         public static int print(IntPtr L)
         {
             // For each argument we'll 'tostring' it
-            int n = LuaDLL.lua_gettop(L);
+            int n = LuaAPI.lua_gettop(L);
             string s = String.Empty;
-            LuaDLL.lua_getglobal(L, "tostring");
+            LuaAPI.lua_getglobal(L, "tostring");
 
             for (int i = 1; i <= n; i++)
             {
-                LuaDLL.lua_pushvalue(L, -1);  /* function to be called */
-                LuaDLL.lua_pushvalue(L, i);   /* value to print */
-                LuaDLL.lua_pcall(L, 1, 1, 0);
+                LuaAPI.lua_pushvalue(L, -1);  /* function to be called */
+                LuaAPI.lua_pushvalue(L, i);   /* value to print */
+                LuaAPI.lua_pcall(L, 1, 1, 0);
 
                 if (i > 1)
                 {
                     s += "\t";
                 }
-                s += LuaDLL.lua_tostring(L, -1);
+                s += LuaAPI.lua_tostring(L, -1);
 
-                LuaDLL.lua_pop(L, 1);  /* pop result */
+                LuaAPI.lua_pop(L, 1);  /* pop result */
 
             }
             Debug.Log("LUA: " + s);
@@ -76,7 +76,7 @@ namespace LuaInterface
         {
             // Get script to load
             string fileName = string.Empty;
-            fileName = LuaDLL.lua_tostring(L, 1);
+            fileName = LuaAPI.lua_tostring(L, 1);
 
             string lowerName = fileName.ToLower();
             if (lowerName.EndsWith(".lua"))
@@ -87,22 +87,22 @@ namespace LuaInterface
             fileName = fileName.Replace('.', '/');
 
             LuaScriptMgr mgr = LuaScriptMgr.GetMgrFromLuaState(L);
-            int oldTop = LuaDLL.lua_gettop(L);
+            int oldTop = LuaAPI.lua_gettop(L);
             if (mgr != null)
             {
-                LuaDLL.lua_pushstdcallcfunction(L, mgr.lua.tracebackFunction);
+                LuaAPI.lua_pushstdcallcfunction(L, mgr.lua.tracebackFunction);
             }
 
             byte[] text = LuaStatic.Load(fileName);
             if (text == null)
             {
-                LuaDLL.lua_pop(L, 1);
+                LuaAPI.lua_pop(L, 1);
                 return 0;
             }
-            if (LuaDLL.luaL_loadbuffer(L, text, text.Length, fileName) != 0)
+            if (LuaAPI.luaL_loadbuffer(L, text, text.Length, fileName) != 0)
             {
                 mgr.lua.ThrowExceptionFromError(oldTop + 1);
-                LuaDLL.lua_pop(L, 1);
+                LuaAPI.lua_pop(L, 1);
             }
             return 1;
         }
@@ -111,7 +111,7 @@ namespace LuaInterface
         public static int dofile(IntPtr L)
         {
             string fileName = String.Empty;
-            fileName = LuaDLL.lua_tostring(L, 1);
+            fileName = LuaAPI.lua_tostring(L, 1);
 
             string lowerName = fileName.ToLower();
             if (lowerName.EndsWith(".lua"))
@@ -121,21 +121,21 @@ namespace LuaInterface
             }
             fileName = fileName.Replace('.', '/') + ".lua";
 
-            int n = LuaDLL.lua_gettop(L);
+            int n = LuaAPI.lua_gettop(L);
 
             byte[] text = Load(fileName);
 
             if (text == null)
             {
-                return LuaDLL.lua_gettop(L) - n;
+                return LuaAPI.lua_gettop(L) - n;
             }
 
-            if (LuaDLL.luaL_loadbuffer(L, text, text.Length, fileName) == 0)
+            if (LuaAPI.luaL_loadbuffer(L, text, text.Length, fileName) == 0)
             {
-                LuaDLL.lua_pcall(L, 0, LuaDLL.LUA_MULTRET, 0);
+                LuaAPI.lua_pcall(L, 0, -1, 0);
             }
 
-            return LuaDLL.lua_gettop(L) - n;
+            return LuaAPI.lua_gettop(L) - n;
         }
 
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
@@ -148,7 +148,7 @@ namespace LuaInterface
         public static int importWrap(IntPtr L)
         {
             string fileName = String.Empty;
-            fileName = LuaDLL.lua_tostring(L, 1);
+            fileName = LuaAPI.lua_tostring(L, 1);
             fileName = fileName.Replace('.', '_');
             if (!string.IsNullOrEmpty(fileName))
             {

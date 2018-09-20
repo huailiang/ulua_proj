@@ -25,7 +25,7 @@ public class TestEventListenerWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTestEventListener(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "TestEventListener class does not have a constructor function");
+		LuaAPI.luaL_error(L, "TestEventListener class does not have a constructor function");
 		return 0;
 	}
 
@@ -46,15 +46,15 @@ public class TestEventListenerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name OnClick");
+				LuaAPI.luaL_error(L, "unknown member name OnClick");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index OnClick on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index OnClick on a nil value");
 			}
 		}
 
@@ -70,19 +70,19 @@ public class TestEventListenerWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name OnClick");
+				LuaAPI.luaL_error(L, "unknown member name OnClick");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index OnClick on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index OnClick on a nil value");
 			}
 		}
 
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
+		LuaTypes funcType = LuaAPI.lua_type(L, 3);
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{

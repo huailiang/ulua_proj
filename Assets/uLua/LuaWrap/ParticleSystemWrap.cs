@@ -68,7 +68,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateParticleSystem(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -78,7 +78,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.New");
 		}
 
 		return 0;
@@ -101,15 +101,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isPlaying");
+				LuaAPI.luaL_error(L, "unknown member name isPlaying");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isPlaying on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isPlaying on a nil value");
 			}
 		}
 
@@ -125,15 +125,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isEmitting");
+				LuaAPI.luaL_error(L, "unknown member name isEmitting");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isEmitting on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isEmitting on a nil value");
 			}
 		}
 
@@ -149,15 +149,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isStopped");
+				LuaAPI.luaL_error(L, "unknown member name isStopped");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isStopped on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isStopped on a nil value");
 			}
 		}
 
@@ -173,15 +173,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isPaused");
+				LuaAPI.luaL_error(L, "unknown member name isPaused");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isPaused on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isPaused on a nil value");
 			}
 		}
 
@@ -197,15 +197,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name time");
+				LuaAPI.luaL_error(L, "unknown member name time");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index time on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index time on a nil value");
 			}
 		}
 
@@ -221,15 +221,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name particleCount");
+				LuaAPI.luaL_error(L, "unknown member name particleCount");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index particleCount on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index particleCount on a nil value");
 			}
 		}
 
@@ -245,15 +245,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name randomSeed");
+				LuaAPI.luaL_error(L, "unknown member name randomSeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index randomSeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index randomSeed on a nil value");
 			}
 		}
 
@@ -269,15 +269,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useAutoRandomSeed");
+				LuaAPI.luaL_error(L, "unknown member name useAutoRandomSeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useAutoRandomSeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useAutoRandomSeed on a nil value");
 			}
 		}
 
@@ -293,15 +293,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name automaticCullingEnabled");
+				LuaAPI.luaL_error(L, "unknown member name automaticCullingEnabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index automaticCullingEnabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index automaticCullingEnabled on a nil value");
 			}
 		}
 
@@ -317,15 +317,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name main");
+				LuaAPI.luaL_error(L, "unknown member name main");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index main on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index main on a nil value");
 			}
 		}
 
@@ -341,15 +341,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name emission");
+				LuaAPI.luaL_error(L, "unknown member name emission");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index emission on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index emission on a nil value");
 			}
 		}
 
@@ -365,15 +365,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name shape");
+				LuaAPI.luaL_error(L, "unknown member name shape");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index shape on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index shape on a nil value");
 			}
 		}
 
@@ -389,15 +389,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name velocityOverLifetime");
+				LuaAPI.luaL_error(L, "unknown member name velocityOverLifetime");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index velocityOverLifetime on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index velocityOverLifetime on a nil value");
 			}
 		}
 
@@ -413,15 +413,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name limitVelocityOverLifetime");
+				LuaAPI.luaL_error(L, "unknown member name limitVelocityOverLifetime");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index limitVelocityOverLifetime on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index limitVelocityOverLifetime on a nil value");
 			}
 		}
 
@@ -437,15 +437,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name inheritVelocity");
+				LuaAPI.luaL_error(L, "unknown member name inheritVelocity");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index inheritVelocity on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index inheritVelocity on a nil value");
 			}
 		}
 
@@ -461,15 +461,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name forceOverLifetime");
+				LuaAPI.luaL_error(L, "unknown member name forceOverLifetime");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index forceOverLifetime on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index forceOverLifetime on a nil value");
 			}
 		}
 
@@ -485,15 +485,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name colorOverLifetime");
+				LuaAPI.luaL_error(L, "unknown member name colorOverLifetime");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index colorOverLifetime on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index colorOverLifetime on a nil value");
 			}
 		}
 
@@ -509,15 +509,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name colorBySpeed");
+				LuaAPI.luaL_error(L, "unknown member name colorBySpeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index colorBySpeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index colorBySpeed on a nil value");
 			}
 		}
 
@@ -533,15 +533,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sizeOverLifetime");
+				LuaAPI.luaL_error(L, "unknown member name sizeOverLifetime");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sizeOverLifetime on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sizeOverLifetime on a nil value");
 			}
 		}
 
@@ -557,15 +557,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sizeBySpeed");
+				LuaAPI.luaL_error(L, "unknown member name sizeBySpeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sizeBySpeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sizeBySpeed on a nil value");
 			}
 		}
 
@@ -581,15 +581,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rotationOverLifetime");
+				LuaAPI.luaL_error(L, "unknown member name rotationOverLifetime");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rotationOverLifetime on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rotationOverLifetime on a nil value");
 			}
 		}
 
@@ -605,15 +605,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rotationBySpeed");
+				LuaAPI.luaL_error(L, "unknown member name rotationBySpeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rotationBySpeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rotationBySpeed on a nil value");
 			}
 		}
 
@@ -629,15 +629,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name externalForces");
+				LuaAPI.luaL_error(L, "unknown member name externalForces");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index externalForces on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index externalForces on a nil value");
 			}
 		}
 
@@ -653,15 +653,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name noise");
+				LuaAPI.luaL_error(L, "unknown member name noise");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index noise on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index noise on a nil value");
 			}
 		}
 
@@ -677,15 +677,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name collision");
+				LuaAPI.luaL_error(L, "unknown member name collision");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index collision on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index collision on a nil value");
 			}
 		}
 
@@ -701,15 +701,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name trigger");
+				LuaAPI.luaL_error(L, "unknown member name trigger");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index trigger on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index trigger on a nil value");
 			}
 		}
 
@@ -725,15 +725,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name subEmitters");
+				LuaAPI.luaL_error(L, "unknown member name subEmitters");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index subEmitters on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index subEmitters on a nil value");
 			}
 		}
 
@@ -749,15 +749,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name textureSheetAnimation");
+				LuaAPI.luaL_error(L, "unknown member name textureSheetAnimation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index textureSheetAnimation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index textureSheetAnimation on a nil value");
 			}
 		}
 
@@ -773,15 +773,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name lights");
+				LuaAPI.luaL_error(L, "unknown member name lights");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index lights on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index lights on a nil value");
 			}
 		}
 
@@ -797,15 +797,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name trails");
+				LuaAPI.luaL_error(L, "unknown member name trails");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index trails on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index trails on a nil value");
 			}
 		}
 
@@ -821,15 +821,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name customData");
+				LuaAPI.luaL_error(L, "unknown member name customData");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index customData on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index customData on a nil value");
 			}
 		}
 
@@ -845,15 +845,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name time");
+				LuaAPI.luaL_error(L, "unknown member name time");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index time on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index time on a nil value");
 			}
 		}
 
@@ -869,15 +869,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name randomSeed");
+				LuaAPI.luaL_error(L, "unknown member name randomSeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index randomSeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index randomSeed on a nil value");
 			}
 		}
 
@@ -893,15 +893,15 @@ public class ParticleSystemWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useAutoRandomSeed");
+				LuaAPI.luaL_error(L, "unknown member name useAutoRandomSeed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useAutoRandomSeed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useAutoRandomSeed on a nil value");
 			}
 		}
 
@@ -957,7 +957,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Simulate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -995,7 +995,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Simulate");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.Simulate");
 		}
 
 		return 0;
@@ -1004,7 +1004,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Play(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1021,7 +1021,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Play");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.Play");
 		}
 
 		return 0;
@@ -1030,7 +1030,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Pause(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1047,7 +1047,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Pause");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.Pause");
 		}
 
 		return 0;
@@ -1056,7 +1056,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Stop(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1081,7 +1081,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Stop");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.Stop");
 		}
 
 		return 0;
@@ -1090,7 +1090,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Clear(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1107,7 +1107,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Clear");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.Clear");
 		}
 
 		return 0;
@@ -1116,7 +1116,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int IsAlive(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1135,7 +1135,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.IsAlive");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.IsAlive");
 		}
 
 		return 0;
@@ -1144,7 +1144,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Emit(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1163,7 +1163,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.Emit");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.Emit");
 		}
 
 		return 0;
@@ -1172,7 +1172,7 @@ public class ParticleSystemWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int TriggerSubEmitter(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1184,7 +1184,7 @@ public class ParticleSystemWrap
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(ParticleSystem), typeof(int), typeof(List<ParticleSystem.Particle>)))
 		{
 			ParticleSystem obj = (ParticleSystem)LuaScriptMgr.GetUnityObjectSelf(L, 1, "ParticleSystem");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 2);
 			List<ParticleSystem.Particle> arg1 = (List<ParticleSystem.Particle>)LuaScriptMgr.GetLuaObject(L, 3);
 			obj.TriggerSubEmitter(arg0,arg1);
 			return 0;
@@ -1192,7 +1192,7 @@ public class ParticleSystemWrap
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(ParticleSystem), typeof(int), typeof(ParticleSystem.Particle)))
 		{
 			ParticleSystem obj = (ParticleSystem)LuaScriptMgr.GetUnityObjectSelf(L, 1, "ParticleSystem");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 2);
 			ParticleSystem.Particle arg1 = (ParticleSystem.Particle)LuaScriptMgr.GetLuaObject(L, 3);
 			obj.TriggerSubEmitter(arg0,ref arg1);
 			LuaScriptMgr.PushValue(L, arg1);
@@ -1200,7 +1200,7 @@ public class ParticleSystemWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: ParticleSystem.TriggerSubEmitter");
+			LuaAPI.luaL_error(L, "invalid arguments to method: ParticleSystem.TriggerSubEmitter");
 		}
 
 		return 0;

@@ -4,23 +4,23 @@ public class ToLua_System_String
 {
     [NoToLuaAttribute]
     public static string ToLua_System_StringDefined =
-@"        LuaTypes luatype = LuaDLL.lua_type(L, 1);
+@"        LuaTypes luatype = LuaAPI.lua_type(L, 1);
 
         if (luatype == LuaTypes.LUA_TSTRING)
         {
-            string arg0 = LuaDLL.lua_tostring(L, 1);
+            string arg0 = LuaAPI.lua_tostring(L, 1);
             LuaScriptMgr.PushObject(L, arg0);
             return 1;
         }
         else
         {
-            LuaDLL.luaL_error(L, ""invalid arguments to method: String.New"");
+            LuaAPI.luaL_error(L, ""invalid arguments to method: String.New"");
         }
         
 		return 0;";
 
     public static string EqualsDefined =
-@"		int count = LuaDLL.lua_gettop(L);
+@"		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 2, typeof(string)))
 		{
@@ -49,7 +49,7 @@ public class ToLua_System_String
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, ""invalid arguments to method: string.Equals"");
+			LuaAPI.luaL_error(L, ""invalid arguments to method: string.Equals"");
 		}
 
 		return 0;";

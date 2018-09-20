@@ -42,11 +42,11 @@ namespace LuaInterface
         {
             int nArgs = 0;
             LuaScriptMgr.PushTraceBack(L);
-            int oldTop = LuaDLL.lua_gettop(L);
+            int oldTop = LuaAPI.lua_gettop(L);
 
-            if (!LuaDLL.lua_checkstack(L, args.Length + 6))
+            if (!LuaAPI.lua_checkstack(L, args.Length + 6))
             {
-                LuaDLL.lua_pop(L, 1);
+                LuaAPI.lua_pop(L, 1);
                 throw new LuaException("Lua stack overflow");
             }
 
@@ -62,18 +62,18 @@ namespace LuaInterface
                 }
             }
 
-            int error = LuaDLL.lua_pcall(L, nArgs, -1, -nArgs - 2);
+            int error = LuaAPI.lua_pcall(L, nArgs, -1, -nArgs - 2);
 
             if (error != 0)
             {
-                string err = LuaDLL.lua_tostring(L, -1);
-                LuaDLL.lua_settop(L, oldTop - 1);
+                string err = LuaAPI.lua_tostring(L, -1);
+                LuaAPI.lua_settop(L, oldTop - 1);
                 if (err == null) err = "Unknown Lua Error";
                 throw new LuaScriptException(err, "");
             }
 
             object[] ret = returnTypes != null ? translator.popValues(L, oldTop, returnTypes) : translator.popValues(L, oldTop);
-            LuaDLL.lua_settop(L, oldTop - 1);
+            LuaAPI.lua_settop(L, oldTop - 1);
             return ret;
         }
 
@@ -93,7 +93,7 @@ namespace LuaInterface
                 return objs;
             }
 
-            LuaDLL.lua_settop(L, oldTop - 1);
+            LuaAPI.lua_settop(L, oldTop - 1);
             return null;
         }
 
@@ -109,7 +109,7 @@ namespace LuaInterface
                 return objs;
             }
 
-            LuaDLL.lua_settop(L, oldTop - 1);
+            LuaAPI.lua_settop(L, oldTop - 1);
             return null;
         }
 
@@ -118,17 +118,17 @@ namespace LuaInterface
         public int BeginPCall()
         {
             LuaScriptMgr.PushTraceBack(L);
-            beginPos = LuaDLL.lua_gettop(L);
+            beginPos = LuaAPI.lua_gettop(L);
             push(L);
             return beginPos;
         }
 
         public bool PCall(int oldTop, int args)
         {
-            if (LuaDLL.lua_pcall(L, args, -1, -args - 2) != 0)
+            if (LuaAPI.lua_pcall(L, args, -1, -args - 2) != 0)
             {
-                string err = LuaDLL.lua_tostring(L, -1);
-                LuaDLL.lua_settop(L, oldTop - 1);
+                string err = LuaAPI.lua_tostring(L, -1);
+                LuaAPI.lua_settop(L, oldTop - 1);
                 if (err == null) err = "Unknown Lua Error";
                 throw new LuaScriptException(err, "");
             }
@@ -142,7 +142,7 @@ namespace LuaInterface
 
         public void EndPCall(int oldTop)
         {
-            LuaDLL.lua_settop(L, oldTop - 1);
+            LuaAPI.lua_settop(L, oldTop - 1);
         }
 
         public IntPtr GetLuaState()
@@ -150,14 +150,11 @@ namespace LuaInterface
             return L;
         }
 
-        /*
-         * Pushes the function into the Lua stack
-         */
         internal void push(IntPtr luaState)
         {
             if (_Reference != 0)
             {
-                LuaDLL.xlua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
+                LuaAPI.xlua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, _Reference);
             }
             else
             {
@@ -169,7 +166,7 @@ namespace LuaInterface
         {
             if (_Reference != 0)
             {
-                LuaDLL.xlua_rawgeti(L, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
+                LuaAPI.xlua_rawgeti(L, LuaAPI.LUA_REGISTRYINDEX, _Reference);
             }
             else
             {

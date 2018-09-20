@@ -29,7 +29,7 @@ public class DelegateFactoryWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateDelegateFactory(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "DelegateFactory class does not have a constructor function");
+		LuaAPI.luaL_error(L, "DelegateFactory class does not have a constructor function");
 		return 0;
 	}
 

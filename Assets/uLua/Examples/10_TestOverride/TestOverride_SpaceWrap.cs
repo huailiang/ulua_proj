@@ -24,7 +24,7 @@ public class TestOverride_SpaceWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int IntToEnum(IntPtr L)
 	{
-		int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+		int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
 		TestOverride.Space o = (TestOverride.Space)arg0;
 		LuaScriptMgr.Push(L, o);
 		return 1;

@@ -8,7 +8,7 @@ public class ToLua_System_Delegate
 @"        LuaScriptMgr.CheckArgsCount(L, 2);
         Delegate arg0 = LuaScriptMgr.GetLuaObject(L, 1) as Delegate;
         
-        LuaTypes type = LuaDLL.lua_type(L, 2);
+        LuaTypes type = LuaAPI.lua_type(L, 2);
 
         if (type != LuaTypes.LUA_TFUNCTION)
         {

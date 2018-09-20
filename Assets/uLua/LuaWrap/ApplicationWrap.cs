@@ -63,7 +63,7 @@ public class ApplicationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateApplication(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -73,7 +73,7 @@ public class ApplicationWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Application.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Application.New");
 		}
 
 		return 0;
@@ -331,7 +331,7 @@ public class ApplicationWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CanStreamedLevelBeLoaded(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1 && LuaScriptMgr.CheckTypes(L, 1, typeof(string)))
 		{
@@ -342,14 +342,14 @@ public class ApplicationWrap
 		}
 		else if (count == 1 && LuaScriptMgr.CheckTypes(L, 1, typeof(int)))
 		{
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
 			bool o = Application.CanStreamedLevelBeLoaded(arg0);
 			LuaScriptMgr.Push(L, o);
 			return 1;
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Application.CanStreamedLevelBeLoaded");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Application.CanStreamedLevelBeLoaded");
 		}
 
 		return 0;
@@ -387,7 +387,7 @@ public class ApplicationWrap
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		Application.AdvertisingIdentifierCallback arg0 = null;
-		LuaTypes funcType1 = LuaDLL.lua_type(L, 1);
+		LuaTypes funcType1 = LuaAPI.lua_type(L, 1);
 
 		if (funcType1 != LuaTypes.LUA_TFUNCTION)
 		{

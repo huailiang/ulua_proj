@@ -29,7 +29,7 @@ public class LuaInterface_UtilWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateLuaInterface_Util(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -39,7 +39,7 @@ public class LuaInterface_UtilWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: LuaInterface.Util.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: LuaInterface.Util.New");
 		}
 
 		return 0;

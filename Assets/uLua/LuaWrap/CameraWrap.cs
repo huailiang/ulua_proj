@@ -128,7 +128,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateCamera(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -138,7 +138,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.New");
 		}
 
 		return 0;
@@ -182,15 +182,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name nearClipPlane");
+				LuaAPI.luaL_error(L, "unknown member name nearClipPlane");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index nearClipPlane on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index nearClipPlane on a nil value");
 			}
 		}
 
@@ -206,15 +206,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name farClipPlane");
+				LuaAPI.luaL_error(L, "unknown member name farClipPlane");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index farClipPlane on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index farClipPlane on a nil value");
 			}
 		}
 
@@ -230,15 +230,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name fieldOfView");
+				LuaAPI.luaL_error(L, "unknown member name fieldOfView");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index fieldOfView on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index fieldOfView on a nil value");
 			}
 		}
 
@@ -254,15 +254,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name renderingPath");
+				LuaAPI.luaL_error(L, "unknown member name renderingPath");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index renderingPath on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index renderingPath on a nil value");
 			}
 		}
 
@@ -278,15 +278,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name actualRenderingPath");
+				LuaAPI.luaL_error(L, "unknown member name actualRenderingPath");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index actualRenderingPath on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index actualRenderingPath on a nil value");
 			}
 		}
 
@@ -302,15 +302,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name allowHDR");
+				LuaAPI.luaL_error(L, "unknown member name allowHDR");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index allowHDR on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index allowHDR on a nil value");
 			}
 		}
 
@@ -326,15 +326,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name allowMSAA");
+				LuaAPI.luaL_error(L, "unknown member name allowMSAA");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index allowMSAA on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index allowMSAA on a nil value");
 			}
 		}
 
@@ -350,15 +350,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name allowDynamicResolution");
+				LuaAPI.luaL_error(L, "unknown member name allowDynamicResolution");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index allowDynamicResolution on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index allowDynamicResolution on a nil value");
 			}
 		}
 
@@ -374,15 +374,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name forceIntoRenderTexture");
+				LuaAPI.luaL_error(L, "unknown member name forceIntoRenderTexture");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index forceIntoRenderTexture on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index forceIntoRenderTexture on a nil value");
 			}
 		}
 
@@ -398,15 +398,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name orthographicSize");
+				LuaAPI.luaL_error(L, "unknown member name orthographicSize");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index orthographicSize on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index orthographicSize on a nil value");
 			}
 		}
 
@@ -422,15 +422,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name orthographic");
+				LuaAPI.luaL_error(L, "unknown member name orthographic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index orthographic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index orthographic on a nil value");
 			}
 		}
 
@@ -446,15 +446,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name opaqueSortMode");
+				LuaAPI.luaL_error(L, "unknown member name opaqueSortMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index opaqueSortMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index opaqueSortMode on a nil value");
 			}
 		}
 
@@ -470,15 +470,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name transparencySortMode");
+				LuaAPI.luaL_error(L, "unknown member name transparencySortMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index transparencySortMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index transparencySortMode on a nil value");
 			}
 		}
 
@@ -494,15 +494,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name transparencySortAxis");
+				LuaAPI.luaL_error(L, "unknown member name transparencySortAxis");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index transparencySortAxis on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index transparencySortAxis on a nil value");
 			}
 		}
 
@@ -518,15 +518,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depth");
+				LuaAPI.luaL_error(L, "unknown member name depth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depth on a nil value");
 			}
 		}
 
@@ -542,15 +542,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name aspect");
+				LuaAPI.luaL_error(L, "unknown member name aspect");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index aspect on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index aspect on a nil value");
 			}
 		}
 
@@ -566,15 +566,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name velocity");
+				LuaAPI.luaL_error(L, "unknown member name velocity");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index velocity on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index velocity on a nil value");
 			}
 		}
 
@@ -590,15 +590,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cullingMask");
+				LuaAPI.luaL_error(L, "unknown member name cullingMask");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cullingMask on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cullingMask on a nil value");
 			}
 		}
 
@@ -614,15 +614,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name eventMask");
+				LuaAPI.luaL_error(L, "unknown member name eventMask");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index eventMask on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index eventMask on a nil value");
 			}
 		}
 
@@ -638,15 +638,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name layerCullSpherical");
+				LuaAPI.luaL_error(L, "unknown member name layerCullSpherical");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index layerCullSpherical on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index layerCullSpherical on a nil value");
 			}
 		}
 
@@ -662,15 +662,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cameraType");
+				LuaAPI.luaL_error(L, "unknown member name cameraType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cameraType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cameraType on a nil value");
 			}
 		}
 
@@ -686,15 +686,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name layerCullDistances");
+				LuaAPI.luaL_error(L, "unknown member name layerCullDistances");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index layerCullDistances on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index layerCullDistances on a nil value");
 			}
 		}
 
@@ -710,15 +710,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useOcclusionCulling");
+				LuaAPI.luaL_error(L, "unknown member name useOcclusionCulling");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useOcclusionCulling on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useOcclusionCulling on a nil value");
 			}
 		}
 
@@ -734,15 +734,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cullingMatrix");
+				LuaAPI.luaL_error(L, "unknown member name cullingMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cullingMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cullingMatrix on a nil value");
 			}
 		}
 
@@ -758,15 +758,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name backgroundColor");
+				LuaAPI.luaL_error(L, "unknown member name backgroundColor");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index backgroundColor on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index backgroundColor on a nil value");
 			}
 		}
 
@@ -782,15 +782,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name clearFlags");
+				LuaAPI.luaL_error(L, "unknown member name clearFlags");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index clearFlags on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index clearFlags on a nil value");
 			}
 		}
 
@@ -806,15 +806,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depthTextureMode");
+				LuaAPI.luaL_error(L, "unknown member name depthTextureMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depthTextureMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depthTextureMode on a nil value");
 			}
 		}
 
@@ -830,15 +830,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name clearStencilAfterLightingPass");
+				LuaAPI.luaL_error(L, "unknown member name clearStencilAfterLightingPass");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index clearStencilAfterLightingPass on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index clearStencilAfterLightingPass on a nil value");
 			}
 		}
 
@@ -854,15 +854,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name usePhysicalProperties");
+				LuaAPI.luaL_error(L, "unknown member name usePhysicalProperties");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index usePhysicalProperties on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index usePhysicalProperties on a nil value");
 			}
 		}
 
@@ -878,15 +878,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sensorSize");
+				LuaAPI.luaL_error(L, "unknown member name sensorSize");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sensorSize on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sensorSize on a nil value");
 			}
 		}
 
@@ -902,15 +902,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name lensShift");
+				LuaAPI.luaL_error(L, "unknown member name lensShift");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index lensShift on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index lensShift on a nil value");
 			}
 		}
 
@@ -926,15 +926,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name focalLength");
+				LuaAPI.luaL_error(L, "unknown member name focalLength");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index focalLength on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index focalLength on a nil value");
 			}
 		}
 
@@ -950,15 +950,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rect");
+				LuaAPI.luaL_error(L, "unknown member name rect");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rect on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rect on a nil value");
 			}
 		}
 
@@ -974,15 +974,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name pixelRect");
+				LuaAPI.luaL_error(L, "unknown member name pixelRect");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index pixelRect on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index pixelRect on a nil value");
 			}
 		}
 
@@ -998,15 +998,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name pixelWidth");
+				LuaAPI.luaL_error(L, "unknown member name pixelWidth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index pixelWidth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index pixelWidth on a nil value");
 			}
 		}
 
@@ -1022,15 +1022,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name pixelHeight");
+				LuaAPI.luaL_error(L, "unknown member name pixelHeight");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index pixelHeight on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index pixelHeight on a nil value");
 			}
 		}
 
@@ -1046,15 +1046,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name scaledPixelWidth");
+				LuaAPI.luaL_error(L, "unknown member name scaledPixelWidth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index scaledPixelWidth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index scaledPixelWidth on a nil value");
 			}
 		}
 
@@ -1070,15 +1070,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name scaledPixelHeight");
+				LuaAPI.luaL_error(L, "unknown member name scaledPixelHeight");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index scaledPixelHeight on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index scaledPixelHeight on a nil value");
 			}
 		}
 
@@ -1094,15 +1094,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name targetTexture");
+				LuaAPI.luaL_error(L, "unknown member name targetTexture");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index targetTexture on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index targetTexture on a nil value");
 			}
 		}
 
@@ -1118,15 +1118,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name activeTexture");
+				LuaAPI.luaL_error(L, "unknown member name activeTexture");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index activeTexture on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index activeTexture on a nil value");
 			}
 		}
 
@@ -1142,15 +1142,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name targetDisplay");
+				LuaAPI.luaL_error(L, "unknown member name targetDisplay");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index targetDisplay on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index targetDisplay on a nil value");
 			}
 		}
 
@@ -1166,15 +1166,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cameraToWorldMatrix");
+				LuaAPI.luaL_error(L, "unknown member name cameraToWorldMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cameraToWorldMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cameraToWorldMatrix on a nil value");
 			}
 		}
 
@@ -1190,15 +1190,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name worldToCameraMatrix");
+				LuaAPI.luaL_error(L, "unknown member name worldToCameraMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index worldToCameraMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index worldToCameraMatrix on a nil value");
 			}
 		}
 
@@ -1214,15 +1214,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name projectionMatrix");
+				LuaAPI.luaL_error(L, "unknown member name projectionMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index projectionMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index projectionMatrix on a nil value");
 			}
 		}
 
@@ -1238,15 +1238,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name nonJitteredProjectionMatrix");
+				LuaAPI.luaL_error(L, "unknown member name nonJitteredProjectionMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index nonJitteredProjectionMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index nonJitteredProjectionMatrix on a nil value");
 			}
 		}
 
@@ -1262,15 +1262,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useJitteredProjectionMatrixForTransparentRendering");
+				LuaAPI.luaL_error(L, "unknown member name useJitteredProjectionMatrixForTransparentRendering");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useJitteredProjectionMatrixForTransparentRendering on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useJitteredProjectionMatrixForTransparentRendering on a nil value");
 			}
 		}
 
@@ -1286,15 +1286,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name previousViewProjectionMatrix");
+				LuaAPI.luaL_error(L, "unknown member name previousViewProjectionMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index previousViewProjectionMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index previousViewProjectionMatrix on a nil value");
 			}
 		}
 
@@ -1324,15 +1324,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name scene");
+				LuaAPI.luaL_error(L, "unknown member name scene");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index scene on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index scene on a nil value");
 			}
 		}
 
@@ -1348,15 +1348,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoEnabled");
+				LuaAPI.luaL_error(L, "unknown member name stereoEnabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoEnabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoEnabled on a nil value");
 			}
 		}
 
@@ -1372,15 +1372,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoSeparation");
+				LuaAPI.luaL_error(L, "unknown member name stereoSeparation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoSeparation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoSeparation on a nil value");
 			}
 		}
 
@@ -1396,15 +1396,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoConvergence");
+				LuaAPI.luaL_error(L, "unknown member name stereoConvergence");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoConvergence on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoConvergence on a nil value");
 			}
 		}
 
@@ -1420,15 +1420,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name areVRStereoViewMatricesWithinSingleCullTolerance");
+				LuaAPI.luaL_error(L, "unknown member name areVRStereoViewMatricesWithinSingleCullTolerance");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index areVRStereoViewMatricesWithinSingleCullTolerance on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index areVRStereoViewMatricesWithinSingleCullTolerance on a nil value");
 			}
 		}
 
@@ -1444,15 +1444,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoTargetEye");
+				LuaAPI.luaL_error(L, "unknown member name stereoTargetEye");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoTargetEye on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoTargetEye on a nil value");
 			}
 		}
 
@@ -1468,15 +1468,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoActiveEye");
+				LuaAPI.luaL_error(L, "unknown member name stereoActiveEye");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoActiveEye on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoActiveEye on a nil value");
 			}
 		}
 
@@ -1506,15 +1506,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name commandBufferCount");
+				LuaAPI.luaL_error(L, "unknown member name commandBufferCount");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index commandBufferCount on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index commandBufferCount on a nil value");
 			}
 		}
 
@@ -1525,7 +1525,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_onPreCull(IntPtr L)
 	{
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
+		LuaTypes funcType = LuaAPI.lua_type(L, 3);
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
@@ -1548,7 +1548,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_onPreRender(IntPtr L)
 	{
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
+		LuaTypes funcType = LuaAPI.lua_type(L, 3);
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
@@ -1571,7 +1571,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_onPostRender(IntPtr L)
 	{
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
+		LuaTypes funcType = LuaAPI.lua_type(L, 3);
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{
@@ -1599,15 +1599,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name nearClipPlane");
+				LuaAPI.luaL_error(L, "unknown member name nearClipPlane");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index nearClipPlane on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index nearClipPlane on a nil value");
 			}
 		}
 
@@ -1623,15 +1623,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name farClipPlane");
+				LuaAPI.luaL_error(L, "unknown member name farClipPlane");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index farClipPlane on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index farClipPlane on a nil value");
 			}
 		}
 
@@ -1647,15 +1647,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name fieldOfView");
+				LuaAPI.luaL_error(L, "unknown member name fieldOfView");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index fieldOfView on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index fieldOfView on a nil value");
 			}
 		}
 
@@ -1671,15 +1671,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name renderingPath");
+				LuaAPI.luaL_error(L, "unknown member name renderingPath");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index renderingPath on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index renderingPath on a nil value");
 			}
 		}
 
@@ -1695,15 +1695,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name allowHDR");
+				LuaAPI.luaL_error(L, "unknown member name allowHDR");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index allowHDR on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index allowHDR on a nil value");
 			}
 		}
 
@@ -1719,15 +1719,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name allowMSAA");
+				LuaAPI.luaL_error(L, "unknown member name allowMSAA");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index allowMSAA on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index allowMSAA on a nil value");
 			}
 		}
 
@@ -1743,15 +1743,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name allowDynamicResolution");
+				LuaAPI.luaL_error(L, "unknown member name allowDynamicResolution");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index allowDynamicResolution on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index allowDynamicResolution on a nil value");
 			}
 		}
 
@@ -1767,15 +1767,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name forceIntoRenderTexture");
+				LuaAPI.luaL_error(L, "unknown member name forceIntoRenderTexture");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index forceIntoRenderTexture on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index forceIntoRenderTexture on a nil value");
 			}
 		}
 
@@ -1791,15 +1791,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name orthographicSize");
+				LuaAPI.luaL_error(L, "unknown member name orthographicSize");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index orthographicSize on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index orthographicSize on a nil value");
 			}
 		}
 
@@ -1815,15 +1815,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name orthographic");
+				LuaAPI.luaL_error(L, "unknown member name orthographic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index orthographic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index orthographic on a nil value");
 			}
 		}
 
@@ -1839,15 +1839,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name opaqueSortMode");
+				LuaAPI.luaL_error(L, "unknown member name opaqueSortMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index opaqueSortMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index opaqueSortMode on a nil value");
 			}
 		}
 
@@ -1863,15 +1863,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name transparencySortMode");
+				LuaAPI.luaL_error(L, "unknown member name transparencySortMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index transparencySortMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index transparencySortMode on a nil value");
 			}
 		}
 
@@ -1887,15 +1887,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name transparencySortAxis");
+				LuaAPI.luaL_error(L, "unknown member name transparencySortAxis");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index transparencySortAxis on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index transparencySortAxis on a nil value");
 			}
 		}
 
@@ -1911,15 +1911,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depth");
+				LuaAPI.luaL_error(L, "unknown member name depth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depth on a nil value");
 			}
 		}
 
@@ -1935,15 +1935,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name aspect");
+				LuaAPI.luaL_error(L, "unknown member name aspect");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index aspect on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index aspect on a nil value");
 			}
 		}
 
@@ -1959,15 +1959,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cullingMask");
+				LuaAPI.luaL_error(L, "unknown member name cullingMask");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cullingMask on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cullingMask on a nil value");
 			}
 		}
 
@@ -1983,15 +1983,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name eventMask");
+				LuaAPI.luaL_error(L, "unknown member name eventMask");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index eventMask on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index eventMask on a nil value");
 			}
 		}
 
@@ -2007,15 +2007,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name layerCullSpherical");
+				LuaAPI.luaL_error(L, "unknown member name layerCullSpherical");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index layerCullSpherical on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index layerCullSpherical on a nil value");
 			}
 		}
 
@@ -2031,15 +2031,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cameraType");
+				LuaAPI.luaL_error(L, "unknown member name cameraType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cameraType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cameraType on a nil value");
 			}
 		}
 
@@ -2055,15 +2055,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name layerCullDistances");
+				LuaAPI.luaL_error(L, "unknown member name layerCullDistances");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index layerCullDistances on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index layerCullDistances on a nil value");
 			}
 		}
 
@@ -2079,15 +2079,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useOcclusionCulling");
+				LuaAPI.luaL_error(L, "unknown member name useOcclusionCulling");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useOcclusionCulling on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useOcclusionCulling on a nil value");
 			}
 		}
 
@@ -2103,15 +2103,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name cullingMatrix");
+				LuaAPI.luaL_error(L, "unknown member name cullingMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index cullingMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index cullingMatrix on a nil value");
 			}
 		}
 
@@ -2127,15 +2127,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name backgroundColor");
+				LuaAPI.luaL_error(L, "unknown member name backgroundColor");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index backgroundColor on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index backgroundColor on a nil value");
 			}
 		}
 
@@ -2151,15 +2151,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name clearFlags");
+				LuaAPI.luaL_error(L, "unknown member name clearFlags");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index clearFlags on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index clearFlags on a nil value");
 			}
 		}
 
@@ -2175,15 +2175,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depthTextureMode");
+				LuaAPI.luaL_error(L, "unknown member name depthTextureMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depthTextureMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depthTextureMode on a nil value");
 			}
 		}
 
@@ -2199,15 +2199,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name clearStencilAfterLightingPass");
+				LuaAPI.luaL_error(L, "unknown member name clearStencilAfterLightingPass");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index clearStencilAfterLightingPass on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index clearStencilAfterLightingPass on a nil value");
 			}
 		}
 
@@ -2223,15 +2223,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name usePhysicalProperties");
+				LuaAPI.luaL_error(L, "unknown member name usePhysicalProperties");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index usePhysicalProperties on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index usePhysicalProperties on a nil value");
 			}
 		}
 
@@ -2247,15 +2247,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sensorSize");
+				LuaAPI.luaL_error(L, "unknown member name sensorSize");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sensorSize on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sensorSize on a nil value");
 			}
 		}
 
@@ -2271,15 +2271,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name lensShift");
+				LuaAPI.luaL_error(L, "unknown member name lensShift");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index lensShift on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index lensShift on a nil value");
 			}
 		}
 
@@ -2295,15 +2295,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name focalLength");
+				LuaAPI.luaL_error(L, "unknown member name focalLength");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index focalLength on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index focalLength on a nil value");
 			}
 		}
 
@@ -2319,15 +2319,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rect");
+				LuaAPI.luaL_error(L, "unknown member name rect");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rect on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rect on a nil value");
 			}
 		}
 
@@ -2343,15 +2343,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name pixelRect");
+				LuaAPI.luaL_error(L, "unknown member name pixelRect");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index pixelRect on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index pixelRect on a nil value");
 			}
 		}
 
@@ -2367,15 +2367,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name targetTexture");
+				LuaAPI.luaL_error(L, "unknown member name targetTexture");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index targetTexture on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index targetTexture on a nil value");
 			}
 		}
 
@@ -2391,15 +2391,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name targetDisplay");
+				LuaAPI.luaL_error(L, "unknown member name targetDisplay");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index targetDisplay on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index targetDisplay on a nil value");
 			}
 		}
 
@@ -2415,15 +2415,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name worldToCameraMatrix");
+				LuaAPI.luaL_error(L, "unknown member name worldToCameraMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index worldToCameraMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index worldToCameraMatrix on a nil value");
 			}
 		}
 
@@ -2439,15 +2439,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name projectionMatrix");
+				LuaAPI.luaL_error(L, "unknown member name projectionMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index projectionMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index projectionMatrix on a nil value");
 			}
 		}
 
@@ -2463,15 +2463,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name nonJitteredProjectionMatrix");
+				LuaAPI.luaL_error(L, "unknown member name nonJitteredProjectionMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index nonJitteredProjectionMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index nonJitteredProjectionMatrix on a nil value");
 			}
 		}
 
@@ -2487,15 +2487,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useJitteredProjectionMatrixForTransparentRendering");
+				LuaAPI.luaL_error(L, "unknown member name useJitteredProjectionMatrixForTransparentRendering");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useJitteredProjectionMatrixForTransparentRendering on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useJitteredProjectionMatrixForTransparentRendering on a nil value");
 			}
 		}
 
@@ -2511,15 +2511,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name scene");
+				LuaAPI.luaL_error(L, "unknown member name scene");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index scene on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index scene on a nil value");
 			}
 		}
 
@@ -2535,15 +2535,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoSeparation");
+				LuaAPI.luaL_error(L, "unknown member name stereoSeparation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoSeparation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoSeparation on a nil value");
 			}
 		}
 
@@ -2559,15 +2559,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoConvergence");
+				LuaAPI.luaL_error(L, "unknown member name stereoConvergence");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoConvergence on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoConvergence on a nil value");
 			}
 		}
 
@@ -2583,15 +2583,15 @@ public class CameraWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name stereoTargetEye");
+				LuaAPI.luaL_error(L, "unknown member name stereoTargetEye");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index stereoTargetEye on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index stereoTargetEye on a nil value");
 			}
 		}
 
@@ -2669,7 +2669,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetTargetBuffers(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(Camera), typeof(RenderBuffer[]), typeof(RenderBuffer)))
 		{
@@ -2689,7 +2689,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.SetTargetBuffers");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.SetTargetBuffers");
 		}
 
 		return 0;
@@ -2727,7 +2727,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int WorldToScreenPoint(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2748,7 +2748,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.WorldToScreenPoint");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.WorldToScreenPoint");
 		}
 
 		return 0;
@@ -2757,7 +2757,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int WorldToViewportPoint(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2778,7 +2778,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.WorldToViewportPoint");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.WorldToViewportPoint");
 		}
 
 		return 0;
@@ -2787,7 +2787,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ViewportToWorldPoint(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2808,7 +2808,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.ViewportToWorldPoint");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.ViewportToWorldPoint");
 		}
 
 		return 0;
@@ -2817,7 +2817,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ScreenToWorldPoint(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2838,7 +2838,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.ScreenToWorldPoint");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.ScreenToWorldPoint");
 		}
 
 		return 0;
@@ -2869,7 +2869,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ViewportPointToRay(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2890,7 +2890,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.ViewportPointToRay");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.ViewportPointToRay");
 		}
 
 		return 0;
@@ -2899,7 +2899,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ScreenPointToRay(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2920,7 +2920,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.ScreenPointToRay");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.ScreenPointToRay");
 		}
 
 		return 0;
@@ -3057,7 +3057,7 @@ public class CameraWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int RenderToCubemap(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Camera), typeof(Cubemap)))
 		{
@@ -3079,7 +3079,7 @@ public class CameraWrap
 		{
 			Camera obj = (Camera)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Camera");
 			RenderTexture arg0 = (RenderTexture)LuaScriptMgr.GetLuaObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 3);
 			bool o = obj.RenderToCubemap(arg0,arg1);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -3088,7 +3088,7 @@ public class CameraWrap
 		{
 			Camera obj = (Camera)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Camera");
 			Cubemap arg0 = (Cubemap)LuaScriptMgr.GetLuaObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 3);
 			bool o = obj.RenderToCubemap(arg0,arg1);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -3105,7 +3105,7 @@ public class CameraWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Camera.RenderToCubemap");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Camera.RenderToCubemap");
 		}
 
 		return 0;

@@ -29,18 +29,18 @@ public class HelloWorld : MonoBehaviour
 
     internal void PrintSearchers(string tag)
     {
-        LuaDLL.lua_getglobal(l.L, "package");
-        LuaDLL.lua_getfield(l.L, -1, "searchers");
-        LuaDLL.lua_remove(l.L, -2); //remv table package
-        int len = LuaDLL.lua_rawlen(l.L, -1);
+        LuaAPI.lua_getglobal(l.L, "package");
+        LuaAPI.lua_getfield(l.L, -1, "searchers");
+        LuaAPI.lua_remove(l.L, -2); //remv table package
+        int len = LuaAPI.lua_rawlen(l.L, -1);
         string stype = string.Empty;
         for (int i = 1; i <= len; i++)
         {
-            LuaDLL.xlua_rawgeti(l.L, -1, i);
-            stype += LuaDLL.lua_type(l.L, -1) + " ";
-            LuaDLL.xlua_rawseti(l.L, -2, i);
+            LuaAPI.xlua_rawgeti(l.L, -1, i);
+            stype += LuaAPI.lua_type(l.L, -1) + " ";
+            LuaAPI.xlua_rawseti(l.L, -2, i);
         }
         UnityEngine.Debug.Log("===> searchers " + tag + " length: " + len + " type:" + stype);
-        LuaDLL.lua_pop(l.L, 1);
+        LuaAPI.lua_pop(l.L, 1);
     }
 }

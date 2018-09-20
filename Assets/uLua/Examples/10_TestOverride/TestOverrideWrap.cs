@@ -22,7 +22,7 @@ public class TestOverrideWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTestOverride(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -32,7 +32,7 @@ public class TestOverrideWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: TestOverride.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: TestOverride.New");
 		}
 
 		return 0;
@@ -50,7 +50,7 @@ public class TestOverrideWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Test(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(TestOverride), typeof(string)))
 		{
@@ -79,7 +79,7 @@ public class TestOverrideWrap
 		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(TestOverride), typeof(double)))
 		{
 			TestOverride obj = (TestOverride)LuaScriptMgr.GetNetObjectSelf(L, 1, "TestOverride");
-			double arg0 = (double)LuaDLL.lua_tonumber(L, 2);
+			double arg0 = (double)LuaAPI.lua_tonumber(L, 2);
 			int o = obj.Test(arg0);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -95,8 +95,8 @@ public class TestOverrideWrap
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(TestOverride), typeof(int), typeof(int)))
 		{
 			TestOverride obj = (TestOverride)LuaScriptMgr.GetNetObjectSelf(L, 1, "TestOverride");
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 2);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 3);
 			int o = obj.Test(arg0,arg1);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -120,7 +120,7 @@ public class TestOverrideWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: TestOverride.Test");
+			LuaAPI.luaL_error(L, "invalid arguments to method: TestOverride.Test");
 		}
 
 		return 0;

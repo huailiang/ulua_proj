@@ -128,7 +128,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateType(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "Type class does not have a constructor function");
+		LuaAPI.luaL_error(L, "Type class does not have a constructor function");
 		return 0;
 	}
 
@@ -191,15 +191,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Assembly");
+				LuaAPI.luaL_error(L, "unknown member name Assembly");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Assembly on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Assembly on a nil value");
 			}
 		}
 
@@ -215,15 +215,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name AssemblyQualifiedName");
+				LuaAPI.luaL_error(L, "unknown member name AssemblyQualifiedName");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index AssemblyQualifiedName on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index AssemblyQualifiedName on a nil value");
 			}
 		}
 
@@ -239,15 +239,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Attributes");
+				LuaAPI.luaL_error(L, "unknown member name Attributes");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Attributes on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Attributes on a nil value");
 			}
 		}
 
@@ -263,15 +263,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name BaseType");
+				LuaAPI.luaL_error(L, "unknown member name BaseType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index BaseType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index BaseType on a nil value");
 			}
 		}
 
@@ -287,15 +287,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name DeclaringType");
+				LuaAPI.luaL_error(L, "unknown member name DeclaringType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index DeclaringType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index DeclaringType on a nil value");
 			}
 		}
 
@@ -318,15 +318,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name FullName");
+				LuaAPI.luaL_error(L, "unknown member name FullName");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index FullName on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index FullName on a nil value");
 			}
 		}
 
@@ -342,15 +342,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name GUID");
+				LuaAPI.luaL_error(L, "unknown member name GUID");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index GUID on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index GUID on a nil value");
 			}
 		}
 
@@ -366,15 +366,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name HasElementType");
+				LuaAPI.luaL_error(L, "unknown member name HasElementType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index HasElementType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index HasElementType on a nil value");
 			}
 		}
 
@@ -390,15 +390,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsAbstract");
+				LuaAPI.luaL_error(L, "unknown member name IsAbstract");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsAbstract on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsAbstract on a nil value");
 			}
 		}
 
@@ -414,15 +414,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsAnsiClass");
+				LuaAPI.luaL_error(L, "unknown member name IsAnsiClass");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsAnsiClass on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsAnsiClass on a nil value");
 			}
 		}
 
@@ -438,15 +438,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsArray");
+				LuaAPI.luaL_error(L, "unknown member name IsArray");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsArray on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsArray on a nil value");
 			}
 		}
 
@@ -462,15 +462,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsAutoClass");
+				LuaAPI.luaL_error(L, "unknown member name IsAutoClass");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsAutoClass on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsAutoClass on a nil value");
 			}
 		}
 
@@ -486,15 +486,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsAutoLayout");
+				LuaAPI.luaL_error(L, "unknown member name IsAutoLayout");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsAutoLayout on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsAutoLayout on a nil value");
 			}
 		}
 
@@ -510,15 +510,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsByRef");
+				LuaAPI.luaL_error(L, "unknown member name IsByRef");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsByRef on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsByRef on a nil value");
 			}
 		}
 
@@ -534,15 +534,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsClass");
+				LuaAPI.luaL_error(L, "unknown member name IsClass");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsClass on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsClass on a nil value");
 			}
 		}
 
@@ -558,15 +558,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsCOMObject");
+				LuaAPI.luaL_error(L, "unknown member name IsCOMObject");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsCOMObject on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsCOMObject on a nil value");
 			}
 		}
 
@@ -582,15 +582,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsContextful");
+				LuaAPI.luaL_error(L, "unknown member name IsContextful");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsContextful on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsContextful on a nil value");
 			}
 		}
 
@@ -606,15 +606,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsEnum");
+				LuaAPI.luaL_error(L, "unknown member name IsEnum");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsEnum on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsEnum on a nil value");
 			}
 		}
 
@@ -630,15 +630,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsExplicitLayout");
+				LuaAPI.luaL_error(L, "unknown member name IsExplicitLayout");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsExplicitLayout on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsExplicitLayout on a nil value");
 			}
 		}
 
@@ -654,15 +654,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsImport");
+				LuaAPI.luaL_error(L, "unknown member name IsImport");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsImport on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsImport on a nil value");
 			}
 		}
 
@@ -678,15 +678,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsInterface");
+				LuaAPI.luaL_error(L, "unknown member name IsInterface");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsInterface on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsInterface on a nil value");
 			}
 		}
 
@@ -702,15 +702,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsLayoutSequential");
+				LuaAPI.luaL_error(L, "unknown member name IsLayoutSequential");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsLayoutSequential on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsLayoutSequential on a nil value");
 			}
 		}
 
@@ -726,15 +726,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsMarshalByRef");
+				LuaAPI.luaL_error(L, "unknown member name IsMarshalByRef");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsMarshalByRef on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsMarshalByRef on a nil value");
 			}
 		}
 
@@ -750,15 +750,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNestedAssembly");
+				LuaAPI.luaL_error(L, "unknown member name IsNestedAssembly");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNestedAssembly on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNestedAssembly on a nil value");
 			}
 		}
 
@@ -774,15 +774,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNestedFamANDAssem");
+				LuaAPI.luaL_error(L, "unknown member name IsNestedFamANDAssem");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNestedFamANDAssem on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNestedFamANDAssem on a nil value");
 			}
 		}
 
@@ -798,15 +798,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNestedFamily");
+				LuaAPI.luaL_error(L, "unknown member name IsNestedFamily");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNestedFamily on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNestedFamily on a nil value");
 			}
 		}
 
@@ -822,15 +822,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNestedFamORAssem");
+				LuaAPI.luaL_error(L, "unknown member name IsNestedFamORAssem");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNestedFamORAssem on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNestedFamORAssem on a nil value");
 			}
 		}
 
@@ -846,15 +846,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNestedPrivate");
+				LuaAPI.luaL_error(L, "unknown member name IsNestedPrivate");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNestedPrivate on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNestedPrivate on a nil value");
 			}
 		}
 
@@ -870,15 +870,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNestedPublic");
+				LuaAPI.luaL_error(L, "unknown member name IsNestedPublic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNestedPublic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNestedPublic on a nil value");
 			}
 		}
 
@@ -894,15 +894,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNotPublic");
+				LuaAPI.luaL_error(L, "unknown member name IsNotPublic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNotPublic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNotPublic on a nil value");
 			}
 		}
 
@@ -918,15 +918,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsPointer");
+				LuaAPI.luaL_error(L, "unknown member name IsPointer");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsPointer on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsPointer on a nil value");
 			}
 		}
 
@@ -942,15 +942,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsPrimitive");
+				LuaAPI.luaL_error(L, "unknown member name IsPrimitive");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsPrimitive on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsPrimitive on a nil value");
 			}
 		}
 
@@ -966,15 +966,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsPublic");
+				LuaAPI.luaL_error(L, "unknown member name IsPublic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsPublic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsPublic on a nil value");
 			}
 		}
 
@@ -990,15 +990,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsSealed");
+				LuaAPI.luaL_error(L, "unknown member name IsSealed");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsSealed on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsSealed on a nil value");
 			}
 		}
 
@@ -1014,15 +1014,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsSerializable");
+				LuaAPI.luaL_error(L, "unknown member name IsSerializable");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsSerializable on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsSerializable on a nil value");
 			}
 		}
 
@@ -1038,15 +1038,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsSpecialName");
+				LuaAPI.luaL_error(L, "unknown member name IsSpecialName");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsSpecialName on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsSpecialName on a nil value");
 			}
 		}
 
@@ -1062,15 +1062,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsUnicodeClass");
+				LuaAPI.luaL_error(L, "unknown member name IsUnicodeClass");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsUnicodeClass on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsUnicodeClass on a nil value");
 			}
 		}
 
@@ -1086,15 +1086,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsValueType");
+				LuaAPI.luaL_error(L, "unknown member name IsValueType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsValueType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsValueType on a nil value");
 			}
 		}
 
@@ -1110,15 +1110,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name MemberType");
+				LuaAPI.luaL_error(L, "unknown member name MemberType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index MemberType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index MemberType on a nil value");
 			}
 		}
 
@@ -1134,15 +1134,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Module");
+				LuaAPI.luaL_error(L, "unknown member name Module");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Module on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Module on a nil value");
 			}
 		}
 
@@ -1158,15 +1158,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Namespace");
+				LuaAPI.luaL_error(L, "unknown member name Namespace");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Namespace on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Namespace on a nil value");
 			}
 		}
 
@@ -1182,15 +1182,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name ReflectedType");
+				LuaAPI.luaL_error(L, "unknown member name ReflectedType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index ReflectedType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index ReflectedType on a nil value");
 			}
 		}
 
@@ -1206,15 +1206,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name TypeHandle");
+				LuaAPI.luaL_error(L, "unknown member name TypeHandle");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index TypeHandle on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index TypeHandle on a nil value");
 			}
 		}
 
@@ -1230,15 +1230,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name TypeInitializer");
+				LuaAPI.luaL_error(L, "unknown member name TypeInitializer");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index TypeInitializer on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index TypeInitializer on a nil value");
 			}
 		}
 
@@ -1254,15 +1254,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name UnderlyingSystemType");
+				LuaAPI.luaL_error(L, "unknown member name UnderlyingSystemType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index UnderlyingSystemType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index UnderlyingSystemType on a nil value");
 			}
 		}
 
@@ -1278,15 +1278,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name ContainsGenericParameters");
+				LuaAPI.luaL_error(L, "unknown member name ContainsGenericParameters");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index ContainsGenericParameters on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index ContainsGenericParameters on a nil value");
 			}
 		}
 
@@ -1302,15 +1302,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsGenericTypeDefinition");
+				LuaAPI.luaL_error(L, "unknown member name IsGenericTypeDefinition");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsGenericTypeDefinition on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsGenericTypeDefinition on a nil value");
 			}
 		}
 
@@ -1326,15 +1326,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsGenericType");
+				LuaAPI.luaL_error(L, "unknown member name IsGenericType");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsGenericType on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsGenericType on a nil value");
 			}
 		}
 
@@ -1350,15 +1350,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsGenericParameter");
+				LuaAPI.luaL_error(L, "unknown member name IsGenericParameter");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsGenericParameter on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsGenericParameter on a nil value");
 			}
 		}
 
@@ -1374,15 +1374,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsNested");
+				LuaAPI.luaL_error(L, "unknown member name IsNested");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsNested on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsNested on a nil value");
 			}
 		}
 
@@ -1398,15 +1398,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name IsVisible");
+				LuaAPI.luaL_error(L, "unknown member name IsVisible");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index IsVisible on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index IsVisible on a nil value");
 			}
 		}
 
@@ -1422,15 +1422,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name GenericParameterPosition");
+				LuaAPI.luaL_error(L, "unknown member name GenericParameterPosition");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index GenericParameterPosition on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index GenericParameterPosition on a nil value");
 			}
 		}
 
@@ -1446,15 +1446,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name GenericParameterAttributes");
+				LuaAPI.luaL_error(L, "unknown member name GenericParameterAttributes");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index GenericParameterAttributes on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index GenericParameterAttributes on a nil value");
 			}
 		}
 
@@ -1470,15 +1470,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name DeclaringMethod");
+				LuaAPI.luaL_error(L, "unknown member name DeclaringMethod");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index DeclaringMethod on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index DeclaringMethod on a nil value");
 			}
 		}
 
@@ -1494,15 +1494,15 @@ public class TypeWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name StructLayoutAttribute");
+				LuaAPI.luaL_error(L, "unknown member name StructLayoutAttribute");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index StructLayoutAttribute on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index StructLayoutAttribute on a nil value");
 			}
 		}
 
@@ -1530,7 +1530,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Equals(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Type), typeof(Type)))
 		{
@@ -1550,7 +1550,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.Equals");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.Equals");
 		}
 
 		return 0;
@@ -1559,7 +1559,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetType(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1594,7 +1594,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetType");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetType");
 		}
 
 		return 0;
@@ -1623,7 +1623,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetTypeFromCLSID(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1643,7 +1643,7 @@ public class TypeWrap
 		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Guid), typeof(bool)))
 		{
 			Guid arg0 = (Guid)LuaScriptMgr.GetLuaObject(L, 1);
-			bool arg1 = LuaDLL.lua_toboolean(L, 2);
+			bool arg1 = LuaAPI.lua_toboolean(L, 2);
 			Type o = Type.GetTypeFromCLSID(arg0,arg1);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -1659,7 +1659,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetTypeFromCLSID");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetTypeFromCLSID");
 		}
 
 		return 0;
@@ -1678,7 +1678,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetTypeFromProgID(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1698,7 +1698,7 @@ public class TypeWrap
 		else if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(string), typeof(bool)))
 		{
 			string arg0 = LuaScriptMgr.GetString(L, 1);
-			bool arg1 = LuaDLL.lua_toboolean(L, 2);
+			bool arg1 = LuaAPI.lua_toboolean(L, 2);
 			Type o = Type.GetTypeFromProgID(arg0,arg1);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -1714,7 +1714,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetTypeFromProgID");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetTypeFromProgID");
 		}
 
 		return 0;
@@ -1747,7 +1747,7 @@ public class TypeWrap
 		LuaScriptMgr.CheckArgsCount(L, 3);
 		Type obj = LuaScriptMgr.GetTypeObject(L, 1);
 		System.Reflection.TypeFilter arg0 = null;
-		LuaTypes funcType2 = LuaDLL.lua_type(L, 2);
+		LuaTypes funcType2 = LuaAPI.lua_type(L, 2);
 
 		if (funcType2 != LuaTypes.LUA_TFUNCTION)
 		{
@@ -1777,7 +1777,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetInterface(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1798,7 +1798,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetInterface");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetInterface");
 		}
 
 		return 0;
@@ -1870,7 +1870,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetEvent(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1891,7 +1891,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetEvent");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetEvent");
 		}
 
 		return 0;
@@ -1900,7 +1900,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetEvents(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1919,7 +1919,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetEvents");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetEvents");
 		}
 
 		return 0;
@@ -1928,7 +1928,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetField(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1949,7 +1949,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetField");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetField");
 		}
 
 		return 0;
@@ -1958,7 +1958,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetFields(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1977,7 +1977,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetFields");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetFields");
 		}
 
 		return 0;
@@ -1996,7 +1996,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetMember(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2027,7 +2027,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetMember");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetMember");
 		}
 
 		return 0;
@@ -2036,7 +2036,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetMembers(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -2055,7 +2055,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetMembers");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetMembers");
 		}
 
 		return 0;
@@ -2064,7 +2064,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetMethod(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2129,7 +2129,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetMethod");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetMethod");
 		}
 
 		return 0;
@@ -2138,7 +2138,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetMethods(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -2157,7 +2157,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetMethods");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetMethods");
 		}
 
 		return 0;
@@ -2166,7 +2166,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetNestedType(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2187,7 +2187,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetNestedType");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetNestedType");
 		}
 
 		return 0;
@@ -2196,7 +2196,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetNestedTypes(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -2215,7 +2215,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetNestedTypes");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetNestedTypes");
 		}
 
 		return 0;
@@ -2224,7 +2224,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetProperties(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -2243,7 +2243,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetProperties");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetProperties");
 		}
 
 		return 0;
@@ -2252,7 +2252,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetProperty(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2325,7 +2325,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetProperty");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetProperty");
 		}
 
 		return 0;
@@ -2334,7 +2334,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetConstructor(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -2369,7 +2369,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetConstructor");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetConstructor");
 		}
 
 		return 0;
@@ -2378,7 +2378,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetConstructors(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -2397,7 +2397,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.GetConstructors");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.GetConstructors");
 		}
 
 		return 0;
@@ -2421,7 +2421,7 @@ public class TypeWrap
 		System.Reflection.MemberTypes arg0 = (System.Reflection.MemberTypes)LuaScriptMgr.GetNetObject(L, 2, typeof(System.Reflection.MemberTypes));
 		System.Reflection.BindingFlags arg1 = (System.Reflection.BindingFlags)LuaScriptMgr.GetNetObject(L, 3, typeof(System.Reflection.BindingFlags));
 		System.Reflection.MemberFilter arg2 = null;
-		LuaTypes funcType4 = LuaDLL.lua_type(L, 4);
+		LuaTypes funcType4 = LuaAPI.lua_type(L, 4);
 
 		if (funcType4 != LuaTypes.LUA_TFUNCTION)
 		{
@@ -2451,7 +2451,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int InvokeMember(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 6)
 		{
@@ -2495,7 +2495,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.InvokeMember");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.InvokeMember");
 		}
 
 		return 0;
@@ -2534,7 +2534,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int MakeGenericType(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 		Type obj = LuaScriptMgr.GetTypeObject(L, 1);
 		Type[] objs0 = LuaScriptMgr.GetParamsObject<Type>(L, 2, count - 1);
 		Type o = obj.MakeGenericType(objs0);
@@ -2555,7 +2555,7 @@ public class TypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int MakeArrayType(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -2574,7 +2574,7 @@ public class TypeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Type.MakeArrayType");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Type.MakeArrayType");
 		}
 
 		return 0;

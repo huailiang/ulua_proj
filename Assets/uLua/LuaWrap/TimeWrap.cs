@@ -40,7 +40,7 @@ public class TimeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTime(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -50,7 +50,7 @@ public class TimeWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Time.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Time.New");
 		}
 
 		return 0;

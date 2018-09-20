@@ -22,7 +22,7 @@ public class TestProtolWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTestProtol(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "TestProtol class does not have a constructor function");
+		LuaAPI.luaL_error(L, "TestProtol class does not have a constructor function");
 		return 0;
 	}
 

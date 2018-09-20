@@ -37,7 +37,7 @@ public class EnumWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateEnum(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "Enum class does not have a constructor function");
+		LuaAPI.luaL_error(L, "Enum class does not have a constructor function");
 		return 0;
 	}
 
@@ -132,7 +132,7 @@ public class EnumWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Parse(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -153,7 +153,7 @@ public class EnumWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Enum.Parse");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Enum.Parse");
 		}
 
 		return 0;
@@ -173,7 +173,7 @@ public class EnumWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ToString(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -192,7 +192,7 @@ public class EnumWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Enum.ToString");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Enum.ToString");
 		}
 
 		return 0;
@@ -201,12 +201,12 @@ public class EnumWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ToObject(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Type), typeof(long)))
 		{
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
-			long arg1 = (long)LuaDLL.lua_tonumber(L, 2);
+			long arg1 = (long)LuaAPI.lua_tonumber(L, 2);
 			object o = Enum.ToObject(arg0,arg1);
 			LuaScriptMgr.PushVarObject(L, o);
 			return 1;
@@ -221,7 +221,7 @@ public class EnumWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Enum.ToObject");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Enum.ToObject");
 		}
 
 		return 0;

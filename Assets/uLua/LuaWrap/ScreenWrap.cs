@@ -37,7 +37,7 @@ public class ScreenWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateScreen(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -47,7 +47,7 @@ public class ScreenWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Screen.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Screen.New");
 		}
 
 		return 0;
@@ -219,45 +219,45 @@ public class ScreenWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetResolution(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(bool)))
 		{
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
-			bool arg2 = LuaDLL.lua_toboolean(L, 3);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 2);
+			bool arg2 = LuaAPI.lua_toboolean(L, 3);
 			Screen.SetResolution(arg0,arg1,arg2);
 			return 0;
 		}
 		else if (count == 3 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(FullScreenMode)))
 		{
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 2);
 			FullScreenMode arg2 = (FullScreenMode)LuaScriptMgr.GetLuaObject(L, 3);
 			Screen.SetResolution(arg0,arg1,arg2);
 			return 0;
 		}
 		else if (count == 4 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(FullScreenMode), typeof(int)))
 		{
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 2);
 			FullScreenMode arg2 = (FullScreenMode)LuaScriptMgr.GetLuaObject(L, 3);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
+			int arg3 = (int)LuaAPI.lua_tonumber(L, 4);
 			Screen.SetResolution(arg0,arg1,arg2,arg3);
 			return 0;
 		}
 		else if (count == 4 && LuaScriptMgr.CheckTypes(L, 1, typeof(int), typeof(int), typeof(bool), typeof(int)))
 		{
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
-			bool arg2 = LuaDLL.lua_toboolean(L, 3);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
+			int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
+			int arg1 = (int)LuaAPI.lua_tonumber(L, 2);
+			bool arg2 = LuaAPI.lua_toboolean(L, 3);
+			int arg3 = (int)LuaAPI.lua_tonumber(L, 4);
 			Screen.SetResolution(arg0,arg1,arg2,arg3);
 			return 0;
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Screen.SetResolution");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Screen.SetResolution");
 		}
 
 		return 0;

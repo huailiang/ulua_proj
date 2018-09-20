@@ -22,7 +22,7 @@ public class TestLuaDelegateWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTestLuaDelegate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -32,7 +32,7 @@ public class TestLuaDelegateWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: TestLuaDelegate.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: TestLuaDelegate.New");
 		}
 
 		return 0;
@@ -55,15 +55,15 @@ public class TestLuaDelegateWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name onClick");
+				LuaAPI.luaL_error(L, "unknown member name onClick");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index onClick on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index onClick on a nil value");
 			}
 		}
 
@@ -79,19 +79,19 @@ public class TestLuaDelegateWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name onClick");
+				LuaAPI.luaL_error(L, "unknown member name onClick");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index onClick on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index onClick on a nil value");
 			}
 		}
 
-		LuaTypes funcType = LuaDLL.lua_type(L, 3);
+		LuaTypes funcType = LuaAPI.lua_type(L, 3);
 
 		if (funcType != LuaTypes.LUA_TFUNCTION)
 		{

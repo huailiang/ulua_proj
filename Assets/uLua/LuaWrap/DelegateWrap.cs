@@ -36,7 +36,7 @@ public class DelegateWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateDelegate(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "Delegate class does not have a constructor function");
+		LuaAPI.luaL_error(L, "Delegate class does not have a constructor function");
 		return 0;
 	}
 
@@ -57,15 +57,15 @@ public class DelegateWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Method");
+				LuaAPI.luaL_error(L, "unknown member name Method");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Method on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Method on a nil value");
 			}
 		}
 
@@ -81,15 +81,15 @@ public class DelegateWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Target");
+				LuaAPI.luaL_error(L, "unknown member name Target");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Target on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Target on a nil value");
 			}
 		}
 
@@ -100,7 +100,7 @@ public class DelegateWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CreateDelegate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -114,7 +114,7 @@ public class DelegateWrap
 		{
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
 			System.Reflection.MethodInfo arg1 = (System.Reflection.MethodInfo)LuaScriptMgr.GetLuaObject(L, 2);
-			bool arg2 = LuaDLL.lua_toboolean(L, 3);
+			bool arg2 = LuaAPI.lua_toboolean(L, 3);
 			Delegate o = Delegate.CreateDelegate(arg0,arg1,arg2);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -151,7 +151,7 @@ public class DelegateWrap
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
 			Type arg1 = LuaScriptMgr.GetTypeObject(L, 2);
 			string arg2 = LuaScriptMgr.GetString(L, 3);
-			bool arg3 = LuaDLL.lua_toboolean(L, 4);
+			bool arg3 = LuaAPI.lua_toboolean(L, 4);
 			Delegate o = Delegate.CreateDelegate(arg0,arg1,arg2,arg3);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -161,7 +161,7 @@ public class DelegateWrap
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
 			object arg1 = LuaScriptMgr.GetVarObject(L, 2);
 			string arg2 = LuaScriptMgr.GetString(L, 3);
-			bool arg3 = LuaDLL.lua_toboolean(L, 4);
+			bool arg3 = LuaAPI.lua_toboolean(L, 4);
 			Delegate o = Delegate.CreateDelegate(arg0,arg1,arg2,arg3);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -171,7 +171,7 @@ public class DelegateWrap
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
 			object arg1 = LuaScriptMgr.GetVarObject(L, 2);
 			System.Reflection.MethodInfo arg2 = (System.Reflection.MethodInfo)LuaScriptMgr.GetLuaObject(L, 3);
-			bool arg3 = LuaDLL.lua_toboolean(L, 4);
+			bool arg3 = LuaAPI.lua_toboolean(L, 4);
 			Delegate o = Delegate.CreateDelegate(arg0,arg1,arg2,arg3);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -181,8 +181,8 @@ public class DelegateWrap
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
 			Type arg1 = LuaScriptMgr.GetTypeObject(L, 2);
 			string arg2 = LuaScriptMgr.GetString(L, 3);
-			bool arg3 = LuaDLL.lua_toboolean(L, 4);
-			bool arg4 = LuaDLL.lua_toboolean(L, 5);
+			bool arg3 = LuaAPI.lua_toboolean(L, 4);
+			bool arg4 = LuaAPI.lua_toboolean(L, 5);
 			Delegate o = Delegate.CreateDelegate(arg0,arg1,arg2,arg3,arg4);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -192,15 +192,15 @@ public class DelegateWrap
 			Type arg0 = LuaScriptMgr.GetTypeObject(L, 1);
 			object arg1 = LuaScriptMgr.GetVarObject(L, 2);
 			string arg2 = LuaScriptMgr.GetString(L, 3);
-			bool arg3 = LuaDLL.lua_toboolean(L, 4);
-			bool arg4 = LuaDLL.lua_toboolean(L, 5);
+			bool arg3 = LuaAPI.lua_toboolean(L, 4);
+			bool arg4 = LuaAPI.lua_toboolean(L, 5);
 			Delegate o = Delegate.CreateDelegate(arg0,arg1,arg2,arg3,arg4);
 			LuaScriptMgr.Push(L, o);
 			return 1;
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Delegate.CreateDelegate");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Delegate.CreateDelegate");
 		}
 
 		return 0;
@@ -209,7 +209,7 @@ public class DelegateWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int DynamicInvoke(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 		Delegate obj = (Delegate)LuaScriptMgr.GetNetObjectSelf(L, 1, "Delegate");
 		object[] objs0 = LuaScriptMgr.GetParamsObject(L, 2, count - 1);
 		object o = obj.DynamicInvoke(objs0);
@@ -251,7 +251,7 @@ public class DelegateWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Combine(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -270,7 +270,7 @@ public class DelegateWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Delegate.Combine");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Delegate.Combine");
 		}
 
 		return 0;
@@ -337,7 +337,7 @@ public class DelegateWrap
         LuaScriptMgr.CheckArgsCount(L, 2);
         Delegate arg0 = LuaScriptMgr.GetLuaObject(L, 1) as Delegate;
         
-        LuaTypes type = LuaDLL.lua_type(L, 2);
+        LuaTypes type = LuaAPI.lua_type(L, 2);
 
         if (type != LuaTypes.LUA_TFUNCTION)
         {

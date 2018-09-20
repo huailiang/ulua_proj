@@ -6,7 +6,7 @@ public class ToLua_UnityEngine_Object
 {
     [NoToLuaAttribute]
     public static string DestroyDefined =
-@"		int count = LuaDLL.lua_gettop(L);
+@"		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -24,14 +24,14 @@ public class ToLua_UnityEngine_Object
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, ""invalid arguments to method: Object.Destroy"");
+			LuaAPI.luaL_error(L, ""invalid arguments to method: Object.Destroy"");
 		}
 
 		return 0;
 ";
     [NoToLuaAttribute]
     public static string DestroyImmediateDefined =
-@"		int count = LuaDLL.lua_gettop(L);
+@"		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -49,7 +49,7 @@ public class ToLua_UnityEngine_Object
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, ""invalid arguments to method: Object.DestroyImmediate"");
+			LuaAPI.luaL_error(L, ""invalid arguments to method: Object.DestroyImmediate"");
 		}
 
 		return 0;
@@ -57,7 +57,7 @@ public class ToLua_UnityEngine_Object
 
     [NoToLuaAttribute]
     public static string DestroyObjectDefined =
-@"		int count = LuaDLL.lua_gettop(L);
+@"		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -75,7 +75,7 @@ public class ToLua_UnityEngine_Object
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, ""invalid arguments to method: Object.DestroyObject"");
+			LuaAPI.luaL_error(L, ""invalid arguments to method: Object.DestroyObject"");
 		}
 
 		return 0;

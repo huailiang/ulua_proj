@@ -13,12 +13,13 @@
 此项目旨在提供一套通用的方式生成lua的库，工程使用的unity版本是2018.2.7
 
 
-### 项目结构：
+### 项目目录结构：
 ```
-1.  Assets/ 目录 Unity的资源目录
+1.  Assets/  Unity的资源目录
 2.  build/  提供luajit lua53等lua原码库，当然你可以去官网下载 以及不同平台的编译脚本
 3.  cpp_proj/  c++工程，用来直接在c++环境里调试lua代码特性 
 4.  Shell/ 用来lua原码编译对应到的bytecode，为了加密和优化
+5.  doc/   说明文档及教程
 ```
 
 
@@ -141,10 +142,10 @@ public static int luaL_typerror(IntPtr luaState, int narg, string tname)
 
 7. lua_rawgeti，lua_rawseti
 
-这两个方法第三个参数在lua53中定义为lua_Integer，其在32位、64位机子对应到c#不同的整形数据， 所以我们采取和xlua一样的调用方式
+这两个方法法的第三个参数在lua53中定义为lua_Integer，其在32位、64位机子对应到c#不同的整形数据， 所以我们采取和xlua一样的处理方式
 
 
-在c#中参数直接定义成long类型：
+在c#中第三个参数直接定义成long类型：
 
 ```csharp
 [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
@@ -153,7 +154,7 @@ public static extern void xlua_rawgeti(IntPtr luaState, int tableIndex, long ind
 public static extern void xlua_rawseti(IntPtr luaState, int tableIndex, long index);
 ```
 
-在c++中再做类型转换：
+然后在c++中再做类型转换：
 
 ```c++
 LUA_API void xlua_rawgeti (lua_State *L, int idx, int64_t n) {

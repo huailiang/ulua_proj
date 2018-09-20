@@ -28,7 +28,7 @@ public class System_ObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateSystem_Object(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -38,7 +38,7 @@ public class System_ObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: object.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: object.New");
 		}
 
 		return 0;

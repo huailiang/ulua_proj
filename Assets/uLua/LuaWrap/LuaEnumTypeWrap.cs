@@ -48,7 +48,7 @@ public class LuaEnumTypeWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int IntToEnum(IntPtr L)
 	{
-		int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+		int arg0 = (int)LuaAPI.lua_tonumber(L, 1);
 		LuaEnumType o = (LuaEnumType)arg0;
 		LuaScriptMgr.Push(L, o);
 		return 1;

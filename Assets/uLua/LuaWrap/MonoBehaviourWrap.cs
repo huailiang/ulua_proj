@@ -34,7 +34,7 @@ public class MonoBehaviourWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateMonoBehaviour(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "MonoBehaviour class does not have a constructor function");
+		LuaAPI.luaL_error(L, "MonoBehaviour class does not have a constructor function");
 		return 0;
 	}
 
@@ -55,15 +55,15 @@ public class MonoBehaviourWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useGUILayout");
+				LuaAPI.luaL_error(L, "unknown member name useGUILayout");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useGUILayout on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useGUILayout on a nil value");
 			}
 		}
 
@@ -79,15 +79,15 @@ public class MonoBehaviourWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useGUILayout");
+				LuaAPI.luaL_error(L, "unknown member name useGUILayout");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useGUILayout on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useGUILayout on a nil value");
 			}
 		}
 
@@ -98,7 +98,7 @@ public class MonoBehaviourWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int IsInvoking(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -117,7 +117,7 @@ public class MonoBehaviourWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: MonoBehaviour.IsInvoking");
+			LuaAPI.luaL_error(L, "invalid arguments to method: MonoBehaviour.IsInvoking");
 		}
 
 		return 0;
@@ -126,7 +126,7 @@ public class MonoBehaviourWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CancelInvoke(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -143,7 +143,7 @@ public class MonoBehaviourWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: MonoBehaviour.CancelInvoke");
+			LuaAPI.luaL_error(L, "invalid arguments to method: MonoBehaviour.CancelInvoke");
 		}
 
 		return 0;
@@ -175,7 +175,7 @@ public class MonoBehaviourWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int StartCoroutine(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(MonoBehaviour), typeof(IEnumerator)))
 		{
@@ -204,7 +204,7 @@ public class MonoBehaviourWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: MonoBehaviour.StartCoroutine");
+			LuaAPI.luaL_error(L, "invalid arguments to method: MonoBehaviour.StartCoroutine");
 		}
 
 		return 0;
@@ -213,7 +213,7 @@ public class MonoBehaviourWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int StopCoroutine(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(MonoBehaviour), typeof(string)))
 		{
@@ -238,7 +238,7 @@ public class MonoBehaviourWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: MonoBehaviour.StopCoroutine");
+			LuaAPI.luaL_error(L, "invalid arguments to method: MonoBehaviour.StopCoroutine");
 		}
 
 		return 0;

@@ -57,7 +57,7 @@ public class RenderTextureWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateRenderTexture(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1 && LuaScriptMgr.CheckTypes(L, 1, typeof(RenderTexture)))
 		{
@@ -115,7 +115,7 @@ public class RenderTextureWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: RenderTexture.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: RenderTexture.New");
 		}
 
 		return 0;
@@ -138,15 +138,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depth");
+				LuaAPI.luaL_error(L, "unknown member name depth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depth on a nil value");
 			}
 		}
 
@@ -162,15 +162,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name width");
+				LuaAPI.luaL_error(L, "unknown member name width");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index width on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index width on a nil value");
 			}
 		}
 
@@ -186,15 +186,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name height");
+				LuaAPI.luaL_error(L, "unknown member name height");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index height on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index height on a nil value");
 			}
 		}
 
@@ -210,15 +210,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name dimension");
+				LuaAPI.luaL_error(L, "unknown member name dimension");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index dimension on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index dimension on a nil value");
 			}
 		}
 
@@ -234,15 +234,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useMipMap");
+				LuaAPI.luaL_error(L, "unknown member name useMipMap");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useMipMap on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useMipMap on a nil value");
 			}
 		}
 
@@ -258,15 +258,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sRGB");
+				LuaAPI.luaL_error(L, "unknown member name sRGB");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sRGB on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sRGB on a nil value");
 			}
 		}
 
@@ -282,15 +282,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name format");
+				LuaAPI.luaL_error(L, "unknown member name format");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index format on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index format on a nil value");
 			}
 		}
 
@@ -306,15 +306,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name vrUsage");
+				LuaAPI.luaL_error(L, "unknown member name vrUsage");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index vrUsage on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index vrUsage on a nil value");
 			}
 		}
 
@@ -330,15 +330,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name memorylessMode");
+				LuaAPI.luaL_error(L, "unknown member name memorylessMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index memorylessMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index memorylessMode on a nil value");
 			}
 		}
 
@@ -354,15 +354,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name autoGenerateMips");
+				LuaAPI.luaL_error(L, "unknown member name autoGenerateMips");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index autoGenerateMips on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index autoGenerateMips on a nil value");
 			}
 		}
 
@@ -378,15 +378,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name volumeDepth");
+				LuaAPI.luaL_error(L, "unknown member name volumeDepth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index volumeDepth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index volumeDepth on a nil value");
 			}
 		}
 
@@ -402,15 +402,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name antiAliasing");
+				LuaAPI.luaL_error(L, "unknown member name antiAliasing");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index antiAliasing on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index antiAliasing on a nil value");
 			}
 		}
 
@@ -426,15 +426,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name bindTextureMS");
+				LuaAPI.luaL_error(L, "unknown member name bindTextureMS");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index bindTextureMS on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index bindTextureMS on a nil value");
 			}
 		}
 
@@ -450,15 +450,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enableRandomWrite");
+				LuaAPI.luaL_error(L, "unknown member name enableRandomWrite");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enableRandomWrite on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enableRandomWrite on a nil value");
 			}
 		}
 
@@ -474,15 +474,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useDynamicScale");
+				LuaAPI.luaL_error(L, "unknown member name useDynamicScale");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useDynamicScale on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useDynamicScale on a nil value");
 			}
 		}
 
@@ -498,15 +498,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isPowerOfTwo");
+				LuaAPI.luaL_error(L, "unknown member name isPowerOfTwo");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isPowerOfTwo on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isPowerOfTwo on a nil value");
 			}
 		}
 
@@ -529,15 +529,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name colorBuffer");
+				LuaAPI.luaL_error(L, "unknown member name colorBuffer");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index colorBuffer on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index colorBuffer on a nil value");
 			}
 		}
 
@@ -553,15 +553,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depthBuffer");
+				LuaAPI.luaL_error(L, "unknown member name depthBuffer");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depthBuffer on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depthBuffer on a nil value");
 			}
 		}
 
@@ -577,15 +577,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name descriptor");
+				LuaAPI.luaL_error(L, "unknown member name descriptor");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index descriptor on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index descriptor on a nil value");
 			}
 		}
 
@@ -601,15 +601,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name depth");
+				LuaAPI.luaL_error(L, "unknown member name depth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index depth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index depth on a nil value");
 			}
 		}
 
@@ -625,15 +625,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name width");
+				LuaAPI.luaL_error(L, "unknown member name width");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index width on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index width on a nil value");
 			}
 		}
 
@@ -649,15 +649,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name height");
+				LuaAPI.luaL_error(L, "unknown member name height");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index height on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index height on a nil value");
 			}
 		}
 
@@ -673,15 +673,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name dimension");
+				LuaAPI.luaL_error(L, "unknown member name dimension");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index dimension on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index dimension on a nil value");
 			}
 		}
 
@@ -697,15 +697,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useMipMap");
+				LuaAPI.luaL_error(L, "unknown member name useMipMap");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useMipMap on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useMipMap on a nil value");
 			}
 		}
 
@@ -721,15 +721,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name format");
+				LuaAPI.luaL_error(L, "unknown member name format");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index format on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index format on a nil value");
 			}
 		}
 
@@ -745,15 +745,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name vrUsage");
+				LuaAPI.luaL_error(L, "unknown member name vrUsage");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index vrUsage on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index vrUsage on a nil value");
 			}
 		}
 
@@ -769,15 +769,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name memorylessMode");
+				LuaAPI.luaL_error(L, "unknown member name memorylessMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index memorylessMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index memorylessMode on a nil value");
 			}
 		}
 
@@ -793,15 +793,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name autoGenerateMips");
+				LuaAPI.luaL_error(L, "unknown member name autoGenerateMips");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index autoGenerateMips on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index autoGenerateMips on a nil value");
 			}
 		}
 
@@ -817,15 +817,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name volumeDepth");
+				LuaAPI.luaL_error(L, "unknown member name volumeDepth");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index volumeDepth on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index volumeDepth on a nil value");
 			}
 		}
 
@@ -841,15 +841,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name antiAliasing");
+				LuaAPI.luaL_error(L, "unknown member name antiAliasing");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index antiAliasing on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index antiAliasing on a nil value");
 			}
 		}
 
@@ -865,15 +865,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name bindTextureMS");
+				LuaAPI.luaL_error(L, "unknown member name bindTextureMS");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index bindTextureMS on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index bindTextureMS on a nil value");
 			}
 		}
 
@@ -889,15 +889,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enableRandomWrite");
+				LuaAPI.luaL_error(L, "unknown member name enableRandomWrite");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enableRandomWrite on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enableRandomWrite on a nil value");
 			}
 		}
 
@@ -913,15 +913,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name useDynamicScale");
+				LuaAPI.luaL_error(L, "unknown member name useDynamicScale");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index useDynamicScale on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index useDynamicScale on a nil value");
 			}
 		}
 
@@ -937,15 +937,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isPowerOfTwo");
+				LuaAPI.luaL_error(L, "unknown member name isPowerOfTwo");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isPowerOfTwo on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isPowerOfTwo on a nil value");
 			}
 		}
 
@@ -968,15 +968,15 @@ public class RenderTextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name descriptor");
+				LuaAPI.luaL_error(L, "unknown member name descriptor");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index descriptor on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index descriptor on a nil value");
 			}
 		}
 
@@ -1006,7 +1006,7 @@ public class RenderTextureWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int DiscardContents(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1024,7 +1024,7 @@ public class RenderTextureWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: RenderTexture.DiscardContents");
+			LuaAPI.luaL_error(L, "invalid arguments to method: RenderTexture.DiscardContents");
 		}
 
 		return 0;
@@ -1042,7 +1042,7 @@ public class RenderTextureWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int ResolveAntiAliasedSurface(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1059,7 +1059,7 @@ public class RenderTextureWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: RenderTexture.ResolveAntiAliasedSurface");
+			LuaAPI.luaL_error(L, "invalid arguments to method: RenderTexture.ResolveAntiAliasedSurface");
 		}
 
 		return 0;
@@ -1137,7 +1137,7 @@ public class RenderTextureWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetTemporary(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -1240,7 +1240,7 @@ public class RenderTextureWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: RenderTexture.GetTemporary");
+			LuaAPI.luaL_error(L, "invalid arguments to method: RenderTexture.GetTemporary");
 		}
 
 		return 0;

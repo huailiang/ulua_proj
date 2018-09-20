@@ -37,7 +37,7 @@ public class AnimationClipWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateAnimationClip(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -47,7 +47,7 @@ public class AnimationClipWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AnimationClip.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AnimationClip.New");
 		}
 
 		return 0;
@@ -70,15 +70,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name events");
+				LuaAPI.luaL_error(L, "unknown member name events");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index events on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index events on a nil value");
 			}
 		}
 
@@ -94,15 +94,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name length");
+				LuaAPI.luaL_error(L, "unknown member name length");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index length on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index length on a nil value");
 			}
 		}
 
@@ -118,15 +118,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name frameRate");
+				LuaAPI.luaL_error(L, "unknown member name frameRate");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index frameRate on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index frameRate on a nil value");
 			}
 		}
 
@@ -142,15 +142,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapMode");
+				LuaAPI.luaL_error(L, "unknown member name wrapMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapMode on a nil value");
 			}
 		}
 
@@ -166,15 +166,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localBounds");
+				LuaAPI.luaL_error(L, "unknown member name localBounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localBounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localBounds on a nil value");
 			}
 		}
 
@@ -190,15 +190,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name legacy");
+				LuaAPI.luaL_error(L, "unknown member name legacy");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index legacy on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index legacy on a nil value");
 			}
 		}
 
@@ -214,15 +214,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name humanMotion");
+				LuaAPI.luaL_error(L, "unknown member name humanMotion");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index humanMotion on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index humanMotion on a nil value");
 			}
 		}
 
@@ -238,15 +238,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name empty");
+				LuaAPI.luaL_error(L, "unknown member name empty");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index empty on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index empty on a nil value");
 			}
 		}
 
@@ -262,15 +262,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name events");
+				LuaAPI.luaL_error(L, "unknown member name events");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index events on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index events on a nil value");
 			}
 		}
 
@@ -286,15 +286,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name frameRate");
+				LuaAPI.luaL_error(L, "unknown member name frameRate");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index frameRate on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index frameRate on a nil value");
 			}
 		}
 
@@ -310,15 +310,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapMode");
+				LuaAPI.luaL_error(L, "unknown member name wrapMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapMode on a nil value");
 			}
 		}
 
@@ -334,15 +334,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localBounds");
+				LuaAPI.luaL_error(L, "unknown member name localBounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localBounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localBounds on a nil value");
 			}
 		}
 
@@ -358,15 +358,15 @@ public class AnimationClipWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name legacy");
+				LuaAPI.luaL_error(L, "unknown member name legacy");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index legacy on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index legacy on a nil value");
 			}
 		}
 

@@ -37,7 +37,7 @@ public class ObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateObject(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -47,7 +47,7 @@ public class ObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Object.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Object.New");
 		}
 
 		return 0;
@@ -70,15 +70,15 @@ public class ObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name name");
+				LuaAPI.luaL_error(L, "unknown member name name");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index name on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index name on a nil value");
 			}
 		}
 
@@ -94,15 +94,15 @@ public class ObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hideFlags");
+				LuaAPI.luaL_error(L, "unknown member name hideFlags");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hideFlags on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hideFlags on a nil value");
 			}
 		}
 
@@ -118,15 +118,15 @@ public class ObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name name");
+				LuaAPI.luaL_error(L, "unknown member name name");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index name on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index name on a nil value");
 			}
 		}
 
@@ -142,15 +142,15 @@ public class ObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hideFlags");
+				LuaAPI.luaL_error(L, "unknown member name hideFlags");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hideFlags on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hideFlags on a nil value");
 			}
 		}
 
@@ -209,7 +209,7 @@ public class ObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Instantiate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -230,7 +230,7 @@ public class ObjectWrap
 		{
 			Object arg0 = (Object)LuaScriptMgr.GetLuaObject(L, 1);
 			Transform arg1 = (Transform)LuaScriptMgr.GetLuaObject(L, 2);
-			bool arg2 = LuaDLL.lua_toboolean(L, 3);
+			bool arg2 = LuaAPI.lua_toboolean(L, 3);
 			Object o = Object.Instantiate(arg0,arg1,arg2);
 			LuaScriptMgr.Push(L, o);
 			return 1;
@@ -256,7 +256,7 @@ public class ObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Object.Instantiate");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Object.Instantiate");
 		}
 
 		return 0;
@@ -315,7 +315,7 @@ public class ObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int DestroyImmediate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -333,7 +333,7 @@ public class ObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Object.DestroyImmediate");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Object.DestroyImmediate");
 		}
 
 		return 0;
@@ -343,7 +343,7 @@ public class ObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Destroy(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -361,7 +361,7 @@ public class ObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Object.Destroy");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Object.Destroy");
 		}
 
 		return 0;

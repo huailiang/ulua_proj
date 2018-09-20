@@ -45,7 +45,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateAssetBundle(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "AssetBundle class does not have a constructor function");
+		LuaAPI.luaL_error(L, "AssetBundle class does not have a constructor function");
 		return 0;
 	}
 
@@ -66,15 +66,15 @@ public class AssetBundleWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name mainAsset");
+				LuaAPI.luaL_error(L, "unknown member name mainAsset");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index mainAsset on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index mainAsset on a nil value");
 			}
 		}
 
@@ -90,15 +90,15 @@ public class AssetBundleWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isStreamedSceneAssetBundle");
+				LuaAPI.luaL_error(L, "unknown member name isStreamedSceneAssetBundle");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isStreamedSceneAssetBundle on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isStreamedSceneAssetBundle on a nil value");
 			}
 		}
 
@@ -127,7 +127,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadFromFileAsync(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -155,7 +155,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromFileAsync");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromFileAsync");
 		}
 
 		return 0;
@@ -164,7 +164,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadFromFile(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -192,7 +192,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromFile");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromFile");
 		}
 
 		return 0;
@@ -201,7 +201,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadFromMemoryAsync(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -220,7 +220,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromMemoryAsync");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromMemoryAsync");
 		}
 
 		return 0;
@@ -229,7 +229,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadFromMemory(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -248,7 +248,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromMemory");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromMemory");
 		}
 
 		return 0;
@@ -257,7 +257,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadFromStreamAsync(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -285,7 +285,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromStreamAsync");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromStreamAsync");
 		}
 
 		return 0;
@@ -294,7 +294,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadFromStream(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -322,7 +322,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromStream");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadFromStream");
 		}
 
 		return 0;
@@ -342,7 +342,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadAsset(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -363,7 +363,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAsset");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAsset");
 		}
 
 		return 0;
@@ -372,7 +372,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadAssetAsync(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -393,7 +393,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAssetAsync");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAssetAsync");
 		}
 
 		return 0;
@@ -402,7 +402,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadAssetWithSubAssets(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -423,7 +423,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAssetWithSubAssets");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAssetWithSubAssets");
 		}
 
 		return 0;
@@ -432,7 +432,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadAssetWithSubAssetsAsync(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -453,7 +453,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAssetWithSubAssetsAsync");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAssetWithSubAssetsAsync");
 		}
 
 		return 0;
@@ -462,7 +462,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadAllAssets(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -481,7 +481,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAllAssets");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAllAssets");
 		}
 
 		return 0;
@@ -490,7 +490,7 @@ public class AssetBundleWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LoadAllAssetsAsync(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 1)
 		{
@@ -509,7 +509,7 @@ public class AssetBundleWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAllAssetsAsync");
+			LuaAPI.luaL_error(L, "invalid arguments to method: AssetBundle.LoadAllAssetsAsync");
 		}
 
 		return 0;

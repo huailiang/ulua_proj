@@ -26,7 +26,7 @@ public class BehaviourWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateBehaviour(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -36,7 +36,7 @@ public class BehaviourWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Behaviour.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Behaviour.New");
 		}
 
 		return 0;
@@ -59,15 +59,15 @@ public class BehaviourWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enabled");
+				LuaAPI.luaL_error(L, "unknown member name enabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enabled on a nil value");
 			}
 		}
 
@@ -83,15 +83,15 @@ public class BehaviourWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isActiveAndEnabled");
+				LuaAPI.luaL_error(L, "unknown member name isActiveAndEnabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isActiveAndEnabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isActiveAndEnabled on a nil value");
 			}
 		}
 
@@ -107,15 +107,15 @@ public class BehaviourWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enabled");
+				LuaAPI.luaL_error(L, "unknown member name enabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enabled on a nil value");
 			}
 		}
 

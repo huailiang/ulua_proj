@@ -25,7 +25,7 @@ public class IEnumeratorWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateIEnumerator(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "IEnumerator class does not have a constructor function");
+		LuaAPI.luaL_error(L, "IEnumerator class does not have a constructor function");
 		return 0;
 	}
 
@@ -46,15 +46,15 @@ public class IEnumeratorWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name Current");
+				LuaAPI.luaL_error(L, "unknown member name Current");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index Current on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index Current on a nil value");
 			}
 		}
 

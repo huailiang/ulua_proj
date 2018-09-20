@@ -50,7 +50,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateGameObject(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -75,7 +75,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.New");
 		}
 
 		return 0;
@@ -98,15 +98,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name transform");
+				LuaAPI.luaL_error(L, "unknown member name transform");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index transform on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index transform on a nil value");
 			}
 		}
 
@@ -122,15 +122,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name layer");
+				LuaAPI.luaL_error(L, "unknown member name layer");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index layer on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index layer on a nil value");
 			}
 		}
 
@@ -146,15 +146,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name activeSelf");
+				LuaAPI.luaL_error(L, "unknown member name activeSelf");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index activeSelf on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index activeSelf on a nil value");
 			}
 		}
 
@@ -170,15 +170,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name activeInHierarchy");
+				LuaAPI.luaL_error(L, "unknown member name activeInHierarchy");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index activeInHierarchy on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index activeInHierarchy on a nil value");
 			}
 		}
 
@@ -194,15 +194,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isStatic");
+				LuaAPI.luaL_error(L, "unknown member name isStatic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isStatic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isStatic on a nil value");
 			}
 		}
 
@@ -218,15 +218,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name tag");
+				LuaAPI.luaL_error(L, "unknown member name tag");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index tag on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index tag on a nil value");
 			}
 		}
 
@@ -242,15 +242,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name scene");
+				LuaAPI.luaL_error(L, "unknown member name scene");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index scene on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index scene on a nil value");
 			}
 		}
 
@@ -266,15 +266,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name gameObject");
+				LuaAPI.luaL_error(L, "unknown member name gameObject");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index gameObject on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index gameObject on a nil value");
 			}
 		}
 
@@ -290,15 +290,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name layer");
+				LuaAPI.luaL_error(L, "unknown member name layer");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index layer on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index layer on a nil value");
 			}
 		}
 
@@ -314,15 +314,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isStatic");
+				LuaAPI.luaL_error(L, "unknown member name isStatic");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isStatic on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isStatic on a nil value");
 			}
 		}
 
@@ -338,15 +338,15 @@ public class GameObjectWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name tag");
+				LuaAPI.luaL_error(L, "unknown member name tag");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index tag on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index tag on a nil value");
 			}
 		}
 
@@ -367,7 +367,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetComponent(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(GameObject), typeof(string)))
 		{
@@ -387,7 +387,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.GetComponent");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.GetComponent");
 		}
 
 		return 0;
@@ -396,7 +396,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetComponentInChildren(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -417,7 +417,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.GetComponentInChildren");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.GetComponentInChildren");
 		}
 
 		return 0;
@@ -437,7 +437,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetComponents(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -457,7 +457,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.GetComponents");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.GetComponents");
 		}
 
 		return 0;
@@ -466,7 +466,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetComponentsInChildren(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -487,7 +487,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.GetComponentsInChildren");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.GetComponentsInChildren");
 		}
 
 		return 0;
@@ -496,7 +496,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetComponentsInParent(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -517,7 +517,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.GetComponentsInParent");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.GetComponentsInParent");
 		}
 
 		return 0;
@@ -536,7 +536,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SendMessageUpwards(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -572,7 +572,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.SendMessageUpwards");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.SendMessageUpwards");
 		}
 
 		return 0;
@@ -581,7 +581,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SendMessage(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -617,7 +617,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.SendMessage");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.SendMessage");
 		}
 
 		return 0;
@@ -626,7 +626,7 @@ public class GameObjectWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int BroadcastMessage(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -662,7 +662,7 @@ public class GameObjectWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: GameObject.BroadcastMessage");
+			LuaAPI.luaL_error(L, "invalid arguments to method: GameObject.BroadcastMessage");
 		}
 
 		return 0;

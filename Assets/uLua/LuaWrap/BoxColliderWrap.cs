@@ -26,7 +26,7 @@ public class BoxColliderWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateBoxCollider(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -36,7 +36,7 @@ public class BoxColliderWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: BoxCollider.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: BoxCollider.New");
 		}
 
 		return 0;
@@ -59,15 +59,15 @@ public class BoxColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name center");
+				LuaAPI.luaL_error(L, "unknown member name center");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index center on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index center on a nil value");
 			}
 		}
 
@@ -83,15 +83,15 @@ public class BoxColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name size");
+				LuaAPI.luaL_error(L, "unknown member name size");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index size on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index size on a nil value");
 			}
 		}
 
@@ -107,15 +107,15 @@ public class BoxColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name center");
+				LuaAPI.luaL_error(L, "unknown member name center");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index center on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index center on a nil value");
 			}
 		}
 
@@ -131,15 +131,15 @@ public class BoxColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name size");
+				LuaAPI.luaL_error(L, "unknown member name size");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index size on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index size on a nil value");
 			}
 		}
 

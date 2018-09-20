@@ -42,7 +42,7 @@ namespace LuaInterface
 
         internal void push(IntPtr luaState)
         {
-            LuaDLL.xlua_rawgeti(luaState, LuaIndexes.LUA_REGISTRYINDEX, _Reference);
+            LuaAPI.xlua_rawgeti(luaState, LuaAPI.LUA_REGISTRYINDEX, _Reference);
         }     
 
         public override string ToString()

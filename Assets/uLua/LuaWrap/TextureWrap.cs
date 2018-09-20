@@ -55,7 +55,7 @@ public class TextureWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTexture(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "Texture class does not have a constructor function");
+		LuaAPI.luaL_error(L, "Texture class does not have a constructor function");
 		return 0;
 	}
 
@@ -90,15 +90,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name width");
+				LuaAPI.luaL_error(L, "unknown member name width");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index width on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index width on a nil value");
 			}
 		}
 
@@ -114,15 +114,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name height");
+				LuaAPI.luaL_error(L, "unknown member name height");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index height on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index height on a nil value");
 			}
 		}
 
@@ -138,15 +138,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name dimension");
+				LuaAPI.luaL_error(L, "unknown member name dimension");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index dimension on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index dimension on a nil value");
 			}
 		}
 
@@ -162,15 +162,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapMode");
+				LuaAPI.luaL_error(L, "unknown member name wrapMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapMode on a nil value");
 			}
 		}
 
@@ -186,15 +186,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapModeU");
+				LuaAPI.luaL_error(L, "unknown member name wrapModeU");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapModeU on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapModeU on a nil value");
 			}
 		}
 
@@ -210,15 +210,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapModeV");
+				LuaAPI.luaL_error(L, "unknown member name wrapModeV");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapModeV on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapModeV on a nil value");
 			}
 		}
 
@@ -234,15 +234,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapModeW");
+				LuaAPI.luaL_error(L, "unknown member name wrapModeW");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapModeW on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapModeW on a nil value");
 			}
 		}
 
@@ -258,15 +258,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name filterMode");
+				LuaAPI.luaL_error(L, "unknown member name filterMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index filterMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index filterMode on a nil value");
 			}
 		}
 
@@ -282,15 +282,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name anisoLevel");
+				LuaAPI.luaL_error(L, "unknown member name anisoLevel");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index anisoLevel on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index anisoLevel on a nil value");
 			}
 		}
 
@@ -306,15 +306,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name mipMapBias");
+				LuaAPI.luaL_error(L, "unknown member name mipMapBias");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index mipMapBias on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index mipMapBias on a nil value");
 			}
 		}
 
@@ -330,15 +330,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name texelSize");
+				LuaAPI.luaL_error(L, "unknown member name texelSize");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index texelSize on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index texelSize on a nil value");
 			}
 		}
 
@@ -354,15 +354,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name updateCount");
+				LuaAPI.luaL_error(L, "unknown member name updateCount");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index updateCount on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index updateCount on a nil value");
 			}
 		}
 
@@ -483,15 +483,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name width");
+				LuaAPI.luaL_error(L, "unknown member name width");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index width on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index width on a nil value");
 			}
 		}
 
@@ -507,15 +507,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name height");
+				LuaAPI.luaL_error(L, "unknown member name height");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index height on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index height on a nil value");
 			}
 		}
 
@@ -531,15 +531,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name dimension");
+				LuaAPI.luaL_error(L, "unknown member name dimension");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index dimension on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index dimension on a nil value");
 			}
 		}
 
@@ -555,15 +555,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapMode");
+				LuaAPI.luaL_error(L, "unknown member name wrapMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapMode on a nil value");
 			}
 		}
 
@@ -579,15 +579,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapModeU");
+				LuaAPI.luaL_error(L, "unknown member name wrapModeU");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapModeU on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapModeU on a nil value");
 			}
 		}
 
@@ -603,15 +603,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapModeV");
+				LuaAPI.luaL_error(L, "unknown member name wrapModeV");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapModeV on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapModeV on a nil value");
 			}
 		}
 
@@ -627,15 +627,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name wrapModeW");
+				LuaAPI.luaL_error(L, "unknown member name wrapModeW");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index wrapModeW on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index wrapModeW on a nil value");
 			}
 		}
 
@@ -651,15 +651,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name filterMode");
+				LuaAPI.luaL_error(L, "unknown member name filterMode");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index filterMode on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index filterMode on a nil value");
 			}
 		}
 
@@ -675,15 +675,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name anisoLevel");
+				LuaAPI.luaL_error(L, "unknown member name anisoLevel");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index anisoLevel on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index anisoLevel on a nil value");
 			}
 		}
 
@@ -699,15 +699,15 @@ public class TextureWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name mipMapBias");
+				LuaAPI.luaL_error(L, "unknown member name mipMapBias");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index mipMapBias on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index mipMapBias on a nil value");
 			}
 		}
 

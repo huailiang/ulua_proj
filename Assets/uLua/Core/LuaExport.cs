@@ -586,7 +586,7 @@ public static class LuaExport
             }
             else
             {
-                sb.AppendLine("\t\tint count = LuaDLL.lua_gettop(L);");
+                sb.AppendLine("\t\tint count = LuaAPI.lua_gettop(L);");
             }
 
             int rc = m.ReturnType == typeof(void) ? 0 : 1;
@@ -601,7 +601,7 @@ public static class LuaExport
         sb.AppendLine("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
         sb.AppendFormat("\tstatic int _Create{0}(IntPtr L)\r\n", wrapClassName);
         sb.AppendLine("\t{");
-        sb.AppendFormat("\t\tLuaDLL.luaL_error(L, \"{0} class does not have a constructor function\");\r\n", className);
+        sb.AppendFormat("\t\tLuaAPI.luaL_error(L, \"{0} class does not have a constructor function\");\r\n", className);
         sb.AppendLine("\t\treturn 0;");
         sb.AppendLine("\t}");
     }
@@ -771,7 +771,7 @@ public static class LuaExport
         sb.AppendLine("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
         sb.AppendFormat("\tstatic int _Create{0}(IntPtr L)\r\n", wrapClassName);
         sb.AppendLine("\t{");
-        sb.AppendLine("\t\tint count = LuaDLL.lua_gettop(L);");
+        sb.AppendLine("\t\tint count = LuaAPI.lua_gettop(L);");
         sb.AppendLine();
 
         List<ConstructorInfo> countList = new List<ConstructorInfo>();
@@ -884,7 +884,7 @@ public static class LuaExport
 
         sb.AppendLine("\t\telse");
         sb.AppendLine("\t\t{");
-        sb.AppendFormat("\t\t\tLuaDLL.luaL_error(L, \"invalid arguments to method: {0}.New\");\r\n", className);
+        sb.AppendFormat("\t\t\tLuaAPI.luaL_error(L, \"invalid arguments to method: {0}.New\");\r\n", className);
         sb.AppendLine("\t\t}");
 
         sb.AppendLine();
@@ -1106,7 +1106,7 @@ public static class LuaExport
             {
                 if (beCheckTypes)
                 {
-                    sb.AppendFormat("{2}bool {0} = LuaDLL.lua_toboolean(L, {1});\r\n", arg, j + offset, head);
+                    sb.AppendFormat("{2}bool {0} = LuaAPI.lua_toboolean(L, {1});\r\n", arg, j + offset, head);
                 }
                 else
                 {
@@ -1122,7 +1122,7 @@ public static class LuaExport
             {
                 if (beCheckTypes)
                 {
-                    sb.AppendFormat("{3}{0} {1} = ({0})LuaDLL.lua_tonumber(L, {2});\r\n", str, arg, j + offset, head);
+                    sb.AppendFormat("{3}{0} {1} = ({0})LuaAPI.lua_tonumber(L, {2});\r\n", str, arg, j + offset, head);
                 }
                 else
                 {
@@ -1143,7 +1143,7 @@ public static class LuaExport
             else if (param.ParameterType.IsSubclassOf(typeof(System.MulticastDelegate)))
             {
                 sb.AppendFormat("{0}{1} {2} = null;\r\n", head, str, arg);
-                sb.AppendFormat("{0}LuaTypes funcType{1} = LuaDLL.lua_type(L, {1});\r\n", head, j + offset);
+                sb.AppendFormat("{0}LuaTypes funcType{1} = LuaAPI.lua_type(L, {1});\r\n", head, j + offset);
                 sb.AppendLine();
                 sb.AppendFormat("{0}if (funcType{1} != LuaTypes.LUA_TFUNCTION)\r\n", head, j + offset);
                 sb.AppendLine(head + "{");
@@ -1632,7 +1632,7 @@ public static class LuaExport
         sb.AppendLine("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
         sb.AppendFormat("\tstatic int {0}(IntPtr L)\r\n", GetFuncName(name));
         sb.AppendLine("\t{");
-        sb.AppendLine("\t\tint count = LuaDLL.lua_gettop(L);");
+        sb.AppendLine("\t\tint count = LuaAPI.lua_gettop(L);");
 
         List<MethodInfo> countList = new List<MethodInfo>();
 
@@ -1756,7 +1756,7 @@ public static class LuaExport
 
         sb.AppendLine("\t\telse");
         sb.AppendLine("\t\t{");
-        sb.AppendFormat("\t\t\tLuaDLL.luaL_error(L, \"invalid arguments to method: {0}.{1}\");\r\n", className, name);
+        sb.AppendFormat("\t\t\tLuaAPI.luaL_error(L, \"invalid arguments to method: {0}.{1}\");\r\n", className, name);
         sb.AppendLine("\t\t}");
 
         sb.AppendLine();
@@ -2093,15 +2093,15 @@ public static class LuaExport
                 sb.AppendLine();
                 CheckObjectNull();
                 sb.AppendLine("\t\t{");
-                sb.AppendLine("\t\t\tLuaTypes types = LuaDLL.lua_type(L, 1);");
+                sb.AppendLine("\t\t\tLuaTypes types = LuaAPI.lua_type(L, 1);");
                 sb.AppendLine();
                 sb.AppendLine("\t\t\tif (types == LuaTypes.LUA_TTABLE)");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"unknown member name {0}\");\r\n", fields[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"unknown member name {0}\");\r\n", fields[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t\telse");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", fields[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", fields[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t}");
                 sb.AppendLine();
@@ -2155,15 +2155,15 @@ public static class LuaExport
                 sb.AppendLine();
                 CheckObjectNull();
                 sb.AppendLine("\t\t{");
-                sb.AppendLine("\t\t\tLuaTypes types = LuaDLL.lua_type(L, 1);");
+                sb.AppendLine("\t\t\tLuaTypes types = LuaAPI.lua_type(L, 1);");
                 sb.AppendLine();
                 sb.AppendLine("\t\t\tif (types == LuaTypes.LUA_TTABLE)");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"unknown member name {0}\");\r\n", props[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"unknown member name {0}\");\r\n", props[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t\telse");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", props[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", props[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t}");
                 sb.AppendLine();
@@ -2207,15 +2207,15 @@ public static class LuaExport
                 sb.AppendLine();
                 CheckObjectNull();
                 sb.AppendLine("\t\t{");
-                sb.AppendLine("\t\t\tLuaTypes types = LuaDLL.lua_type(L, 1);");
+                sb.AppendLine("\t\t\tLuaTypes types = LuaAPI.lua_type(L, 1);");
                 sb.AppendLine();
                 sb.AppendLine("\t\t\tif (types == LuaTypes.LUA_TTABLE)");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"unknown member name {0}\");\r\n", fields[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"unknown member name {0}\");\r\n", fields[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t\telse");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", fields[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", fields[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t}");
 
@@ -2270,15 +2270,15 @@ public static class LuaExport
                 sb.AppendLine();
                 CheckObjectNull();
                 sb.AppendLine("\t\t{");
-                sb.AppendLine("\t\t\tLuaTypes types = LuaDLL.lua_type(L, 1);");
+                sb.AppendLine("\t\t\tLuaTypes types = LuaAPI.lua_type(L, 1);");
                 sb.AppendLine();
                 sb.AppendLine("\t\t\tif (types == LuaTypes.LUA_TTABLE)");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"unknown member name {0}\");\r\n", props[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"unknown member name {0}\");\r\n", props[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t\telse");
                 sb.AppendLine("\t\t\t{");
-                sb.AppendFormat("\t\t\t\tLuaDLL.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", props[i].Name);
+                sb.AppendFormat("\t\t\t\tLuaAPI.luaL_error(L, \"attempt to index {0} on a nil value\");\r\n", props[i].Name);
                 sb.AppendLine("\t\t\t}");
                 sb.AppendLine("\t\t}");
                 sb.AppendLine();
@@ -2461,7 +2461,7 @@ public static class LuaExport
         }
         else if (typeof(System.Delegate).IsAssignableFrom(t))
         {
-            sb.AppendLine("\t\tLuaTypes funcType = LuaDLL.lua_type(L, 3);\r\n");
+            sb.AppendLine("\t\tLuaTypes funcType = LuaAPI.lua_type(L, 3);\r\n");
             sb.AppendLine("\t\tif (funcType != LuaTypes.LUA_TFUNCTION)");
             sb.AppendLine("\t\t{");
             sb.AppendFormat("\t\t\t{0}.{1} = ({2})LuaScriptMgr.GetNetObject(L, 3, typeof({2}));\r\n", o, name, GetTypeStr(t));
@@ -2683,7 +2683,7 @@ public static class LuaExport
         sb.AppendLine("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
         sb.AppendLine("\tstatic int IntToEnum(IntPtr L)");
         sb.AppendLine("\t{");
-        sb.AppendLine("\t\tint arg0 = (int)LuaDLL.lua_tonumber(L, 1);");
+        sb.AppendLine("\t\tint arg0 = (int)LuaAPI.lua_tonumber(L, 1);");
         sb.AppendFormat("\t\t{0} o = ({0})arg0;\r\n", className);
         sb.AppendLine("\t\tLuaScriptMgr.Push(L, o);");
         sb.AppendLine("\t\treturn 1;");

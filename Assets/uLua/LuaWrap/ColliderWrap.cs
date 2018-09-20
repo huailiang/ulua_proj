@@ -34,7 +34,7 @@ public class ColliderWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateCollider(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -44,7 +44,7 @@ public class ColliderWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Collider.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Collider.New");
 		}
 
 		return 0;
@@ -67,15 +67,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enabled");
+				LuaAPI.luaL_error(L, "unknown member name enabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enabled on a nil value");
 			}
 		}
 
@@ -91,15 +91,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name attachedRigidbody");
+				LuaAPI.luaL_error(L, "unknown member name attachedRigidbody");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index attachedRigidbody on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index attachedRigidbody on a nil value");
 			}
 		}
 
@@ -115,15 +115,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isTrigger");
+				LuaAPI.luaL_error(L, "unknown member name isTrigger");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isTrigger on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isTrigger on a nil value");
 			}
 		}
 
@@ -139,15 +139,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name contactOffset");
+				LuaAPI.luaL_error(L, "unknown member name contactOffset");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index contactOffset on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index contactOffset on a nil value");
 			}
 		}
 
@@ -163,15 +163,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name bounds");
+				LuaAPI.luaL_error(L, "unknown member name bounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index bounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index bounds on a nil value");
 			}
 		}
 
@@ -187,15 +187,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sharedMaterial");
+				LuaAPI.luaL_error(L, "unknown member name sharedMaterial");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sharedMaterial on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sharedMaterial on a nil value");
 			}
 		}
 
@@ -211,15 +211,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name material");
+				LuaAPI.luaL_error(L, "unknown member name material");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index material on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index material on a nil value");
 			}
 		}
 
@@ -235,15 +235,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name enabled");
+				LuaAPI.luaL_error(L, "unknown member name enabled");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index enabled on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index enabled on a nil value");
 			}
 		}
 
@@ -259,15 +259,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name isTrigger");
+				LuaAPI.luaL_error(L, "unknown member name isTrigger");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index isTrigger on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index isTrigger on a nil value");
 			}
 		}
 
@@ -283,15 +283,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name contactOffset");
+				LuaAPI.luaL_error(L, "unknown member name contactOffset");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index contactOffset on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index contactOffset on a nil value");
 			}
 		}
 
@@ -307,15 +307,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sharedMaterial");
+				LuaAPI.luaL_error(L, "unknown member name sharedMaterial");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sharedMaterial on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sharedMaterial on a nil value");
 			}
 		}
 
@@ -331,15 +331,15 @@ public class ColliderWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name material");
+				LuaAPI.luaL_error(L, "unknown member name material");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index material on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index material on a nil value");
 			}
 		}
 

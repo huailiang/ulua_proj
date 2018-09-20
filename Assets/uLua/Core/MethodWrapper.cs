@@ -136,7 +136,7 @@
             bool failedCall = true;
             int nReturnValues = 0;
 
-            if (!LuaDLL.lua_checkstack(luaState, 5))
+            if (!LuaAPI.lua_checkstack(luaState, 5))
                 throw new LuaException("Lua stack overflow");
 
             bool isStatic = (_BindingType & BindingFlags.Static) == BindingFlags.Static;
@@ -153,12 +153,12 @@
                 if (_LastCalledMethod.cachedMethod != null) // Cached?
                 {
                     int numStackToSkip = isStatic ? 0 : 1; // If this is an instance invoe we will have an extra arg on the stack for the targetObject
-                    int numArgsPassed = LuaDLL.lua_gettop(luaState) - numStackToSkip;
+                    int numArgsPassed = LuaAPI.lua_gettop(luaState) - numStackToSkip;
                     MethodBase method = _LastCalledMethod.cachedMethod;
 
                     if (numArgsPassed == _LastCalledMethod.argTypes.Length) // No. of args match?
                     {
-                        if (!LuaDLL.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
+                        if (!LuaAPI.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
                             throw new LuaException("Lua stack overflow");
 
                         // fjs: 这里 args 只是将 _LastCalledMethod.args 拿来做缓冲区用，避免内存再分配, 里面的值是可以干掉的
@@ -180,7 +180,7 @@
                                 }
 
                                 if (args[type.index] == null &&
-                                    !LuaDLL.lua_isnil(luaState, i + 1 + numStackToSkip))
+                                    !LuaAPI.lua_isnil(luaState, i + 1 + numStackToSkip))
                                 {
                                     throw new LuaException("argument number " + (i + 1) + " is invalid");
                                 }
@@ -220,11 +220,11 @@
                         if (targetObject == null)
                         {
                             _Translator.throwError(luaState, String.Format("instance method '{0}' requires a non null target object", _MethodName));
-                            LuaDLL.lua_pushnil(luaState);
+                            LuaAPI.lua_pushnil(luaState);
                             return 1;
                         }
 
-                        LuaDLL.lua_remove(luaState, 1); // Pops the receiver
+                        LuaAPI.lua_remove(luaState, 1); // Pops the receiver
                     }
 
                     bool hasMatch = false;
@@ -250,8 +250,8 @@
                             ? "invalid arguments to method call"
                             : ("invalid arguments to method: " + candidateName);
 
-                        LuaDLL.luaL_error(luaState, msg);
-                        LuaDLL.lua_pushnil(luaState);
+                        LuaAPI.luaL_error(luaState, msg);
+                        LuaAPI.lua_pushnil(luaState);
 
                         ClearCachedArgs();
 
@@ -282,8 +282,8 @@
                     }
                     else if (methodToCall.ContainsGenericParameters)
                     {
-                        LuaDLL.luaL_error(luaState, "unable to invoke method on generic class as the current method is an open generic method");
-                        LuaDLL.lua_pushnil(luaState);
+                        LuaAPI.luaL_error(luaState, "unable to invoke method on generic class as the current method is an open generic method");
+                        LuaAPI.lua_pushnil(luaState);
 
                         ClearCachedArgs();
                         return 1;
@@ -294,14 +294,14 @@
                     if (!methodToCall.IsStatic && !methodToCall.IsConstructor && targetObject == null)
                     {
                         targetObject = _ExtractTarget(luaState, 1);
-                        LuaDLL.lua_remove(luaState, 1); // Pops the receiver
+                        LuaAPI.lua_remove(luaState, 1); // Pops the receiver
                     }
 
                     // fjs: 这里在缓存调用参数，退出前一定要释放掉
                     if (!_Translator.matchParameters(luaState, methodToCall, ref _LastCalledMethod))
                     {
-                        LuaDLL.luaL_error(luaState, "invalid arguments to method call");
-                        LuaDLL.lua_pushnil(luaState);
+                        LuaAPI.luaL_error(luaState, "invalid arguments to method call");
+                        LuaAPI.lua_pushnil(luaState);
 
                         ClearCachedArgs();
                         return 1;
@@ -311,7 +311,7 @@
 
             if (failedCall)
             {
-                if (!LuaDLL.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
+                if (!LuaAPI.lua_checkstack(luaState, _LastCalledMethod.outList.Length + 6))
                 {
                     ClearCachedArgs();
                     throw new LuaException("Lua stack overflow");

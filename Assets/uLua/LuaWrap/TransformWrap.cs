@@ -65,7 +65,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateTransform(IntPtr L)
 	{
-		LuaDLL.luaL_error(L, "Transform class does not have a constructor function");
+		LuaAPI.luaL_error(L, "Transform class does not have a constructor function");
 		return 0;
 	}
 
@@ -86,15 +86,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name position");
+				LuaAPI.luaL_error(L, "unknown member name position");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index position on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index position on a nil value");
 			}
 		}
 
@@ -110,15 +110,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localPosition");
+				LuaAPI.luaL_error(L, "unknown member name localPosition");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localPosition on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localPosition on a nil value");
 			}
 		}
 
@@ -134,15 +134,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name eulerAngles");
+				LuaAPI.luaL_error(L, "unknown member name eulerAngles");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index eulerAngles on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index eulerAngles on a nil value");
 			}
 		}
 
@@ -158,15 +158,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localEulerAngles");
+				LuaAPI.luaL_error(L, "unknown member name localEulerAngles");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localEulerAngles on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localEulerAngles on a nil value");
 			}
 		}
 
@@ -182,15 +182,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name right");
+				LuaAPI.luaL_error(L, "unknown member name right");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index right on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index right on a nil value");
 			}
 		}
 
@@ -206,15 +206,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name up");
+				LuaAPI.luaL_error(L, "unknown member name up");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index up on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index up on a nil value");
 			}
 		}
 
@@ -230,15 +230,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name forward");
+				LuaAPI.luaL_error(L, "unknown member name forward");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index forward on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index forward on a nil value");
 			}
 		}
 
@@ -254,15 +254,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rotation");
+				LuaAPI.luaL_error(L, "unknown member name rotation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rotation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rotation on a nil value");
 			}
 		}
 
@@ -278,15 +278,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localRotation");
+				LuaAPI.luaL_error(L, "unknown member name localRotation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localRotation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localRotation on a nil value");
 			}
 		}
 
@@ -302,15 +302,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localScale");
+				LuaAPI.luaL_error(L, "unknown member name localScale");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localScale on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localScale on a nil value");
 			}
 		}
 
@@ -326,15 +326,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name parent");
+				LuaAPI.luaL_error(L, "unknown member name parent");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index parent on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index parent on a nil value");
 			}
 		}
 
@@ -350,15 +350,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name worldToLocalMatrix");
+				LuaAPI.luaL_error(L, "unknown member name worldToLocalMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index worldToLocalMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index worldToLocalMatrix on a nil value");
 			}
 		}
 
@@ -374,15 +374,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localToWorldMatrix");
+				LuaAPI.luaL_error(L, "unknown member name localToWorldMatrix");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localToWorldMatrix on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localToWorldMatrix on a nil value");
 			}
 		}
 
@@ -398,15 +398,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name root");
+				LuaAPI.luaL_error(L, "unknown member name root");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index root on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index root on a nil value");
 			}
 		}
 
@@ -422,15 +422,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name childCount");
+				LuaAPI.luaL_error(L, "unknown member name childCount");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index childCount on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index childCount on a nil value");
 			}
 		}
 
@@ -446,15 +446,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name lossyScale");
+				LuaAPI.luaL_error(L, "unknown member name lossyScale");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index lossyScale on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index lossyScale on a nil value");
 			}
 		}
 
@@ -470,15 +470,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hasChanged");
+				LuaAPI.luaL_error(L, "unknown member name hasChanged");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hasChanged on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hasChanged on a nil value");
 			}
 		}
 
@@ -494,15 +494,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hierarchyCapacity");
+				LuaAPI.luaL_error(L, "unknown member name hierarchyCapacity");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hierarchyCapacity on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hierarchyCapacity on a nil value");
 			}
 		}
 
@@ -518,15 +518,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hierarchyCount");
+				LuaAPI.luaL_error(L, "unknown member name hierarchyCount");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hierarchyCount on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hierarchyCount on a nil value");
 			}
 		}
 
@@ -542,15 +542,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name position");
+				LuaAPI.luaL_error(L, "unknown member name position");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index position on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index position on a nil value");
 			}
 		}
 
@@ -566,15 +566,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localPosition");
+				LuaAPI.luaL_error(L, "unknown member name localPosition");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localPosition on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localPosition on a nil value");
 			}
 		}
 
@@ -590,15 +590,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name eulerAngles");
+				LuaAPI.luaL_error(L, "unknown member name eulerAngles");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index eulerAngles on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index eulerAngles on a nil value");
 			}
 		}
 
@@ -614,15 +614,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localEulerAngles");
+				LuaAPI.luaL_error(L, "unknown member name localEulerAngles");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localEulerAngles on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localEulerAngles on a nil value");
 			}
 		}
 
@@ -638,15 +638,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name right");
+				LuaAPI.luaL_error(L, "unknown member name right");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index right on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index right on a nil value");
 			}
 		}
 
@@ -662,15 +662,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name up");
+				LuaAPI.luaL_error(L, "unknown member name up");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index up on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index up on a nil value");
 			}
 		}
 
@@ -686,15 +686,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name forward");
+				LuaAPI.luaL_error(L, "unknown member name forward");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index forward on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index forward on a nil value");
 			}
 		}
 
@@ -710,15 +710,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rotation");
+				LuaAPI.luaL_error(L, "unknown member name rotation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rotation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rotation on a nil value");
 			}
 		}
 
@@ -734,15 +734,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localRotation");
+				LuaAPI.luaL_error(L, "unknown member name localRotation");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localRotation on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localRotation on a nil value");
 			}
 		}
 
@@ -758,15 +758,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localScale");
+				LuaAPI.luaL_error(L, "unknown member name localScale");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localScale on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localScale on a nil value");
 			}
 		}
 
@@ -782,15 +782,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name parent");
+				LuaAPI.luaL_error(L, "unknown member name parent");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index parent on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index parent on a nil value");
 			}
 		}
 
@@ -806,15 +806,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hasChanged");
+				LuaAPI.luaL_error(L, "unknown member name hasChanged");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hasChanged on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hasChanged on a nil value");
 			}
 		}
 
@@ -830,15 +830,15 @@ public class TransformWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name hierarchyCapacity");
+				LuaAPI.luaL_error(L, "unknown member name hierarchyCapacity");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index hierarchyCapacity on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index hierarchyCapacity on a nil value");
 			}
 		}
 
@@ -849,7 +849,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetParent(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -868,7 +868,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.SetParent");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.SetParent");
 		}
 
 		return 0;
@@ -888,7 +888,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Translate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -925,9 +925,9 @@ public class TransformWrap
 		else if (count == 5 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(float), typeof(float), typeof(float), typeof(Transform)))
 		{
 			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+			float arg0 = (float)LuaAPI.lua_tonumber(L, 2);
+			float arg1 = (float)LuaAPI.lua_tonumber(L, 3);
+			float arg2 = (float)LuaAPI.lua_tonumber(L, 4);
 			Transform arg3 = (Transform)LuaScriptMgr.GetLuaObject(L, 5);
 			obj.Translate(arg0,arg1,arg2,arg3);
 			return 0;
@@ -935,16 +935,16 @@ public class TransformWrap
 		else if (count == 5 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(float), typeof(float), typeof(float), typeof(Space)))
 		{
 			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+			float arg0 = (float)LuaAPI.lua_tonumber(L, 2);
+			float arg1 = (float)LuaAPI.lua_tonumber(L, 3);
+			float arg2 = (float)LuaAPI.lua_tonumber(L, 4);
 			Space arg3 = (Space)LuaScriptMgr.GetLuaObject(L, 5);
 			obj.Translate(arg0,arg1,arg2,arg3);
 			return 0;
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.Translate");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.Translate");
 		}
 
 		return 0;
@@ -953,7 +953,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Rotate(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -966,7 +966,7 @@ public class TransformWrap
 		{
 			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
 			Vector3 arg0 = LuaScriptMgr.GetVector3(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+			float arg1 = (float)LuaAPI.lua_tonumber(L, 3);
 			obj.Rotate(arg0,arg1);
 			return 0;
 		}
@@ -982,7 +982,7 @@ public class TransformWrap
 		{
 			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
 			Vector3 arg0 = LuaScriptMgr.GetVector3(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+			float arg1 = (float)LuaAPI.lua_tonumber(L, 3);
 			Space arg2 = (Space)LuaScriptMgr.GetLuaObject(L, 4);
 			obj.Rotate(arg0,arg1,arg2);
 			return 0;
@@ -990,9 +990,9 @@ public class TransformWrap
 		else if (count == 4 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(float), typeof(float), typeof(float)))
 		{
 			Transform obj = (Transform)LuaScriptMgr.GetUnityObjectSelf(L, 1, "Transform");
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+			float arg0 = (float)LuaAPI.lua_tonumber(L, 2);
+			float arg1 = (float)LuaAPI.lua_tonumber(L, 3);
+			float arg2 = (float)LuaAPI.lua_tonumber(L, 4);
 			obj.Rotate(arg0,arg1,arg2);
 			return 0;
 		}
@@ -1008,7 +1008,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.Rotate");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.Rotate");
 		}
 
 		return 0;
@@ -1029,7 +1029,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int LookAt(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2 && LuaScriptMgr.CheckTypes(L, 1, typeof(Transform), typeof(LuaTable)))
 		{
@@ -1063,7 +1063,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.LookAt");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.LookAt");
 		}
 
 		return 0;
@@ -1072,7 +1072,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int TransformDirection(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1094,7 +1094,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.TransformDirection");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.TransformDirection");
 		}
 
 		return 0;
@@ -1103,7 +1103,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int InverseTransformDirection(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1125,7 +1125,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.InverseTransformDirection");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.InverseTransformDirection");
 		}
 
 		return 0;
@@ -1134,7 +1134,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int TransformVector(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1156,7 +1156,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.TransformVector");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.TransformVector");
 		}
 
 		return 0;
@@ -1165,7 +1165,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int InverseTransformVector(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1187,7 +1187,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.InverseTransformVector");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.InverseTransformVector");
 		}
 
 		return 0;
@@ -1196,7 +1196,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int TransformPoint(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1218,7 +1218,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.TransformPoint");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.TransformPoint");
 		}
 
 		return 0;
@@ -1227,7 +1227,7 @@ public class TransformWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int InverseTransformPoint(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 2)
 		{
@@ -1249,7 +1249,7 @@ public class TransformWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: Transform.InverseTransformPoint");
+			LuaAPI.luaL_error(L, "invalid arguments to method: Transform.InverseTransformPoint");
 		}
 
 		return 0;

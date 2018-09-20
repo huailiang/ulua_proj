@@ -34,7 +34,7 @@ public class SkinnedMeshRendererWrap
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int _CreateSkinnedMeshRenderer(IntPtr L)
 	{
-		int count = LuaDLL.lua_gettop(L);
+		int count = LuaAPI.lua_gettop(L);
 
 		if (count == 0)
 		{
@@ -44,7 +44,7 @@ public class SkinnedMeshRendererWrap
 		}
 		else
 		{
-			LuaDLL.luaL_error(L, "invalid arguments to method: SkinnedMeshRenderer.New");
+			LuaAPI.luaL_error(L, "invalid arguments to method: SkinnedMeshRenderer.New");
 		}
 
 		return 0;
@@ -67,15 +67,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name quality");
+				LuaAPI.luaL_error(L, "unknown member name quality");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index quality on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index quality on a nil value");
 			}
 		}
 
@@ -91,15 +91,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name updateWhenOffscreen");
+				LuaAPI.luaL_error(L, "unknown member name updateWhenOffscreen");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index updateWhenOffscreen on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index updateWhenOffscreen on a nil value");
 			}
 		}
 
@@ -115,15 +115,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rootBone");
+				LuaAPI.luaL_error(L, "unknown member name rootBone");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rootBone on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rootBone on a nil value");
 			}
 		}
 
@@ -139,15 +139,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name bones");
+				LuaAPI.luaL_error(L, "unknown member name bones");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index bones on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index bones on a nil value");
 			}
 		}
 
@@ -163,15 +163,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sharedMesh");
+				LuaAPI.luaL_error(L, "unknown member name sharedMesh");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sharedMesh on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sharedMesh on a nil value");
 			}
 		}
 
@@ -187,15 +187,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name skinnedMotionVectors");
+				LuaAPI.luaL_error(L, "unknown member name skinnedMotionVectors");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index skinnedMotionVectors on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index skinnedMotionVectors on a nil value");
 			}
 		}
 
@@ -211,15 +211,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localBounds");
+				LuaAPI.luaL_error(L, "unknown member name localBounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localBounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localBounds on a nil value");
 			}
 		}
 
@@ -235,15 +235,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name quality");
+				LuaAPI.luaL_error(L, "unknown member name quality");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index quality on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index quality on a nil value");
 			}
 		}
 
@@ -259,15 +259,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name updateWhenOffscreen");
+				LuaAPI.luaL_error(L, "unknown member name updateWhenOffscreen");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index updateWhenOffscreen on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index updateWhenOffscreen on a nil value");
 			}
 		}
 
@@ -283,15 +283,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name rootBone");
+				LuaAPI.luaL_error(L, "unknown member name rootBone");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index rootBone on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index rootBone on a nil value");
 			}
 		}
 
@@ -307,15 +307,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name bones");
+				LuaAPI.luaL_error(L, "unknown member name bones");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index bones on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index bones on a nil value");
 			}
 		}
 
@@ -331,15 +331,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name sharedMesh");
+				LuaAPI.luaL_error(L, "unknown member name sharedMesh");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index sharedMesh on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index sharedMesh on a nil value");
 			}
 		}
 
@@ -355,15 +355,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name skinnedMotionVectors");
+				LuaAPI.luaL_error(L, "unknown member name skinnedMotionVectors");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index skinnedMotionVectors on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index skinnedMotionVectors on a nil value");
 			}
 		}
 
@@ -379,15 +379,15 @@ public class SkinnedMeshRendererWrap
 
 		if (obj == null)
 		{
-			LuaTypes types = LuaDLL.lua_type(L, 1);
+			LuaTypes types = LuaAPI.lua_type(L, 1);
 
 			if (types == LuaTypes.LUA_TTABLE)
 			{
-				LuaDLL.luaL_error(L, "unknown member name localBounds");
+				LuaAPI.luaL_error(L, "unknown member name localBounds");
 			}
 			else
 			{
-				LuaDLL.luaL_error(L, "attempt to index localBounds on a nil value");
+				LuaAPI.luaL_error(L, "attempt to index localBounds on a nil value");
 			}
 		}
 
