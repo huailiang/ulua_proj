@@ -21,10 +21,6 @@ namespace LuaEditor
 		_GT(typeof(Util)),
         _GT(typeof(LuaEnumType)),
         _GT(typeof(Debugger)),
-        _GT(typeof(DelegateFactory)),
-        _GT(typeof(TestLuaDelegate)),
-        _GT(typeof(TestDelegateListener)),
-        _GT(typeof(TestEventListener)),
         
         //unity                        
         _GT(typeof(Component)),

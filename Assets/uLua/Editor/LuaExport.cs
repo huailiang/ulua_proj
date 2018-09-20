@@ -29,29 +29,6 @@ namespace LuaEditor
         All = 3
     }
 
-    public class DelegateType
-    {
-        public string name;
-        public Type type;
-        public string strType = "";
-
-        public DelegateType(Type t)
-        {
-            type = t;
-            strType = LuaExport.GetTypeStr(t);
-
-            if (t.IsGenericType)
-            {
-                name = LuaExport.GetGenericLibName(t);
-            }
-            else
-            {
-                name = LuaExport.GetTypeStr(t);
-                name = name.Replace(".", "_");
-            }
-        }
-    }
-
     public static class LuaExport
     {
         public static string className = string.Empty;
@@ -2547,69 +2524,6 @@ namespace LuaEditor
             sb.AppendLine("\t\tLuaScriptMgr.Push(L, o);");
             sb.AppendLine("\t\treturn 1;");
             sb.AppendLine("\t}");
-        }
-
-        public static void GenDelegates(DelegateType[] list)
-        {
-            usingList.Add("System");
-            usingList.Add("System.Collections.Generic");
-
-            for (int i = 0; i < list.Length; i++)
-            {
-                Type t = list[i].type;
-                if (!typeof(System.Delegate).IsAssignableFrom(t))
-                {
-                    Debug.LogError(t.FullName + " not a delegate type");
-                    return;
-                }
-            }
-            sb.AppendLine("public static class DelegateFactory");
-            sb.AppendLine("{");
-            sb.AppendLine("\tdelegate Delegate DelegateValue(LuaFunction func);");
-            sb.AppendLine("\tstatic Dictionary<Type, DelegateValue> dict = new Dictionary<Type, DelegateValue>();");
-            sb.AppendLine();
-            sb.AppendLine("\t[NoToLuaAttribute]");
-            sb.AppendLine("\tpublic static void Register(IntPtr L)");
-            sb.AppendLine("\t{");
-            for (int i = 0; i < list.Length; i++)
-            {
-                string type = list[i].strType;
-                string name = list[i].name;
-                sb.AppendFormat("\t\tdict.Add(typeof({0}), new DelegateValue({1}));\r\n", type, name);
-            }
-            sb.AppendLine("\t}\r\n");
-            sb.AppendLine("\t[NoToLuaAttribute]");
-            sb.AppendLine("\tpublic static Delegate CreateDelegate(Type t, LuaFunction func)");
-            sb.AppendLine("\t{");
-            sb.AppendLine("\t\tDelegateValue create = null;\r\n");
-            sb.AppendLine("\t\tif (!dict.TryGetValue(t, out create))");
-            sb.AppendLine("\t\t{");
-            sb.AppendLine("\t\t\tDebugger.LogError(\"Delegate {0} not register\", t.FullName);");
-            sb.AppendLine("\t\t\treturn null;");
-            sb.AppendLine("\t\t}");
-            sb.AppendLine("\t\treturn create(func);");
-            sb.AppendLine("\t}\r\n");
-
-
-            for (int i = 0; i < list.Length; i++)
-            {
-                Type t = list[i].type;
-                string type = list[i].strType;
-                string name = list[i].name;
-                sb.AppendFormat("\tpublic static Delegate {0}(LuaFunction func)\r\n", name);
-                sb.AppendLine("\t{");
-                sb.AppendFormat("\t\t{0} d = ", type);
-                GenDelegateBody(t, "\t\t", false);
-                sb.AppendLine("\t\treturn d;");
-                sb.AppendLine("\t}\r\n");
-            }
-            sb.AppendLine("\tpublic static void Clear()");
-            sb.AppendLine("\t{");
-            sb.AppendLine("\t\tdict.Clear();");
-            sb.AppendLine("\t}\r\n");
-            sb.AppendLine("}");
-            SaveFile(Util.uLuaPath + "/Core/DelegateFactory.cs");
-            Clear();
         }
 
         private static string[] GetGenericLibName(Type[] types)

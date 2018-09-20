@@ -105,8 +105,6 @@ namespace LuaEditor
     [InitializeOnLoad]
     public static class LuaBinding
     {
-        static bool beAutoGen = false;
-
         [MenuItem("Lua/Gen Lua Wrap Files", false, 11)]
         public static void Binding()
         {
@@ -137,7 +135,6 @@ namespace LuaEditor
             EditorApplication.isPlaying = false;
 
             GenLuaBinder();
-            GenLuaDelegates();
             Debug.Log("Generate lua binding files over");
             AssetDatabase.Refresh();
         }
@@ -215,11 +212,6 @@ namespace LuaEditor
             AssetDatabase.Refresh();
         }
 
-        static DelegateType _DT(Type t)
-        {
-            return new DelegateType(t);
-        }
-
         static HashSet<Type> GetCustomDelegateTypes()
         {
             BindType[] list = WrapFile.binds;
@@ -278,29 +270,5 @@ namespace LuaEditor
             }
         }
 
-        [MenuItem("Lua/Gen Lua Delegates", false, 2)]
-        static void GenLuaDelegates()
-        {
-            LuaExport.Clear();
-            List<DelegateType> list = new List<DelegateType>();
-            list.AddRange(new DelegateType[] {
-            _DT(typeof(Action<GameObject>)),
-            _DT(typeof(Action)),
-            _DT(typeof(UnityEngine.Events.UnityAction)),
-        });
-            HashSet<Type> set = beAutoGen ? LuaExport.eventSet : GetCustomDelegateTypes();
-            foreach (Type t in set)
-            {
-                if (null == list.Find((p) => { return p.type == t; }))
-                {
-                    list.Add(_DT(t));
-                }
-            }
-            LuaExport.GenDelegates(list.ToArray());
-            set.Clear();
-            LuaExport.Clear();
-            AssetDatabase.Refresh();
-            Debug.Log("Create lua delegate over");
-        }
     }
 }

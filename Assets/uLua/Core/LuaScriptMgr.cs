@@ -63,7 +63,6 @@ namespace LuaInterface
         {
             IntPtr L = lua.L;
             BindArray(L);
-            DelegateFactory.Register(L);
             LuaBinder.Bind(L);
         }
 
@@ -187,8 +186,7 @@ namespace LuaInterface
             lua.Close();
             lua.Dispose();
             lua = null;
-
-            DelegateFactory.Clear();
+            
             LuaBinder.wrapList.Clear();
             Debugger.Log("Lua module destroy");
         }

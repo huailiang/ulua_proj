@@ -19,7 +19,6 @@ public static class LuaBinder
 			case "CharacterControllerWrap": CharacterControllerWrap.Register(L); break;
 			case "ColliderWrap": ColliderWrap.Register(L); break;
 			case "ComponentWrap": ComponentWrap.Register(L); break;
-			case "DelegateFactoryWrap": DelegateFactoryWrap.Register(L); break;
 			case "DelegateWrap": DelegateWrap.Register(L); break;
 			case "EnumWrap": EnumWrap.Register(L); break;
 			case "GameObjectWrap": GameObjectWrap.Register(L); break;
@@ -36,9 +35,6 @@ public static class LuaBinder
 			case "ScreenWrap": ScreenWrap.Register(L); break;
 			case "SkinnedMeshRendererWrap": SkinnedMeshRendererWrap.Register(L); break;
 			case "System_ObjectWrap": System_ObjectWrap.Register(L); break;
-			case "TestDelegateListenerWrap": TestDelegateListenerWrap.Register(L); break;
-			case "TestEventListenerWrap": TestEventListenerWrap.Register(L); break;
-			case "TestLuaDelegateWrap": TestLuaDelegateWrap.Register(L); break;
 			case "TextureWrap": TextureWrap.Register(L); break;
 			case "TimeWrap": TimeWrap.Register(L); break;
 			case "TransformWrap": TransformWrap.Register(L); break;
