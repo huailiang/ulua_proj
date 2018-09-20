@@ -46,7 +46,6 @@ set ( LUA_LIB ${LUA_SRC_PATH}/lauxlib.c ${LUA_SRC_PATH}/lbaselib.c ${LUA_SRC_PAT
   ${LUA_SRC_PATH}/lutf8lib.c ${LUA_SRC_PATH}/loadlib.c )
 
 set ( XLUA_CORE
-    perflib.c
     ulua.c
 )
 
