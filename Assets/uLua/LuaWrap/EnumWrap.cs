@@ -17,14 +17,13 @@ public class EnumWrap
 			new LuaMethod("CompareTo", CompareTo),
 			new LuaMethod("ToString", ToString),
 			new LuaMethod("ToObject", ToObject),
+			new LuaMethod("Equals", Equals),
+			new LuaMethod("GetHashCode", GetHashCode),
 			new LuaMethod("Format", Format),
 			new LuaMethod("GetType", GetType),
-			new LuaMethod("GetHashCode", GetHashCode),
-			new LuaMethod("Equals", Equals),
 			new LuaMethod("New", _CreateEnum),
 			new LuaMethod("GetClassType", GetClassType),
 			new LuaMethod("__tostring", Lua_ToString),
-			new LuaMethod("__eq", Lua_Eq),
 		};
 
 		LuaField[] fields = new LuaField[]
@@ -228,6 +227,27 @@ public class EnumWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Equals(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 2);
+		Enum obj = LuaScriptMgr.GetVarObject(L, 1) as Enum;
+		object arg0 = LuaScriptMgr.GetVarObject(L, 2);
+		bool o = obj != null ? obj.Equals(arg0) : arg0 == null;
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetHashCode(IntPtr L)
+	{
+		LuaScriptMgr.CheckArgsCount(L, 1);
+		Enum obj = (Enum)LuaScriptMgr.GetNetObjectSelf(L, 1, "Enum");
+		int o = obj.GetHashCode();
+		LuaScriptMgr.Push(L, o);
+		return 1;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Format(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 3);
@@ -245,38 +265,6 @@ public class EnumWrap
 		LuaScriptMgr.CheckArgsCount(L, 1);
 		Enum obj = (Enum)LuaScriptMgr.GetNetObjectSelf(L, 1, "Enum");
 		Type o = obj.GetType();
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetHashCode(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 1);
-		Enum obj = (Enum)LuaScriptMgr.GetNetObjectSelf(L, 1, "Enum");
-		int o = obj.GetHashCode();
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Equals(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Enum obj = LuaScriptMgr.GetVarObject(L, 1) as Enum;
-		object arg0 = LuaScriptMgr.GetVarObject(L, 2);
-		bool o = obj != null ? obj.Equals(arg0) : arg0 == null;
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Lua_Eq(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Enum arg0 = LuaScriptMgr.GetLuaObject(L, 1) as Enum;
-		Enum arg1 = LuaScriptMgr.GetLuaObject(L, 2) as Enum;
-		bool o = arg0 == arg1;
 		LuaScriptMgr.Push(L, o);
 		return 1;
 	}

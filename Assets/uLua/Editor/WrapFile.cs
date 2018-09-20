@@ -3,11 +3,13 @@ using System.Collections;
 using System;
 using LuaInterface;
 
-public static class WrapFile
+namespace LuaEditor
 {
-
-    public static BindType[] binds = new BindType[]
+    public static class WrapFile
     {
+
+        public static BindType[] binds = new BindType[]
+        {
         _GT(typeof(object)),
         _GT(typeof(System.Enum)),
         _GT(typeof(IEnumerator)),
@@ -50,10 +52,11 @@ public static class WrapFile
         _GT(typeof(Texture)),
         _GT(typeof(RenderTexture)),
         _GT(typeof(ParticleSystem)),
-    };
+        };
 
-    public static BindType _GT(Type t)
-    {
-        return new BindType(t);
+        public static BindType _GT(Type t)
+        {
+            return new BindType(t);
+        }
     }
 }

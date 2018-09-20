@@ -11,14 +11,13 @@ public class ObjectWrap
 		{
 			new LuaMethod("GetInstanceID", GetInstanceID),
 			new LuaMethod("GetHashCode", GetHashCode),
-			new LuaMethod("Equals", Equals),
 			new LuaMethod("Instantiate", Instantiate),
+			new LuaMethod("Destroy", Destroy),
+			new LuaMethod("DestroyImmediate", DestroyImmediate),
 			new LuaMethod("FindObjectsOfType", FindObjectsOfType),
 			new LuaMethod("DontDestroyOnLoad", DontDestroyOnLoad),
 			new LuaMethod("FindObjectOfType", FindObjectOfType),
 			new LuaMethod("ToString", ToString),
-			new LuaMethod("DestroyImmediate", DestroyImmediate),
-			new LuaMethod("Destroy", Destroy),
 			new LuaMethod("New", _CreateObject),
 			new LuaMethod("GetClassType", GetClassType),
 			new LuaMethod("__tostring", Lua_ToString),
@@ -196,17 +195,6 @@ public class ObjectWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Equals(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		Object obj = LuaScriptMgr.GetVarObject(L, 1) as Object;
-		object arg0 = LuaScriptMgr.GetVarObject(L, 2);
-		bool o = obj != null ? obj.Equals(arg0) : arg0 == null;
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Instantiate(IntPtr L)
 	{
 		int count = LuaAPI.lua_gettop(L);
@@ -263,6 +251,58 @@ public class ObjectWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Destroy(IntPtr L)
+	{
+		int count = LuaAPI.lua_gettop(L);
+
+		if (count == 1)
+		{
+			Object arg0 = (Object)LuaScriptMgr.GetUnityObject(L, 1, typeof(Object));
+			Object.Destroy(arg0);
+			return 0;
+		}
+		else if (count == 2)
+		{
+			Object arg0 = (Object)LuaScriptMgr.GetUnityObject(L, 1, typeof(Object));
+			float arg1 = (float)LuaScriptMgr.GetNumber(L, 2);
+			Object.Destroy(arg0,arg1);
+			return 0;
+		}
+		else
+		{
+			LuaAPI.luaL_error(L, "invalid arguments to method: Object.Destroy");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int DestroyImmediate(IntPtr L)
+	{
+		int count = LuaAPI.lua_gettop(L);
+
+		if (count == 1)
+		{
+			Object arg0 = (Object)LuaScriptMgr.GetUnityObject(L, 1, typeof(Object));
+			Object.DestroyImmediate(arg0);
+			return 0;
+		}
+		else if (count == 2)
+		{
+			Object arg0 = (Object)LuaScriptMgr.GetUnityObject(L, 1, typeof(Object));
+			bool arg1 = LuaScriptMgr.GetBoolean(L, 2);
+			Object.DestroyImmediate(arg0,arg1);
+			return 0;
+		}
+		else
+		{
+			LuaAPI.luaL_error(L, "invalid arguments to method: Object.DestroyImmediate");
+		}
+
+		return 0;
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int FindObjectsOfType(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
@@ -310,62 +350,6 @@ public class ObjectWrap
 		bool o = arg0 == arg1;
 		LuaScriptMgr.Push(L, o);
 		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int DestroyImmediate(IntPtr L)
-	{
-		int count = LuaAPI.lua_gettop(L);
-
-		if (count == 1)
-		{
-			Object arg0 = (Object)LuaScriptMgr.GetLuaObject(L, 1);
-			LuaScriptMgr.__gc(L);
-			Object.DestroyImmediate(arg0);
-			return 0;
-		}
-		else if (count == 2)
-		{
-			Object arg0 = (Object)LuaScriptMgr.GetLuaObject(L, 1);
-			bool arg1 = LuaScriptMgr.GetBoolean(L, 2);
-			Object.DestroyImmediate(arg0,arg1);
-			return 0;
-		}
-		else
-		{
-			LuaAPI.luaL_error(L, "invalid arguments to method: Object.DestroyImmediate");
-		}
-
-		return 0;
-
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Destroy(IntPtr L)
-	{
-		int count = LuaAPI.lua_gettop(L);
-
-		if (count == 1)
-		{
-			Object arg0 = (Object)LuaScriptMgr.GetLuaObject(L, 1);
-			LuaScriptMgr.__gc(L);
-			Object.Destroy(arg0);
-			return 0;
-		}
-		else if (count == 2)
-		{
-			Object arg0 = (Object)LuaScriptMgr.GetLuaObject(L, 1);
-			float arg1 = (float)LuaScriptMgr.GetNumber(L, 2);
-			Object.Destroy(arg0, arg1);
-			return 0;
-		}
-		else
-		{
-			LuaAPI.luaL_error(L, "invalid arguments to method: Object.Destroy");
-		}
-
-		return 0;
-
 	}
 }
 

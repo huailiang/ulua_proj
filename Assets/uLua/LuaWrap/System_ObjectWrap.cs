@@ -7,12 +7,10 @@ public class System_ObjectWrap
 	{
 		LuaMethod[] regs = new LuaMethod[]
 		{
-			new LuaMethod("Equals", Equals),
 			new LuaMethod("GetHashCode", GetHashCode),
 			new LuaMethod("GetType", GetType),
 			new LuaMethod("ToString", ToString),
 			new LuaMethod("ReferenceEquals", ReferenceEquals),
-			new LuaMethod("Destroy", Destroy),
 			new LuaMethod("New", _CreateSystem_Object),
 			new LuaMethod("GetClassType", GetClassType),
 			new LuaMethod("__tostring", Lua_ToString),
@@ -71,17 +69,6 @@ public class System_ObjectWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Equals(IntPtr L)
-	{
-		LuaScriptMgr.CheckArgsCount(L, 2);
-		object obj = LuaScriptMgr.GetVarObject(L, 1) as object;
-		object arg0 = LuaScriptMgr.GetVarObject(L, 2);
-		bool o = obj != null ? obj.Equals(arg0) : arg0 == null;
-		LuaScriptMgr.Push(L, o);
-		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetHashCode(IntPtr L)
 	{
 		LuaScriptMgr.CheckArgsCount(L, 1);
@@ -120,13 +107,6 @@ public class System_ObjectWrap
 		bool o = object.ReferenceEquals(arg0,arg1);
 		LuaScriptMgr.Push(L, o);
 		return 1;
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Destroy(IntPtr L)
-	{
-		LuaScriptMgr.__gc(L);
-		return 0;
 	}
 }
 
