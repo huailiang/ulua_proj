@@ -139,7 +139,36 @@ public static int luaL_typerror(IntPtr luaState, int narg, string tname)
 }
 ```
 
-7. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
+7. lua_rawgeti，lua_rawseti
+
+这两个方法第三个参数在lua53中定义为lua_Integer，其在32位、64位机子对应到c#不同的整形数据， 所以我们采取和xlua一样的调用方式
+
+
+在c#中参数直接定义成long类型：
+
+```csharp
+[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+public static extern void xlua_rawgeti(IntPtr luaState, int tableIndex, long index);
+[DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+public static extern void xlua_rawseti(IntPtr luaState, int tableIndex, long index);
+```
+
+在c++中再做类型转换：
+
+```c++
+LUA_API void xlua_rawgeti (lua_State *L, int idx, int64_t n) {
+	lua_rawgeti(L, idx, (lua_Integer)n);
+}
+
+LUA_API void xlua_rawseti (lua_State *L, int idx, int64_t n) {
+	lua_rawseti(L, idx, (lua_Integer)n);
+}
+```
+
+如果不这样做的话，android平台下lua require其他lua文件，访问package.seachers表的时候，找不到对应的loader, 这个问题困扰了我好久。
+
+
+8. 根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要的库，可以减少代码量，ios提交app store审核时，会有代码量的限制。 读者可以根据自己项目的需要来定制自己的lua库。
 
 
 更多关于lua51升级后的更变 请参考[这里](/doc/luachanges.md)
