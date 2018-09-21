@@ -68,7 +68,7 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 
 关于lua51升级后的更变 请参考[lua51升级变更](/doc/luachanges.md)
 
-关于lua51升级后，c#相应的改动参考这里[这里](/doc/lua53.md)
+关于lua51升级后，c#相应的改动参考这里[这里](/doc/ulua53.md)
 
 
 
