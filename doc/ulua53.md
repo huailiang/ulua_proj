@@ -155,10 +155,9 @@ LUA_API void xlua_rawseti (lua_State *L, int idx, int64_t n) {
 
 ```
 
-如果不这样做的话，android平台下lua require其他lua文件，访问package.seachers表的时候，找不到对应的loader, 这个问题困扰了我好久。
+如果不这样做的话，android平台下lua require其他lua文件，访问package.seachers表的时候，找不到对应的loader, 这个问题困扰了我好久
 
-
-###8. library变更
+### 8. library变更
 
 	根据我们项目的需要 移除了luasocket的库， 因为我们项目中所有的收发消息都是通过c#来，网络消息过来的时候，根据注册表分别向c++
 	(战斗使用的库GameCore), lua(补丁使用的库)，c#(系统逻辑)转发， 不同平台使用对应的protobuf来反序列化出相应的对象。移除不必要
