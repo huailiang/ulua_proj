@@ -368,7 +368,6 @@ namespace LuaInterface
             translator = null;
             L = IntPtr.Zero;
             GC.SuppressFinalize(this);
-
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }

@@ -183,7 +183,7 @@ namespace LuaEditor
             }
         }
 
-        [MenuItem("Lua/Clear LuaBinder File + Wrap Files", false, 13)]
+        [MenuItem("Lua/Clear Wrap Files", false, 13)]
         public static void ClearLuaBinder()
         {
             StringBuilder sb = new StringBuilder();
