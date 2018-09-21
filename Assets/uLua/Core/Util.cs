@@ -17,7 +17,7 @@ namespace LuaInterface
                 name = name.Substring(0, index);
             }
             name = name.Replace('.', '/');
-            if (name.StartsWith("hotfix"))
+            if (name.ToLower().StartsWith("hotfix"))
             {
                 return "lua/Hotfix/" + name + ".lua";
             }

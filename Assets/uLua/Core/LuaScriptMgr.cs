@@ -10,7 +10,6 @@ namespace LuaInterface
     public class LuaScriptMgr
     {
         public static LuaScriptMgr Instance { get; private set; }
-
         public LuaState lua;
         public HashSet<string> fileList = null;
         Dictionary<string, LuaBase> dict = null;
