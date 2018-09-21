@@ -1,9 +1,10 @@
-## Lua 导出bytecode
+# Lua 导出bytecode
 
 ### lua使用bytecode 的好处主要有两点：
+```
  a. 二进制文件，为了加密
  b. 编译后的中间件，提升效率
-
+```
 
  那么如何导出bytecode呢？
 
