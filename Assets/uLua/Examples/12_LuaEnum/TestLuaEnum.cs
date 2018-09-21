@@ -1,17 +1,26 @@
-﻿using UnityEngine;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
-public class LuaEnum : MonoBehaviour {
+public enum LuaEnumType
+{
+    AAA = 1,
+    BBB = 2,
+    CCC = 3,
+    DDD = 4
+}
+
+public class TestLuaEnum : MonoBehaviour
+{
     const string source = @"
         local type = LuaEnumType.IntToEnum(1);
         print(type == LuaEnumType.AAA);
     ";
 
-	// Use this for initialization
-	void Start () {
+
+    void Start()
+    {
         LuaScriptMgr mgr = new LuaScriptMgr();
         mgr.Start();
         mgr.lua.DoString(source);
-	}
+    }
 }

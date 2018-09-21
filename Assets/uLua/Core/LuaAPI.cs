@@ -248,7 +248,7 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_pushnumber(IntPtr luaState, double number);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_pushinteger(IntPtr luaState, int number);
+        public static extern void lua_pushinteger(IntPtr luaState, long number);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_pushboolean(IntPtr luaState, bool value);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

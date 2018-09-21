@@ -1,7 +1,7 @@
 ﻿using LuaInterface;
 using UnityEngine;
 
-public class LuaArray : MonoBehaviour
+public class TestLuaArray2 : MonoBehaviour
 {
 
     string source = @"

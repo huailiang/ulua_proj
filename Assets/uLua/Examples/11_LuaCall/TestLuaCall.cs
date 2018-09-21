@@ -1,11 +1,11 @@
 ﻿using LuaInterface;
 using UnityEngine;
 
-public class A1_LuaCall : MonoBehaviour
+public class TestLuaCall : MonoBehaviour
 {
 
     const string script = @"
-        A6_LuaCall = luanet.import_type('A6_LuaCall')  
+        TestLuaCall = luanet.import_type('TestLuaCall')  
 
         LuaClass = {}
         LuaClass.__index = LuaClass
@@ -17,7 +17,7 @@ public class A1_LuaCall : MonoBehaviour
         end
 
         function LuaClass:test() 
-            A6_LuaCall.OnSharpCall(self, self.callback);
+            TestLuaCall.OnSharpCall(self, self.callback);
         end
 
         function LuaClass:callback()

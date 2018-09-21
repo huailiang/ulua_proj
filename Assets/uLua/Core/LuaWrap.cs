@@ -30,10 +30,6 @@ public struct LuaField
 };
 
 
-public interface ILuaWrap 
-{
-    void Register();
-}
 
 public class LuaStringBuffer
 {
@@ -63,13 +59,4 @@ public class LuaRef
         this.L = L;
         this.reference = reference;
     }
-}
-
-/*一个发送协议的例子结构*/
-public class MsgPacket
-{
-    public ushort id;
-    public int      seq;
-    public ushort   errno;        
-    public LuaStringBuffer data;   
 }

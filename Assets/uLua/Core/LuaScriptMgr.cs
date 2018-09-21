@@ -1125,12 +1125,12 @@ namespace LuaInterface
 
         public static void Push(IntPtr L, long d)
         {
-            LuaAPI.lua_pushnumber(L, d);
+            LuaAPI.lua_pushinteger(L, d);
         }
 
         public static void Push(IntPtr L, ulong d)
         {
-            LuaAPI.lua_pushnumber(L, d);
+            LuaAPI.lua_pushinteger(L, (long)d);
         }
 
         public static void Push(IntPtr L, float d)
