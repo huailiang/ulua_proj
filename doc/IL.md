@@ -23,12 +23,19 @@
 注意事项：
 ```
 1. 构造函数不能被热修
+
 2. 参数含有ref、out的不能被热修
-3. 加入[Hotfix]标签后执行LuaTools->Injector->Inject来注入，然后在编辑器里运行，确保注入成功没有错误后再执行LuaTools->Injector->Clean来清除IL注入。切记注入之后，不要上传dll，上传之前一定要清掉，避免污染代码
+
+3. 加入[Hotfix]标签后执行LuaTools->Injector->Inject来注入，
+	然后在编辑器里运行，确保注入成功没有错误后再执行LuaTools->Injector->Clean来清除IL注入。
+	切记注入之后，不要上传dll，上传之前一定要清掉，避免污染代码
+	
 4. 原先已经成熟的模块就不要在注入了 因为注入会增加额外的代码量
+
 5. 考虑到性能的问题 最好Update方法都主动加一个[HotfixIgnore] 不去热修
+
 ```
 
-![](/img/il1.jpg)
+![](/img/il1.png)
 
-![](/img/il2.jpg)
+![](/img/il2.png)
