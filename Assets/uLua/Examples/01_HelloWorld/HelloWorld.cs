@@ -8,12 +8,8 @@ public class HelloWorld : MonoBehaviour
     {
         if (GUI.Button(new Rect(20, 20, 200, 80), "Hello"))
         {
-            Debug.Log("Helooclick");
             if (l == null) l = new LuaState();
-            string str =
-                @"
-                 -- require('hotfix_Scripts')
-                  print('hello world!')";
+            string str = @"print('hello world!')";
             l.DoString(str);
         }
         if (GUI.Button(new Rect(20, 120, 200, 80), "Close"))
@@ -22,6 +18,7 @@ public class HelloWorld : MonoBehaviour
             {
                 Debug.Log("close state");
                 l.Close();
+                l = null;
             }
         }
     }
