@@ -70,6 +70,9 @@ LuaException: error loading module Main from CustomLoader, Main: size_t size mis
 
 解决：
 所使用的luac编译工具得区分32、64位 , 安卓需在32位的编译文件
+
 https://github.com/Tencent/xLua/issues/356
+
 https://www.jianshu.com/p/3c49cf454502
+
 https://github.com/Tencent/xLua/issues/356
