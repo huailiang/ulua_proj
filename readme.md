@@ -1,12 +1,12 @@
 <p align="center">
     <a href="https://www.lua.org/">
-	    <img src="http://www.runoob.com/manual/lua53doc/logo.gif" width="110" height="100">
+	    <img src="http://www.runoob.com/manual/lua53doc/logo.gif" width="110" height="100" target="_blank">
 	</a>
 	<a href="https://unity3d.com/cn/">
-	    <img src="https://huailiang.github.io/img/unity.jpeg" width="200" height="100">
+	    <img src="https://huailiang.github.io/img/unity.jpeg" width="200" height="100" target="_blank">
 	</a>
     	<a href="https://huailiang.github.io/">
-    	<img src="https://huailiang.github.io/img/avatar-Alex.jpg" width="120" height="100">
+    	<img src="https://huailiang.github.io/img/avatar-Alex.jpg" width="120" height="100" target="_blank">
    	</a>
 </p>
 
@@ -40,7 +40,7 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 
 1. master使用lua53作为native-lib 天然对int64支持，使用参考项目里这个Examples-10_Int64例子
 
-2. luac 支持对bytecode模式的支持,参考[这里](/doc/bytecode.md)
+2. luac 支持对bytecode模式的支持,参考[这里](/doc/bytecode.md?_blank)
 
 3. profile 查看lua调用堆栈,lua函数执行时间
 	
@@ -50,9 +50,9 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 	
 
 
-关于lua51升级后的更变 请参考[这里](/doc/luachanges.md)
+关于lua51升级后的更变 请参考[这里](/doc/luachanges.md?_blank)
 
-关于lua51升级后，c#相应的改动参考这里[这里](/doc/lua53.md)
+关于lua51升级后，c#相应的改动参考这里[这里](/doc/lua53.md?_blank)
 
 ### QA:
 
@@ -68,5 +68,5 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 #### 2. lua原码加密
 
 
-一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[这里](/doc/bytecode.md)
+一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[这里](/doc/bytecode.md?_blank)
 
