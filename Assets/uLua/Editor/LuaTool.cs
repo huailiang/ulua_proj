@@ -13,7 +13,7 @@ namespace LuaEditor
 
         private static List<FileInfo> g_files = new List<FileInfo>();
 
-        [MenuItem("Lua/Trans-utf8encode")]
+        [MenuItem("Lua/Coding-UTF8")]
         public static void TransNoBom()
         {
             Handle(TransNoBomUtf8);

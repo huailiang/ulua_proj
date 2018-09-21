@@ -1,0 +1,30 @@
+--
+--  #SCRIPTNAME#.lua
+--  Created by #AuthorName# on #CreateTime#
+--  Please make sure you file start with "Hotfix" or "Lua"
+--
+
+#SCRIPTNAME#={}
+local this = #SCRIPTNAME#
+
+local Go
+
+--called by MonoBehaviour.Awake
+function #SCRIPTNAME#.Awake(go)
+	Go = go
+end
+
+function #SCRIPTNAME#.Start()
+end
+
+function #SCRIPTNAME#.OnEnable()
+end
+
+function #SCRIPTNAME#.OnDisable()
+end
+
+function #SCRIPTNAME#.OnDestroy()
+end
+
+function #SCRIPTNAME#.OnShow()
+end

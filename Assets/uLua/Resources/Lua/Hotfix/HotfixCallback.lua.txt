@@ -1,0 +1,45 @@
+﻿
+function LuaTestInject()
+	print("code execute in lua")
+	return 3
+end
+
+
+function LuaTestBool( ... )
+	-- body
+	print("code execute in lua")
+	return true
+end
+
+
+function LuaTestStatic( params )
+	-- body
+	local cnt = params.Length-1
+	for i=0,cnt do
+		print("lua arg:"..tostring(params[i]))
+	end
+
+	return 100
+	--print("execute in lua "..tostring(a)..tostring(b)..tostring(c))
+end
+
+
+function LuaTestArgs( params )
+	-- body
+	local cnt = params.Length-1
+	local ret =0 
+	for i=0,cnt do
+		print("lua arg:"..tostring(params[i]))
+		ret = ret + params[i] * 2
+	end
+	return ret
+end
+
+
+
+function LuaTestNode( params )
+	local node = params[0]
+	print("lua node c: "..node.c)
+	return nil
+end
+

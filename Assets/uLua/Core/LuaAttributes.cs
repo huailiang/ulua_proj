@@ -2,6 +2,16 @@
 
 namespace LuaInterface
 {
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+    public class HotfixAttribute : System.Attribute
+    {
+    }
+
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+    public class HotfixIgnoreAttribute : System.Attribute
+    {
+    }
+
     public class NoToLuaAttribute : System.Attribute
     {
         public NoToLuaAttribute() { }

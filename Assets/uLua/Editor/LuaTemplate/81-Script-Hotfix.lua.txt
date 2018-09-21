@@ -1,0 +1,32 @@
+﻿--
+--  #SCRIPTNAME#.lua
+--  Created by #AuthorName# on #CreateTime#
+--  Please make sure you file start with "Hotfix" or "Lua"
+--
+
+#SCRIPTTITLE#={}
+local this = #SCRIPTTITLE#
+
+function #SCRIPTTITLE#.BeforeRefresh(go)
+	if not IsNil(go) then
+		local str = "BeforeRefresh=>  "..go.name
+		print(str)
+	else
+		print("BeforeRefresh: There is nil lua script ")
+	end
+	
+	return false
+end
+
+
+function #SCRIPTTITLE#.AfterRefresh(go)
+	if not IsNil(go) then
+		local str = "AfterRefresh=>  "..go.name
+		print(str)
+	else
+		print("AfterRefresh: There is nil lua script ")
+	end
+	return false
+end
+
+
