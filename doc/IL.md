@@ -36,6 +36,6 @@
 
 ```
 
-![](/img/il1.png)
+![](/doc/img/il1.png)
 
-![](/img/il2.png)
+![](/doc/img/il2.png)
