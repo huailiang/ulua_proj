@@ -28,7 +28,7 @@
 
 	自定义的lua的脚本以hotfix开头， hotfix开头的lua脚本，我们直接进入指定的路径加载，不再去搜索其他的文件路径，提升搜索效率
 
-4. 为cs类或者方法打标签[Hotfix]或者[HotfixIgnore] 来为dll注入lua代码 详细参考[IL注入实现热修](/IL.md)
+4. 为cs类或者方法打标签[Hotfix]或者[HotfixIgnore] 来为dll注入lua代码 详细参考[IL注入实现热修](/doc/IL.md)
 
 
 
