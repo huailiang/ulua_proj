@@ -27,6 +27,20 @@ MARK_AS_ADVANCED(XLUA_PROJECT_DIR)
 
 set(LUA_SRC_PATH lua-5.3.5/src)
 
+#begin lua-profobuf
+set (LPB_SRC 
+    lua-protobuf/pb.c
+)
+set_property(
+    SOURCE ${LPB_SRC}
+    APPEND
+    PROPERTY COMPILE_DEFINITIONS
+    LUA_LIB
+)
+list(APPEND THIRDPART_INC lua-protobuf)
+set (THIRDPART_SRC ${THIRDPART_SRC} ${LPB_SRC})
+#end lua-protobuf
+
 set ( LUA_IDSIZE 120 CACHE NUMBER "gives the maximum size for the description of the source." )
 
 configure_file ( ${LUA_SRC_PATH}/luaconf.h.in ${CMAKE_CURRENT_BINARY_DIR}/luaconf.h )
@@ -77,6 +91,7 @@ if (APPLE)
            ${LUA_CORE}
            ${LUA_LIB}
            ${XLUA_CORE}
+           ${THIRDPART_SRC}
         )
 		set_xcode_property (ulua IPHONEOS_DEPLOYMENT_TARGET "7.0")
     else ()
@@ -85,6 +100,7 @@ if (APPLE)
             ${LUA_CORE}
             ${LUA_LIB}
             ${XLUA_CORE}
+            ${THIRDPART_SRC}
         )
         set_target_properties ( ulua PROPERTIES BUNDLE TRUE )
     endif ()
@@ -93,6 +109,7 @@ else ( )
         ${LUA_CORE}
         ${LUA_LIB}
         ${XLUA_CORE}
+        ${THIRDPART_SRC}
     )
 endif ( )
 

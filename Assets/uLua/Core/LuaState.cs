@@ -15,6 +15,7 @@ namespace LuaInterface
         internal LuaCSFunction printFunction;
         internal LuaCSFunction loadfileFunction;
         internal LuaCSFunction loaderFunction;
+        internal LuaCSFunction builtinFunction;
         internal LuaCSFunction dofileFunction;
         internal LuaCSFunction import_wrapFunction;
 
@@ -61,22 +62,30 @@ namespace LuaInterface
             LuaAPI.lua_setglobal(L, "import");
 
             loaderFunction = new LuaCSFunction(LuaStatic.loader);
-            LuaAPI.lua_pushstdcallcfunction(L, loaderFunction);
+            AddLoader(loaderFunction, 2);
+            builtinFunction = new LuaCSFunction(LuaStatic.LoadBuiltinLib);
+            AddLoader(builtinFunction, 3);
+
+            LuaAPI.lua_settop(L, 0); //clear stack
+            tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
+        }
+
+
+        public void AddLoader(LuaCSFunction loader, int index)
+        {
+            LuaAPI.lua_pushstdcallcfunction(L, loader);
 
             LuaAPI.lua_getglobal(L, "package");
             LuaAPI.lua_getfield(L, -1, "searchers");
             LuaAPI.lua_remove(L, -2); //remv table package
             int len = LuaAPI.lua_rawlen(L, -1);
-            int index = 2;
             for (int i = len + 1; i > index; i--)
             {
                 LuaAPI.ulua_rawgeti(L, -1, i - 1);
                 LuaAPI.ulua_rawseti(L, -2, i);
             }
-            LuaAPI.lua_pushstdcallcfunction(L, loaderFunction);
+            LuaAPI.lua_pushstdcallcfunction(L, loader);
             LuaAPI.ulua_rawseti(L, -2, index);
-            LuaAPI.lua_settop(L, 0); //clear stack
-            tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
         }
 
         public void Close()

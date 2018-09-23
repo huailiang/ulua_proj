@@ -40,7 +40,7 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 ## 特性：
 
 
-1. master使用lua53作为native-lib 天然对int64支持，使用参考项目里这个Examples-10_Int64例子
+1. master使用lua53作为native-lib 天然对int64支持，使用参考项目里这个ulua/Examples/10_Int64 例子
 
 
 2. luac 支持对bytecode模式的支持,参考[lua生成bytecode](/doc/bytecode.md?_blank)
@@ -62,6 +62,11 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 
 	通过新的功能模块中的类名或者方法名加上[Hotfix]标签 而如果忽略某个函数可以使用[HotfixIgnore]，对线上问题快速修复，具体参考[IL注入实现热修](/doc/IL.md)
 
+6. 支持protobuf3
+	
+	目前主流的lua插件 比如ulua、tolua、slua都是支持protobuf2  c#测如果使用protobuf2 反序列化都是使用反射，产生大量的gc，升级protobuf3还是很有必要的.
+
+	项目使用protobuf3 的例子是ulua/Examples/14_ProtoBuffer， 当然详细的使用文档和注意事项，请点击[这里](/doc/pb.md)查看
 	
 
 ## 升级变更

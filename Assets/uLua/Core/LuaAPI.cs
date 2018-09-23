@@ -335,5 +335,7 @@ namespace LuaInterface
         public static extern void ulua_rawgeti(IntPtr luaState, int tableIndex, long index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void ulua_rawseti(IntPtr luaState, int tableIndex, long index);
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern int luaopen_pb(System.IntPtr L);
     }
 }

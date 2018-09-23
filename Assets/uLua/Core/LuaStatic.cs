@@ -41,7 +41,7 @@ namespace LuaInterface
             LuaAPI.lua_pcall(L, 2, 1, 0);
             return 1;
         }
-        
+
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         public static int print(IntPtr L)
         {
@@ -142,6 +142,19 @@ namespace LuaInterface
                 LuaBinder.Bind(L, fileName);
             }
             return 0;
+        }
+
+        [MonoPInvokeCallback(typeof(LuaCSFunction))]
+        public static int LoadLuaProfobuf(IntPtr L)
+        {
+            return LuaAPI.luaopen_pb(L);
+        }
+
+        [MonoPInvokeCallback(typeof(LuaCSFunction))]
+        internal static int LoadBuiltinLib(IntPtr L)
+        {
+            LuaAPI.lua_pushstdcallcfunction(L, LoadLuaProfobuf);
+            return 1;
         }
     }
 }
