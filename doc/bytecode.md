@@ -65,7 +65,9 @@ luac -o test.luac test.lua
 如果运行时候出现这个报错
 
 ```
-LuaException: error loading module Main from CustomLoader, Main: size_t size mismatch in precompiled chunk
+LuaException: error loading module Main from CustomLoader,
+Main: size_t size mismatch in precompiled chunk
+
 ```
 
 解决：
