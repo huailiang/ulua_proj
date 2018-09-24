@@ -75,5 +75,3 @@ Main: size_t size mismatch in precompiled chunk
 https://github.com/Tencent/xLua/issues/356
 
 https://www.jianshu.com/p/3c49cf454502
-
-https://github.com/Tencent/xLua/issues/356
