@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-using System;
-using System.Collections;
-using LuaInterface;
+﻿using LuaInterface;
+using UnityEngine;
 
 public class TestProtol : MonoBehaviour
 {

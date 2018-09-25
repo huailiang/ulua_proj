@@ -149,7 +149,7 @@ namespace LuaInterface
             lua_createtable(luaState, 0, 0);
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_getglobal(IntPtr luaState, string name);
+        public static extern int lua_getglobal(IntPtr luaState, string name);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_setglobal(IntPtr luaState, string name);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
