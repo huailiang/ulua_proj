@@ -73,8 +73,6 @@ namespace LuaInterface
 
         public void AddLoader(LuaCSFunction loader, int index)
         {
-            LuaAPI.lua_pushstdcallcfunction(L, loader);
-
             LuaAPI.lua_getglobal(L, "package");
             LuaAPI.lua_getfield(L, -1, "searchers");
             LuaAPI.lua_remove(L, -2); //remv table package
@@ -183,7 +181,7 @@ namespace LuaInterface
                     //LuaAPI.lua_setfenv(L, -1);
                     LuaAPI.lua_setfenv(L, -2);
                 }
-                if (LuaAPI.lua_pcall(L, 0, -1, -2) == 0)
+                if (LuaAPI.lua_pcall(L, 0, -1, 0) == 0)
                 {
                     object[] results = translator.popValues(L, oldTop);
                     LuaAPI.lua_pop(L, 1);
