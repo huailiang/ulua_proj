@@ -93,3 +93,37 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 
 一般我们不使用自定义的加密算法去加密lua原码， 而是将lua编译成中间件（bytecode），关于如何生成bytecode, 请参考[lua生成bytecode](/doc/bytecode.md?_blank)
 
+#### 3. ios编译
+
+ios build error: 'system' is unavailable: not available on iOS
+
+
+iOS11废除了system之后,rug如果使用xcode9以上的版本编译都会报此错误，解决方法就是：
+
+将loslib.c中
+
+int stat = system(cmd);
+
+改为
+
+int stat = nftw(cmd, unlink_cb, 64, FTW_DEPTH | FTW_PHYS);
+
+引入头文件
+
+#include <ftw.h>
+
+添加方法:
+
+```c++
+int unlink_cb(const char *fpath, const struct stat *sb, int typeflag, struct FTW     *ftwbuf)
+{
+    int rv = remove(fpath);
+    
+    if (rv)
+        perror(fpath);
+    
+    return rv;
+}
+```
+
+
