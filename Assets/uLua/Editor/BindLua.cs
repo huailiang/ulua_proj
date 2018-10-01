@@ -263,7 +263,7 @@ namespace LuaEditor
 
         static void ClearFiles(string path)
         {
-            string[] names = Directory.GetFiles(path);
+            string[] names = Directory.GetFiles(path, "*.cs");
             foreach (var filename in names)
             {
                 File.Delete(filename);

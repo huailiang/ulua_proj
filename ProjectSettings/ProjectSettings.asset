@@ -729,7 +729,7 @@ PlayerSettings:
   webGLLinkerTarget: 1
   scriptingDefineSymbols: {}
   platformArchitecture:
-    iOS: 0
+    iOS: 1
   scriptingBackend:
     iOS: 1
   il2cppCompilerConfiguration: {}

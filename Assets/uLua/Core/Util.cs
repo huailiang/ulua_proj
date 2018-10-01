@@ -62,7 +62,7 @@ namespace LuaInterface
             else
             {
                 string[] files = Directory.GetFiles(sourceDir);
-                if (files.Length == 0) return -2;
+                if (files.Length < 3) return -2;
             }
             return 0;
         }
@@ -71,14 +71,8 @@ namespace LuaInterface
         public static bool CheckEnvironment()
         {
 #if UNITY_EDITOR
-            int resultId = Util.CheckRuntimeFile();
-            if (resultId == -1)
-            {
-                Debug.LogError("没有找到框架所需要的资源，单击Game菜单下Build xxx Resource生成！！");
-                UnityEditor.EditorApplication.isPlaying = false;
-                return false;
-            }
-            else if (resultId == -2)
+            int resultId = CheckRuntimeFile();
+            if (resultId == -2)
             {
                 Debug.LogError("没有找到Wrap脚本缓存，单击Lua菜单下Gen Lua Wrap Files生成脚本！！");
                 UnityEditor.EditorApplication.isPlaying = false;
