@@ -22,7 +22,7 @@ namespace LuaEditor
         _GT(typeof(LuaEnumType)),
         _GT(typeof(Debugger)),
         _GT(typeof(ClientProfiler)),
-
+        _GT(typeof(LuaStringBuffer)),
         //unity                        
         _GT(typeof(Component)),
         _GT(typeof(Behaviour)),
