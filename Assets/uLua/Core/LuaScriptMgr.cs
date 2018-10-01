@@ -255,7 +255,7 @@ namespace LuaInterface
         {
             if (!fileList.Contains(fileName))
             {
-                return lua.DoFile(fileName, null);
+                return lua.DoFile(fileName);
             }
             return null;
         }

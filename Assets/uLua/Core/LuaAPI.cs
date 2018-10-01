@@ -121,8 +121,6 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int lua_rawequal(IntPtr luaState, int stackPos1, int stackPos2);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int lua_setfenv(IntPtr luaState, int stackPos);
-        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_setfield(IntPtr luaState, int stackPos, string name);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luaL_callmeta(IntPtr luaState, int stackPos, string name);

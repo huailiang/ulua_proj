@@ -1,4 +1,4 @@
-﻿
+
 function LuaTestInject()
 	print("code execute in lua")
 	return 3

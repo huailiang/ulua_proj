@@ -1,4 +1,4 @@
-﻿require "HotfixCallback"
+require "HotfixCallback"
 
 regist = {}
 

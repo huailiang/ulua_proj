@@ -114,7 +114,7 @@ namespace LuaInterface
             return 0;
         }
 
-        public LuaFunction LoadString(string chunk, string name, LuaTable env)
+        public LuaFunction LoadString(string chunk, string name)
         {
             int oldTop = LuaAPI.lua_gettop(L);
             byte[] bt = Encoding.UTF8.GetBytes(chunk);
@@ -122,11 +122,6 @@ namespace LuaInterface
             if (LuaAPI.luaL_loadbuffer(L, bt, bt.Length, name) != 0)
                 ThrowExceptionFromError(oldTop);
 
-            if (env != null)
-            {
-                env.push(L);
-                LuaAPI.lua_setfenv(L, -2);
-            }
             LuaFunction result = translator.getFunction(L, -1);
             translator.popValues(L, oldTop);
             return result;
@@ -134,20 +129,10 @@ namespace LuaInterface
 
         public object[] DoString(string chunk)
         {
-            return DoString(chunk, "chunk", null);
-        }
-
-        public object[] DoString(string chunk, string chunkName, LuaTable env)
-        {
             int oldTop = LuaAPI.lua_gettop(L);
             byte[] bt = Encoding.UTF8.GetBytes(chunk);
-            if (LuaAPI.luaL_loadbuffer(L, bt, bt.Length, chunkName) == 0)
+            if (LuaAPI.luaL_loadbuffer(L, bt, bt.Length, "chunk") == 0)
             {
-                if (env != null)
-                {
-                    env.push(L);
-                    LuaAPI.lua_setfenv(L, -2);
-                }
                 if (LuaAPI.lua_pcall(L, 0, -1, 0) == 0)
                     return translator.popValues(L, oldTop);
                 else
@@ -160,11 +145,6 @@ namespace LuaInterface
 
         public object[] DoFile(string fileName)
         {
-            return DoFile(fileName, null);
-        }
-
-        public object[] DoFile(string fileName, LuaTable env)
-        {
             LuaAPI.lua_pushstdcallcfunction(L, tracebackFunction);
             int oldTop = LuaAPI.lua_gettop(L);
             byte[] bytes = LuaStatic.Load(fileName);
@@ -175,12 +155,6 @@ namespace LuaInterface
             }
             if (LuaAPI.luaL_loadbuffer(L, bytes, bytes.Length, fileName) == 0)
             {
-                if (env != null)
-                {
-                    env.push(L);
-                    //LuaAPI.lua_setfenv(L, -1);
-                    LuaAPI.lua_setfenv(L, -2);
-                }
                 if (LuaAPI.lua_pcall(L, 0, -1, 0) == 0)
                 {
                     object[] results = translator.popValues(L, oldTop);
