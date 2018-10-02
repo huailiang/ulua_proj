@@ -1622,25 +1622,6 @@ namespace LuaInterface
             return null;
         }
 
-        public static LuaStringBuffer GetStringBuffer(IntPtr L, int stackPos)
-        {
-            LuaTypes luatype = LuaAPI.lua_type(L, stackPos);
-
-            if (luatype == LuaTypes.LUA_TNIL)
-            {
-                return null;
-            }
-            else if (luatype != LuaTypes.LUA_TSTRING)
-            {
-                LuaAPI.luaL_typerror(L, stackPos, "string");
-                return null;
-            }
-
-            int len = 0;
-            IntPtr buffer = LuaAPI.lua_tolstring(L, stackPos, out len);
-            return new LuaStringBuffer(buffer, (int)len);
-        }
-
         public static void SetValueObject(IntPtr L, int pos, object obj)
         {
             GetTranslator(L).SetValueObject(L, pos, obj);

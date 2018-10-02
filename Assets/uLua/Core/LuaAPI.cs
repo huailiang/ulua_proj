@@ -64,7 +64,9 @@ namespace LuaInterface
 #endif
     public class LuaAPI
     {
-        public static int LUA_REGISTRYINDEX = -1001000;
+        public const int LUA_REGISTRYINDEX = -1001000;
+
+        public const int LUA_MULTRET = -1;
 
 #if UNITY_IPHONE
 #if UNITY_EDITOR
@@ -221,25 +223,34 @@ namespace LuaInterface
         public static extern double lua_tonumber(IntPtr luaState, int index);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool lua_toboolean(IntPtr luaState, int index);
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]//[,,m]
+        public static extern int get_error_func_ref(IntPtr L);
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]//[,,m]
+        public static extern int load_error_func(IntPtr L, int Ref);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr lua_tolstring(IntPtr luaState, int index, out int strLen);
-        static string AnsiToUnicode(IntPtr source, int strlen)
-        {
-            byte[] buffer = new byte[strlen];
-            Marshal.Copy(source, buffer, 0, strlen);
-            return Encoding.UTF8.GetString(buffer);
-        }
+        public static extern IntPtr lua_tolstring(IntPtr luaState, int index, out IntPtr strLen);
+
         public static string lua_tostring(IntPtr luaState, int index)
         {
-            int strlen;
+            IntPtr strlen;
+
             IntPtr str = lua_tolstring(luaState, index, out strlen);
             if (str != IntPtr.Zero)
             {
-                string ss = Marshal.PtrToStringAnsi(str, strlen);
-                if (ss == null) return AnsiToUnicode(str, strlen);
-                return ss;
+                string ret = Marshal.PtrToStringAnsi(str, strlen.ToInt32());
+                if (ret == null)
+                {
+                    int len = strlen.ToInt32();
+                    byte[] buffer = new byte[len];
+                    Marshal.Copy(str, buffer, 0, len);
+                    return Encoding.UTF8.GetString(buffer);
+                }
+                return ret;
             }
-            return null;
+            else
+            {
+                return null;
+            }
         }
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void lua_atpanic(IntPtr luaState, LuaCSFunction panicf);
@@ -284,7 +295,7 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern int luanet_checkudata(IntPtr luaState, int obj, string meta);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void lua_error(IntPtr luaState);
+        public static extern int lua_error(IntPtr luaState);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern bool lua_checkstack(IntPtr luaState, int extra);
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]

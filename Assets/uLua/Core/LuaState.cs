@@ -8,17 +8,7 @@ namespace LuaInterface
     {
         public IntPtr L;
         internal ObjectTranslator translator;
-        internal LuaCSFunction tracebackFunction;
-        internal LuaCSFunction panicCallback;
-
-        // Overrides
-        internal LuaCSFunction printFunction;
-        internal LuaCSFunction loadfileFunction;
-        internal LuaCSFunction loaderFunction;
-        internal LuaCSFunction builtinFunction;
-        internal LuaCSFunction dofileFunction;
-        internal LuaCSFunction import_wrapFunction;
-
+        internal int errorFuncRef = -1;
         public ObjectTranslator Translator { get { return translator; } }
 
         public LuaState()
@@ -42,32 +32,23 @@ namespace LuaInterface
             translator = new ObjectTranslator(this, L);
             translator.PushTranslator(L);
 
-            panicCallback = new LuaCSFunction(LuaStatic.panic);
-            LuaAPI.lua_atpanic(L, panicCallback);
+            LuaAPI.lua_atpanic(L, LuaStatic.panic);
 
-            printFunction = new LuaCSFunction(LuaStatic.print);
-            LuaAPI.lua_pushstdcallcfunction(L, printFunction);
+            LuaAPI.lua_pushstdcallcfunction(L, LuaStatic.print);
             LuaAPI.lua_setglobal(L, "print");
-
-            loadfileFunction = new LuaCSFunction(LuaStatic.loadfile);
-            LuaAPI.lua_pushstdcallcfunction(L, loadfileFunction);
+            LuaAPI.lua_pushstdcallcfunction(L, LuaStatic.loadfile);
             LuaAPI.lua_setglobal(L, "loadfile");
-
-            dofileFunction = new LuaCSFunction(LuaStatic.dofile);
-            LuaAPI.lua_pushstdcallcfunction(L, dofileFunction);
+            LuaAPI.lua_pushstdcallcfunction(L, LuaStatic.dofile);
             LuaAPI.lua_setglobal(L, "dofile");
-
-            import_wrapFunction = new LuaCSFunction(LuaStatic.importWrap);
-            LuaAPI.lua_pushstdcallcfunction(L, import_wrapFunction);
+            LuaAPI.lua_pushstdcallcfunction(L, LuaStatic.importWrap);
             LuaAPI.lua_setglobal(L, "import");
 
-            loaderFunction = new LuaCSFunction(LuaStatic.loader);
-            AddLoader(loaderFunction, 2);
-            builtinFunction = new LuaCSFunction(LuaStatic.LoadBuiltinLib);
-            AddLoader(builtinFunction, 3);
+            AddLoader(LuaStatic.loader, 2);
+            AddLoader(LuaStatic.LoadBuiltinLib, 3);
 
+            errorFuncRef = LuaAPI.get_error_func_ref(L);
             LuaAPI.lua_settop(L, 0); //clear stack
-            tracebackFunction = new LuaCSFunction(LuaStatic.traceback);
+
         }
 
 
@@ -130,11 +111,15 @@ namespace LuaInterface
         public object[] DoString(string chunk)
         {
             int oldTop = LuaAPI.lua_gettop(L);
+            int errFunc = LuaAPI.load_error_func(L, errorFuncRef);
             byte[] bt = Encoding.UTF8.GetBytes(chunk);
             if (LuaAPI.luaL_loadbuffer(L, bt, bt.Length, "chunk") == 0)
             {
-                if (LuaAPI.lua_pcall(L, 0, -1, 0) == 0)
+                if (LuaAPI.lua_pcall(L, 0, LuaAPI.LUA_MULTRET, errFunc) == 0)
+                {
+                    LuaAPI.lua_remove(L, errFunc);
                     return translator.popValues(L, oldTop);
+                }
                 else
                     ThrowExceptionFromError(oldTop);
             }
@@ -145,7 +130,8 @@ namespace LuaInterface
 
         public object[] DoFile(string fileName)
         {
-            LuaAPI.lua_pushstdcallcfunction(L, tracebackFunction);
+            int errFunc = LuaAPI.load_error_func(L, errorFuncRef);
+            LuaAPI.lua_pushstdcallcfunction(L, LuaStatic.traceback);
             int oldTop = LuaAPI.lua_gettop(L);
             byte[] bytes = LuaStatic.Load(fileName);
             if (bytes == null)
@@ -155,9 +141,10 @@ namespace LuaInterface
             }
             if (LuaAPI.luaL_loadbuffer(L, bytes, bytes.Length, fileName) == 0)
             {
-                if (LuaAPI.lua_pcall(L, 0, -1, 0) == 0)
+                if (LuaAPI.lua_pcall(L, 0, LuaAPI.LUA_MULTRET, errFunc) == 0)
                 {
                     object[] results = translator.popValues(L, oldTop);
+                    LuaAPI.lua_remove(L, errFunc);
                     LuaAPI.lua_pop(L, 1);
                     return results;
                 }

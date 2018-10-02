@@ -47,19 +47,23 @@ namespace LuaInterface
         {
             int n = LuaAPI.lua_gettop(L);
             string s = String.Empty;
-            LuaAPI.lua_getglobal(L, "tostring");
 
+            LuaAPI.lua_getglobal(L, "tostring");
             for (int i = 1; i <= n; i++)
             {
                 LuaAPI.lua_pushvalue(L, -1);  /* function to be called */
                 LuaAPI.lua_pushvalue(L, i);   /* value to print */
-                LuaAPI.lua_pcall(L, 1, 1, 0);
-
-                if (i > 1) s += "\t";
+                if (0 != LuaAPI.lua_pcall(L, 1, 1, 0))
+                {
+                    return LuaAPI.lua_error(L);
+                }
                 s += LuaAPI.lua_tostring(L, -1);
-                LuaAPI.lua_pop(L, 1);  /* pop result */
+
+                if (i != n) s += "\t";
+
+                LuaAPI.lua_pop(L, 1);
             }
-            Debug.Log("LUA: " + s);
+            UnityEngine.Debug.Log("LUA: " + s);
             return 0;
         }
 
@@ -76,13 +80,8 @@ namespace LuaInterface
                 fileName = fileName.Substring(0, index);
             }
             fileName = fileName.Replace('.', '/');
-
-            LuaScriptMgr mgr = LuaScriptMgr.GetMgrFromLuaState(L);
             int oldTop = LuaAPI.lua_gettop(L);
-            if (mgr != null)
-            {
-                LuaAPI.lua_pushstdcallcfunction(L, mgr.lua.tracebackFunction);
-            }
+            LuaAPI.lua_pushstdcallcfunction(L, LuaStatic.traceback);
 
             byte[] text = LuaStatic.Load(fileName);
             if (text == null)
@@ -92,7 +91,8 @@ namespace LuaInterface
             }
             if (LuaAPI.luaL_loadbuffer(L, text, text.Length, fileName) != 0)
             {
-                mgr.lua.ThrowExceptionFromError(oldTop + 1);
+                LuaScriptMgr mgr = LuaScriptMgr.GetMgrFromLuaState(L);
+                if (mgr != null) mgr.lua.ThrowExceptionFromError(oldTop + 1);
                 LuaAPI.lua_pop(L, 1);
             }
             return 1;
