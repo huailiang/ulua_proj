@@ -82,14 +82,14 @@ https://www.jianshu.com/p/3c49cf454502
 我们lua官网下载好对应的版本的lua源码之后，修改src/Makefile，默认生成的是64bit的luac，将
 
 
-```python
+```makefile
 macosx:
 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline"
 ```
 
 修改为：
 
-```python
+```makefile
 macosx:
 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX"  MYCFLAGS="-DLUA_USE_LINUX -arch i386" MYLIBS="-arch i386 -lreadline"
 ```
