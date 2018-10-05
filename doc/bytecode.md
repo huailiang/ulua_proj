@@ -75,3 +75,35 @@ Main: size_t size mismatch in precompiled chunk
 https://github.com/Tencent/xLua/issues/356
 
 https://www.jianshu.com/p/3c49cf454502
+
+
+如何在macos上编译32位luac呢？
+
+我们lua官网下载好对应的版本的lua源码之后，修改src/Makefile，默认生成的是64bit的luac，将
+
+
+```
+macosx:
+	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline"
+
+```
+
+修改为：
+```
+macosx:
+	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX"  MYCFLAGS="-DLUA_USE_LINUX -arch i386" MYLIBS="-arch i386 -lreadline"
+```
+
+如果你不愿意修改，可以直接Shell的目录覆盖掉源文件下Makefile
+
+
+同时shell目录下，已经有作者生成好的32bit、64bit平台下的luac文件， 引用目录是：
+
+Shell\install-32
+
+Shell]install-64
+
+
+你可以方便直接运行Shell脚本lua2bytecode.sh，直接选择对应的平台，bytecode可以转好。
+
+![](/doc/img/lua4.jpg)
