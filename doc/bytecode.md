@@ -99,7 +99,7 @@ Shell\install-32
 Shell\install-64
 
 
-你可以方便直接运行Shell脚本lua2bytecode.sh，直接选择对应的平台，bytecode可以转好。
+终端里直接运行Shell脚本lua2bytecode.sh，选择对应的平台，不同平台的bytecode直接就生成了。
 
 ![](/doc/img/lua4.jpg)
 
