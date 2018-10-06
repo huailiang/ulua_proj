@@ -53,7 +53,7 @@ d. luac生成bytecode, 使用如下命令：
 
 
 ```shell
-luac -o test.luac test.lua
+luac -o test.bytes test.lua
 ```
 
 
