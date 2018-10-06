@@ -43,7 +43,7 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 1. master使用lua53作为native-lib 天然对int64支持，使用参考项目里这个ulua/Examples/10_Int64 例子
 
 
-2. luac 支持对bytecode模式的支持,参考[lua生成bytecode](/doc/bytecode.md?_blank)
+2. luac 支持对bytecode模式,参考[lua生成bytecode](/doc/bytecode.md?_blank)
 
 
 3. cs2lua 通过wrap文件直接将方法地址和参数列表暴露给lua 让lua高效访问
