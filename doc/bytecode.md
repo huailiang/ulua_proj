@@ -72,11 +72,6 @@ Main: size_t size mismatch in precompiled chunk
 解决：
 所使用的luac编译工具得区分32、64位 , 安卓需在32位的编译文件
 
-https://github.com/Tencent/xLua/issues/356
-
-https://www.jianshu.com/p/3c49cf454502
-
-
 如何在macos上编译32位luac呢？
 
 我们lua官网下载好对应的版本的lua源码之后，修改src/Makefile，默认生成的是64bit的luac，将
