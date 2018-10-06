@@ -71,9 +71,10 @@ function selectplatf(){
         luac=${currdir}"/install-64/bin/luac"
     fi
 
-    cd $luadir
-    git clean -df .
-    git checkout .
+    # # reset origin lua file with git 
+    # cd $luadir
+    # git clean -df .
+    # git checkout .
 }
 
 
