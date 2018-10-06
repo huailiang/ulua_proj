@@ -98,7 +98,7 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 ios build error: 'system' is unavailable: not available on iOS
 
 
-iOS11废除了system之后,rug如果使用xcode9以上的版本编译都会报此错误，解决方法就是：
+iOS11废除了system之后,如果使用xcode9以上的版本编译都会报此错误，解决方法就是：
 
 将loslib.c中
 
