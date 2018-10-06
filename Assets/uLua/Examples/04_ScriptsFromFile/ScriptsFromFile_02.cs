@@ -13,7 +13,7 @@ public class ScriptsFromFile_02 : MonoBehaviour
                 mgr = new LuaScriptMgr();
                 mgr.Start();
             }
-            mgr.lua.DoFile("hotfix_hello");
+            mgr.lua.DoFile("Logic/hotfix_hello");
         }
         if (GUI.Button(new Rect(20, 120, 200, 80), "Dispose"))
         {

@@ -1,2 +1,0 @@
-require "hotfix_Scripts"
-print("hello world, huailiang 世界")
