@@ -34,7 +34,7 @@ public class LuaClass : MonoBehaviour
             return self.limit or 0;  
         end  
 
-        s = SpecialAccount:new{ limit = 1000 };
+        s = SpecialAccount:new{ limit = 1000; balance = 20 };
         print(s.balance);  
         s:deposit(100.00);
 
