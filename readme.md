@@ -66,7 +66,7 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 	
 	目前主流的lua插件 比如ulua、tolua、slua都是支持protobuf2  c#测如果使用protobuf2 反序列化都是使用反射，产生大量的gc，升级protobuf3还是很有必要的.
 
-	项目使用protobuf3 的例子是ulua/Examples/14_ProtoBuffer， 当然详细的使用文档和注意事项，请点击[这里](/doc/pb.md)查看
+	项目使用protobuf3 的例子是ulua/Examples/14_ProtoBuffer， 当然详细的使用文档和注意事项，请点击[lua proto3.x 说明文档](/doc/pb.md)查看
 
 7. OO 支持继承和多态
 
@@ -80,9 +80,9 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 
 关于lua51升级后的更变 请参考[lua51升级变更](/doc/luachanges.md)
 
-关于lua51升级后，c#相应的改动参考这里[这里](/doc/ulua53.md)
+关于lua51升级后，c#相应的改动参考这里[ulua c#脚本改动变更](/doc/ulua53.md)
 
-
+关于如何编译lua的c原码以及扩展插件， 请参考[ulua native编译说明](/doc/build.md)
 
 ## QA:
 
