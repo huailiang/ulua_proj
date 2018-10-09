@@ -57,5 +57,7 @@ make_android_lua53.sh 需要指定ndk的本地路径，请根据自己的实际�
 
 
 lua-protobuf/ 	是lua支持protobuf的c原码
+
 lua-5.3.5/    	是lua53经过不同平台适应修改后的lua原码
+
 CMakeLists.txt 	是cmake的配置文件，扩展和删除native插件，编译添加的宏可以通过此来配置
