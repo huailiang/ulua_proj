@@ -26,7 +26,7 @@
 windows:	*.dll   	shared
 macosx:		*.bundle	shared	
 android:	*.so		shared
-ios:		*.a         static
+ios:		*.a         	static
 ```
 
 
