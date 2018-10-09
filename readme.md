@@ -67,6 +67,13 @@ windows 上编译需要安装cmake, vs2013(当然也可以是其他版本，只�
 	目前主流的lua插件 比如ulua、tolua、slua都是支持protobuf2  c#测如果使用protobuf2 反序列化都是使用反射，产生大量的gc，升级protobuf3还是很有必要的.
 
 	项目使用protobuf3 的例子是ulua/Examples/14_ProtoBuffer， 当然详细的使用文档和注意事项，请点击[这里](/doc/pb.md)查看
+
+7. OO 支持继承和多态
+
+	lua中没有class 也没有class这个关键词，lua中的面向对象是通过元表来进行实现和模拟的
+
+	在例子ulua/Examples/13_LuaClass中 我们可以看到基类中的balance被子类覆盖了，而且子类可以调用基类里的方法，基类方法deposit()可以修改子类里的变量
+
 	
 
 ## 升级变更
