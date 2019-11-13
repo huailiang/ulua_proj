@@ -30,7 +30,9 @@ void xtable::exec()
 	lua_newtable(L);
 	lua_pushnumber(L, 101); // 先将值压入栈 key=101
 	lua_pushstring(L, "www.jb51.net"); //global_c_write[101]="www.jb51.net"
+	LUAPRINT(tag);
 	lua_settable(L, -3);
+	LUAPRINT(tag);
 	lua_pushstring(L, "baidu");
 	lua_pushstring(L, "www.baidu.com"); ////global_c_write["baidu"]="www.baidu.com"
 	LUAPRINT(tag);

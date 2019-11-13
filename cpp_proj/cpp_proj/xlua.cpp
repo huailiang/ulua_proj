@@ -46,8 +46,10 @@ void xlua::exec()
 	}
 	if (lua_isnumber(L, -1))        //È¡ÖµÊä³ö  
 	{
+		cout << lua_type(L, 0) << " xx " << lua_type(L, -1) << endl;
 		double fValue = lua_tonumber(L, -1);
 		cout << "Result is " << fValue << endl;
+		
 	}
 	LUAPRINT(tag);
 }

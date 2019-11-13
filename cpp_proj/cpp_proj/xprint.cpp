@@ -42,7 +42,7 @@ void  xprint::print(lua_State* L, const char* tag)
 		}
 		else
 		{
-			cout << i << " is not released" << endl;
+			cout << i << " is "<< lua_typename(L, i) << endl;
 		}
 	}
 	cout << endl << endl;
