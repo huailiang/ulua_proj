@@ -1,14 +1,3 @@
-<p align="center">
-    <a href="https://www.lua.org/">
-	    <img src="http://www.runoob.com/manual/lua53doc/logo.gif" width="110" height="100" target="_blank">
-	</a>
-	<a href="https://unity3d.com/cn/">
-	    <img src="https://huailiang.github.io/img/unity.jpeg" width="200" height="100" target="_blank">
-	</a>
-    	<a href="https://huailiang.github.io/">
-    	<img src="https://huailiang.github.io/img/avatar-Alex.jpg" width="120" height="100" target="_blank">
-   	</a>
-</p>
 
 此项目旨在提供一套通用的方式生成lua的库，工程使用的unity版本是2018.2.7
 
