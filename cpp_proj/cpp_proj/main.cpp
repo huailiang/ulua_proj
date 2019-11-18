@@ -2,6 +2,7 @@
 #include "xstate.h"
 #include "ulua.h"
 #include "xtable.h"
+#include "table.h"
 
 using namespace std;
 
@@ -9,6 +10,7 @@ xstate* pState;
 xlua* pXlua;
 ulua* pUlua;
 xtable* pTable;
+table* pTab;
 
 void init()
 {
@@ -16,6 +18,7 @@ void init()
 	pXlua = new xlua();
 	pUlua = new ulua();
 	pTable = new xtable;
+	pTab = new table("BeHit.bytes");
 }
 
 void tip()
@@ -26,18 +29,16 @@ void tip()
 
 void dispose()
 {
-	delete pState;
-	delete pXlua;
-	delete pUlua;
-	delete pTable;
-	pState = NULL;
-	pXlua = NULL;
-	pUlua = NULL;
-	pTable = NULL;
+	SAFE_DELETE(pState);
+	SAFE_DELETE(pXlua);
+	SAFE_DELETE(pUlua);
+	SAFE_DELETE(pTable);
+	SAFE_DELETE(pTab);
 }
 
 int main()
 {
+	cout << "32 int: " << sizeof(int32_t) << endl;
 	init();
 	int a = 0;
 	bool loop = true;
@@ -59,6 +60,8 @@ int main()
 		case 4:
 			pTable->exec();
 			break;
+		case 5:
+			pTab->read();
 		default:
 			loop = false;
 			break;

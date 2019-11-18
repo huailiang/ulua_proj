@@ -121,6 +121,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="reader.cpp" />
+    <ClCompile Include="table.cpp" />
     <ClCompile Include="ulua.cpp" />
     <ClCompile Include="xlua.cpp" />
     <ClCompile Include="xprint.cpp" />
@@ -128,6 +130,9 @@
     <ClCompile Include="xtable.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="common.h" />
+    <ClInclude Include="reader.h" />
+    <ClInclude Include="table.h" />
     <ClInclude Include="ulua.h" />
     <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />

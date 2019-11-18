@@ -3,9 +3,11 @@ xcode_proj/
 
 [Ll]ibrary/
 [Tt]emp/
+Logs/
 **/[Oo]bj/
 **/.vs/
 **/.vscode/
+**/idea/
 
 build/plugin_luajit/
 build/plugin_lua53/
