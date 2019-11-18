@@ -9,18 +9,17 @@
 
 using namespace std;
 
-class table
+class behit
 {
 public:
-	table(string name);
-	~table();
+	behit(string name);
+	~behit();
 	void read();
 
 private:
 	void init_header(ifstream& f);
 	void init_column(ifstream& f);
 	void read_line(ifstream& f);
-
 	string inner_string(ifstream& f);
 
 private:
@@ -35,6 +34,10 @@ private:
 	float* p_float = NULL;
 	double* p_double = NULL;
 	uint16_t* p_index = NULL;
+
+private:
+	string* headers; //表格header = 列数 (这里由lua传过来)
+
 };
 
 

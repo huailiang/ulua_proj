@@ -2,7 +2,7 @@
 #include "xstate.h"
 #include "ulua.h"
 #include "xtable.h"
-#include "table.h"
+#include "behit.h"
 
 using namespace std;
 
@@ -10,7 +10,7 @@ xstate* pState;
 xlua* pXlua;
 ulua* pUlua;
 xtable* pTable;
-table* pTab;
+behit* pTab;
 
 void init()
 {
@@ -18,7 +18,7 @@ void init()
 	pXlua = new xlua();
 	pUlua = new ulua();
 	pTable = new xtable;
-	pTab = new table("BeHit.bytes");
+	pTab = new behit("BeHit.bytes");
 }
 
 void tip()

@@ -1,14 +1,14 @@
-#include "table.h"
+#include "behit.h"
 
 
 
-table::table(string name)
+behit::behit(string name)
 {
 	this->name = name;
 }
 
 
-table::~table()
+behit::~behit()
 {
 	this->name = "";
 	delete[] p_str;
@@ -21,7 +21,7 @@ table::~table()
 }
 
 
-void table::read()
+void behit::read()
 {
 	ifstream ifs;
 	ifs.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -44,7 +44,7 @@ void table::read()
 }
 
 
-void table::init_header(ifstream& f)
+void behit::init_header(ifstream& f)
 {
 	bool hasString = false;
 	f.read((char*)&hasString, sizeof(bool));
@@ -94,7 +94,7 @@ void table::init_header(ifstream& f)
 	}
 }
 
-void table::init_column(ifstream& f)
+void behit::init_column(ifstream& f)
 {
 	f.read(&columnCount, sizeof(char));
 	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount << endl;
@@ -111,7 +111,7 @@ void table::init_column(ifstream& f)
 		int32_t beforePos = f.tellg();
 		this->read_line(f);
 		int32_t afterPos = f.tellg();
-		cout << i << " before pos:" << beforePos << " after pos:" << afterPos << " size:" << size << endl;
+		cout << i << ": before pos:" << beforePos << " after pos:" << afterPos << " size:" << size << endl;
 		auto delta = afterPos - beforePos;
 		if (size > delta)
 		{
@@ -126,7 +126,7 @@ void table::init_column(ifstream& f)
 }
 
 
-void table::read_line(ifstream& f)
+void behit::read_line(ifstream& f)
 {
 	uint32_t presentid = 0;
 	f.read((char*)&presentid, sizeof(presentid));
@@ -168,7 +168,7 @@ void table::read_line(ifstream& f)
 	cout << "pve:" << PVESP << " pvp:" << PVPSP << " " << setHitFromDir << endl;
 }
 
-string table::inner_string(ifstream& f)
+string behit::inner_string(ifstream& f)
 {
 	uint16_t idx;
 	f.read((char*)&idx, sizeof(uint16_t));
