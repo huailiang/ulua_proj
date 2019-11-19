@@ -136,6 +136,7 @@
     <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />
     <ClInclude Include="xtable.h" />
+    <ClInclude Include="xtype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

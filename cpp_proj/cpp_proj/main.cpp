@@ -43,8 +43,10 @@ int main()
 		{
 		case 1:
 			pXlua->exec();
+			break;
 		case 2:
 			pTable->exec();
+			break;
 		case 3:
 			pTab->Read();
 		default:

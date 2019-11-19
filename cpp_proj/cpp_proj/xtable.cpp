@@ -69,7 +69,7 @@ void xtable::table()
 	push_k_v(101, "101 string");
 	push_k_v("abc", "baidu string");
 
-	int16_t* p = new int16_t[2] {101, 102};
+	uint16_t* p = new uint16_t[2] {101, 102};
 	push_array("arr", p, 2);
 	lua_rawseti(L, -2, 1);
 

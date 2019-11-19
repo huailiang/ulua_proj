@@ -8,8 +8,7 @@ for (size_t i = 0; i < len; i++) { \
 	lua_pushnumber(L, *(p + i)); \
 	lua_rawseti(L, -2, i); \
 } \
-lua_settable(L, -3); \
-delete[] p; 
+lua_settable(L, -3); 
 
 
 #define PUSH_NUMBER_KV(key, v) \
@@ -81,7 +80,7 @@ void cvs::fill(int i_row, int i_col, bool v)
 	push_k_v(title[i_col].c_str(), v);
 }
 
-void cvs::fill(int i_row, int i_col, int16_t *p, size_t len)
+void cvs::fill(int i_row, int i_col, uint32_t *p, size_t len)
 {
 	push_array(title[i_col].c_str(), p, len);
 }
@@ -126,7 +125,7 @@ lua_State*  cvs::GetLuaL()
 	return L;
 }
 
-void cvs::push_array(const char* key, int16_t *p, size_t len)
+void cvs::push_array(const char* key, uint32_t *p, size_t len)
 {
 	PUSH_NUMBER_ARRAY(key, p, len);
 }

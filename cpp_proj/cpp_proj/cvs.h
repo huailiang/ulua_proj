@@ -22,7 +22,7 @@ public:
 	void fill(int i_row, int i_col, double v);
 	void fill(int i_row, int i_col, string v);
 	void fill(int i_row, int i_col, bool v);
-	void fill(int i_row, int i_col, int16_t *p, size_t len);
+	void fill(int i_row, int i_col, uint32_t *p, size_t len);
 	void fill(int i_row, int i_col, uint16_t *p, size_t len);
 	void fill(int i_row, int i_col, int32_t *p, size_t len);
 	void fill(int i_row, int i_col, float *p, size_t len);
@@ -34,7 +34,7 @@ public:
 
 
 protected:
-	void push_array(const char* key, int16_t *p, size_t len);
+	void push_array(const char* key, uint32_t *p, size_t len);
 	void push_array(const char* key, uint16_t *p, size_t len);
 	void push_array(const char* key, int32_t *p, size_t len);
 	void push_array(const char* key, float *p, size_t len);

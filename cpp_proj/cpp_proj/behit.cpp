@@ -1,10 +1,14 @@
 #include "behit.h"
+#include "xtype.h"
 
 
 
 Behit::Behit(string name)
 {
 	this->name = name;
+
+	this->columnCount = 25;
+
 	headers = new string[25]{
 		"presentid",  // 0
 		"hitid",
@@ -32,6 +36,63 @@ Behit::Behit(string name)
 		"ChangeFlyTime",
 		"setHitFromDir" //24
 	};
+
+	types = new int[25]{
+		UINT32,  // presentid
+		INT32,  // hitid
+		STRING_ARR, // hit_front
+		STRING_ARR, // hit_front_curve
+		STRING_ARR,
+		STRING_ARR,
+		STRING_ARR,
+		STRING_ARR, // hit_left_curve
+		STRING_ARR,
+		STRING_ARR, // hit_right_curve
+		STRING,  // death
+		STRING_ARR, // death_curve
+		FLOAT_ARR,
+		UINT32_ARR, // qte
+		FLOAT_LIST,
+		INT32,
+		INT32,
+		FLOAT_ARR, // postEffectParams
+		INT32_LIST,
+		FLOAT_LIST,
+		INT32,
+		INT32, //PVPSP
+		FLOAT_SEQ,
+		FLOAT_SEQ, // ChangeFlyTime
+		BOOLEAN
+	};
+
+	void(Behit::*fReader)(ifstream& f, int row) = &Behit::ReadUint32;
+
+	pReader[INT32] = &Behit::ReadInt32;
+	pReader[UINT32] = &Behit::ReadUint32;
+	pReader[UINT16] = &Behit::ReadUint16;
+	pReader[INT64] = &Behit::ReadUint16;
+	pReader[FLOAT] = &Behit::ReadFloat;
+	pReader[DOUBLE] = &Behit::ReadDouble;
+	pReader[BOOLEAN] = &Behit::ReadBool;
+	pReader[STRING] = &Behit::ReadString;
+
+	pReader[INT32_ARR] = &Behit::ReadInt32Array;
+	pReader[UINT32_ARR] = &Behit::ReadUint32Array;
+	pReader[FLOAT_ARR] = &Behit::ReadFloatArray;
+	pReader[DOUBLE_ARR] = &Behit::ReadDoubleArray;
+	pReader[STRING_ARR] = &Behit::ReadStringArray;
+
+	pReader[INT32_SEQ] = &Behit::ReadSeq;
+	pReader[UINT32_SEQ] = &Behit::ReadSeq;
+	pReader[FLOAT_SEQ] = &Behit::ReadSeq;
+	pReader[DOUBLE_SEQ] = &Behit::ReadSeq;
+	pReader[STRING_SEQ] = &Behit::ReadSeq;
+
+	pReader[INT32_LIST] = &Behit::ReadSeqList;
+	pReader[UINT32_LIST] = &Behit::ReadSeqList;
+	pReader[FLOAT_LIST] = &Behit::ReadSeqList;
+	pReader[DOUBLE_LIST] = &Behit::ReadSeqList;
+	pReader[STRING_LIST] = &Behit::ReadSeqList;
 }
 
 
@@ -49,6 +110,130 @@ Behit::~Behit()
 	SAFE_DELETE(p_cvs);
 }
 
+
+void Behit::ReadUint32(ifstream& f, int row)
+{
+	uint32_t tmp =0;
+	f.read((char*)&tmp, sizeof(uint32_t));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadInt32(ifstream& f, int row)
+{
+	int32_t tmp=0;
+	f.read((char*)&tmp, sizeof(int32_t));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadUint16(ifstream& f, int row)
+{
+	uint16_t tmp=0;
+	f.read((char*)&tmp, sizeof(uint16_t));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadInt64(ifstream& f, int row)
+{
+	int64_t tmp = 0;
+	f.read((char*)&tmp, sizeof(int64_t));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadFloat(ifstream& f, int row)
+{
+	float tmp = 0;
+	f.read((char*)&tmp, sizeof(float));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadDouble(ifstream& f, int row)
+{
+	double tmp = 0;
+	f.read((char*)&tmp, sizeof(double));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadBool(ifstream& f, int row)
+{
+	bool tmp = 0;
+	f.read((char*)&tmp, sizeof(bool));
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadString(ifstream& f, int row)
+{
+	string tmp = InnerString(f);
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void Behit::ReadInt32Array(ifstream& f, int row)
+{
+	int32_t *tmp = nullptr;
+	char len = 0;
+	read_number_array(f, tmp, &len);
+	p_cvs->fill(row, p_curr++, tmp, (size_t)len);
+	delete[] tmp;
+}
+
+void Behit::ReadUint32Array(ifstream& f, int row)
+{
+	uint32_t *tmp = nullptr;
+	char len = 0;
+	read_number_array(f, tmp, &len);
+	p_cvs->fill(row, p_curr++, tmp, (size_t)len);
+	delete[] tmp;
+}
+
+void Behit::ReadFloatArray(ifstream& f, int row)
+{
+	float *tmp = nullptr;
+	char len = 0;
+	read_number_array(f, tmp, &len);
+	p_cvs->fill(row, p_curr++, tmp, (size_t)len);
+	delete[] tmp;
+}
+
+void Behit::ReadDoubleArray(ifstream& f, int row)
+{
+	double *tmp = nullptr;
+	char len = 0;
+	read_number_array(f, tmp, &len);
+	p_cvs->fill(row, p_curr++, tmp, (size_t)len);
+	delete[] tmp;
+}
+
+void Behit::ReadStringArray(ifstream& f, int row)
+{
+	uint16_t *tmp = nullptr;
+	char len = 0;
+	read_number_array(f, tmp, &len);
+
+	int size = (size_t)len;
+	string* ptr = new string[size];
+	loop(size)
+	{
+		auto idx = tmp[i];
+		*(ptr + i) = p_str[idx];
+	}
+	p_cvs->fill(row, p_curr++, ptr, (size_t)len);
+	delete[] tmp;
+	delete[] ptr;
+}
+
+
+void Behit::ReadSeq(ifstream& f, int row)
+{
+	uint16_t len = 0;
+	readSeqRef(f, &len);
+	p_curr++;
+}
+
+void Behit::ReadSeqList(ifstream& f, int row)
+{
+	char len = 0;
+	readSeqlist(f, &len);
+	p_curr++;
+}
 
 void Behit::Read()
 {
@@ -70,7 +255,6 @@ void Behit::Read()
 		std::cerr << "read table error " << name << std::endl;
 	}
 }
-
 
 void Behit::ReadHeader(ifstream& f)
 {
@@ -120,11 +304,10 @@ void Behit::ReadHeader(ifstream& f)
 	}
 }
 
-
 void Behit::ReadContent(ifstream & f)
 {
 	f.read(&columnCount, sizeof(char));
-	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount <<" name:"<<name<< endl;
+	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount << " name:" << name << endl;
 	p_cvs = new cvs("c_behit", lineCount, columnCount, headers);
 	loop(columnCount)
 	{
@@ -156,10 +339,20 @@ void Behit::ReadContent(ifstream & f)
 	PostProcess();
 }
 
+void Behit::ReadLine2(ifstream& f, int i)
+{
+	loop(columnCount)
+	{
+		fReader reader = pReader[this->types[i]];
+		(this->*reader)(f, i);
+	}
+}
+
 void Behit::ReadLine(ifstream& f, int i)
 {
+	p_curr = 0;
 	uint32_t presentid = 0;
-	f.read((char*)&presentid, sizeof(presentid));
+	f.read((char*)&presentid, sizeof(uint32_t));
 	p_cvs->fill(i, 0, presentid);
 	int32_t hitid = 0;
 	f.read((char*)&hitid, sizeof(int32_t));
@@ -172,33 +365,33 @@ void Behit::ReadLine(ifstream& f, int i)
 
 	char len = 0;
 	uint16_t ulen = 0;
-	read_inner_array(f, hit_front, &len);
+	read_number_array(f, hit_front, &len);
 	p_cvs->fill(i, 2, hit_front, len);
-	read_inner_array(f, hit_front_curve, &len);
+	read_number_array(f, hit_front_curve, &len);
 	p_cvs->fill(i, 3, hit_front_curve, len);
-	read_inner_array(f, hit_back, &len);
+	read_number_array(f, hit_back, &len);
 	p_cvs->fill(i, 4, hit_back, len);
-	read_inner_array(f, hit_back_curve, &len);
+	read_number_array(f, hit_back_curve, &len);
 	p_cvs->fill(i, 5, hit_back_curve, len);
-	read_inner_array(f, hit_left, &len);
+	read_number_array(f, hit_left, &len);
 	p_cvs->fill(i, 6, hit_left, len);
-	read_inner_array(f, hit_left_curve, &len);
+	read_number_array(f, hit_left_curve, &len);
 	p_cvs->fill(i, 7, hit_left_curve, len);
-	read_inner_array(f, hit_right, &len);
+	read_number_array(f, hit_right, &len);
 	p_cvs->fill(i, 8, hit_right, len);
-	read_inner_array(f, hit_right_curve, &len);
+	read_number_array(f, hit_right_curve, &len);
 	p_cvs->fill(i, 9, hit_right_curve, len);
 	string death = InnerString(f);
 	p_cvs->fill(i, 10, death);
-	read_inner_array(f, death_curve, &len);
+	read_number_array(f, death_curve, &len);
 	p_cvs->fill(i, 11, death_curve, len);
-	read_float_array(f, cameraShake, &len);
-	read_uint_array(f, qte, &len);
+	read_number_array(f, cameraShake, &len);
+	read_number_array(f, qte, &len);
 	readSeqlist(f, &len); // QTETime
 	int32_t setFace, postEffect, PVESP, PVPSP;
 	f.read((char*)&setFace, sizeof(int32_t));
 	f.read((char*)&postEffect, sizeof(int32_t));
-	read_float_array(f, postEffectParams, &len);
+	read_number_array(f, postEffectParams, &len);
 	readSeqlist(f, &len); // BuffIDs
 	readSeqlist(f, &len); // BuffTime
 	f.read((char*)&PVESP, sizeof(int32_t));
