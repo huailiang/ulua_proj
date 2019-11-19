@@ -32,8 +32,6 @@ cvs::cvs(const char* table, int row, int col, string* title)
 
 cvs::~cvs()
 {
-	delete[] title;
-	title = nullptr;
 	lua_close(L);
 	L = nullptr;
 }
@@ -41,6 +39,11 @@ cvs::~cvs()
 void cvs::begin_row()
 {
 	lua_newtable(L); //每一行里的小表
+}
+
+void cvs::fill(int i_row, int i_col, uint16_t v)
+{
+	push_k_v(title[i_col].c_str(), v);
 }
 
 void cvs::fill(int i_row, int i_col, int32_t v)
@@ -83,6 +86,11 @@ void cvs::fill(int i_row, int i_col, int16_t *p, size_t len)
 	push_array(title[i_col].c_str(), p, len);
 }
 
+void cvs::fill(int i_row, int i_col, uint16_t *p, size_t len)
+{
+	push_array(title[i_col].c_str(), p, len);
+}
+
 void cvs::fill(int i_row, int i_col, int32_t *p, size_t len)
 {
 	push_array(title[i_col].c_str(), p, len);
@@ -113,7 +121,17 @@ void cvs::end()
 	lua_setglobal(L, table);
 }
 
+lua_State*  cvs::GetLuaL()
+{
+	return L;
+}
+
 void cvs::push_array(const char* key, int16_t *p, size_t len)
+{
+	PUSH_NUMBER_ARRAY(key, p, len);
+}
+
+void cvs::push_array(const char* key, uint16_t *p, size_t len)
 {
 	PUSH_NUMBER_ARRAY(key, p, len);
 }

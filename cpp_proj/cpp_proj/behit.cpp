@@ -5,6 +5,33 @@
 Behit::Behit(string name)
 {
 	this->name = name;
+	headers = new string[25]{
+		"presentid",  // 0
+		"hitid",
+		"hit_front",
+		"hit_front_curve",
+		"hit_back",   // 4
+		"hit_back_curve",
+		"hit_left",
+		"hit_left_curve",
+		"hit_right",  // 8
+		"hit_right_curve",
+		"death",
+		"death_curve",
+		"cameraShake",  // 12
+		"qte",
+		"QTETime",
+		"setFace",
+		"postEffect", // 16
+		"postEffectParams",
+		"BuffIDs",
+		"BuffTime",
+		"PVESP", // 20
+		"PVPSP",
+		"PostEffectTime",
+		"ChangeFlyTime",
+		"setHitFromDir" //24
+	};
 }
 
 
@@ -18,6 +45,8 @@ Behit::~Behit()
 	delete[] p_float;
 	delete[] p_double;
 	delete[] p_index;
+	delete[] headers;
+	SAFE_DELETE(p_cvs);
 }
 
 
@@ -32,7 +61,6 @@ void Behit::Read()
 		ifs.seekg(0, ios::beg);
 		ifs.read((char*)&fileSize, sizeof(int32_t));
 		ifs.read((char*)&lineCount, sizeof(int32_t));
-		cout << "filesize:" << fileSize << " line count:" << lineCount << endl;
 		this->ReadHeader(ifs);
 		this->ReadContent(ifs);
 		ifs.close();
@@ -49,12 +77,10 @@ void Behit::ReadHeader(ifstream& f)
 	bool hasString = false;
 	f.read((char*)&hasString, sizeof(bool));
 	f.read((char*)&strCount, sizeof(int16_t));
-	cout << "hasString:" << hasString << " stringCount:" << strCount << endl;
 	p_str = new string[strCount];
 	loop(strCount)
 	{
 		readstring(f, p_str[i]);
-		cout << i << " " << p_str[i] << endl;
 	}
 	f.read((char*)&intCount, sizeof(uint16_t));
 	p_int32 = new int32_t[intCount];
@@ -98,7 +124,8 @@ void Behit::ReadHeader(ifstream& f)
 void Behit::ReadContent(ifstream & f)
 {
 	f.read(&columnCount, sizeof(char));
-	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount << endl;
+	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount <<" name:"<<name<< endl;
+	p_cvs = new cvs("c_behit", lineCount, columnCount, headers);
 	loop(columnCount)
 	{
 		char type0, type1;
@@ -108,11 +135,12 @@ void Behit::ReadContent(ifstream & f)
 	loop(lineCount)
 	{
 		int32_t size = 0;
+		p_cvs->begin_row();
 		f.read((char*)&size, sizeof(int32_t));
-		int32_t beforePos = f.tellg();
-		this->ReadLine(f);
-		int32_t afterPos = f.tellg();
-		cout << i << ": before pos:" << beforePos << " after pos:" << afterPos << " size:" << size << endl;
+		auto beforePos = f.tellg();
+		this->ReadLine(f, i);
+		p_cvs->end_row(i);
+		auto afterPos = f.tellg();
 		auto delta = afterPos - beforePos;
 		if (size > delta)
 		{
@@ -124,14 +152,18 @@ void Behit::ReadContent(ifstream & f)
 			break;
 		}
 	}
+	p_cvs->end();
+	PostProcess();
 }
 
-void Behit::ReadLine(ifstream& f)
+void Behit::ReadLine(ifstream& f, int i)
 {
 	uint32_t presentid = 0;
 	f.read((char*)&presentid, sizeof(presentid));
+	p_cvs->fill(i, 0, presentid);
 	int32_t hitid = 0;
 	f.read((char*)&hitid, sizeof(int32_t));
+	p_cvs->fill(i, 1, hitid);
 	uint16_t *hit_front = nullptr, *hit_front_curve = nullptr, *hit_back = nullptr, *hit_back_curve = nullptr;
 	uint16_t *hit_left = nullptr, *hit_left_curve = nullptr, *hit_right = nullptr, *hit_right_curve = nullptr;
 	uint16_t *death_curve = nullptr;
@@ -141,15 +173,25 @@ void Behit::ReadLine(ifstream& f)
 	char len = 0;
 	uint16_t ulen = 0;
 	read_inner_array(f, hit_front, &len);
+	p_cvs->fill(i, 2, hit_front, len);
 	read_inner_array(f, hit_front_curve, &len);
+	p_cvs->fill(i, 3, hit_front_curve, len);
 	read_inner_array(f, hit_back, &len);
+	p_cvs->fill(i, 4, hit_back, len);
 	read_inner_array(f, hit_back_curve, &len);
+	p_cvs->fill(i, 5, hit_back_curve, len);
 	read_inner_array(f, hit_left, &len);
+	p_cvs->fill(i, 6, hit_left, len);
 	read_inner_array(f, hit_left_curve, &len);
+	p_cvs->fill(i, 7, hit_left_curve, len);
 	read_inner_array(f, hit_right, &len);
+	p_cvs->fill(i, 8, hit_right, len);
 	read_inner_array(f, hit_right_curve, &len);
+	p_cvs->fill(i, 9, hit_right_curve, len);
 	string death = InnerString(f);
+	p_cvs->fill(i, 10, death);
 	read_inner_array(f, death_curve, &len);
+	p_cvs->fill(i, 11, death_curve, len);
 	read_float_array(f, cameraShake, &len);
 	read_uint_array(f, qte, &len);
 	readSeqlist(f, &len); // QTETime
@@ -165,7 +207,6 @@ void Behit::ReadLine(ifstream& f)
 	readSeqRef(f, &ulen); // ChangeFlyTime
 	bool setHitFromDir = false;
 	f.read((char*)&setHitFromDir, sizeof(bool));
-	cout << "pve:" << PVESP << " pvp:" << PVPSP << " " << setHitFromDir << endl;
 }
 
 string Behit::InnerString(ifstream& f)
@@ -173,4 +214,12 @@ string Behit::InnerString(ifstream& f)
 	uint16_t idx;
 	f.read((char*)&idx, sizeof(uint16_t));
 	return p_str[idx];
+}
+
+void Behit::PostProcess()
+{
+	auto L = p_cvs->GetLuaL();
+	luaL_dofile(L, "behit.lua");
+	lua_getglobal(L, "prt_behit");
+	lua_pcall(L, 0, 0, 0);
 }

@@ -15,7 +15,7 @@ void readstring(std::ifstream& f, std::string& str)
 }
 
 
-void read_string_array(ifstream& f, string* p, char* len)
+void read_string_array(ifstream& f, string*& p, char* len)
 {
 	f.read(len, sizeof(char));
 	size_t length = (size_t)(*len);
@@ -26,7 +26,7 @@ void read_string_array(ifstream& f, string* p, char* len)
 	}
 }
 
-void read_float_array(ifstream& f, float* p, char* len)
+void read_float_array(ifstream& f, float*& p, char* len)
 {
 	f.read(len, sizeof(char));
 	size_t length = (size_t)(*len);
@@ -37,7 +37,7 @@ void read_float_array(ifstream& f, float* p, char* len)
 	}
 }
 
-void read_uint_array(ifstream& f, uint32_t* p, char* len)
+void read_uint_array(ifstream& f, uint32_t*& p, char* len)
 {
 	f.read(len, sizeof(char));
 	size_t length = (size_t)(*len);
@@ -48,7 +48,7 @@ void read_uint_array(ifstream& f, uint32_t* p, char* len)
 	}
 }
 
-void read_long_array(ifstream& f, int64_t* p, char* len)
+void read_long_array(ifstream& f, int64_t*& p, char* len)
 {
 	f.read(len, sizeof(char));
 	size_t length = (size_t)(*len);
@@ -59,7 +59,7 @@ void read_long_array(ifstream& f, int64_t* p, char* len)
 	}
 }
 
-void read_inner_array(ifstream&f, uint16_t* p, char* len)
+void read_inner_array(ifstream&f, uint16_t*& p, char* len)
 {
 	f.read(len, sizeof(char));
 	size_t length = (size_t)(*len);

@@ -20,8 +20,9 @@ public:
 private:
 	void ReadHeader(ifstream& f);
 	void ReadContent(ifstream& f);
-	void ReadLine(ifstream& f);
+	void ReadLine(ifstream& f, int i);
 	string InnerString(ifstream& f);
+	void PostProcess();
 
 private:
 	string name;
@@ -38,6 +39,7 @@ private:
 
 private:
 	string* headers; //表格header = 列数 (这里由lua传过来)
+	cvs* p_cvs;
 };
 
 

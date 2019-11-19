@@ -14,6 +14,7 @@ public:
 	cvs(const char* name, int row, int col, string* title);
 	~cvs();
 	void begin_row();
+	void fill(int i_row, int i_col, uint16_t v);
 	void fill(int i_row, int i_col, int32_t v);
 	void fill(int i_row, int i_col, uint32_t v);
 	void fill(int i_row, int i_col, int64_t v);
@@ -22,15 +23,19 @@ public:
 	void fill(int i_row, int i_col, string v);
 	void fill(int i_row, int i_col, bool v);
 	void fill(int i_row, int i_col, int16_t *p, size_t len);
+	void fill(int i_row, int i_col, uint16_t *p, size_t len);
 	void fill(int i_row, int i_col, int32_t *p, size_t len);
 	void fill(int i_row, int i_col, float *p, size_t len);
 	void fill(int i_row, int i_col, double *p, size_t len);
 	void fill(int i_row, int i_col, string *p, size_t len);
 	void end_row(int i_row);
 	void end();
+	lua_State* GetLuaL();
+
 
 protected:
 	void push_array(const char* key, int16_t *p, size_t len);
+	void push_array(const char* key, uint16_t *p, size_t len);
 	void push_array(const char* key, int32_t *p, size_t len);
 	void push_array(const char* key, float *p, size_t len);
 	void push_array(const char* key, double *p, size_t len);
