@@ -11,7 +11,7 @@ public:
 	~xlua();
 	void exec();
 
-private :
+private:
 	const char* file;
 	lua_State* L;
 	const char* tag;

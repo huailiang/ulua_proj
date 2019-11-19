@@ -2,13 +2,13 @@
 
 
 
-behit::behit(string name)
+Behit::Behit(string name)
 {
 	this->name = name;
 }
 
 
-behit::~behit()
+Behit::~Behit()
 {
 	this->name = "";
 	delete[] p_str;
@@ -21,7 +21,7 @@ behit::~behit()
 }
 
 
-void behit::read()
+void Behit::Read()
 {
 	ifstream ifs;
 	ifs.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -33,8 +33,8 @@ void behit::read()
 		ifs.read((char*)&fileSize, sizeof(int32_t));
 		ifs.read((char*)&lineCount, sizeof(int32_t));
 		cout << "filesize:" << fileSize << " line count:" << lineCount << endl;
-		this->init_header(ifs);
-		this->init_column(ifs);
+		this->ReadHeader(ifs);
+		this->ReadContent(ifs);
 		ifs.close();
 	}
 	catch (std::ifstream::failure e)
@@ -44,7 +44,7 @@ void behit::read()
 }
 
 
-void behit::init_header(ifstream& f)
+void Behit::ReadHeader(ifstream& f)
 {
 	bool hasString = false;
 	f.read((char*)&hasString, sizeof(bool));
@@ -94,7 +94,8 @@ void behit::init_header(ifstream& f)
 	}
 }
 
-void behit::init_column(ifstream& f)
+
+void Behit::ReadContent(ifstream & f)
 {
 	f.read(&columnCount, sizeof(char));
 	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount << endl;
@@ -109,7 +110,7 @@ void behit::init_column(ifstream& f)
 		int32_t size = 0;
 		f.read((char*)&size, sizeof(int32_t));
 		int32_t beforePos = f.tellg();
-		this->read_line(f);
+		this->ReadLine(f);
 		int32_t afterPos = f.tellg();
 		cout << i << ": before pos:" << beforePos << " after pos:" << afterPos << " size:" << size << endl;
 		auto delta = afterPos - beforePos;
@@ -125,8 +126,7 @@ void behit::init_column(ifstream& f)
 	}
 }
 
-
-void behit::read_line(ifstream& f)
+void Behit::ReadLine(ifstream& f)
 {
 	uint32_t presentid = 0;
 	f.read((char*)&presentid, sizeof(presentid));
@@ -148,7 +148,7 @@ void behit::read_line(ifstream& f)
 	read_inner_array(f, hit_left_curve, &len);
 	read_inner_array(f, hit_right, &len);
 	read_inner_array(f, hit_right_curve, &len);
-	string death = inner_string(f);
+	string death = InnerString(f);
 	read_inner_array(f, death_curve, &len);
 	read_float_array(f, cameraShake, &len);
 	read_uint_array(f, qte, &len);
@@ -168,7 +168,7 @@ void behit::read_line(ifstream& f)
 	cout << "pve:" << PVESP << " pvp:" << PVPSP << " " << setHitFromDir << endl;
 }
 
-string behit::inner_string(ifstream& f)
+string Behit::InnerString(ifstream& f)
 {
 	uint16_t idx;
 	f.read((char*)&idx, sizeof(uint16_t));

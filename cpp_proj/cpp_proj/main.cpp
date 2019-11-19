@@ -10,15 +10,16 @@ xstate* pState;
 xlua* pXlua;
 ulua* pUlua;
 xtable* pTable;
-behit* pTab;
+Behit* pTab;
 
 void init()
 {
 	pState = new xstate();
 	pXlua = new xlua();
 	pUlua = new ulua();
-	pTable = new xtable;
-	pTab = new behit("BeHit.bytes");
+	string *title = new string[3]{ "c1", "c2","c3" };
+	pTable = new xtable("m_table", 4, 3, title);
+	pTab = new Behit("BeHit.bytes");
 }
 
 void tip()
@@ -61,7 +62,7 @@ int main()
 			pTable->exec();
 			break;
 		case 5:
-			pTab->read();
+			pTab->Read();
 		default:
 			loop = false;
 			break;

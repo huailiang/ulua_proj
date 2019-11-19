@@ -6,21 +6,22 @@
 #include <string>
 #include <vector>
 #include "reader.h"
+#include "cvs.h"
 
 using namespace std;
 
-class behit
+class Behit
 {
 public:
-	behit(string name);
-	~behit();
-	void read();
+	Behit(string name);
+	~Behit();
+	void Read();
 
 private:
-	void init_header(ifstream& f);
-	void init_column(ifstream& f);
-	void read_line(ifstream& f);
-	string inner_string(ifstream& f);
+	void ReadHeader(ifstream& f);
+	void ReadContent(ifstream& f);
+	void ReadLine(ifstream& f);
+	string InnerString(ifstream& f);
 
 private:
 	string name;
@@ -37,7 +38,6 @@ private:
 
 private:
 	string* headers; //表格header = 列数 (这里由lua传过来)
-
 };
 
 

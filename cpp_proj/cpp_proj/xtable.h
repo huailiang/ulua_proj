@@ -1,23 +1,25 @@
 #ifndef  __xtable__
 #define __xtable__
 
-
-#include "lua.hpp"
+#include <string>
+#include "cvs.h"
 #include "xprint.h"
 
+using namespace std;
 
-class xtable
+
+class xtable : public cvs
 {
 public:
-	xtable();
-	~xtable();
+	xtable(const char* table, int row, int col, string* title);
+	virtual ~xtable();
 	void exec();
-	void feach();
+	void table();
 
 private:
-	lua_State * L;
 	const char* tag;
 	const char* name;
+	const char* file;
 };
 
 

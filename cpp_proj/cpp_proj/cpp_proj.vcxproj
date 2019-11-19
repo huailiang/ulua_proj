@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cvs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reader.cpp" />
     <ClCompile Include="behit.cpp" />
@@ -131,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
+    <ClInclude Include="cvs.h" />
     <ClInclude Include="reader.h" />
     <ClInclude Include="behit.h" />
     <ClInclude Include="ulua.h" />
@@ -138,9 +140,6 @@
     <ClInclude Include="xprint.h" />
     <ClInclude Include="xstate.h" />
     <ClInclude Include="xtable.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="main.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
