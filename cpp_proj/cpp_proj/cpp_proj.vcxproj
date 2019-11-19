@@ -124,10 +124,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reader.cpp" />
     <ClCompile Include="behit.cpp" />
-    <ClCompile Include="ulua.cpp" />
     <ClCompile Include="xlua.cpp" />
     <ClCompile Include="xprint.cpp" />
-    <ClCompile Include="xstate.cpp" />
     <ClCompile Include="xtable.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,10 +133,8 @@
     <ClInclude Include="cvs.h" />
     <ClInclude Include="reader.h" />
     <ClInclude Include="behit.h" />
-    <ClInclude Include="ulua.h" />
     <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />
-    <ClInclude Include="xstate.h" />
     <ClInclude Include="xtable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
