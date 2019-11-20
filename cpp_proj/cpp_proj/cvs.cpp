@@ -17,7 +17,7 @@ lua_pushnumber(L, v); \
 lua_settable(L, -3); 
 
 
-cvs::cvs(const char* table, int row, int col, string* title)
+cvs::cvs(string table, int row, int col, string* title)
 {
 	this->table = table;
 	this->col = col;
@@ -117,7 +117,7 @@ void cvs::end_row(int i_row)
 
 void cvs::end()
 {
-	lua_setglobal(L, table);
+	lua_setglobal(L, table.c_str());
 }
 
 lua_State*  cvs::GetLuaL()

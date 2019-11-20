@@ -1,7 +1,7 @@
 #ifndef  __csv__
 #define __csv__
 
-
+#include <iostream>
 #include <string>
 #include "lua.hpp"
 
@@ -11,7 +11,7 @@ using namespace std;
 class cvs
 {
 public:
-	cvs(const char* name, int row, int col, string* title);
+	cvs(string name, int row, int col, string* title);
 	~cvs();
 	void begin_row();
 	void fill(int i_row, int i_col, uint16_t v);
@@ -55,7 +55,7 @@ protected:
 	lua_State * L;
 	int col, row;
 	string* title;
-	const char* table;
+	string table;
 };
 
 

@@ -3,10 +3,10 @@ require('util')
 
 function prt_behit( ... )
 	-- body
-	print("table length: "..#c_behit, util.table_len(c_behit))
-	print(c_behit[0]['presentid'], c_behit[0]['hitid'], c_behit[0]['death'], #(c_behit[0]['hit_back']))
-	print(c_behit[1]["presentid"], c_behit[1]['hitid'], c_behit[1]['death'], #(c_behit[1]['hit_back']))
-	print(c_behit[17]["presentid"], c_behit[17]['hitid'], c_behit[17]['death'], #(c_behit[17]['hit_back']))
+	print("table length: "..#g_BeHit, util.table_len(g_BeHit))
+	print(g_BeHit[0]['presentid'], g_BeHit[0]['hitid'], g_BeHit[0]['death'], g_BeHit[0]['hit_back'][0], g_BeHit[0]['hit_back'][1])
+	print(g_BeHit[1]["presentid"], g_BeHit[1]['hitid'], g_BeHit[1]['death'], #(g_BeHit[1]['hit_back']))
+	print(g_BeHit[17]["presentid"], g_BeHit[17]['hitid'], g_BeHit[17]['death'], #(g_BeHit[17]['hit_back']))
 end
 
 

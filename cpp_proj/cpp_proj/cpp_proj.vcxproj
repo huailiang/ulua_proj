@@ -123,19 +123,19 @@
     <ClCompile Include="cvs.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reader.cpp" />
-    <ClCompile Include="behit.cpp" />
+    <ClCompile Include="xtable.cpp" />
     <ClCompile Include="xlua.cpp" />
     <ClCompile Include="xprint.cpp" />
-    <ClCompile Include="xtable.cpp" />
+    <ClCompile Include="xtest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
     <ClInclude Include="cvs.h" />
     <ClInclude Include="reader.h" />
-    <ClInclude Include="behit.h" />
+    <ClInclude Include="xtable.h" />
     <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />
-    <ClInclude Include="xtable.h" />
+    <ClInclude Include="xtest.h" />
     <ClInclude Include="xtype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
