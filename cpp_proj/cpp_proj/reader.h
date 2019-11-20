@@ -28,12 +28,6 @@ void readSeqlist(ifstream&f, char* len);
 
 void readSeqRef(ifstream&f, uint16_t* len);
 
-void readintarr(std::ifstream& f, int* v, int32_t* len);
-
-void readfloatarr(std::ifstream& f, float* v, int32_t* len);
-
-void readdoublearr(std::ifstream& f, double* v, int32_t* len);
-
 
 #endif // ! __reader__
 

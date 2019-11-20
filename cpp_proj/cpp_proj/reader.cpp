@@ -31,31 +31,3 @@ void readSeqRef(ifstream&f, uint16_t* len)
 	f.read((char*)len, sizeof(uint16_t));
 }
 
-
-void readintarr(std::ifstream& f, int* v, int32_t* len)
-{
-	f.read((char*)len, sizeof(int));
-	loop(*len)
-	{
-		f.read((char*)(v + i), sizeof(int));
-	}
-}
-
-void readfloatarr(std::ifstream& f, float* v, int32_t* len)
-{
-	f.read((char*)len, sizeof(int));
-	loop(*len)
-	{
-		f.read((char*)(v + i), sizeof(float));
-	}
-}
-
-
-void readdoublearr(std::ifstream& f, double* v, int32_t* len)
-{
-	f.read((char*)len, sizeof(int));
-	loop(*len)
-	{
-		f.read((char*)(v + i), sizeof(double));
-	}
-}

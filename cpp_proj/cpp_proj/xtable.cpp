@@ -38,7 +38,6 @@ XTable::XTable(string name, string* headers, int* types, char len)
 	pReader[STRING_LIST] = &XTable::ReadSeqList;
 }
 
-
 XTable::~XTable()
 {
 	delete[] p_str;
@@ -51,7 +50,6 @@ XTable::~XTable()
 	delete[] headers;
 	SAFE_DELETE(p_cvs);
 }
-
 
 void XTable::ReadUint32(ifstream& f, int row)
 {
