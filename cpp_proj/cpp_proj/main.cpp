@@ -1,11 +1,9 @@
-#include "xlua.h"
 #include "xtest.h"
 #include "xtable.h"
 #include "xtype.h"
 
 using namespace std;
 
-xlua* pXlua;
 xtest* pTest;
 lua_State* L;
 
@@ -15,20 +13,18 @@ void init()
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
-	pXlua = new xlua();
 	string *title = new string[3]{ "c1", "c2","c3" };
 	pTest = new xtest("m_table", 4, 3, title);
 }
 
 void tip()
 {
-	cout << "** 1.xlua, 2.test, 3.table, any other number break **" << endl;
+	cout << "** 1.test, 2.table, any other number break **" << endl;
 	cout << "please your input op: ";
 }
 
 void dispose()
 {
-	SAFE_DELETE(pXlua);
 	SAFE_DELETE(pTest);
 
 	lua_close(L);
@@ -38,7 +34,7 @@ void dispose()
 
 void info()
 {
-	luaL_dofile(L, "behit.lua");
+	luaL_dofile(L, "table.lua");
 	lua_getglobal(L, "prt_behit");
 	lua_pcall(L, 0, 0, 0);
 	lua_getglobal(L, "prt_actor");
@@ -104,12 +100,9 @@ int main()
 		switch (cmd)
 		{
 		case 1:
-			pXlua->exec(L);
-			break;
-		case 2:
 			pTest->exec(L);
 			break;
-		case 3:
+		case 2:
 			load();
 		default:
 			loop = false;

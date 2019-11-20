@@ -292,6 +292,7 @@ void XTable::Read(lua_State* L)
 
 void XTable::ReadHeader(ifstream& f)
 {
+	p_cvs->begin_row();
 	bool hasString = false;
 	f.read((char*)&hasString, sizeof(bool));
 	f.read((char*)&strCount, sizeof(int16_t));
@@ -336,6 +337,14 @@ void XTable::ReadHeader(ifstream& f)
 	{
 		f.read((char*)(p_index + i), sizeof(uint16_t));
 	}
+	//在第一行填充表头buffer
+	p_cvs->fill(0, 0, p_str, strCount);
+	p_cvs->fill(0, 1, p_int32, intCount);
+	p_cvs->fill(0, 2, p_uint32, uintCount);
+	p_cvs->fill(0, 3, p_float, floatCount);
+	p_cvs->fill(0, 4, p_double, doubleCount);
+	p_cvs->fill(0, 5, p_index, idxCount);
+	p_cvs->end_row(0);
 }
 
 void XTable::ReadContent(ifstream & f)
@@ -381,7 +390,7 @@ void XTable::ReadLine(ifstream& f, int i)
 		fReader reader = pReader[this->types[i]];
 		(this->*reader)(f, i);
 	}
-	p_cvs->end_row(i);
+	p_cvs->end_row(i + 1);
 }
 
 string XTable::InnerString(ifstream& f)

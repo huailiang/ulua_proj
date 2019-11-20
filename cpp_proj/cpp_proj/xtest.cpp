@@ -11,7 +11,7 @@ xtest::xtest(const char* table, int row, int col, string* title)
 {
 	tag = "xtable";
 	name = "global_c_write";
-	file = "table.lua";
+	file = "test.lua";
 }
 
 

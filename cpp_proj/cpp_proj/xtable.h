@@ -4,8 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
-#include <functional>
 #include "reader.h"
 #include "cvs.h"
 

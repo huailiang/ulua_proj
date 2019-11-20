@@ -1,36 +1,22 @@
 require('util')
 
-function add(a,b)  
-    return a + b  
-end
 
-function average(...)
-   result = 0
-   local arg={...}
-   for i,v in ipairs(arg) do
-      result = result + v
-   end
-   print("arg count " .. #arg .. " .")
-   return result/#arg, result
-end
-
-function prt_ctable( ... )
+function prt_behit( ... )
 	-- body
-	print("table length: "..#global_c_write, util.table_len(global_c_write))
-	print(global_c_write[101])
-	print(global_c_write["baidu"])
+	print("********* lua env: BeHit ***********")
+	print("table length: "..#g_BeHit, util.table_len(g_BeHit))
+	print(g_BeHit[1]["presentid"], g_BeHit[1]['hitid'], g_BeHit[1]['death'], #(g_BeHit[1]['hit_back']))
+	print(g_BeHit[2]['presentid'], g_BeHit[2]['hitid'], g_BeHit[0]['death'], g_BeHit[2]['hit_back'][0], g_BeHit[2]['hit_back'][1])
+	print(g_BeHit[17]["presentid"], g_BeHit[17]['hitid'], g_BeHit[17]['death'], #(g_BeHit[17]['hit_back']))
 end
 
-function table_v2( ... )
+
+function prt_actor( ... )
 	-- body
-	print("***********")
-	print("table length: ", util.table_len(m_table), #m_table)
-	print(m_table[0][100])
-	print(m_table[1][101])
-	print(m_table[1]["abc"])
-	print(m_table[1]["arr"][0])
-	print(m_table[1]["arr"][1])
-	print(util.table_len(m_table[1]['arr']))
+	print("********* lua env: ActorTable ***********")
+	print("table length: "..#g_ActorTable, util.table_len(g_ActorTable))
+	print(g_ActorTable[1]['actorId'], g_ActorTable[1]['idle'])
+	print(g_ActorTable[2]['actorId'], g_ActorTable[2]['idle'])
 end
 
-print("hello world from lua")
+

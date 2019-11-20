@@ -124,7 +124,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reader.cpp" />
     <ClCompile Include="xtable.cpp" />
-    <ClCompile Include="xlua.cpp" />
     <ClCompile Include="xprint.cpp" />
     <ClCompile Include="xtest.cpp" />
   </ItemGroup>
@@ -133,7 +132,6 @@
     <ClInclude Include="cvs.h" />
     <ClInclude Include="reader.h" />
     <ClInclude Include="xtable.h" />
-    <ClInclude Include="xlua.h" />
     <ClInclude Include="xprint.h" />
     <ClInclude Include="xtest.h" />
     <ClInclude Include="xtype.h" />
