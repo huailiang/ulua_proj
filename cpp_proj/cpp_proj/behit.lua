@@ -1,4 +1,6 @@
 require('util')
+require('type')
+
 
 
 function prt_behit( ... )

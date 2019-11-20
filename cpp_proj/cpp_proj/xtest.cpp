@@ -17,7 +17,7 @@ xtest::xtest(const char* table, int row, int col, string* title)
 
 xtest::~xtest()
 {
-	cout << "xtable deconstruct" << endl;
+	cout << "xtable destructor called" << endl;
 }
 
 
