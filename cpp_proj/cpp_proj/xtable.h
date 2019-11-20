@@ -12,7 +12,6 @@
 using namespace std;
 
 
-
 class XTable
 {
 
@@ -21,14 +20,12 @@ class XTable
 public:
 	XTable(string name, string* headers, int* types, char len);
 	~XTable();
-	void Read();
+	void Read(lua_State* L);
 
 private:
-	void PostProcess();
 	void ReadHeader(ifstream& f);
 	void ReadContent(ifstream& f);
 	void ReadLine(ifstream& f, int i);
-	string InnerString(ifstream& f);
 
 private:
 	void ReadUint32(ifstream& f, int row);
@@ -48,7 +45,7 @@ private:
 
 	void ReadSeq(ifstream& f, int row);
 	void ReadSeqList(ifstream& f, int row);
-	
+	string InnerString(ifstream& f);
 
 private:
 	string name;

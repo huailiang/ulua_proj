@@ -10,7 +10,6 @@
 
 using namespace std;
 
-void readstring(std::ifstream& f, string& str);
 
 template <typename T>
 void read_number_array(ifstream& f, T*& p, char* len)
@@ -23,6 +22,9 @@ void read_number_array(ifstream& f, T*& p, char* len)
 		f.read((char*)(p + i), sizeof(T));
 	}
 }
+
+
+void readstring(std::ifstream& f, string& str);
 
 void readSeqlist(ifstream&f, char* len);
 

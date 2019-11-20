@@ -7,16 +7,15 @@ cvs::cvs(string table, int row, int col, string* title)
 	this->col = col;
 	this->row = row;
 	this->title = title;
-	L = luaL_newstate();
-	luaL_openlibs(L);
-	lua_newtable(L); // 最外层的大表
 }
 
 
-cvs::~cvs()
+cvs::~cvs() {}
+
+void cvs::begin(lua_State* L)
 {
-	lua_close(L);
-	L = nullptr;
+	this->L = L;
+	lua_newtable(L); // 最外层的大表
 }
 
 void cvs::begin_row()

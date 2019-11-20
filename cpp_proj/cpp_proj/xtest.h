@@ -13,8 +13,8 @@ class xtest : public cvs
 public:
 	xtest(const char* table, int row, int col, string* title);
 	virtual ~xtest();
-	void exec();
-	void table();
+	void exec(lua_State* L);
+	void table(lua_State* L);
 
 private:
 	const char* tag;

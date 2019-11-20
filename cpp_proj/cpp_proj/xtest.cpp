@@ -21,8 +21,9 @@ xtest::~xtest()
 }
 
 
-void xtest::exec()
+void xtest::exec(lua_State* L)
 {
+	lua_settop(L, 0);
 	lua_pushstring(L, "hello world");
 
 	//先动态创建一个table
@@ -50,14 +51,15 @@ void xtest::exec()
 	lua_pcall(L, 0, 0, 0);
 
 	
-	table();
+	table(L);
 	lua_getglobal(L, "table_v2");
 	lua_pcall(L, 0, 0, 0);
 }
 
-void xtest::table()
+void xtest::table(lua_State* L)
 {
 	lua_settop(L, 0);
+	begin(L);
 	lua_newtable(L);
 
 	lua_newtable(L);

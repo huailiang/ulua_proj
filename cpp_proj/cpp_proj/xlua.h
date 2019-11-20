@@ -8,12 +8,10 @@ class xlua
 {
 public:
 	xlua();
-	~xlua();
-	void exec();
+	void exec(lua_State* L);
 
 private:
 	const char* file;
-	lua_State* L;
 	const char* tag;
 };
 

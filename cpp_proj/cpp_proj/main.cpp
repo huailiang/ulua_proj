@@ -8,13 +8,22 @@ using namespace std;
 xlua* pXlua;
 xtest* pTest;
 XTable* pTab;
+lua_State* L;
+
 
 void init()
 {
+	L = luaL_newstate();
+	luaL_openlibs(L);
+
 	pXlua = new xlua();
 	string *title = new string[3]{ "c1", "c2","c3" };
 	pTest = new xtest("m_table", 4, 3, title);
 
+
+	/*
+	headers, types最终由lua传过来， luaState由c#传过来
+	*/
 	string* headers = new string[25]{
 		"presentid",  // 0
 		"hitid",
@@ -85,6 +94,17 @@ void dispose()
 	SAFE_DELETE(pXlua);
 	SAFE_DELETE(pTest);
 	SAFE_DELETE(pTab);
+
+	lua_close(L);
+	L = nullptr;
+}
+
+
+void info()
+{
+	luaL_dofile(L, "behit.lua");
+	lua_getglobal(L, "prt_behit");
+	lua_pcall(L, 0, 0, 0);
 }
 
 int main()
@@ -100,19 +120,20 @@ int main()
 		switch (cmd)
 		{
 		case 1:
-			pXlua->exec();
+			pXlua->exec(L);
 			break;
 		case 2:
-			pTest->exec();
+			pTest->exec(L);
 			break;
 		case 3:
-			pTab->Read();
+			pTab->Read(L);
+			info();
 		default:
 			loop = false;
 			break;
 		}
 	}
-	
+
 	system("pause");
 	dispose();
 	return 0;

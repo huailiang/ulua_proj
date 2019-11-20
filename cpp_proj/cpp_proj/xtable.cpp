@@ -174,7 +174,7 @@ void XTable::ReadSeqList(ifstream& f, int row)
 	p_curr++;
 }
 
-void XTable::Read()
+void XTable::Read(lua_State* L)
 {
 	ifstream ifs;
 	ifs.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -185,6 +185,10 @@ void XTable::Read()
 		ifs.seekg(0, ios::beg);
 		ifs.read((char*)&fileSize, sizeof(int32_t));
 		ifs.read((char*)&lineCount, sizeof(int32_t));
+
+		p_cvs = new cvs("g_" + name, lineCount, columnCount, headers);
+		p_cvs->begin(L);
+
 		this->ReadHeader(ifs);
 		this->ReadContent(ifs);
 		ifs.close();
@@ -249,7 +253,7 @@ void XTable::ReadContent(ifstream & f)
 #ifdef _DEBUG
 	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount << " name:" << name << endl;
 #endif
-	p_cvs = new cvs("g_"+name, lineCount, columnCount, headers);
+	
 	loop(columnCount)
 	{
 		char type0, type1;
@@ -277,7 +281,6 @@ void XTable::ReadContent(ifstream & f)
 		}
 	}
 	p_cvs->end();
-	PostProcess();
 }
 
 void XTable::ReadLine(ifstream& f, int i)
@@ -295,12 +298,4 @@ string XTable::InnerString(ifstream& f)
 	uint16_t idx;
 	f.read((char*)&idx, sizeof(uint16_t));
 	return p_str[idx];
-}
-
-void XTable::PostProcess()
-{
-	auto L = p_cvs->GetLuaL();
-	luaL_dofile(L, "behit.lua");
-	lua_getglobal(L, "prt_behit");
-	lua_pcall(L, 0, 0, 0);
 }

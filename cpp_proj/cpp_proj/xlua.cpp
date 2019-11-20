@@ -4,20 +4,12 @@ xlua::xlua()
 {
 	file = "main.lua";
 	tag = "xlua";
-	L = luaL_newstate();
-	luaL_openlibs(L);
 }
 
 
-xlua::~xlua()
+void xlua::exec(lua_State* L)
 {
-	lua_close(L);
-	L = NULL;
-}
-
-
-void xlua::exec()
-{
+	lua_settop(L, 0);// Çå¿ÕÕ»
 	luaL_dofile(L, file);
 	luaL_dostring(L, "print(\"called in cpp\")");
 
