@@ -48,6 +48,7 @@ XTable::~XTable()
 	delete[] p_double;
 	delete[] p_index;
 	delete[] headers;
+	delete[] types;
 	SAFE_DELETE(p_cvs);
 }
 

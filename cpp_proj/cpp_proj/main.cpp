@@ -7,7 +7,7 @@ using namespace std;
 
 xlua* pXlua;
 xtest* pTest;
-XTable* pTab;
+XTable* pTab, *pTab2;
 lua_State* L;
 
 
@@ -81,6 +81,36 @@ void init()
 	};
 
 	pTab = new XTable("BeHit", headers, types, 25);
+
+	string* headers2 = new string[11]{
+		"actorId",
+		"rotation",
+		"scale",
+		"offset",
+		"idle",
+		"touch",
+		"interact1",
+		"interact2",
+		"interact3",
+		"filters",
+		"pvpStartAction",
+	};
+
+	int* types2 = new int[11]{
+		UINT32,
+		FLOAT_SEQ,
+		FLOAT_SEQ,
+		FLOAT_SEQ,
+		STRING,
+		STRING,
+		STRING,
+		STRING,
+		STRING,
+		UINT32_ARR,
+		STRING_ARR
+	};
+
+	pTab2 = new XTable("ActorTable", headers2, types2, 11);
 }
 
 void tip()
@@ -105,6 +135,8 @@ void info()
 	luaL_dofile(L, "behit.lua");
 	lua_getglobal(L, "prt_behit");
 	lua_pcall(L, 0, 0, 0);
+	lua_getglobal(L, "prt_actor");
+	lua_pcall(L, 0, 0, 0);
 }
 
 int main()
@@ -127,6 +159,7 @@ int main()
 			break;
 		case 3:
 			pTab->Read(L);
+			pTab2->Read(L);
 			info();
 		default:
 			loop = false;
