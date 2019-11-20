@@ -26,9 +26,9 @@ void read_number_array(ifstream& f, T*& p, char* len)
 
 void readstring(std::ifstream& f, string& str);
 
-void readSeqlist(ifstream&f, char* len);
+void readSeqlist(ifstream&f, char* count, char* allSameMask, uint16_t* startOffset);
 
-void readSeqRef(ifstream&f, uint16_t* len);
+void readSeqRef(ifstream&f, uint16_t* offset);
 
 
 #endif // ! __reader__

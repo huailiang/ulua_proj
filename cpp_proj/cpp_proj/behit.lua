@@ -1,6 +1,4 @@
 require('util')
-require('type')
-
 
 
 function prt_behit( ... )
@@ -21,4 +19,4 @@ function prt_actor( ... )
 	print(g_ActorTable[1]['actorId'], g_ActorTable[1]['idle'])
 end
 
-print("read table behit from lua")
+

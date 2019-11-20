@@ -43,8 +43,19 @@ private:
 	void ReadDoubleArray(ifstream& f, int row);
 	void ReadStringArray(ifstream& f, int row);
 
-	void ReadSeq(ifstream& f, int row);
-	void ReadSeqList(ifstream& f, int row);
+	void ReadInt32Seq(ifstream& f, int row);
+	void ReadUint32Seq(ifstream& f, int row);
+	void ReadFloatSeq(ifstream& f, int row);
+	void ReadDoubleSeq(ifstream& f, int row);
+	void ReadStringSeq(ifstream& f, int row);
+
+	void ReadInt32List(ifstream& f, int row);
+	void ReadUint32List(ifstream& f, int row);
+	void ReadFloatList(ifstream& f, int row);
+	void ReadDoubleList(ifstream& f, int row);
+	void ReadStringList(ifstream& f, int row);
+
+
 	string InnerString(ifstream& f);
 
 private:

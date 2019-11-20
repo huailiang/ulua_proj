@@ -25,17 +25,17 @@ XTable::XTable(string name, string* headers, int* types, char len)
 	pReader[DOUBLE_ARR] = &XTable::ReadDoubleArray;
 	pReader[STRING_ARR] = &XTable::ReadStringArray;
 
-	pReader[INT32_SEQ] = &XTable::ReadSeq;
-	pReader[UINT32_SEQ] = &XTable::ReadSeq;
-	pReader[FLOAT_SEQ] = &XTable::ReadSeq;
-	pReader[DOUBLE_SEQ] = &XTable::ReadSeq;
-	pReader[STRING_SEQ] = &XTable::ReadSeq;
+	pReader[INT32_SEQ] = &XTable::ReadInt32Seq;
+	pReader[UINT32_SEQ] = &XTable::ReadUint32Seq;
+	pReader[FLOAT_SEQ] = &XTable::ReadFloatSeq;
+	pReader[DOUBLE_SEQ] = &XTable::ReadDoubleSeq;
+	pReader[STRING_SEQ] = &XTable::ReadStringSeq;
 
-	pReader[INT32_LIST] = &XTable::ReadSeqList;
-	pReader[UINT32_LIST] = &XTable::ReadSeqList;
-	pReader[FLOAT_LIST] = &XTable::ReadSeqList;
-	pReader[DOUBLE_LIST] = &XTable::ReadSeqList;
-	pReader[STRING_LIST] = &XTable::ReadSeqList;
+	pReader[INT32_LIST] = &XTable::ReadInt32List;
+	pReader[UINT32_LIST] = &XTable::ReadUint32List;
+	pReader[FLOAT_LIST] = &XTable::ReadFloatList;
+	pReader[DOUBLE_LIST] = &XTable::ReadDoubleList;
+	pReader[STRING_LIST] = &XTable::ReadStringList;
 }
 
 XTable::~XTable()
@@ -161,18 +161,109 @@ void XTable::ReadStringArray(ifstream& f, int row)
 	delete[] ptr;
 }
 
-void XTable::ReadSeq(ifstream& f, int row)
+void XTable::ReadInt32Seq(ifstream& f, int row)
 {
-	uint16_t len = 0;
-	readSeqRef(f, &len);
-	p_curr++;
+	uint16_t p[2];
+	readSeqRef(f, &p[0]);
+	p[1] = INT32_SEQ;
+	p_cvs->fill(row, p_curr++, p, 2);
 }
 
-void XTable::ReadSeqList(ifstream& f, int row)
+void XTable::ReadUint32Seq(ifstream& f, int row)
 {
-	char len = 0;
-	readSeqlist(f, &len);
-	p_curr++;
+	uint16_t p[2];
+	readSeqRef(f, &p[0]);
+	p[1] = UINT32_SEQ;
+	p_cvs->fill(row, p_curr++, p, 2);
+}
+
+void XTable::ReadFloatSeq(ifstream& f, int row)
+{
+	uint16_t p[2];
+	readSeqRef(f, &p[0]);
+	p[1] = FLOAT_SEQ;
+	p_cvs->fill(row, p_curr++, p, 2);
+}
+
+void XTable::ReadDoubleSeq(ifstream& f, int row)
+{
+	uint16_t p[2];
+	readSeqRef(f, &p[0]);
+	p[1] = DOUBLE_SEQ;
+	p_cvs->fill(row, p_curr++, p, 2);
+}
+
+void XTable::ReadStringSeq(ifstream& f, int row)
+{
+	uint16_t p[2];
+	readSeqRef(f, &p[0]);
+	p[1] = STRING_SEQ;
+	p_cvs->fill(row, p_curr++, p, 2);
+}
+
+void XTable::ReadInt32List(ifstream& f, int row)
+{
+	char count = 0, allSameMask = 1;
+	uint16_t startOffset = 0;
+	readSeqlist(f, &count, &allSameMask, &startOffset);
+	uint16_t p[4];
+	p[0] = (uint16_t)count;
+	p[1] = (uint16_t)allSameMask;
+	p[2] = startOffset;
+	p[3] = INT32_LIST;
+	p_cvs->fill(row, p_curr++, p, 4);
+}
+
+void XTable::ReadUint32List(ifstream& f, int row)
+{
+	char count = 0, allSameMask = 1;
+	uint16_t startOffset = 0;
+	readSeqlist(f, &count, &allSameMask, &startOffset);
+	uint16_t p[4];
+	p[0] = (uint16_t)count;
+	p[1] = (uint16_t)allSameMask;
+	p[2] = startOffset;
+	p[3] = UINT32_LIST;
+	p_cvs->fill(row, p_curr++, p, 4);
+}
+
+void XTable::ReadFloatList(ifstream& f, int row)
+{
+	char count = 0, allSameMask = 1;
+	uint16_t startOffset = 0;
+	readSeqlist(f, &count, &allSameMask, &startOffset);
+	uint16_t p[4];
+	p[0] = (uint16_t)count;
+	p[1] = (uint16_t)allSameMask;
+	p[2] = startOffset;
+	p[3] = FLOAT_LIST;
+	p_cvs->fill(row, p_curr++, p, 4);
+}
+
+void XTable::ReadDoubleList(ifstream& f, int row)
+{
+	char count = 0, allSameMask = 1;
+	uint16_t startOffset = 0;
+	readSeqlist(f, &count, &allSameMask, &startOffset);
+	uint16_t p[4];
+	p[0] = (uint16_t)count;
+	p[1] = (uint16_t)allSameMask;
+	p[2] = startOffset;
+	p[3] = DOUBLE_LIST;
+	p_cvs->fill(row, p_curr++, p, 4);
+}
+
+void XTable::ReadStringList(ifstream& f, int row)
+{
+	char count = 0, allSameMask = 1;
+	uint16_t startOffset = 0;
+	readSeqlist(f, &count, &allSameMask, &startOffset);
+	uint16_t p[4];
+	p[0] = (uint16_t)count;
+	p[1] = (uint16_t)allSameMask;
+	p[2] = startOffset;
+	p[3] = STRING_LIST;
+	p_cvs->fill(row, p_curr++, p, 4);
 }
 
 void XTable::Read(lua_State* L)
@@ -189,7 +280,6 @@ void XTable::Read(lua_State* L)
 
 		p_cvs = new cvs("g_" + name, lineCount, columnCount, headers);
 		p_cvs->begin(L);
-
 		this->ReadHeader(ifs);
 		this->ReadContent(ifs);
 		ifs.close();
@@ -264,11 +354,9 @@ void XTable::ReadContent(ifstream & f)
 	loop(lineCount)
 	{
 		int32_t size = 0;
-		p_cvs->begin_row();
 		f.read((char*)&size, sizeof(int32_t));
 		auto beforePos = f.tellg();
 		this->ReadLine(f, i);
-		p_cvs->end_row(i);
 		auto afterPos = f.tellg();
 		auto delta = afterPos - beforePos;
 		if (size > delta)
@@ -287,11 +375,13 @@ void XTable::ReadContent(ifstream & f)
 void XTable::ReadLine(ifstream& f, int i)
 {
 	p_curr = 0;
+	p_cvs->begin_row();
 	loop(columnCount)
 	{
 		fReader reader = pReader[this->types[i]];
 		(this->*reader)(f, i);
 	}
+	p_cvs->end_row(i);
 }
 
 string XTable::InnerString(ifstream& f)

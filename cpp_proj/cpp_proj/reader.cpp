@@ -14,20 +14,18 @@ void readstring(std::ifstream& f, std::string& str)
 	}
 }
 
-void readSeqlist(ifstream&f, char* len)
+void readSeqlist(ifstream&f, char* count, char* allSameMask, uint16_t* startOffset)
 {
-	f.read(len, sizeof(char));
-	char allSameMask = 1;
-	uint16_t startOffset = 0;
-	if ((*len) > 0)
+	f.read(count, sizeof(char));
+	if ((*count) > 0)
 	{
-		f.read(&allSameMask, sizeof(char));
-		f.read((char*)&startOffset, sizeof(uint16_t));
+		f.read(allSameMask, sizeof(char));
+		f.read((char*)startOffset, sizeof(uint16_t));
 	}
 }
 
-void readSeqRef(ifstream&f, uint16_t* len)
+void readSeqRef(ifstream&f, uint16_t* offset)
 {
-	f.read((char*)len, sizeof(uint16_t));
+	f.read((char*)offset, sizeof(uint16_t));
 }
 
