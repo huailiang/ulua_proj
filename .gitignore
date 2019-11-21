@@ -7,7 +7,7 @@ Logs/
 **/[Oo]bj/
 **/.vs/
 **/.vscode/
-**/idea/
+**/.idea/
 
 build/plugin_luajit/
 build/plugin_lua53/

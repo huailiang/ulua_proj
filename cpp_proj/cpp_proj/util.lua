@@ -4,17 +4,20 @@
 --- DateTime: 2019/11/12 10:11
 ---
 
+require('type')
+
 util = {}
 
 function util.table_len(t)
     --当我们获取 table 的长度的时候 #table会把nil计算进去, 而此方法不会计入nil
+    -- #不会计算0号元素, 这里会计算
+    -- #不会计算k,v结对的pair元素， 这里会计算
     local len = 0
     for k, v in pairs(t) do
         len = len + 1
     end
     return len
 end
-
 
 function util.getn(t)
     --lua5.0以上版本去除了table.getn方法
@@ -35,6 +38,68 @@ function util.table_maxn(t)
         end
     end
     return mn
+end
+
+function util.table_buffer(t, type)
+    -- 需和 xtable.cpp 定义一致
+    if (type == INT32_SEQ or type == INT32_LIST)  then
+        return t[0]['intBuffer']
+    elseif (type == UINT32_SEQ or type == UINT32_LIST) then
+        return t[0]['uintBuffer']
+    elseif (type == FLOAT_SEQ or type == FLOAT_LIST) then
+        return t[0]['floatBuffer']
+    elseif (type == DOUBLE_SEQ or type == DOUBLE_LIST) then
+        return t[0]['doubleBuffer']
+    elseif (type == STRING_SEQ or type == STRING_LIST) then
+        return t[0]['strBuffer']
+    end
+end
+
+function util.to_seq(t, row, key, idx)
+    --   row: 行号 key: 列名 idx: 序列号
+    type = t[row][key][0]
+    offset = t[row][key][1]
+    buffer = util.table_buffer(t, type)
+    return buffer[offset + idx]
+end
+
+function util.to_seq2(t, row, key)
+    type = t[row][key][0]
+    offset = t[row][key][1]
+    buffer = util.table_buffer(t, type)
+    return { buffer[offset], buffer[offset + 1] }
+end
+
+function util.to_seq3(t, row, key)
+    type = t[row][key][0]
+    offset = t[row][key][1]
+    buffer = util.table_buffer(t, type)
+    return { buffer[offset], buffer[offset + 1], buffer[offset + 2] }
+end
+
+function util.to_seq4(t, row, key)
+    type = t[row][key][0]
+    offset = t[row][key][1]
+    buffer = util.table_buffer(t, type)
+    return { buffer[offset], buffer[offset + 1], buffer[offset + 2], buffer[offset + 3] }
+end
+
+function util.parse_seqList(t, row, key)
+    arr = t[row][key]
+    return arr[0], arr[1], arr[2], arr[3]
+end
+
+function util.to_seqlist(t, row, key, idx1, idx2)
+    -- t:table, row:行号， key:列名 idx1:内部数组编号 idx2:seq 序列号
+    type, count, mask, offset = util.parse_seqList(t, row, key)
+    buffer = util.table_buffer(t, type)
+    if (mask == 1) then
+        return buffer[offset + idx2]
+    else
+        indexBuffer = t[0]['idxBuffer']
+        index = indexBuffer[offset+idx1] + idx2
+        return buffer[index]
+    end
 end
 
 return util

@@ -164,40 +164,40 @@ void XTable::ReadStringArray(ifstream& f, int row)
 void XTable::ReadInt32Seq(ifstream& f, int row)
 {
 	uint16_t p[2];
-	readSeqRef(f, &p[0]);
-	p[1] = INT32_SEQ;
+	readSeqRef(f, &p[1]);
+	p[0] = INT32_SEQ;
 	p_cvs->fill(row, p_curr++, p, 2);
 }
 
 void XTable::ReadUint32Seq(ifstream& f, int row)
 {
 	uint16_t p[2];
-	readSeqRef(f, &p[0]);
-	p[1] = UINT32_SEQ;
+	readSeqRef(f, &p[1]);
+	p[0] = UINT32_SEQ;
 	p_cvs->fill(row, p_curr++, p, 2);
 }
 
 void XTable::ReadFloatSeq(ifstream& f, int row)
 {
 	uint16_t p[2];
-	readSeqRef(f, &p[0]);
-	p[1] = FLOAT_SEQ;
+	readSeqRef(f, &p[1]);
+	p[0] = FLOAT_SEQ;
 	p_cvs->fill(row, p_curr++, p, 2);
 }
 
 void XTable::ReadDoubleSeq(ifstream& f, int row)
 {
 	uint16_t p[2];
-	readSeqRef(f, &p[0]);
-	p[1] = DOUBLE_SEQ;
+	readSeqRef(f, &p[1]);
+	p[0] = DOUBLE_SEQ;
 	p_cvs->fill(row, p_curr++, p, 2);
 }
 
 void XTable::ReadStringSeq(ifstream& f, int row)
 {
 	uint16_t p[2];
-	readSeqRef(f, &p[0]);
-	p[1] = STRING_SEQ;
+	readSeqRef(f, &p[1]);
+	p[0] = STRING_SEQ;
 	p_cvs->fill(row, p_curr++, p, 2);
 }
 
@@ -207,10 +207,10 @@ void XTable::ReadInt32List(ifstream& f, int row)
 	uint16_t startOffset = 0;
 	readSeqlist(f, &count, &allSameMask, &startOffset);
 	uint16_t p[4];
-	p[0] = (uint16_t)count;
-	p[1] = (uint16_t)allSameMask;
-	p[2] = startOffset;
-	p[3] = INT32_LIST;
+	p[0] = INT32_LIST;
+	p[1] = (uint16_t)count;
+	p[2] = (uint16_t)allSameMask;
+	p[3] = startOffset;
 	p_cvs->fill(row, p_curr++, p, 4);
 }
 
@@ -220,10 +220,10 @@ void XTable::ReadUint32List(ifstream& f, int row)
 	uint16_t startOffset = 0;
 	readSeqlist(f, &count, &allSameMask, &startOffset);
 	uint16_t p[4];
-	p[0] = (uint16_t)count;
-	p[1] = (uint16_t)allSameMask;
-	p[2] = startOffset;
-	p[3] = UINT32_LIST;
+	p[0] = UINT32_LIST;
+	p[1] = (uint16_t)count;
+	p[2] = (uint16_t)allSameMask;
+	p[3] = startOffset;
 	p_cvs->fill(row, p_curr++, p, 4);
 }
 
@@ -233,10 +233,10 @@ void XTable::ReadFloatList(ifstream& f, int row)
 	uint16_t startOffset = 0;
 	readSeqlist(f, &count, &allSameMask, &startOffset);
 	uint16_t p[4];
-	p[0] = (uint16_t)count;
-	p[1] = (uint16_t)allSameMask;
-	p[2] = startOffset;
-	p[3] = FLOAT_LIST;
+	p[0] = FLOAT_LIST;
+	p[1] = (uint16_t)count;
+	p[2] = (uint16_t)allSameMask;
+	p[3] = startOffset;
 	p_cvs->fill(row, p_curr++, p, 4);
 }
 
@@ -246,10 +246,10 @@ void XTable::ReadDoubleList(ifstream& f, int row)
 	uint16_t startOffset = 0;
 	readSeqlist(f, &count, &allSameMask, &startOffset);
 	uint16_t p[4];
-	p[0] = (uint16_t)count;
-	p[1] = (uint16_t)allSameMask;
-	p[2] = startOffset;
-	p[3] = DOUBLE_LIST;
+	p[0] = DOUBLE_LIST;
+	p[1] = (uint16_t)count;
+	p[2] = (uint16_t)allSameMask;
+	p[3] = startOffset;
 	p_cvs->fill(row, p_curr++, p, 4);
 }
 
@@ -259,10 +259,10 @@ void XTable::ReadStringList(ifstream& f, int row)
 	uint16_t startOffset = 0;
 	readSeqlist(f, &count, &allSameMask, &startOffset);
 	uint16_t p[4];
-	p[0] = (uint16_t)count;
-	p[1] = (uint16_t)allSameMask;
-	p[2] = startOffset;
-	p[3] = STRING_LIST;
+	p[0] = STRING_LIST;
+	p[1] = (uint16_t)count;
+	p[2] = (uint16_t)allSameMask;
+	p[3] = startOffset;
 	p_cvs->fill(row, p_curr++, p, 4);
 }
 
@@ -338,12 +338,12 @@ void XTable::ReadHeader(ifstream& f)
 		f.read((char*)(p_index + i), sizeof(uint16_t));
 	}
 	//在第一行填充表头buffer
-	p_cvs->fill(0, 0, p_str, strCount);
-	p_cvs->fill(0, 1, p_int32, intCount);
-	p_cvs->fill(0, 2, p_uint32, uintCount);
-	p_cvs->fill(0, 3, p_float, floatCount);
-	p_cvs->fill(0, 4, p_double, doubleCount);
-	p_cvs->fill(0, 5, p_index, idxCount);
+	p_cvs->push_array("strBuffer", p_str, strCount);
+	p_cvs->push_array("intBuffer", p_int32, intCount);
+	p_cvs->push_array("uintBuffer", p_uint32, uintCount);
+	p_cvs->push_array("floatBuffer", p_float, floatCount);
+	p_cvs->push_array("doubleBuffer", p_double, doubleCount);
+	p_cvs->push_array("idxBuffer", p_index, idxCount);
 	p_cvs->end_row(0);
 }
 

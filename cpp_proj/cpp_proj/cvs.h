@@ -41,8 +41,15 @@ public:
 		push_array(title[i_col].c_str(), p, len);
 	}
 
+	template<typename T>
+	void push_array(const char* key, T *p, size_t len)
+	{
+		PUSH_NUMBER_ARRAY(key, p, len);
+	}
+
 	void fill(int i_row, int i_col, string v);
 	void fill(int i_row, int i_col, string *p, size_t len);
+	void push_array(const char* key, string* p, size_t len);
 	void begin_row();
 	void end_row(int i_row);
 	void begin(lua_State* L);
@@ -53,18 +60,11 @@ public:
 protected:
 
 	template<typename T>
-	void push_array(const char* key, T *p, size_t len)
-	{
-		PUSH_NUMBER_ARRAY(key, p, len);
-	}
-
-	template<typename T>
 	void push_k_v(const char* key, T v)
 	{
 		PUSH_NUMBER_KV(key, v);
 	}
 
-	void push_array(const char* key, string* p, size_t len);
 	void push_k_v(const char* key, const char* v);
 	void push_k_v(const char* key, bool v);
 	void push_k_v(int32_t key, const char* v);
