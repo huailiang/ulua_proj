@@ -59,29 +59,29 @@ function util.to_seq(t, row, key, idx)
     --   row: 行号 key: 列名 idx: 序列号
     type = t[row][key][0]
     offset = t[row][key][1]
-    buffer = util.table_buffer(t, type)
-    return buffer[offset + idx]
+    buf = util.table_buffer(t, type)
+    return buf[offset + idx]
 end
 
 function util.to_seq2(t, row, key)
     type = t[row][key][0]
     offset = t[row][key][1]
-    buffer = util.table_buffer(t, type)
-    return { buffer[offset], buffer[offset + 1] }
+    buf = util.table_buffer(t, type)
+    return { buf[offset], buf[offset + 1] }
 end
 
 function util.to_seq3(t, row, key)
     type = t[row][key][0]
     offset = t[row][key][1]
-    buffer = util.table_buffer(t, type)
-    return { buffer[offset], buffer[offset + 1], buffer[offset + 2] }
+    buf = util.table_buffer(t, type)
+    return { buf[offset], buf[offset + 1], buf[offset + 2] }
 end
 
 function util.to_seq4(t, row, key)
     type = t[row][key][0]
     offset = t[row][key][1]
-    buffer = util.table_buffer(t, type)
-    return { buffer[offset], buffer[offset + 1], buffer[offset + 2], buffer[offset + 3] }
+    buf = util.table_buffer(t, type)
+    return { buf[offset], buf[offset + 1], buf[offset + 2], buf[offset + 3] }
 end
 
 function util.parse_seqList(t, row, key)
@@ -92,13 +92,13 @@ end
 function util.to_seqlist(t, row, key, idx1, idx2)
     -- t:table, row:行号， key:列名 idx1:内部数组编号 idx2:seq 序列号
     type, count, mask, offset = util.parse_seqList(t, row, key)
-    buffer = util.table_buffer(t, type)
+    buf = util.table_buffer(t, type)
     if (mask == 1) then
-        return buffer[offset + idx2]
+        return buf[offset + idx2]
     else
         indexBuffer = t[0]['idxBuffer']
         index = indexBuffer[offset+idx1] + idx2
-        return buffer[index]
+        return buf[index]
     end
 end
 
