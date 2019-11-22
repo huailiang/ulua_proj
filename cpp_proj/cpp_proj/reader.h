@@ -15,15 +15,6 @@
 
 using namespace std;
 
-typedef enum TextCodeType
-{
-	TextUnkonw = -1,
-	TextANSI = 0,
-	TextUTF8,
-	TextUNICODE,
-	TextUNICODE_BIG
-}TextCodeType;
-
 
 template <typename T>
 void read_number_array(ifstream& f, T*& p, char* len)
