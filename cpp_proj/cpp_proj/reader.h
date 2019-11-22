@@ -6,9 +6,23 @@
 #include <iostream>
 #include <string>
 #include <stdint.h>
+#include <codecvt> 
 #include "common.h"
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 using namespace std;
+
+typedef enum TextCodeType
+{
+	TextUnkonw = -1,
+	TextANSI = 0,
+	TextUTF8,
+	TextUNICODE,
+	TextUNICODE_BIG
+}TextCodeType;
 
 
 template <typename T>
@@ -24,11 +38,15 @@ void read_number_array(ifstream& f, T*& p, char* len)
 }
 
 
+int32_t readStringLen(std::ifstream& f);
+
 void readstring(std::ifstream& f, string& str);
 
 void readSeqlist(ifstream&f, char* count, char* allSameMask, uint16_t* startOffset);
 
 void readSeqRef(ifstream&f, uint16_t* offset);
+
+string Utf8ToGbk(char *src_str);
 
 
 #endif // ! __reader__
