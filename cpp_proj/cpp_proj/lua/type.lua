@@ -13,7 +13,7 @@
 -- basic
 INT32     = 1 
 UINT32    = 2
-INT16    = 3
+INT16     = 3
 INT64     = 4
 FLOAT     = 5
 DOUBLE    = 6

@@ -2,19 +2,17 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="xprint.cpp" />
     <ClCompile Include="reader.cpp" />
     <ClCompile Include="cvs.cpp" />
-    <ClCompile Include="xtest.cpp" />
     <ClCompile Include="xtable.cpp" />
+    <ClCompile Include="itable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="xprint.h" />
     <ClInclude Include="reader.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="cvs.h" />
     <ClInclude Include="xtype.h" />
-    <ClInclude Include="xtest.h" />
     <ClInclude Include="xtable.h" />
+    <ClInclude Include="itable.h" />
   </ItemGroup>
 </Project>

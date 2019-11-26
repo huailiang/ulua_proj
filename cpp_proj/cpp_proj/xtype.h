@@ -2,7 +2,7 @@
 #define __xtype__
 
 /*
- 表格里所有用到的数据类型定义
+  all data type used in table
 */
 
 

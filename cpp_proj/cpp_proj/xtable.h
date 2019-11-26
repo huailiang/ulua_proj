@@ -16,7 +16,7 @@ class XTable
 	typedef void(XTable::*fReader)(ifstream& f, int row);
 
 public:
-	XTable(string name, string* headers, int* types, char len);
+	XTable(string name, string directory, string* headers, int* types, char len);
 	~XTable();
 	void Read(lua_State* L);
 
@@ -58,7 +58,7 @@ private:
 	string InnerString(ifstream& f);
 
 private:
-	string name;
+	string name, directory;
 	char columnCount;
 	int32_t fileSize = 0, lineCount = 0;
 	uint16_t strCount, intCount, uintCount, longCount, floatCount, doubleCount, idxCount;

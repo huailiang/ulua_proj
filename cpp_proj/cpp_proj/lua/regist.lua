@@ -4,7 +4,14 @@
 --- DateTime: 2019/11/20 10:11
 ---
 
+
+print("search path:")
+print(package.path)
+print("\n\n********* lua env ******")
+
+
 require('type')
+
 
 BeHit_headers = {
 		"presentid",  

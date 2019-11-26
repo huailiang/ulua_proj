@@ -3,9 +3,10 @@
 
 
 
-XTable::XTable(string name, string* headers, int* types, char len)
+XTable::XTable(string name, string directory, string* headers, int* types, char len)
 {
 	this->name = name;
+	this->directory = directory;
 	this->columnCount = len;
 	this->headers = headers;
 	this->types = types;
@@ -48,8 +49,6 @@ XTable::~XTable()
 	delete[] p_float;
 	delete[] p_double;
 	delete[] p_index;
-	delete[] headers;
-	delete[] types;
 	SAFE_DELETE(p_cvs);
 }
 
@@ -280,7 +279,7 @@ void XTable::Read(lua_State* L)
 	ifs.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 	try
 	{
-		std::string path = name+".bytes";
+		std::string path = directory + name + ".bytes";
 		ifs.open(path, std::ifstream::binary | std::ios::in);
 		ifs.seekg(0, ios::beg);
 		ifs.read((char*)&fileSize, sizeof(int32_t));

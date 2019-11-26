@@ -2,8 +2,6 @@
 #define __common__
 
 
-const double PI = 3.14159265359;
-typedef unsigned int uint;
 
 #define max(a,b) ((a)>(b)?(a):(b))
 

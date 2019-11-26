@@ -122,19 +122,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cvs.cpp" />
+    <ClCompile Include="itable.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="reader.cpp" />
     <ClCompile Include="xtable.cpp" />
-    <ClCompile Include="xprint.cpp" />
-    <ClCompile Include="xtest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h" />
     <ClInclude Include="cvs.h" />
+    <ClInclude Include="itable.h" />
     <ClInclude Include="reader.h" />
     <ClInclude Include="xtable.h" />
-    <ClInclude Include="xprint.h" />
-    <ClInclude Include="xtest.h" />
     <ClInclude Include="xtype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
