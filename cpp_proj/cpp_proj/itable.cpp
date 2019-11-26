@@ -8,7 +8,7 @@ void add_search_path(lua_State * L, std::string path)
 	lua_getglobal(L, "package");
 	lua_getfield(L, -1, "path");
 	v.append(lua_tostring(L, -1));
-	v.append(";" + path + "?.lua");
+	v.append(";" + path + "?.lua.txt");
 	lua_pushstring(L, v.c_str());
 	lua_setfield(L, -3, "path");
 	lua_pop(L, 2);
@@ -19,12 +19,12 @@ int inner_load(lua_State * L, const char* search_path, const char* table_path)
 	int result = 0;
 	string r_path = search_path;
 	add_search_path(L, search_path);
-	r_path += "regist.lua";
+	r_path += "regist.lua.txt";
 	result = luaL_dofile(L, r_path.c_str());
 	lua_getglobal(L, "Tables");
 	if (!lua_istable(L, -1))
 	{
-		std::cerr << "error, not found table" << std::endl;
+		std::cerr << "regist.lua error" << std::endl;
 	}
 	else
 	{

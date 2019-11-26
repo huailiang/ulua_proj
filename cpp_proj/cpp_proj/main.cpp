@@ -24,7 +24,7 @@ void dispose()
 void info(const char* path)
 {
 	string t_path = path;
-	t_path += "table.lua";
+	t_path += "table.lua.txt";
 	luaL_dofile(L, t_path.c_str());
 	lua_getglobal(L, "prt_behit");
 	lua_pcall(L, 0, 0, 0);
