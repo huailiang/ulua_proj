@@ -9,12 +9,13 @@
 // basic
 #define INT32           1 
 #define UINT32          2
-#define UINT16          3
+#define INT16           3
 #define INT64           4
 #define FLOAT           5
 #define DOUBLE          6
 #define BOOLEAN         7
 #define STRING          8
+#define BYTE			9
 
 
 // array

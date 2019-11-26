@@ -28,12 +28,13 @@ private:
 private:
 	void ReadUint32(ifstream& f, int row);
 	void ReadInt32(ifstream& f, int row);
-	void ReadUint16(ifstream& f, int row);
+	void ReadInt16(ifstream& f, int row);
 	void ReadInt64(ifstream& f, int row);
 	void ReadFloat(ifstream& f, int row);
 	void ReadDouble(ifstream& f, int row);
 	void ReadBool(ifstream& f, int row);
 	void ReadString(ifstream& f, int row);
+	void ReadByte(ifstream& f, int row);
 
 	void ReadInt32Array(ifstream& f, int row);
 	void ReadUint32Array(ifstream& f, int row);

@@ -13,12 +13,13 @@
 -- basic
 INT32     = 1 
 UINT32    = 2
-UINT16    = 3
+INT16    = 3
 INT64     = 4
 FLOAT     = 5
 DOUBLE    = 6
 BOOLEAN   = 7
 STRING    = 8
+BYTE      = 9
 
 
 -- array

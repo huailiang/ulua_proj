@@ -29,6 +29,10 @@ void cvs::fill(int i_row, int i_col, string v)
 	push_k_v(title[i_col].c_str(), v.c_str());
 }
 
+void cvs::fill(int i_row, int i_col, char v)
+{
+	push_k_v(title[i_col].c_str(), v);
+}
 
 void cvs::fill(int i_row, int i_col, string *p, size_t len)
 {
@@ -70,6 +74,12 @@ void cvs::push_k_v(const char* key, const char* v)
 	lua_settable(L, -3);
 }
 
+void cvs::push_k_v(const char* key, char v)
+{
+	lua_pushstring(L, key);
+	lua_pushnumber(L, v);
+	lua_settable(L, -3);
+}
 
 void cvs::push_k_v(const char* key, bool v)
 {
@@ -78,13 +88,14 @@ void cvs::push_k_v(const char* key, bool v)
 	lua_settable(L, -3);
 }
 
-
 void cvs::push_k_v(int32_t key, const char* v)
 {
 	lua_pushnumber(L, key);
 	lua_pushstring(L, v);
 	lua_settable(L, -3);
 }
+
+
 
 void cvs::push_k_v(int32_t key, int32_t v)
 {

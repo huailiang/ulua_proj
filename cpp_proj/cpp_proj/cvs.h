@@ -48,6 +48,7 @@ public:
 	}
 
 	void fill(int i_row, int i_col, string v);
+	void fill(int i_row, int i_col, char v);
 	void fill(int i_row, int i_col, string *p, size_t len);
 	void push_array(const char* key, string* p, size_t len);
 	void begin_row();
@@ -67,6 +68,7 @@ protected:
 
 	void push_k_v(const char* key, const char* v);
 	void push_k_v(const char* key, bool v);
+	void push_k_v(const char*  key, char v);
 	void push_k_v(int32_t key, const char* v);
 	void push_k_v(int32_t key, int32_t v);
 

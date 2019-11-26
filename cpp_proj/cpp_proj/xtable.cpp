@@ -12,12 +12,13 @@ XTable::XTable(string name, string* headers, int* types, char len)
 
 	pReader[INT32] = &XTable::ReadInt32;
 	pReader[UINT32] = &XTable::ReadUint32;
-	pReader[UINT16] = &XTable::ReadUint16;
-	pReader[INT64] = &XTable::ReadUint16;
+	pReader[INT16] = &XTable::ReadInt16;
+	pReader[INT64] = &XTable::ReadInt64;
 	pReader[FLOAT] = &XTable::ReadFloat;
 	pReader[DOUBLE] = &XTable::ReadDouble;
 	pReader[BOOLEAN] = &XTable::ReadBool;
 	pReader[STRING] = &XTable::ReadString;
+	pReader[BYTE] = &XTable::ReadByte;
 
 	pReader[INT32_ARR] = &XTable::ReadInt32Array;
 	pReader[UINT32_ARR] = &XTable::ReadUint32Array;
@@ -66,10 +67,10 @@ void XTable::ReadInt32(ifstream& f, int row)
 	p_cvs->fill(row, p_curr++, tmp);
 }
 
-void XTable::ReadUint16(ifstream& f, int row)
+void XTable::ReadInt16(ifstream& f, int row)
 {
-	uint16_t tmp=0;
-	f.read((char*)&tmp, sizeof(uint16_t));
+	int16_t tmp=0;
+	f.read((char*)&tmp, sizeof(int16_t));
 	p_cvs->fill(row, p_curr++, tmp);
 }
 
@@ -104,6 +105,13 @@ void XTable::ReadBool(ifstream& f, int row)
 void XTable::ReadString(ifstream& f, int row)
 {
 	string tmp = InnerString(f);
+	p_cvs->fill(row, p_curr++, tmp);
+}
+
+void XTable::ReadByte(ifstream& f, int row)
+{
+	char tmp;
+	f.read(&tmp, sizeof(char));
 	p_cvs->fill(row, p_curr++, tmp);
 }
 
