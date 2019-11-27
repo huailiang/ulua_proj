@@ -1,6 +1,5 @@
 require('util')
 
-
 function prt_behit( ... )
 	-- body
 	print("********* lua env: BeHit ***********")
