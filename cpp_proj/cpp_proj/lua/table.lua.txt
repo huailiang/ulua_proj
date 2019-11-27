@@ -25,3 +25,5 @@ function prt_actor( ... )
 	print(g_ActorTable[2]['actorId'], g_ActorTable[2]['idle'])
 end
 
+prt_behit()
+prt_actor()
