@@ -29,22 +29,22 @@ if ( WIN32 AND NOT CYGWIN AND NOT ( CMAKE_SYSTEM_NAME STREQUAL "WindowsStore" ) 
 	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd" CACHE STRING "")
 endif ()
 
-project(XLua)
+project(ULua)
 
 option ( UINT_ESPECIALLY "using custom ulong" OFF )
 option ( USING_LUAJIT "using luajit" OFF )
 
-find_path(XLUA_PROJECT_DIR NAMES SConstruct
+find_path(ULUA_PROJECT_DIR NAMES SConstruct
     PATHS 
     ${CMAKE_SOURCE_DIR}
     NO_DEFAULT_PATH
     )
 
-MARK_AS_ADVANCED(XLUA_PROJECT_DIR)
+MARK_AS_ADVANCED(ULUA_PROJECT_DIR)
 
 set(LUA_SRC_PATH lua-5.3.5/src)
 
-#begin lua-profobuf
+#begin THIRD PART： lua-profobuf
 set (LPB_SRC 
     lua-protobuf/pb.c
 )

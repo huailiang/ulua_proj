@@ -38,7 +38,7 @@ int main()
 	init();
 	const char* search = "lua/";
 	const char* table = "table/";
-	inner_load(L, search, table);
+	inner_load(L, search, table, 0);
 	info(search);
 	system("pause");
 	dispose();

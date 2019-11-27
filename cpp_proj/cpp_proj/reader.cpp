@@ -1,5 +1,7 @@
 #include "reader.h"
 
+unsigned char reader_flag = 0;
+
 
 int32_t readStringLen(std::ifstream& f)
 {
@@ -32,7 +34,10 @@ void readstring(std::ifstream& f, std::string& str)
 		char* temp = new char[len + 1];
 		f.read(temp, len);
 		temp[len] = '\0';
-		str = Utf8ToGbk(temp);
+		if (reader_flag == 0)
+			str = Utf8ToGbk(temp);
+		else
+			str = temp;
 		delete[] temp;
 	}
 }

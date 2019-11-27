@@ -28,6 +28,7 @@ void read_number_array(ifstream& f, T*& p, char* len)
 	}
 }
 
+extern unsigned char reader_flag;
 
 int32_t readStringLen(std::ifstream& f);
 

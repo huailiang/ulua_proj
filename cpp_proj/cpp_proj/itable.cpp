@@ -14,9 +14,10 @@ void add_search_path(lua_State * L, std::string path)
 	lua_pop(L, 2);
 }
 
-int inner_load(lua_State * L, const char* search_path, const char* table_path)
+int inner_load(lua_State * L, const char* search_path, const char* table_path, unsigned char flag)
 {
 	int result = 0;
+	reader_flag = flag;
 	string r_path = search_path;
 	add_search_path(L, search_path);
 	r_path += "regist.lua.txt";
@@ -70,8 +71,8 @@ int inner_load(lua_State * L, const char* search_path, const char* table_path)
 extern "C"
 {
 	
-	int luaE_table(lua_State* L, const char* search_path, const char* table_path)
+	int luaE_table(lua_State* L, const char* search_path, const char* table_path, unsigned char flag)
 	{
-		return	inner_load(L, search_path, table_path);
+		return	inner_load(L, search_path, table_path, flag);
 	}
 }
