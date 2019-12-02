@@ -1,11 +1,10 @@
 #ifndef __common__
 #define __common__
 
+#ifndef nullptr
+#define nullptr NULL
+#endif // !nullptr
 
-
-#define max(a,b) ((a)>(b)?(a):(b))
-
-#define min(a,b) ((a)<(b)?(a):(b))
 
 #undef foreach
 #define foreach(var, container) for( auto var = (container).begin(); var != (container).end(); ++var)

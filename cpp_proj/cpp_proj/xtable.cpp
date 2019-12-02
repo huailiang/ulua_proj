@@ -160,7 +160,7 @@ void XTable::ReadStringArray(ifstream& f, int row)
 	string* ptr = new string[size];
 	loop(size)
 	{
-		auto idx = tmp[i];
+		uint16_t idx = tmp[i];
 		*(ptr + i) = p_str[idx];
 	}
 	p_cvs->fill(row, p_curr++, ptr, (size_t)len);
@@ -280,7 +280,8 @@ void XTable::Read(lua_State* L)
 	try
 	{
 		std::string path = directory + name + ".bytes";
-		ifs.open(path, std::ifstream::binary | std::ios::in);
+		ifs.open(path.c_str(), std::ifstream::binary | std::ios::in);
+		ifs.clear();
 		ifs.seekg(0, ios::beg);
 		ifs.read((char*)&fileSize, sizeof(int32_t));
 		ifs.read((char*)&lineCount, sizeof(int32_t));
@@ -371,13 +372,13 @@ void XTable::ReadContent(ifstream & f)
 	{
 		int32_t size = 0;
 		f.read((char*)&size, sizeof(int32_t));
-		auto beforePos = f.tellg();
+		std::streampos beforePos = f.tellg();
 		this->ReadLine(f, i);
-		auto afterPos = f.tellg();
-		auto delta = afterPos - beforePos;
+		std::streampos afterPos = f.tellg();
+		std::streampos delta = afterPos - beforePos;
 		if (size > delta)
 		{
-			f.seekg(size - delta, SEEK_CUR);
+			f.seekg((ifstream::off_type)(size - delta), (ios_base::seekdir)SEEK_CUR);
 		}
 		else if (size < delta)
 		{
