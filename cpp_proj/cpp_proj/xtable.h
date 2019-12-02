@@ -60,16 +60,16 @@ private:
 private:
 	string name, directory;
 	char columnCount;
-	int32_t fileSize = 0, lineCount = 0;
+	int32_t fileSize, lineCount;
 	uint16_t strCount, intCount, uintCount, longCount, floatCount, doubleCount, idxCount;
-	string* p_str = NULL;
-	int32_t* p_int32 = NULL;
-	uint32_t* p_uint32 = NULL;
-	int64_t* p_int64 = NULL;
-	float* p_float = NULL;
-	double* p_double = NULL;
-	uint16_t* p_index = NULL;
-	int p_curr = 0;
+	string* p_str;
+	int32_t* p_int32;
+	uint32_t* p_uint32;
+	int64_t* p_int64 ;
+	float* p_float;
+	double* p_double;
+	uint16_t* p_index;
+	int p_curr;
 
 private:
 	fReader pReader[40];
