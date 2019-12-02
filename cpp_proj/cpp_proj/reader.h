@@ -6,7 +6,6 @@
 #include <iostream>
 #include <string>
 #include <stdint.h>
-#include <codecvt> 
 #include "common.h"
 
 #ifdef _WIN32
