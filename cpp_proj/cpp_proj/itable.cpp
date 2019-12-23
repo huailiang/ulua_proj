@@ -25,7 +25,9 @@ int inner_load(lua_State * L, const char* search_path, const char* table_path, u
 	lua_getglobal(L, "Tables");
 	if (!lua_istable(L, -1))
 	{
+#if _DEBUG
 		std::cerr << "regist.lua error" << std::endl;
+#endif
 	}
 	else
 	{

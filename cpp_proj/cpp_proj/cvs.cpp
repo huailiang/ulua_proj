@@ -15,12 +15,12 @@ cvs::~cvs() {}
 void cvs::begin(lua_State* L)
 {
 	this->L = L;
-	lua_newtable(L); // 最外层的大表
+	lua_newtable(L); // outer table 
 }
 
 void cvs::begin_row()
 {
-	lua_newtable(L); //每一行里的小表
+	lua_newtable(L); // row table
 }
 
 

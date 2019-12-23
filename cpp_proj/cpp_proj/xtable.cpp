@@ -294,7 +294,9 @@ void XTable::Read(lua_State* L)
 	}
 	catch (std::ifstream::failure e)
 	{
+#if _DEBUG
 		std::cerr << "read table error " << name << std::endl;
+#endif
 	}
 }
 
@@ -345,7 +347,7 @@ void XTable::ReadHeader(ifstream& f)
 	{
 		f.read((char*)(p_index + i), sizeof(uint16_t));
 	}
-	//在第一行填充表头buffer
+	//Fill the buffer in the first row 
 	p_cvs->push_array("strBuffer", p_str, strCount);
 	p_cvs->push_array("intBuffer", p_int32, intCount);
 	p_cvs->push_array("uintBuffer", p_uint32, uintCount);
@@ -361,7 +363,7 @@ void XTable::ReadContent(ifstream & f)
 #ifdef _DEBUG
 	cout << "columnCount: " << (int)columnCount << "  lineCount:" << lineCount << " name:" << name << endl;
 #endif
-	
+
 	loop(columnCount)
 	{
 		char type0, type1;
@@ -382,7 +384,9 @@ void XTable::ReadContent(ifstream & f)
 		}
 		else if (size < delta)
 		{
+#if _DEBUG
 			cerr << "read table error: " << this->name << endl;
+#endif
 			break;
 		}
 	}

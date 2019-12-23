@@ -8,17 +8,21 @@
 
 
 /*
- 对外的API（比如说 main(), c# etc.）
- 
- 外部需要传lua的搜索路径、表格bytes所在的路径
+ External API（such as main(), c# etc.）
 
- flag: c++内部main()传0， unity传1
+ search_path: lua script path in disk
+
+ table_path: table file(.bytes) path in disk
+
+ flag: c++ main() is 0， unity is 1
 */
 
 
 void add_search_path(lua_State *L, std::string path);
 
+
 int inner_load(lua_State* L, const char* search_path, const char* table_path, unsigned char flag);
+
 
 extern "C" 
 {

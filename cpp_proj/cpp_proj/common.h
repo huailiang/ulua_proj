@@ -1,9 +1,10 @@
 #ifndef __common__
 #define __common__
 
+
 #ifndef nullptr
 #define nullptr NULL
-#endif // !nullptr
+#endif
 
 
 #undef foreach

@@ -14,7 +14,9 @@ int32_t readStringLen(std::ifstream& f)
 	{
 		if (shift == 5 * 7) // 5 bytes max per Int32, shift += 7
 		{
+#if _DEBUG
 			std::cerr << "string  Format_Bad7BitInt32" << endl;
+#endif // _DEBUG
 			return 0;
 		}
 		f.read(&b, sizeof(char));
@@ -61,12 +63,16 @@ void readSeqRef(ifstream&f, uint16_t* offset)
 
 
 /*
-不同的国家和地区制定了不同的标准，由此产生了 GB2312、GBK、Big5、Shift_JIS 等各自的编码标准
-这些使用 1 至 4 个字节来代表一个字符的各种汉字延伸编码方式，称为 ANSI 编码
-简体中文Windows操作系统中，ANSI编码代表GBK编码,日文Windows操作系统中，ANSI编码代表Shift_JIS编码
+Different countries and regions have formulated different standards, resulting in the coding standards of GB2312, GBK, BIG5, shift JIS, etc
 
-非windows使用iconv 涉及到平台编译问题， 这里没有移植进去
-参考：
+These are all kinds of Chinese character extension encoding methods that use 1 to 4 bytes to represent a character, called ANSI encoding
+
+In simplified Chinese Windows operating system, ANSI code stands for GBK code, while in Japanese windows operating system, ANSI code stands for shift JIS code
+
+
+
+Using iconv without windows involves platform compilation, which is not ported here
+reference：
 	https://blog.csdn.net/u012234115/article/details/83186386
 	https://www.cnblogs.com/wangbin/p/6744352.html
 */

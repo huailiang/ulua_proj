@@ -65,7 +65,7 @@ private:
 	string* p_str;
 	int32_t* p_int32;
 	uint32_t* p_uint32;
-	int64_t* p_int64 ;
+	int64_t* p_int64;
 	float* p_float;
 	double* p_double;
 	uint16_t* p_index;
@@ -73,7 +73,7 @@ private:
 
 private:
 	fReader pReader[40];
-	string* headers; //表格header = 列数 (这里由lua传过来)
+	string* headers; //passed by lua
 	int* types;
 	cvs* p_cvs;
 };
