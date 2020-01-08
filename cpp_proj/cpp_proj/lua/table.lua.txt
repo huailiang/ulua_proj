@@ -16,13 +16,13 @@ function prt_behit( ... )
 end
 
 
-function prt_actor( ... )
+function prt_server( ... )
 	-- body
-	print("********* lua env: ActorTable ***********")
-	print("table length: "..#g_ActorTable, util.table_len(g_ActorTable))
-	print(g_ActorTable[1]['actorId'], g_ActorTable[1]['idle'])
-	print(g_ActorTable[2]['actorId'], g_ActorTable[2]['idle'])
+	print("********* lua env: QteStatusList ***********")
+	print("table length: "..#g_QteStatusList, util.table_len(g_QteStatusList))
+	print(g_QteStatusList[1]['Name'], g_QteStatusList[1]['Value'])
+	print(g_QteStatusList[2]['Name'], g_QteStatusList[2]['Value'])
 end
 
 prt_behit()
-prt_actor()
+prt_server()

@@ -10,11 +10,11 @@ print(package.path)
 print("\n\n********* lua env ******")
 
 require('table.BeHit')
-require('table.ActorTable')
+require('table.QteStatusList')
 
 
 Tables = {
-	"ActorTable",
+	"QteStatusList",
 	"BeHit"
 }
 
