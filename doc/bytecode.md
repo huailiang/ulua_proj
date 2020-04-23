@@ -19,7 +19,7 @@
 luajit -b d:\src.lua d:\des.lua
   ```
 
-### 2. luac (mac下)
+### 2.1 luac (mac下)
 
 a.  下载源文件
 
@@ -54,6 +54,24 @@ d. luac生成bytecode, 使用如下命令：
 
 ```shell
 luac -o test.bytes test.lua
+```
+
+### 2.2 luac (windows下)
+
+1.到lua官网https://sourceforge.net/projects/luabinaries/files/5.3.4/Tools%20Executables/下载 lua-5.3.4_Win32_bin.zip压缩包到D或E盘
+
+2.解压lua-5.3.4_Win32_bin.zip文件
+
+3.打开解压的lua-5.3.4_Win32_bin文件夹
+
+![](/doc/img/luac.png)
+
+4.按住Shift键，然后鼠标右键该文件夹空白处，点击：在此处打开命令窗口(W)
+
+5.输入luac53 -o 输出文件路径+输出文件名.out 源文件路径+源文件名.lua，然后按Enter键即可，在指定路径下可找到编译后的.out文件，也可以输出.lua后缀的文件，不一定要输出.out的文件
+
+```bat
+luac53 -o c:\path\test.o c:\path\test.lua
 ```
 
 
