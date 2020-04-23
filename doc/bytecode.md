@@ -64,7 +64,7 @@ luac -o test.bytes test.lua
 
 3.打开解压的lua-5.3.4_Win32_bin文件夹
 
-![](/doc/img/luac.png)
+![](/img/luac.png)
 
 4.按住Shift键，然后鼠标右键该文件夹空白处，点击：在此处打开命令窗口(W)
 
